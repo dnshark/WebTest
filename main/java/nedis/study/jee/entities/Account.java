@@ -1,4 +1,4 @@
-package entities;
+package nedis.study.jee.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
