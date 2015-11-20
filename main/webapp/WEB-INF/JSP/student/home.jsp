@@ -6,6 +6,14 @@
 
 <jsp:include page="../templates/header.jsp" />
 <div class="container">
-	Hello, student!
+
+	<h1>Hello, student!</h1>
+	<table>
+		 <c:forEach var="tests" items="${tests.name}">
+			<tr>
+				<td>${tests.name}</td>
+			</tr>
+		</c:forEach>
+	</table>
 </div>
 <jsp:include page="../templates/footer.jsp" />

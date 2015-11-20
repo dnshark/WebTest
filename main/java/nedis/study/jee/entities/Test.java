@@ -30,11 +30,11 @@ public class Test extends AbstractEntity  {
 	@Column(length=2147483647)
 	private String description;
 
-	@Column(name="period_per_question", nullable=false)
-	private Integer periodPerQuestion;
+	@Column(name="time_per_question", nullable=false)
+	private Integer timePerQuestion;
 
 	@Column(nullable=false, length=100)
-	private String title;
+	private String name;
 
 	private Timestamp updated;
 
@@ -50,7 +50,7 @@ public class Test extends AbstractEntity  {
 
 	//bi-directional many-to-one association to Account
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_owner", nullable=false)
+	@JoinColumn(name="id_account", nullable=false)
 	private Account account;
 
     public Test() {
@@ -94,20 +94,20 @@ public class Test extends AbstractEntity  {
 		this.description = description;
 	}
 
-	public Integer getPeriodPerQuestion() {
-		return this.periodPerQuestion;
+	public Integer getTimePerQuestion() {
+		return this.timePerQuestion;
 	}
 
-	public void setPeriodPerQuestion(Integer periodPerQuestion) {
-		this.periodPerQuestion = periodPerQuestion;
+	public void setTimePerQuestion(Integer periodPerQuestion) {
+		this.timePerQuestion = periodPerQuestion;
 	}
 
-	public String getTitle() {
-		return this.title;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String title) {
+		this.name = title;
 	}
 
 	public Timestamp getUpdated() {
