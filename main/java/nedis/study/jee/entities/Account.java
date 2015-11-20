@@ -45,7 +45,7 @@ public class Account extends AbstractEntity {
 	private String login;
 
 	@Column(length=80)
-	private String name;
+	private String fio;
 
 	@Column(nullable=false, length=255)
 	private String password;
@@ -119,12 +119,12 @@ public class Account extends AbstractEntity {
 		this.login = login;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getFio() {
+		return this.fio;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFio(String name) {
+		this.fio = name;
 	}
 
 	public String getPassword() {
