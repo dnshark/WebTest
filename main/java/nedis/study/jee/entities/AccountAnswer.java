@@ -25,8 +25,8 @@ public class AccountAnswer extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ACCOUNT_ANSWER_IDACCOUNTANSWER_GENERATOR", sequenceName="ACCOUNT_ANSWER_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_ANSWER_IDACCOUNTANSWER_GENERATOR")
+	@SequenceGenerator(name="ACCOUNT_ANSWER_IDACCOUNTANSWER_GENERATOR", sequenceName="answer_id_answer_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_ANSWER_IDACCOUNTANSWER_GENERATOR")
 	@Column(name="id_account_answer", unique=true, nullable=false)
 	private Long idAccountAnswer;
 
@@ -35,10 +35,10 @@ public class AccountAnswer extends AbstractEntity {
 	@JoinColumn(name="id_answer", nullable=false)
 	private Answer answer;
 
-	//bi-directional many-to-one association to PassedTest
+	//bi-directional many-to-one association to TestResult
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_passed_test", nullable=false)
-	private PassedTest passedTest;
+	private TestResult testResult;
 
     public AccountAnswer() {
     }
@@ -65,12 +65,12 @@ public class AccountAnswer extends AbstractEntity {
 		this.answer = answer;
 	}
 	
-	public PassedTest getPassedTest() {
-		return this.passedTest;
+	public TestResult getTestResult() {
+		return this.testResult;
 	}
 
-	public void setPassedTest(PassedTest passedTest) {
-		this.passedTest = passedTest;
+	public void setTestResult(TestResult testResult) {
+		this.testResult = testResult;
 	}
 	
 }

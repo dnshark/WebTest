@@ -17,7 +17,7 @@ public class Test extends AbstractEntity  {
 
 	@Id
 	@SequenceGenerator(name="TEST_IDTEST_GENERATOR", sequenceName="TEST_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TEST_IDTEST_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="TEST_IDTEST_GENERATOR")
 	@Column(name="id_test", unique=true, nullable=false)
 	private Long idTest;
 
@@ -39,9 +39,9 @@ public class Test extends AbstractEntity  {
 	private Timestamp updated;
 
 	/*
-	//bi-directional many-to-one association to PassedTest
+	//bi-directional many-to-one association to TestResult
 	@OneToMany(mappedBy="test")
-	private List<PassedTest> passedTests;
+	private List<TestResult> passedTests;
 */
 	//bi-directional many-to-one association to Question
 	@OneToMany(mappedBy="test")
@@ -118,11 +118,11 @@ public class Test extends AbstractEntity  {
 		this.updated = updated;
 	}
 
-	/*public List<PassedTest> getPassedTests() {
+	/*public List<TestResult> getPassedTests() {
 		return this.passedTests;
 	}
 
-	public void setPassedTests(List<PassedTest> passedTests) {
+	public void setPassedTests(List<TestResult> passedTests) {
 		this.passedTests = passedTests;
 	}*/
 	

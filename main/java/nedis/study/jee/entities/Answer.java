@@ -27,7 +27,7 @@ public class Answer extends AbstractEntity {
 
 	@Id
 	@SequenceGenerator(name="ANSWER_IDANSWER_GENERATOR", sequenceName="ANSWER_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ANSWER_IDANSWER_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ANSWER_IDANSWER_GENERATOR")
 	@Column(name="id_answer", unique=true, nullable=false)
 	private Long idAnswer;
 

@@ -47,8 +47,8 @@ public abstract class AbstractEntity implements IEntity, Comparable<AbstractEnti
 		}
 		return true;
 	}
-	
-	@Override
+
+
 	public int compareTo (AbstractEntity o) {
 		Object o1 = getId();
 		Object o2 = o != null ? o.getId() : null;
@@ -59,4 +59,5 @@ public abstract class AbstractEntity implements IEntity, Comparable<AbstractEnti
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
+
 }

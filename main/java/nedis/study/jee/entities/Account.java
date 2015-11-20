@@ -1,4 +1,4 @@
-package nedis.study.jee.entities;
+package entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -27,8 +27,8 @@ public class Account extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ACCOUNT_IDACCOUNT_GENERATOR", sequenceName="ACCOUNT_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_IDACCOUNT_GENERATOR")
+	@SequenceGenerator(name="ACCOUNT_IDACCOUNT_GENERATOR", sequenceName="account_id_account_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_IDACCOUNT_GENERATOR")
 	@Column(name="id_account", unique=true, nullable=false)
 	private Long idAccount;
 
@@ -50,27 +50,21 @@ public class Account extends AbstractEntity {
 	@Column(nullable=false, length=255)
 	private String password;
 
-	@Column(name="second_name", length=80)
-	private String secondName;
-
-	@Column(length=80)
-	private String surname;
-
 	private Timestamp updated;
 
 	//bi-directional many-to-one association to AccountRole
 	@OneToMany(mappedBy="account")
 	private List<AccountRole> accountRoles;
 
-	//bi-directional one-to-one association to AccountTempPwd
+	//bi-directional one-to-one association to AccountRegistration
 	@OneToOne(mappedBy="account", fetch=FetchType.LAZY)
 	//FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
-	private AccountTempPwd accountTempPwd;
+	private AccountRegistration accountRegistration;
 
 	/*
-	//bi-directional many-to-one association to PassedTest
+	//bi-directional many-to-one association to TestResult
 	@OneToMany(mappedBy="account")
-	private List<PassedTest> passedTests;
+	private List<TestResult> passedTests;
 
 	//bi-directional many-to-one association to Test
 	@OneToMany(mappedBy="account")
@@ -141,22 +135,6 @@ public class Account extends AbstractEntity {
 		this.password = password;
 	}
 
-	public String getSecondName() {
-		return this.secondName;
-	}
-
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
-	}
-
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
 	public Timestamp getUpdated() {
 		return this.updated;
 	}
@@ -173,19 +151,19 @@ public class Account extends AbstractEntity {
 		this.accountRoles = accountRoles;
 	}
 	
-	public AccountTempPwd getAccountTempPwd() {
-		return this.accountTempPwd;
+	public AccountRegistration getAccountRegistration() {
+		return this.accountRegistration;
 	}
 
-	public void setAccountTempPwd(AccountTempPwd accountTempPwd) {
-		this.accountTempPwd = accountTempPwd;
+	public void setAccountRegistration(AccountRegistration accountRegistration) {
+		this.accountRegistration = accountRegistration;
 	}
 	
-	/*public List<PassedTest> getPassedTests() {
+	/*public List<TestResult> getPassedTests() {
 		return this.passedTests;
 	}
 
-	public void setPassedTests(List<PassedTest> passedTests) {
+	public void setPassedTests(List<TestResult> passedTests) {
 		this.passedTests = passedTests;
 	}
 	

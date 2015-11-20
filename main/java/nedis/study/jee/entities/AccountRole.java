@@ -25,8 +25,8 @@ public class AccountRole extends AbstractEntity  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ACCOUNT_ROLE_IDACCOUNTROLE_GENERATOR", sequenceName="ACCOUNT_ROLE_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_ROLE_IDACCOUNTROLE_GENERATOR")
+	@SequenceGenerator(name="ACCOUNT_ROLE_IDACCOUNTROLE_GENERATOR", sequenceName="account_role_id_account_role_seq")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_ROLE_IDACCOUNTROLE_GENERATOR")
 	@Column(name="id_account_role", unique=true, nullable=false)
 	private Long idAccountRole;
 

@@ -17,7 +17,7 @@ public class Question extends AbstractEntity {
 
 	@Id
 	@SequenceGenerator(name="QUESTION_IDQUESTION_GENERATOR", sequenceName="QUESTION_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="QUESTION_IDQUESTION_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="QUESTION_IDQUESTION_GENERATOR")
 	@Column(name="id_question", unique=true, nullable=false)
 	private Long idQuestion;
 
@@ -50,6 +50,7 @@ public class Question extends AbstractEntity {
 	}
 	
 	@Override
+	@Transient
 	public Serializable getId() {
 		return getIdQuestion();
 	}

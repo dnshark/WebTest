@@ -20,18 +20,18 @@ import javax.persistence.Transient;
  * 
  */
 @Entity
-@Table(name="account_temp_pwd")
-public class AccountTempPwd extends AbstractEntity  {
+@Table(name="account_registration")
+public class AccountRegistration extends AbstractEntity  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR", sequenceName="ACCOUNT_TEMP_PWD_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR")
 	@Column(name="id_account", unique=true, nullable=false)
 	private Long idAccount;
 
-	@Column(name="temp_pwd", nullable=false, length=255)
-	private String tempPwd;
+	@Column(name="hash", nullable=false, length=255)
+	private String hash;
 
 	
 	//bi-directional one-to-one association to Account
@@ -40,7 +40,7 @@ public class AccountTempPwd extends AbstractEntity  {
 	//FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
 	private Account account;
 
-    public AccountTempPwd() {
+    public AccountRegistration() {
     }
 
 	public Long getIdAccount() {
@@ -57,12 +57,12 @@ public class AccountTempPwd extends AbstractEntity  {
 		this.idAccount = idAccount;
 	}
 
-	public String getTempPwd() {
-		return this.tempPwd;
+	public String getHash() {
+		return this.hash;
 	}
 
-	public void setTempPwd(String tempPwd) {
-		this.tempPwd = tempPwd;
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public Account getAccount() {
