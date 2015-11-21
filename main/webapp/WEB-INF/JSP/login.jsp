@@ -5,7 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<jsp:include page="templates/header.jsp" />
 <div class="container">
 	<h2>Please login</h2>
 	<form:form method="POST" action="${context }/login" commandName="loginForm" >
@@ -38,4 +37,3 @@
 	</table>  
 	</form:form>
 </div>
-<jsp:include page="templates/footer.jsp" />
