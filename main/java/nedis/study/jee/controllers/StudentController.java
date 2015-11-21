@@ -24,10 +24,6 @@ public class StudentController extends AbstractController {
 	protected void initRoles(Model model){
 		List<Test> tests = studentService.listAllTests();
 		model.addAttribute("tests", tests);
-
-		for (int i = 0; i < tests.size()-1 ; i++) {
-			System.out.println(tests.get(i).getName());
-		}
 	}
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
