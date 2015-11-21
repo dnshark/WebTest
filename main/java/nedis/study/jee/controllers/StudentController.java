@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +22,14 @@ public class StudentController extends AbstractController {
 	@Autowired
 	protected StudentService studentService;
 
-	protected void initRoles(Model model){
+	protected void initTests(Model model){
 		List<Test> tests = studentService.listAllTests();
 		model.addAttribute("tests", tests);
 	}
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String showLogin(Model model){
-		initRoles(model);
+		initTests(model);
 		return "student/home";
 	}
 }
