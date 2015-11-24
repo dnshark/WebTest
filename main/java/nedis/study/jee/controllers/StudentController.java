@@ -36,7 +36,8 @@ public class StudentController extends AbstractController {
 
 	@RequestMapping(value="/tests/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,@PathVariable String testId){
-		Question question = studentService.getQuestion(testId);
+
+		Question question = studentService.getFirstQuestion(testId);
 
 		model.addAttribute("question",question);
 		model.addAttribute("answer", studentService.getAnswers(question));
@@ -44,9 +45,19 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="tests/id{questionId}", method=RequestMethod.POST)
-	public String GetAnswer(Model model,@PathVariable String questionId){
-		System.out.println("hi");
-		return "student/tests";
+	public String GetAnswer(Model model,@PathVariable String questionId) {
+		Question question = studentService.getQuestionById(Long.valueOf(questionId));
+		question = studentService.getNextQuestion(question);
+
+		if (question == null) {
+			return "student/result";
+		} else {
+			model.addAttribute("question",question);
+			model.addAttribute("answer", studentService.getAnswers(question));
+			return "student/tests";
+		}
+
+
 	}
 
 }
