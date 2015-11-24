@@ -18,5 +18,10 @@
       </tr>
     </c:forEach>
   </table>
+  <p>
+    <form action="id${question.getId()}" method="post">
+    <input type="submit" name="Ok" value="Ok"/>
+    </form>
+  </p>
 
 </div>

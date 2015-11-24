@@ -43,4 +43,10 @@ public class StudentController extends AbstractController {
 		return "student/tests";
 	}
 
+	@RequestMapping(value="tests/id{questionId}", method=RequestMethod.POST)
+	public String GetAnswer(Model model,@PathVariable String questionId){
+		System.out.println("hi");
+		return "student/tests";
+	}
+
 }
