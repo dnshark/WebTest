@@ -35,7 +35,7 @@ public class Answer extends AbstractEntity {
 	private Boolean active;
 
 	@Column(nullable=false, length=2147483647)
-	private String answer;
+	private String name;
 
 	@Column(nullable=false)
 	private Boolean correct;
@@ -80,12 +80,12 @@ public class Answer extends AbstractEntity {
 		this.active = active;
 	}
 
-	public String getAnswer() {
-		return this.answer;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setName(String answer) {
+		this.name = answer;
 	}
 
 	public Boolean getCorrect() {

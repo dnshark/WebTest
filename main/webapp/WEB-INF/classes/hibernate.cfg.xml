@@ -8,9 +8,9 @@
         <mapping class="nedis.study.jee.entities.Account"/>
 		<mapping class="nedis.study.jee.entities.AccountAnswer"/>
 		<mapping class="nedis.study.jee.entities.AccountRole"/>
-		<mapping class="nedis.study.jee.entities.AccountTempPwd"/>
+		<mapping class="nedis.study.jee.entities.AccountRegistration"/>
 		<mapping class="nedis.study.jee.entities.Answer"/>
-		<mapping class="nedis.study.jee.entities.PassedTest"/>
+		<mapping class="nedis.study.jee.entities.TestResult"/>
 		<mapping class="nedis.study.jee.entities.Question"/>
 		<mapping class="nedis.study.jee.entities.Role"/>
 		<mapping class="nedis.study.jee.entities.Test"/>

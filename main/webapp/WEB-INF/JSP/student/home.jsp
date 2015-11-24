@@ -10,7 +10,9 @@
 	<table>
 		 <c:forEach var="tests" items="${tests}">
 			<tr>
-				<td><a href="/tests/id${tests.getId()}">${tests.getName()}</a></td>
+				<td>
+					<a href="/tests/id${tests.getId()}">${tests.getName()}</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

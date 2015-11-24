@@ -28,7 +28,7 @@ public class Question extends AbstractEntity {
 	private Timestamp created;
 
 	@Column(nullable=false, length=2147483647)
-	private String question;
+	private String name;
 
 	private Timestamp updated;
 
@@ -75,12 +75,12 @@ public class Question extends AbstractEntity {
 		this.created = created;
 	}
 
-	public String getQuestion() {
-		return this.question;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setName(String question) {
+		this.name = question;
 	}
 
 	public Timestamp getUpdated() {
