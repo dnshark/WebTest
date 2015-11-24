@@ -12,4 +12,6 @@ public interface StudentService {
 
     List<Test> listAllTests();
 
+    Test GetTestById(long testId);
+
 }

@@ -6,6 +6,7 @@ import nedis.study.jee.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,8 +29,17 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String showLogin(Model model){
+	public String showTest(Model model){
 		initTests(model);
 		return "student/home";
+	}
+
+	@RequestMapping(value="/tests/id{testId}", method=RequestMethod.GET)
+	public String showQuestion(Model model,@PathVariable String testId){
+		model.addAttribute("question",studentService
+				.GetTestById(Long.getLong(testId))
+				.getQuestions());
+		initTests(model);
+		return "student/tests";
 	}
 }

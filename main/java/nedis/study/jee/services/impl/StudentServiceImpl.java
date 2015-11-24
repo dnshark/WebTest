@@ -28,4 +28,8 @@ public class StudentServiceImpl implements StudentService {
     public List<Test> listAllTests() {
         return testDao.findAll();
     }
+
+    public Test GetTestById(long testId) {
+        return testDao.findById(testId);
+    }
 }
