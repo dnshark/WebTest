@@ -7,10 +7,14 @@
 <div class="container">
 
   <h1>Questions!</h1>
+
+  <h2><c:out value="${question.getName()}"></c:out></h2>
   <table>
-    <c:forEach var="question" items="${question}">
+    <c:forEach var="answer" items="${answer}">
       <tr>
-        <td>${question.getName()}</td>
+        <td>
+          <input type="checkbox" id="${answer.getId()}" value="${answer.getName()}"> ${answer.getName()}
+        </td>
       </tr>
     </c:forEach>
   </table>

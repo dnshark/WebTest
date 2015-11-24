@@ -1,5 +1,6 @@
 package nedis.study.jee.controllers;
 
+import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.services.StudentService;
 
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,10 +36,11 @@ public class StudentController extends AbstractController {
 
 	@RequestMapping(value="/tests/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,@PathVariable String testId){
-		model.addAttribute("question",studentService
-				.GetTestById(Long.getLong(testId))
-				.getQuestions());
-		initTests(model);
+		Question question = studentService.getQuestion(testId);
+
+		model.addAttribute("question",question);
+		model.addAttribute("answer", studentService.getAnswers(question));
 		return "student/tests";
 	}
+
 }
