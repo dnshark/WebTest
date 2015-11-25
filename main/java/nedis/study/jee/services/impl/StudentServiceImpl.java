@@ -1,5 +1,6 @@
 package nedis.study.jee.services.impl;
 
+import nedis.study.jee.dao.QuestionDao;
 import nedis.study.jee.dao.TestDao;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
@@ -27,6 +28,10 @@ public class StudentServiceImpl implements StudentService {
     @Qualifier("hibernateTestDao")
     private TestDao testDao;
 
+    @Autowired
+    @Qualifier("hibernateQuestionDao")
+    private QuestionDao questionDao;
+
     @Override
     public List<Test> listAllTests() {
         return testDao.findAll();
@@ -37,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Question getQuestion(String testId) {
+    public Question getFirstQuestion(String testId) {
         List<Question> questions = GetTestById(Long.valueOf(testId)).getQuestions();
 
         if (questions.isEmpty()) {
@@ -59,5 +64,24 @@ public class StudentServiceImpl implements StudentService {
             throw new EmptyResultDataAccessException(1);
         }
         return answers;
+    }
+
+    @Override
+    public Question getQuestionById(long questionId) {
+        return questionDao.findById(questionId);
+    }
+
+    @Override
+    public Question getNextQuestion(Question question) {
+        Test test = question.getTest();
+        List<Question> listQ = test.getQuestions();
+
+        for(Question q : listQ){
+
+         if (q.getIdQuestion()>question.getIdQuestion()) {
+             return q;
+         }
+        }
+        return null;
     }
 }

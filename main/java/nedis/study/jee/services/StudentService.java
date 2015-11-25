@@ -16,7 +16,11 @@ public interface StudentService {
 
     Test GetTestById(long testId);
 
-    Question getQuestion(String testId);
+    Question getFirstQuestion(String testId);
 
     List<Answer> getAnswers(Question question);
+
+    Question getQuestionById(long questionId);
+
+    Question getNextQuestion(Question question);
 }

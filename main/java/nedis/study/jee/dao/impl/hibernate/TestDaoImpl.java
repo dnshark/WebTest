@@ -13,4 +13,5 @@ public class TestDaoImpl extends AbstractEntityDao<Test> implements TestDao {
     protected Class<Test> getEntityClass() {
         return Test.class;
     }
+
 }
