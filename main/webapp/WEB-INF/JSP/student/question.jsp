@@ -9,7 +9,7 @@
   <h1>Questions!</h1>
 
   <h2><c:out value="${question.getName()}"></c:out></h2>
-  <table>
+  <table align="center">
     <c:forEach var="answer" items="${answer}">
       <tr>
         <td>

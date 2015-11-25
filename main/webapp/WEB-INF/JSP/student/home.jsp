@@ -6,7 +6,7 @@
 
 <div class="container">
   <h1>Hello student</h1>
-  <table>
+  <table align="center">
     <tr>
       <td>
        <a href="tests">Testing</a>

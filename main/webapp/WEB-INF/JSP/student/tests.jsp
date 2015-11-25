@@ -7,7 +7,7 @@
 <div class="container">
 
 	<h1>Tests available!</h1>
-	<table>
+	<table align="center">
 		 <c:forEach var="tests" items="${tests}">
 			<tr>
 				<td>

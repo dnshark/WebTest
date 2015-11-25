@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Dmitrij on 24.11.2015.
  */
-public class TestForm {
+public class TestForm implements IForm{
     private int numberQuestion;
 
     private List<Boolean> answer;

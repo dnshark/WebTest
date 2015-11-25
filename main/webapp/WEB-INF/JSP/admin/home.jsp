@@ -6,5 +6,22 @@
 
 
 <div class="container">
-	Hello, admin!
+	<h1>Hello admin</h1>
+	<table>
+		<tr>
+			<td>
+				<a href="tests">Testing</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="student/result">View result</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="edit">Edit Info</a>
+			</td>
+		</tr>
+	</table>
 </div>
