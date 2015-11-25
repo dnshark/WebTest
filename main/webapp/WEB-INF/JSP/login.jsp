@@ -11,6 +11,7 @@
 	   <table>
 	    <tr>
 	        <td colspan="2" class="errors"><form:errors path="*"/></td>
+			<td><a href="/signup">New user</a></td>
 	    </tr>
 	    <tr>
 	        <td><form:label path="login">Login</form:label></td>
