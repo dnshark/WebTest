@@ -5,7 +5,22 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-  <a href="tests">Testing</a>
-  <a href="result">View result</a>
-  <a href="edit">Edit Info</a>
+  <h1>Hello student</h1>
+  <table>
+    <tr>
+      <td>
+       <a href="tests">Testing</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <a href="student/result">View result</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <a href="edit">Edit Info</a>
+      </td>
+    </tr>
+  </table>
 </div>

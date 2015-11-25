@@ -19,7 +19,7 @@
       </tr>
       <tr>
         <td><form:label path="login">Login</form:label></td>
-        <td><form:password path="login"/> </td>
+        <td><form:input path="login"/> </td>
       </tr>
       <tr>
         <td><form:label path="fio">Full name</form:label></td>

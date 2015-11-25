@@ -33,7 +33,7 @@ public class SignUpController {
         } catch (InvalidUserInputException e) {
             e.printStackTrace();
         }
-        return "login";
+        return "index";
     }
 
 }
