@@ -29,22 +29,27 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String showTest(Model model){
-		initTests(model);
+	public String showStudent(Model model){
 		return "student/home";
 	}
 
-	@RequestMapping(value="/tests/id{testId}", method=RequestMethod.GET)
+	@RequestMapping(value="/tests", method=RequestMethod.GET)
+	public String showTest(Model model){
+		initTests(model);
+		return "student/tests";
+	}
+
+	@RequestMapping(value="/question/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,@PathVariable String testId){
 
 		Question question = studentService.getFirstQuestion(testId);
 
 		model.addAttribute("question",question);
 		model.addAttribute("answer", studentService.getAnswers(question));
-		return "student/tests";
+		return "student/question";
 	}
 
-	@RequestMapping(value="tests/id{questionId}", method=RequestMethod.POST)
+	@RequestMapping(value="question/id{questionId}", method=RequestMethod.POST)
 	public String GetAnswer(Model model,@PathVariable String questionId) {
 		Question question = studentService.getQuestionById(Long.valueOf(questionId));
 		question = studentService.getNextQuestion(question);
@@ -54,10 +59,8 @@ public class StudentController extends AbstractController {
 		} else {
 			model.addAttribute("question",question);
 			model.addAttribute("answer", studentService.getAnswers(question));
-			return "student/tests";
+			return "student/question";
 		}
-
-
 	}
 
 }

@@ -6,22 +6,15 @@
 
 <div class="container">
 
-  <h1>Questions!</h1>
-
-  <h2><c:out value="${question.getName()}"></c:out></h2>
-  <table>
-    <c:forEach var="answer" items="${answer}">
-      <tr>
-        <td>
-          <input type="checkbox" id="${answer.getId()}" value="${answer.getName()}"> ${answer.getName()}
-        </td>
-      </tr>
-    </c:forEach>
-  </table>
-  <p>
-    <form action="id${question.getId()}" method="post">
-    <input type="submit" name="Ok" value="Ok"/>
-    </form>
-  </p>
+	<h1>Tests available!</h1>
+	<table>
+		 <c:forEach var="tests" items="${tests}">
+			<tr>
+				<td>
+					<a href="/tests/id${tests.getId()}">${tests.getName()}</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 
 </div>

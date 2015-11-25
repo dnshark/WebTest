@@ -32,7 +32,6 @@ public class SignUpController {
             commonService.signUp(form);
         } catch (InvalidUserInputException e) {
             e.printStackTrace();
-            return "login";
         }
         return "login";
     }
