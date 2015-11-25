@@ -56,10 +56,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Answer> getAnswers(Question question) {
         List<Answer> answers = question.getAnswers();
 
-        for (Answer a : answers ) {
-            System.out.println(a.getName());
-        }
-
         if (answers.isEmpty()) {
             throw new EmptyResultDataAccessException(1);
         }
