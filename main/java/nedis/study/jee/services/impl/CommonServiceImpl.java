@@ -23,6 +23,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+
 /**
  * @author nedis
  * @version 1.0
@@ -78,7 +80,7 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(SignUpForm form) throws InvalidUserInputException {
+	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException {
 		Account a = entityBuilder.buildAccount();
 		ReflectionUtils.copyByFields(a, form);
 		accountDao.save(a);
@@ -87,7 +89,7 @@ public class CommonServiceImpl implements CommonService {
 		AccountRole ar = entityBuilder.buildAccountRole(a, r);
 		accountRoleDao.save(ar);
 		
-		emailService.sendVerificationEmail();
+		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),"NoReplay@gmail.com","WebTester","subject","content");
 		
 		return a;
 	}

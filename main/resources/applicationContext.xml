@@ -69,5 +69,19 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="defaultMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="username" value="webtester789"/>
+        <property name="password" value="asdfasdf12341234"/>
+        <property name="port" value="587"/>
+        <property name="defaultEncoding" value="utf8"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

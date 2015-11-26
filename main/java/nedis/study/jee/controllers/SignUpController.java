@@ -6,16 +6,20 @@ import nedis.study.jee.services.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.MessagingException;
+
 /**
  * Created by Dmitrij on 25.11.2015.
  */
 @Controller
-public class SignUpController {
+public class SignUpController extends AbstractController{
 
     @Autowired
     protected CommonService commonService;
@@ -27,13 +31,22 @@ public class SignUpController {
     }
 
     @RequestMapping(value="/signup/ok", method= RequestMethod.POST)
-    public String DoSignUp(@ModelAttribute("signUpForm") SignUpForm form) throws InvalidUserInputException {
+    public String DoSignUp(@ModelAttribute("signUpForm") SignUpForm form, BindingResult result) throws InvalidUserInputException {
         try {
+
             commonService.signUp(form);
-        } catch (InvalidUserInputException e) {
-            e.printStackTrace();
+            return "redirect:/login";
+        } catch (MessagingException e) {
+            result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
+            LOGGER.info("send e-mail Error " + e.getMessage());
+            return "/signup";
+            }
+         catch (InvalidUserInputException e) {
+            result.addError(new ObjectError("Can't create user. Change some information.", e.getMessage()));
+            LOGGER.info("Input form Error "+e.getMessage());
+            return "/signup";
         }
-        return "index";
+
     }
 
 }
