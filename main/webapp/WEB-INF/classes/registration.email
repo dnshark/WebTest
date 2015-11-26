@@ -1,0 +1,7 @@
+ Hello ${user}
+
+ Congradulation You create new Account.
+
+ Your login / password ${login} / ${password}
+
+ please click link to confirm passord : ${host_context}

@@ -1,5 +1,6 @@
 package nedis.study.jee.services.impl;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import nedis.study.jee.components.EntityBuilder;
@@ -13,6 +14,7 @@ import nedis.study.jee.exceptions.InvalidUserInputException;
 import nedis.study.jee.forms.SignUpForm;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.EmailService;
+import nedis.study.jee.services.TemplateService;
 import nedis.study.jee.utils.ReflectionUtils;
 
 import org.apache.commons.lang.StringUtils;
@@ -48,6 +50,9 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private TemplateService templateService;
 	
 	public CommonServiceImpl() {
 		super();
@@ -80,7 +85,7 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException {
+	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException {
 		Account a = entityBuilder.buildAccount();
 		ReflectionUtils.copyByFields(a, form);
 		accountDao.save(a);
@@ -88,8 +93,14 @@ public class CommonServiceImpl implements CommonService {
 		Role r = roleDao.getStudentRole();
 		AccountRole ar = entityBuilder.buildAccountRole(a, r);
 		accountRoleDao.save(ar);
-		
-		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),"NoReplay@gmail.com","WebTester","subject","content");
+
+		String hash = "$^%$^"+form.getLogin()+"$%^#";
+
+		form.setHash(hash);
+
+		String content = templateService.GetTemplateForEmail(form);
+
+		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),"NoReplay@gmail.com","WebTester","Registraion",content);
 		
 		return a;
 	}

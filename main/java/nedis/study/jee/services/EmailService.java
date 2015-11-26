@@ -1,7 +1,5 @@
 package nedis.study.jee.services;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-
 /**
  * @author nedis
  * @version 1.0

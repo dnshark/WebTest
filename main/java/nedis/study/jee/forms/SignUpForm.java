@@ -13,6 +13,16 @@ public class SignUpForm extends AbstractLoginForm implements IForm {
 
 	private String fio;
 
+	private String hash;
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = this.hash;
+	}
+
 	public String getEmail() {
 		return email;
 	}
