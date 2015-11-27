@@ -2,6 +2,7 @@ package nedis.study.jee.components.impl;
 
 import java.sql.Timestamp;
 
+import nedis.study.jee.entities.AccountRegistration;
 import org.springframework.stereotype.Component;
 
 import nedis.study.jee.components.EntityBuilder;
@@ -15,7 +16,7 @@ import nedis.study.jee.entities.Role;
  */
 @Component("entityBuilder")
 public class EntityBuilderImpl implements EntityBuilder {
-	
+
 	@Override
 	public Account buildAccount() {
 		Account a = new Account();
@@ -23,7 +24,7 @@ public class EntityBuilderImpl implements EntityBuilder {
 		a.setActive(Boolean.FALSE);
 		return a;
 	}
-	
+
 	@Override
 	public AccountRole buildAccountRole(Account account, Role role) {
 		return new AccountRole(account, role);

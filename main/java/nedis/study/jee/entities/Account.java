@@ -36,6 +36,9 @@ public class Account extends AbstractEntity {
 	private Boolean active;
 
 	@Column(nullable=false)
+	private Boolean confirmed;
+
+	@Column(nullable=false)
 	private Timestamp created;
 
 	@Column(nullable=false, length=100)
@@ -174,5 +177,11 @@ public class Account extends AbstractEntity {
 	public void setTests(List<Test> tests) {
 		this.tests = tests;
 	}*/
-	
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
 }

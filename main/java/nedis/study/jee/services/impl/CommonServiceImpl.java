@@ -1,13 +1,17 @@
 package nedis.study.jee.services.impl;
 
 import java.io.FileNotFoundException;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.UUID;
 
 import nedis.study.jee.components.EntityBuilder;
 import nedis.study.jee.dao.AccountDao;
+import nedis.study.jee.dao.AccountRegistrationDao;
 import nedis.study.jee.dao.AccountRoleDao;
 import nedis.study.jee.dao.RoleDao;
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
@@ -44,6 +48,9 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Autowired
 	private AccountRoleDao accountRoleDao;
+
+	@Autowired
+	private AccountRegistrationDao accountRegistrationDao;
 	
 	@Autowired
 	private EntityBuilder entityBuilder;
@@ -85,24 +92,43 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException {
-		Account a = entityBuilder.buildAccount();
-		ReflectionUtils.copyByFields(a, form);
-		accountDao.save(a);
-		
-		Role r = roleDao.getStudentRole();
-		AccountRole ar = entityBuilder.buildAccountRole(a, r);
-		accountRoleDao.save(ar);
+	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
 
-		String hash = "$^%$^"+form.getLogin()+"$%^#";
-
-		form.setHash(hash);
+		Account a = addAccount(form);
 
 		String content = templateService.GetTemplateForEmail(form);
 
 		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),"NoReplay@gmail.com","WebTester","Registraion",content);
 		
 		return a;
+	}
+
+	private Account addAccount(SignUpForm form) {
+		Account a = entityBuilder.buildAccount();
+		ReflectionUtils.copyByFields(a, form);
+		accountDao.save(a);
+
+		String hash = UUID.randomUUID().toString();
+		form.setHash(hash);
+
+		addHashToAccount(a, hash);
+
+		initStudentRole(a);
+
+		return a;
+	}
+
+	private void addHashToAccount(Account a, String hash) {
+		AccountRegistration aReg = new AccountRegistration();
+		aReg.setAccount(a);
+		aReg.setHash(hash);
+		accountRegistrationDao.save(aReg);
+	}
+
+	private void initStudentRole(Account a) {
+		Role r = roleDao.getStudentRole();
+		AccountRole ar = entityBuilder.buildAccountRole(a, r);
+		accountRoleDao.save(ar);
 	}
 
 	@Override

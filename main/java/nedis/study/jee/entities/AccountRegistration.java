@@ -25,10 +25,10 @@ public class AccountRegistration extends AbstractEntity  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR", sequenceName="ACCOUNT_TEMP_PWD_SEQ")
+	@SequenceGenerator(name="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR", sequenceName="account_registration_id_account_registration_seq")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_TEMP_PWD_IDACCOUNT_GENERATOR")
-	@Column(name="id_account", unique=true, nullable=false)
-	private Long idAccount;
+	@Column(name="id_account_registration", unique=true, nullable=false)
+	private Long idAccountRegistration;
 
 	@Column(name="hash", nullable=false, length=255)
 	private String hash;
@@ -36,25 +36,25 @@ public class AccountRegistration extends AbstractEntity  {
 	
 	//bi-directional one-to-one association to Account
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_account", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="id_account", nullable=false)
 	//FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
 	private Account account;
 
     public AccountRegistration() {
     }
 
-	public Long getIdAccount() {
-		return this.idAccount;
+	public Long getIdAccountRegistration() {
+		return this.idAccountRegistration;
 	}
 	
 	@Override
 	@Transient
 	public Serializable getId() {
-		return getIdAccount();
+		return getIdAccountRegistration();
 	}
 
-	public void setIdAccount(Long idAccount) {
-		this.idAccount = idAccount;
+	public void setIdAccountRegistration(Long idAccount) {
+		this.idAccountRegistration = idAccount;
 	}
 
 	public String getHash() {

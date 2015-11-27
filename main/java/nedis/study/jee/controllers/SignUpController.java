@@ -1,8 +1,11 @@
 package nedis.study.jee.controllers;
 
+import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.exceptions.InvalidUserInputException;
 import nedis.study.jee.forms.SignUpForm;
 import nedis.study.jee.services.CommonService;
+import nedis.study.jee.services.SignUpService;
 import nedis.study.jee.services.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
+import java.net.UnknownHostException;
 
 /**
  * Created by Dmitrij on 25.11.2015.
@@ -27,6 +31,9 @@ public class SignUpController extends AbstractController{
     protected CommonService commonService;
 
     @Autowired
+    protected SignUpService signUpService;
+
+    @Autowired
     protected TemplateService templateService;
 
     @RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -35,10 +42,26 @@ public class SignUpController extends AbstractController{
         return "signup";
     }
 
+    @RequestMapping(value="/hash{hashText}", method=RequestMethod.GET)
+    public String DoConfirmRegister(Model model,@PathVariable String hashText){
+        Account account =  signUpService.getAccountByHash(hashText);
+        if (account==null) {
+            model.addAttribute("Incorrect link","confirmed");
+        }else if (account.getActive()){
+            model.addAttribute("Account already confirmed","confirmed");
+        }else {
+            signUpService.confirmAccount(account);
+            model.addAttribute("Congradulation account confirmed","confirmed");
+        }
+
+        return "redirect:/confirm";
+    }
+
     @RequestMapping(value="/signup/ok", method= RequestMethod.POST)
     public String DoSignUp(@ModelAttribute("signUpForm") SignUpForm form, BindingResult result) throws InvalidUserInputException {
         try {
             commonService.signUp(form);
+
             return "redirect:/login";
         } catch (MessagingException e) {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
@@ -52,6 +75,10 @@ public class SignUpController extends AbstractController{
          } catch (FileNotFoundException e) {
             result.addError(new ObjectError("Can't find e-mail template file.", e.getMessage()));
             LOGGER.info("Can't find e-mail template file " + e.getMessage());
+            return "/signup";
+        } catch (UnknownHostException e) {
+            result.addError(new ObjectError("Can't find host address", e.getMessage()));
+            LOGGER.info("Can't find host address " + e.getMessage());
             return "/signup";
         }
     }

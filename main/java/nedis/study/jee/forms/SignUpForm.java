@@ -20,7 +20,7 @@ public class SignUpForm extends AbstractLoginForm implements IForm {
 	}
 
 	public void setHash(String hash) {
-		this.hash = this.hash;
+		this.hash = hash;
 	}
 
 	public String getEmail() {
