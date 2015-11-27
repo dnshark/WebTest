@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,11 +17,14 @@ import java.util.Scanner;
 @Service("templateService")
 public class TemplateServiceImpl implements TemplateService {
 
-    private static String readTemplate() throws FileNotFoundException {
+    private final String TEMPLATE_EMAIL_FILE="registration.email";
+
+    private String readTemplate() throws FileNotFoundException {
         String text = "";
-        Scanner scanner = new Scanner(new File("registration.email"));
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+TEMPLATE_EMAIL_FILE);
+        Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNextLine())
-            text.concat((scanner.nextLine()));
+            text= text.concat(scanner.nextLine());
         scanner.close();
         return text;
     }
