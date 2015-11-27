@@ -65,6 +65,10 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean name="emailSource" class="nedis.study.jee.services.impl.Settings">
+        <property name="port" value="8080" />
+    </bean>
+
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

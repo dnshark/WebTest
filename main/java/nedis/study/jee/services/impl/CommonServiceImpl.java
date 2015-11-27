@@ -98,7 +98,7 @@ public class CommonServiceImpl implements CommonService {
 
 		String content = templateService.GetTemplateForEmail(form);
 
-		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),"NoReplay@gmail.com","WebTester","Registraion",content);
+		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),content);
 		
 		return a;
 	}

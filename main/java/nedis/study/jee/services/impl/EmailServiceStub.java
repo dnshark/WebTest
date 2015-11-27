@@ -22,7 +22,16 @@ public class EmailServiceStub implements EmailService {
     @Autowired
 	private JavaMailSender defaultMailSender;
 
-	public void sendVerificationEmail(String destinationEmail,String name,String fromEmail,String fromName,
+	@Autowired
+	private Settings emailSettings;
+
+
+	@Override
+	public void sendVerificationEmail(String destinationEmail, String name, String content) throws javax.mail.MessagingException {
+		sendEmail(destinationEmail,name,emailSettings.getEmailReplay(),emailSettings.getFromName(),emailSettings.getSubject(),content);
+	}
+
+	public void sendEmail(String destinationEmail,String name,String fromEmail,String fromName,
 									  String subject,String content) throws javax.mail.MessagingException {
        try {
 		   MimeMessageHelper message = new MimeMessageHelper(defaultMailSender.createMimeMessage(),false);

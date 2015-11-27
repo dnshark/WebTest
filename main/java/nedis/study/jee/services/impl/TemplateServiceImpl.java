@@ -2,9 +2,9 @@ package nedis.study.jee.services.impl;
 
 import nedis.study.jee.forms.SignUpForm;
 import nedis.study.jee.services.TemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -19,11 +19,12 @@ import java.util.Scanner;
 @Service("templateService")
 public class TemplateServiceImpl implements TemplateService {
 
-    private final String TEMPLATE_EMAIL_FILE="registration.email";
+    @Autowired
+    private Settings emailSettings;
 
     private String readTemplate() throws FileNotFoundException {
         String text = "";
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+TEMPLATE_EMAIL_FILE);
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+emailSettings.getEmailFileName());
         Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNextLine())
             text= text.concat(scanner.nextLine());
@@ -44,7 +45,7 @@ public class TemplateServiceImpl implements TemplateService {
         params.put("user", form.getFio());
         params.put("password", form.getPassword());
         params.put("login", form.getLogin());
-        String host = InetAddress.getLocalHost().getHostAddress()+":8080";
+        String host = InetAddress.getLocalHost().getHostAddress()+":"+emailSettings.getPort();
         params.put("host_context", host+"/hash"+form.getHash());
         return params;
     }

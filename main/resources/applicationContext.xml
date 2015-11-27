@@ -59,6 +59,14 @@
         <property name="initialConnections" value="10" />
         <property name="maxConnections" value="200" />
     </bean>
+
+    <bean name="emailSettings" class="nedis.study.jee.services.impl.Settings">
+        <property name="port" value="${host.port}" />
+        <property name="emailFileName" value="${template.email.filename}"/>
+        <property name="emailReplay" value="${template.email.replay}"/>
+        <property name="fromName" value="${template.email.fromname}"/>
+        <property name="subject" value="${template.email.subject}"/>
+    </bean>
 	
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="configLocation" value="classpath:/hibernate.cfg.xml"/>
