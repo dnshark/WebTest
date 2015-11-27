@@ -15,6 +15,12 @@ public class SignUpForm extends AbstractLoginForm implements IForm {
 
 	private String hash;
 
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	private Boolean confirmed=false;
+
 	public String getHash() {
 		return hash;
 	}
