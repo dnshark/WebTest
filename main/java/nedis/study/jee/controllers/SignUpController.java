@@ -46,23 +46,23 @@ public class SignUpController extends AbstractController{
     public String DoConfirmRegister(Model model,@PathVariable String hashText){
         Account account =  signUpService.getAccountByHash(hashText);
         if (account==null) {
-            model.addAttribute("Incorrect link","confirmed");
-        }else if (account.getActive()){
-            model.addAttribute("Account already confirmed","confirmed");
+            model.addAttribute("confirmed","Incorrect link");
+        }else if (account.getConfirmed()){
+            model.addAttribute("confirmed","Account already confirmed");
         }else {
             signUpService.confirmAccount(account);
-            model.addAttribute("Congradulation account confirmed","confirmed");
+            model.addAttribute("confirmed","Congradulation account confirmed");
         }
 
-        return "redirect:/confirm";
+        return "confirm";
     }
 
     @RequestMapping(value="/signup/ok", method= RequestMethod.POST)
-    public String DoSignUp(@ModelAttribute("signUpForm") SignUpForm form, BindingResult result) throws InvalidUserInputException {
+    public String DoSignUp(Model model,@ModelAttribute("signUpForm") SignUpForm form, BindingResult result) throws InvalidUserInputException {
         try {
             commonService.signUp(form);
-
-            return "redirect:/login";
+            model.addAttribute("confirmed","Check email to confirm password");
+            return "confirm";
         } catch (MessagingException e) {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
             LOGGER.info("send e-mail Error " + e.getMessage());

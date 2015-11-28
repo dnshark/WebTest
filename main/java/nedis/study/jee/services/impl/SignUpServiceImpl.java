@@ -7,6 +7,7 @@ import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Дмитрий on 27.11.2015.
@@ -24,12 +25,14 @@ public class SignUpServiceImpl implements SignUpService {
         if (accountRegistration==null){
             return null;
         }else
-        return accountRegistration.getAccount();
+            return accountRegistration.getAccount();
     }
 
     @Override
+    @Transactional
     public void confirmAccount(Account account) {
         account.setConfirmed(true);
+        account.setActive(true);
         accountDao.update(account);
     }
 }

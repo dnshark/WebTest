@@ -38,7 +38,7 @@ public class EmailServiceStub implements EmailService {
 		   message.setSubject(subject);
 		   message.setTo(new InternetAddress(destinationEmail, name));
 		   message.setFrom(fromEmail, fromName);
-		   message.setText(content);
+		   message.setText(content,true);
 		   MimeMailMessage msg = new MimeMailMessage(message);
 		   defaultMailSender.send(msg.getMimeMessage());
 	   } catch (UnsupportedEncodingException e) {
