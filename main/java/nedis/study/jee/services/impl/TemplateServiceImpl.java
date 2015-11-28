@@ -1,6 +1,6 @@
 package nedis.study.jee.services.impl;
 
-import nedis.study.jee.forms.SignUpForm;
+import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class TemplateServiceImpl implements TemplateService {
         return text;
     }
 
-    public String GetTemplateForEmail(SignUpForm form) throws FileNotFoundException, UnknownHostException {
+    public String GetTemplateForEmail(UserForm form) throws FileNotFoundException, UnknownHostException {
         String text = readTemplate();
 
         Map<String, Object> map = getMapParams(form);
@@ -40,7 +40,7 @@ public class TemplateServiceImpl implements TemplateService {
         return resolveVariables(text,map);
     }
 
-    private Map<String, Object> getMapParams(SignUpForm form) throws UnknownHostException {
+    private Map<String, Object> getMapParams(UserForm form) throws UnknownHostException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("user", form.getFio());
         params.put("password", form.getPassword());

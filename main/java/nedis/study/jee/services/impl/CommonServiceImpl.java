@@ -15,7 +15,7 @@ import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
-import nedis.study.jee.forms.SignUpForm;
+import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.EmailService;
 import nedis.study.jee.services.TemplateService;
@@ -92,7 +92,7 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(SignUpForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
+	public Account signUp(UserForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
 
 		Account a = addAccount(form);
 
@@ -103,7 +103,9 @@ public class CommonServiceImpl implements CommonService {
 		return a;
 	}
 
-	private Account addAccount(SignUpForm form) {
+
+
+	private Account addAccount(UserForm form) {
 		Account a = entityBuilder.buildAccount();
 		ReflectionUtils.copyByFields(a, form);
 		accountDao.save(a);
@@ -135,4 +137,27 @@ public class CommonServiceImpl implements CommonService {
 	public List<Role> listAllRoles() {
 		return roleDao.findAll();
 	}
+	/*
+	@Override
+	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
+	public Account login(User user) throws InvalidUserInputException {
+		Account a = accountDao.findByLogin(user.getEmail());
+		if(a != null) {
+			return a;
+		}
+		else{
+			SignUpForm form = new SignUpForm ();
+			form.setEmail(user.getEmail());
+			form.setSurname(user.getLastName());
+			form.setName(user.getFirstName());
+			form.setSecondName(user.getMiddleName());
+			form.setLogin(user.getEmail());
+
+			UUID pwd = UUID.randomUUID();//generate temp password
+			form.setPassword(pwd.toString());
+			form.setPassword2(pwd.toString());
+
+			return signUp(form, false, true);
+		}
+	}*/
 }

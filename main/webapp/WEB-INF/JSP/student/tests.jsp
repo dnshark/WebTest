@@ -8,10 +8,10 @@
 
 	<h1>Tests available!</h1>
 	<table>
-		 <c:forEach var="tests" items="${tests}">
+		 <c:forEach var="test" items="${tests}">
 			<tr>
 				<td>
-					<a href="/question/id${tests.getId()}">${tests.getName()}</a>
+					<a href="/question/id${test.id}">${tests.name}</a>
 				</td>
 			</tr>
 		</c:forEach>

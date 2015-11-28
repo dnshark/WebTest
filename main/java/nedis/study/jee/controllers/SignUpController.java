@@ -1,9 +1,8 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.exceptions.InvalidUserInputException;
-import nedis.study.jee.forms.SignUpForm;
+import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.SignUpService;
 import nedis.study.jee.services.TemplateService;
@@ -38,7 +37,7 @@ public class SignUpController extends AbstractController{
 
     @RequestMapping(value="/signup", method=RequestMethod.GET)
     public String showLogin(Model model){
-        model.addAttribute("signUpForm", new SignUpForm());
+        model.addAttribute("signUpForm", new UserForm());
         return "signup";
     }
 
@@ -58,7 +57,7 @@ public class SignUpController extends AbstractController{
     }
 
     @RequestMapping(value="/signup/ok", method= RequestMethod.POST)
-    public String DoSignUp(Model model,@ModelAttribute("signUpForm") SignUpForm form, BindingResult result) throws InvalidUserInputException {
+    public String DoSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         try {
             commonService.signUp(form);
             model.addAttribute("confirmed","Check email to confirm password");

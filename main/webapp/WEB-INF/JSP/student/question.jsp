@@ -8,12 +8,12 @@
 
   <h1>Questions!</h1>
 
-  <h2><c:out value="${question.getName()}"></c:out></h2>
+  <h2>${question.name}</h2>
   <table>
-    <c:forEach var="answer" items="${answer}">
+    <c:forEach var="answer" items="${answers}">
       <tr>
         <td>
-          <input type="checkbox" id="${answer.getId()}" value="${answer.getName()}"> ${answer.getName()}
+          <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"> ${answer.name}
         </td>
       </tr>
     </c:forEach>

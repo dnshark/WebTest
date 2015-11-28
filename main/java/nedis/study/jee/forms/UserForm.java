@@ -6,7 +6,7 @@ package nedis.study.jee.forms;
  * @author nedis
  * @version 1.0
  */
-public class SignUpForm extends AbstractLoginForm implements IForm {
+public class UserForm extends AbstractLoginForm implements IForm {
 	private static final long serialVersionUID = -3633827335080843887L;
 	
 	private String email;
@@ -15,11 +15,21 @@ public class SignUpForm extends AbstractLoginForm implements IForm {
 
 	private String hash;
 
+	private Boolean confirmed=false;
+
+	private Boolean active=false;
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	public Boolean getConfirmed() {
 		return confirmed;
 	}
-
-	private Boolean confirmed=false;
 
 	public String getHash() {
 		return hash;

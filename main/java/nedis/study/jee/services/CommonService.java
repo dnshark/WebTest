@@ -7,7 +7,7 @@ import java.util.List;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
-import nedis.study.jee.forms.SignUpForm;
+import nedis.study.jee.forms.UserForm;
 
 import javax.mail.MessagingException;
 
@@ -19,7 +19,7 @@ public interface CommonService {
 
 	Account login (String email, String password, int role) throws InvalidUserInputException;
 	
-	Account signUp (SignUpForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
+	Account signUp (UserForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
 	
 	List<Role> listAllRoles();
 }

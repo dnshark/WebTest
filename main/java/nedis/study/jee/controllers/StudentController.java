@@ -45,7 +45,7 @@ public class StudentController extends AbstractController {
 		Question question = studentService.getFirstQuestion(testId);
 
 		model.addAttribute("question",question);
-		model.addAttribute("answer", studentService.getAnswers(question));
+		model.addAttribute("answers", studentService.getAnswers(question));
 		return "student/question";
 	}
 
