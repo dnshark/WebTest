@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +44,7 @@ public class TemplateServiceImpl implements TemplateService {
         params.put("user", form.getFio());
         params.put("password", form.getPassword());
         params.put("login", form.getLogin());
-        String host = InetAddress.getLocalHost().getHostAddress()+":"+emailSettings.getPort();
+        String host = emailSettings.getHost();
         params.put("host_context", host+"/hash"+form.getHash());
         return params;
     }

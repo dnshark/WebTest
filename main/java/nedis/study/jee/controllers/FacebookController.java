@@ -5,6 +5,7 @@ import com.restfb.FacebookClient;
 import com.restfb.types.User;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.services.CommonService;
+import nedis.study.jee.services.impl.Settings;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class FacebookController extends AbstractController implements Initializi
 
     @Value("${facebook.secretKey}")
     private String facebookSecretKey;
-    
-    @Value("${application.host}")
-    private String applicationHost;
+
+    @Autowired
+    Settings emailSettings;
     
     @Autowired
     private CommonService commonService;
@@ -46,7 +47,7 @@ public class FacebookController extends AbstractController implements Initializi
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		fbReferrer = "https://graph.facebook.com/oauth/authorize?client_id=" + facebookClientId + 
-				"&redirect_uri=http://" + applicationHost + "/fromfb" + "&scope=email,user_location,user_birthday";
+				"&redirect_uri=http://" + emailSettings.getHost() + "/fromfb" + "&scope=email,user_location,user_birthday";
 	}
     
 	@RequestMapping(value={"/fbLogin", "/fbSignup"}, method={RequestMethod.GET})
@@ -65,7 +66,7 @@ public class FacebookController extends AbstractController implements Initializi
 	
 	protected User getFacebookUser (String code) throws IOException{
     	String url = "https://graph.facebook.com/oauth/access_token?client_id="
-                + facebookClientId + "&redirect_uri=http://" + applicationHost + "/fromfb?referrer="
+                + facebookClientId + "&redirect_uri=http://" + emailSettings.getHost() + "/fromfb?referrer="
                 + fbReferrer + "&client_secret=" + facebookSecretKey + "&code=" + code;
         URLConnection connection = new URL(url).openConnection();
         InputStream in = null;

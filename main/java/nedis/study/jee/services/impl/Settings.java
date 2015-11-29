@@ -33,7 +33,7 @@ public class Settings {
     }
 
 
-    public String getPort() {
+    public String getHost() {
         return port;
     }
 
