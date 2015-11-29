@@ -8,9 +8,7 @@ import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author nedis
@@ -40,8 +38,24 @@ public class AdminControler extends AbstractController {
 		UserForm userForm = new UserForm();
 		ReflectionUtils.copyByFields(userForm, user);
 		model.addAttribute("userForm", userForm);
-
+		model.addAttribute("adminId",userId);
 		return "admin/userInfo";
+	}
+
+	@RequestMapping(value="/Ok{adminId}", method= RequestMethod.POST)
+	public String DoEditInfo(Model model,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("userForm") UserForm form) {
+		if (button.equals("save")) {
+			adminService.updateUser(Long.valueOf(adminId), form);
+			return "redirect:id"+adminId;
+		}
+		else if (button.equals("delete")){
+			adminService.deleteUser(Long.valueOf(adminId));
+			return "admin/listUsers";
+		} else if (button.equals("add")){
+			Long id = adminService.addUser(Long.valueOf(adminId), form);
+			return "redirect:id"+String.valueOf(id);
+		}
+			 return ""; //to NEDIS (ошибка не определена кнопка)
 	}
 
 }

@@ -7,7 +7,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form action="/admin/editOk" commandName="userForm">
+  <form:form action="/admin/Ok${adminId}" commandName="userForm">
     <table>
       <tr>
         <td>Email</td>
@@ -27,7 +27,10 @@
       </tr>
       <tr>
         <td colspan="2" style="text-align:center;">
-          <input type="submit" value="Save"/>
+          <input type="submit" name="button" value="save"/>
+        </td>
+        <td colspan="2" style="text-align:center;">
+          <input type="submit" name="button" value="delete"/>
         </td>
       </tr>
     </table>
