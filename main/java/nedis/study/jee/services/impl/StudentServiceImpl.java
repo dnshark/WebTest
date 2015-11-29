@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import nedis.study.jee.services.StudentService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,21 +92,30 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean CheckCorrectAnswer(Answer answer, List<String> userAnswers) {
-        Boolean exists = userAnswers.indexOf(answer.getIdAnswer())>=0;
+    public Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers) {
+        String id = String.valueOf(answer.getIdAnswer());
 
-        return exists && answer.getCorrect();
+        Boolean exists = userAnswers.contains(id);
+
+        Integer result = 0;
+
+        if (exists && answer.getCorrect()) {
+            result = 1;
+        }
+
+        if (exists && !answer.getCorrect())
+        {
+            result = -1;
+        }
+
+        return result;
     }
 
     @Override
-    public Integer CheckCorrectAnswers(List<Answer> answers, List<String> userAnswers) {
+    public Integer CheckCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers) {
         Integer correct = 0;
         for (Answer answer : answers) {
-            if (CheckCorrectAnswer(answer, userAnswers)) correct++;
-            else{
-                correct--;
-            }
-
+            correct = correct +(CheckCorrectAnswer(answer, userAnswers));
         }
 
         if (correct<0) {

@@ -2,6 +2,7 @@ package nedis.study.jee.services;
 
 import nedis.study.jee.entities.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,9 +23,9 @@ public interface StudentService {
 
     Question getNextQuestion(Question question);
 
-    boolean CheckCorrectAnswer(Answer answer, List<String> userAnswers);
+    Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers);
 
-    Integer CheckCorrectAnswers(List<Answer> answers,List<String> userAnswers);
+    Integer CheckCorrectAnswers(List<Answer> answers,ArrayList<String> userAnswers);
 
     TestResult saveResult(Account current_account, String current_test, int correct_answer);
 }

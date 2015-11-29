@@ -1,5 +1,6 @@
 package nedis.study.jee.forms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,14 +8,14 @@ import java.util.List;
  */
 public class TestForm implements IForm{
 
-    private List<String> answer;
+    private ArrayList<String> answer;
 
-    public List<String> getAnswer() {
+    public ArrayList<String> getAnswer() {
 
         return answer;
     }
 
-    public void setAnswer(List<String> answer) {
+    public void setAnswer(ArrayList<String> answer) {
         this.answer = answer;
     }
 
