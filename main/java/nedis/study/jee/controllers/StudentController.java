@@ -58,7 +58,7 @@ public class StudentController extends AbstractController {
 			return "student/result";
 		} else {
 			model.addAttribute("question",question);
-			model.addAttribute("answer", studentService.getAnswers(question));
+			model.addAttribute("answers", studentService.getAnswers(question));
 			return "student/question";
 		}
 	}

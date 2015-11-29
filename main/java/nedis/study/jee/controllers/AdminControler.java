@@ -39,6 +39,15 @@ public class AdminControler extends AbstractController {
 		ReflectionUtils.copyByFields(userForm, user);
 		model.addAttribute("userForm", userForm);
 		model.addAttribute("adminId",userId);
+		model.addAttribute("mode","edit");
+		return "admin/userInfo";
+	}
+
+	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
+	public String showLogin(Model model){
+		UserForm userForm = new UserForm();
+		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
+		model.addAttribute("userForm", userForm);
 		return "admin/userInfo";
 	}
 
@@ -52,8 +61,9 @@ public class AdminControler extends AbstractController {
 			adminService.deleteUser(Long.valueOf(adminId));
 			return "admin/listUsers";
 		} else if (button.equals("add")){
-			Long id = adminService.addUser(Long.valueOf(adminId), form);
-			return "redirect:id"+String.valueOf(id);
+			Account account = adminService.addUser(form);
+		//	return "redirect:id"+String.valueOf(account.getIdAccount());
+			return "admin/listUsers";
 		}
 			 return ""; //to NEDIS (ошибка не определена кнопка)
 	}

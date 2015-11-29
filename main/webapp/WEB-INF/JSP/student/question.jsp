@@ -9,7 +9,7 @@
   <h1>Questions!</h1>
 
   <h2>${question.name}</h2>
-  <table>
+  <table align="center">
     <c:forEach var="answer" items="${answers}">
       <tr>
         <td>

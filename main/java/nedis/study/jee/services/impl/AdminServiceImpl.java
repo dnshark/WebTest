@@ -3,6 +3,7 @@ package nedis.study.jee.services.impl;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.forms.UserForm;
+import nedis.study.jee.services.CommonService;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AccountDao accountDao;
+
+    @Autowired
+    private CommonService commonService;
 
     @Override
     public List<Account> loadAllUser() {
@@ -56,10 +60,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Account addUser(Long aLong, UserForm form) {
-        Account account = new Account();
-        ReflectionUtils.copyByFields(account, form);
-        accountDao.save(account);
-        return null;
+    public Account addUser(UserForm form) {
+        Account account = commonService.addAccount(form);
+        return account;
     }
 }

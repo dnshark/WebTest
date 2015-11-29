@@ -7,11 +7,11 @@
 <div class="container">
 
 	<h1>Tests available!</h1>
-	<table>
+	<table align="center">
 		 <c:forEach var="test" items="${tests}">
 			<tr>
 				<td>
-					<a href="/question/id${test.id}">${tests.name}</a>
+					<a href="/question/id${test.id}">${test.name}</a>
 				</td>
 			</tr>
 		</c:forEach>

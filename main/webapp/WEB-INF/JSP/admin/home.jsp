@@ -8,10 +8,15 @@
 
 <div class="container">
 	<h1>Hello admin</h1>
-	<table>
+	<table align="center">
 		<tr>
 			<td>
 				<a href="listUsers">Users list</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="userInfo/new">Add new user</a>
 			</td>
 		</tr>
 	</table>

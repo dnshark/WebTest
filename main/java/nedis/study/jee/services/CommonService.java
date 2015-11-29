@@ -22,4 +22,6 @@ public interface CommonService {
 	Account signUp (UserForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
 	
 	List<Role> listAllRoles();
+
+	Account addAccount(UserForm form);
 }

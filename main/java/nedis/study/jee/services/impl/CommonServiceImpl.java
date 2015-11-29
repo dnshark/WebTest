@@ -105,7 +105,7 @@ public class CommonServiceImpl implements CommonService {
 
 
 
-	private Account addAccount(UserForm form) {
+	public Account addAccount(UserForm form) {
 		Account a = entityBuilder.buildAccount();
 		ReflectionUtils.copyByFields(a, form);
 		accountDao.save(a);

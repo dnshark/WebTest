@@ -19,5 +19,5 @@ public interface AdminService {
 
     void deleteUser(Long userId);
 
-    Account addUser(Long aLong, UserForm form);
+    Account addUser(UserForm form);
 }

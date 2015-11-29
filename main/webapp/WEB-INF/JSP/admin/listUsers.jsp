@@ -8,7 +8,7 @@
 <div class="container">
   <h1> Users list</h1>
 
-  <table>
+  <table align="center">
     <c:forEach var="user" items="${users}">
       <tr>
         <td>
