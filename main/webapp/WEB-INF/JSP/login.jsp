@@ -35,6 +35,13 @@
 	            <input type="submit" value="Login"/>
 	        </td>
 	    </tr>
+	    <tr>
+			<td colspan="2" style="text-align:center;padding-top:20px;">
+				<a href="${context }/fbLogin">
+					<img alt="fbLogin" src="${context }/resources/images/login-facebook.png"/>
+				</a>
+			</td>
+		</tr>
 	</table>  
 	</form:form>
 </div>

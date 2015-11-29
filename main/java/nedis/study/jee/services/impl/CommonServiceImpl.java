@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.UUID;
 
+import com.restfb.types.User;
 import nedis.study.jee.components.EntityBuilder;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.AccountRegistrationDao;
@@ -89,17 +90,37 @@ public class CommonServiceImpl implements CommonService {
 		}
 		return a;
 	}
-	
+
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(UserForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
+	public Account login(User user) throws InvalidUserInputException, FileNotFoundException, MessagingException, UnknownHostException {
+		Account a = accountDao.findByLogin(user.getEmail());
+		if(a != null) {
+			return a;
+		}
+		else{
+			UserForm form = new UserForm ();
+			form.setEmail(user.getEmail());
+			form.setFio(user.getLastName() + " " + user.getFirstName());
+			form.setLogin(user.getEmail());
+
+			UUID pwd = UUID.randomUUID();//generate temp password
+			form.setPassword(pwd.toString());
+
+			return signUp(form, false);
+		}
+	}
+
+	@Override
+	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
+	public Account signUp(UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
 
 		Account a = addAccount(form);
 
 		String content = templateService.GetTemplateForEmail(form);
-
-		emailService.sendVerificationEmail(form.getEmail(),form.getFio(),content);
-		
+		if (sendVerificationEmail) {
+			emailService.sendVerificationEmail(form.getEmail(), form.getFio(), content);
+		}
 		return a;
 	}
 

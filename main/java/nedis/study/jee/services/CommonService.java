@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import com.restfb.types.User;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
@@ -18,8 +19,10 @@ import javax.mail.MessagingException;
 public interface CommonService {
 
 	Account login (String email, String password, int role) throws InvalidUserInputException;
+
+	Account login (User user) throws InvalidUserInputException, FileNotFoundException, MessagingException, UnknownHostException;
 	
-	Account signUp (UserForm form) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
+	Account signUp (UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
 	
 	List<Role> listAllRoles();
 
