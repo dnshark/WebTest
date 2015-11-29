@@ -1,8 +1,6 @@
 package nedis.study.jee.components;
 
-import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.AccountRole;
-import nedis.study.jee.entities.Role;
+import nedis.study.jee.entities.*;
 
 /**
  * @author nedis
@@ -13,4 +11,6 @@ public interface EntityBuilder {
 	Account buildAccount();
 	
 	AccountRole buildAccountRole(Account account, Role role);
+
+	TestResult buildTestResult(Account account,Test test);
 }

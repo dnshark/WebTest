@@ -14,4 +14,8 @@ public class TestDaoImpl extends AbstractEntityDao<Test> implements TestDao {
         return Test.class;
     }
 
+    @Override
+    public int getCorrectCountAnswer(Test test) {
+        return 100;
+    }
 }

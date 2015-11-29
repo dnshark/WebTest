@@ -28,11 +28,18 @@ public class TestResult extends AbstractEntity {
 	@Id
 	@SequenceGenerator(name="PASSED_TEST_IDPASSEDTEST_GENERATOR", sequenceName="test_result_id_test_result_seq")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="PASSED_TEST_IDPASSEDTEST_GENERATOR")
-	@Column(name="id_passed_test", unique=true, nullable=false)
+	@Column(name="id_test_result", unique=true, nullable=false)
 	private Long idPassedTest;
 
 	@Column(name="correct_answer",nullable = false)
 	private int correctAnswer;
+
+	@Column(name="all_count",nullable = false)
+	private int allCount;
+
+	@Column(name="test_name",nullable = false)
+	private String testName;
+
 
 	public int getCorrectAnswer() {
 		return correctAnswer;
@@ -107,6 +114,23 @@ public class TestResult extends AbstractEntity {
 
 	public void setTest(Test test) {
 		this.test = test;
+	}
+
+	public String getTestName() {
+		return testName;
+	}
+
+	public void setTestName(String testName) {
+		this.testName = testName;
+	}
+
+	public int getAllCount() {
+
+		return allCount;
+	}
+
+	public void setAllCount(int allCount) {
+		this.allCount = allCount;
 	}
 	
 }

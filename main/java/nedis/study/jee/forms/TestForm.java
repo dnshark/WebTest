@@ -5,40 +5,17 @@ import java.util.List;
 /**
  * Created by Dmitrij on 24.11.2015.
  */
-public class TestForm {
-    private int numberQuestion;
+public class TestForm implements IForm{
 
-    private List<Boolean> answer;
+    private List<String> answer;
 
-    private int correctAnswer;
-
-    TestForm() {
-        setCorrectAnswer(0);
-    }
-
-    public int getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(int correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public List<Boolean> getAnswer() {
+    public List<String> getAnswer() {
 
         return answer;
     }
 
-    public void setAnswer(List<Boolean> answer) {
+    public void setAnswer(List<String> answer) {
         this.answer = answer;
-    }
-
-    public int getNumberQuestion() {
-        return numberQuestion;
-    }
-
-    public void setNumberQuestion(int numberQuestion) {
-        this.numberQuestion = numberQuestion;
     }
 
 }

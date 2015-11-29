@@ -2,13 +2,10 @@ package nedis.study.jee.components.impl;
 
 import java.sql.Timestamp;
 
-import nedis.study.jee.entities.AccountRegistration;
+import nedis.study.jee.entities.*;
 import org.springframework.stereotype.Component;
 
 import nedis.study.jee.components.EntityBuilder;
-import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.AccountRole;
-import nedis.study.jee.entities.Role;
 
 /**
  * @author nedis
@@ -28,5 +25,15 @@ public class EntityBuilderImpl implements EntityBuilder {
 	@Override
 	public AccountRole buildAccountRole(Account account, Role role) {
 		return new AccountRole(account, role);
+	}
+
+	@Override
+	public TestResult buildTestResult(Account account, Test test) {
+		TestResult testResult = new TestResult();
+		testResult.setAccount(account);
+		testResult.setTest(test);
+		testResult.setCreated(new Timestamp(System.currentTimeMillis()));
+		testResult.setTestName(test.getName());
+		return testResult;
 	}
 }
