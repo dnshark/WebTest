@@ -13,6 +13,8 @@ public interface StudentService {
 
     List<Test> listAllTests();
 
+    List<TestResult> listAllResult(Account account);
+
     Test GetTestById(long testId);
 
     Question getFirstQuestion(String testId);

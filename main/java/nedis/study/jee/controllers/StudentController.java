@@ -57,6 +57,13 @@ public class StudentController extends AbstractController {
 		return "student/question";
 	}
 
+	@RequestMapping(value="student/result", method=RequestMethod.GET)
+	public String showResults(Model model,HttpSession session){
+		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+		studentService.listAllResult(account);
+		return "student/result";
+	}
+
 	@RequestMapping(value="question/id{questionId}", method=RequestMethod.POST)
 	public String GetAnswer(Model model,HttpSession session,@PathVariable String questionId,@ModelAttribute("testForm") TestForm form) {
 		Question question = studentService.getQuestionById(Long.valueOf(questionId));
@@ -69,12 +76,14 @@ public class StudentController extends AbstractController {
 
 		question = studentService.getNextQuestion(question);
 
+		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+
 		if (question == null) {
-			studentService.saveResult((Account)session.getAttribute("CURRENT_ACCOUNT"),
+			studentService.saveResult(account,
 					(String)session.getAttribute("CURRENT_TEST"),
 					(Integer)session.getAttribute("CORRECT_ANSWER")
 					);
-			return "student/result";
+			return "student/result/id"+String.valueOf(account.getIdAccount());
 		} else {
 			model.addAttribute("question",question);
 			model.addAttribute("answers", studentService.getAnswers(question));

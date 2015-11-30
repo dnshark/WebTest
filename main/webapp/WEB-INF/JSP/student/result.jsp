@@ -8,5 +8,24 @@
 
   <h1>Result</h1>
 
+  <table align="center">
+    <c:forEach var="result" items="${results}">
+      <tr>
+        <td>
+           ${result.testName}
+        </td>
+        <td>
+            ${result.correctAnswer}
+        </td>
+        <td>
+            ${result.allCount}
+        </td>
+        <td>
+            ${result.created}
+        </td>
+      </tr>
+    </c:forEach>
+  </table>
+
 
 </div>

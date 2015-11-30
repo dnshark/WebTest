@@ -1,8 +1,12 @@
 package nedis.study.jee.dao.impl.hibernate;
 
 import nedis.study.jee.dao.TestResultDao;
+import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.TestResult;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by Дмитрий on 29.11.2015.
@@ -12,5 +16,10 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
     @Override
     protected Class<TestResult> getEntityClass() {
         return TestResult.class;
+    }
+
+    @Override
+    public List<TestResult> getUserResults(Account account) {
+        return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account)).list();
     }
 }

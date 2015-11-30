@@ -1,6 +1,7 @@
 package nedis.study.jee.services.impl;
 
 import nedis.study.jee.components.EntityBuilder;
+import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.QuestionDao;
 import nedis.study.jee.dao.TestDao;
 import nedis.study.jee.dao.TestResultDao;
@@ -39,12 +40,21 @@ public class StudentServiceImpl implements StudentService {
     private TestResultDao testResultDao;
 
     @Autowired
+    @Qualifier("hibernateAccountDao")
+    private AccountDao accountDao;
+
+    @Autowired
     @Qualifier("entityBuilder")
     private EntityBuilder entityBuilder;
 
     @Override
     public List<Test> listAllTests() {
         return testDao.findAll();
+    }
+
+    @Override
+    public List<TestResult> listAllResult(Account account) {
+        return testResultDao.getUserResults(account);
     }
 
     public Test GetTestById(long testId) {
