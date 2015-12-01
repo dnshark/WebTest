@@ -62,17 +62,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Question getFirstQuestion(String testId) {
-        List<Question> questions = GetTestById(Long.valueOf(testId)).getQuestions();
-
-        if (questions.isEmpty()) {
-            throw new EmptyResultDataAccessException(1);
-        }
-
-        return questions.get(0);
-    }
-
-    @Override
     public List<Answer> getAnswers(Question question) {
         List<Answer> answers = question.getAnswers();
 
@@ -88,17 +77,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Question getNextQuestion(Question question) {
-        Test test = question.getTest();
-        List<Question> listQ = test.getQuestions();
-
-        for(Question q : listQ){
-
-         if (q.getIdQuestion()>question.getIdQuestion()) {
-             return q;
-         }
-        }
-        return null;
+    public Question getQuestionByNumber(String testId, Integer number) {
+        Test test = testDao.findById(Long.valueOf(testId));
+        return questionDao.getQuestionByNumber(number, test);
     }
 
     @Override

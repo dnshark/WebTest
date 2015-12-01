@@ -17,13 +17,11 @@ public interface StudentService {
 
     Test GetTestById(long testId);
 
-    Question getFirstQuestion(String testId);
-
     List<Answer> getAnswers(Question question);
 
     Question getQuestionById(long questionId);
 
-    Question getNextQuestion(Question question);
+    Question getQuestionByNumber(String testId, Integer number);
 
     Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers);
 

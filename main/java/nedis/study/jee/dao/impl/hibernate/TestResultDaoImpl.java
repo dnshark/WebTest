@@ -3,6 +3,7 @@ package nedis.study.jee.dao.impl.hibernate;
 import nedis.study.jee.dao.TestResultDao;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.TestResult;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
 
     @Override
     public List<TestResult> getUserResults(Account account) {
-        return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account)).list();
+        return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
+                .addOrder(Order.desc("created")).list();
     }
 }

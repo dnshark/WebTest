@@ -8,7 +8,21 @@
 
   <h1>Result</h1>
 
-  <table align="center">
+  <table align="center" border="2">
+      <tr>
+          <td>
+             Test name
+          </td>
+          <td>
+             User correct answers
+          </td>
+          <td>
+             All correct answers
+          </td>
+          <td>
+             Date
+          </td>
+      </tr>
     <c:forEach var="result" items="${results}">
       <tr>
         <td>

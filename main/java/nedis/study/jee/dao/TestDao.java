@@ -6,5 +6,5 @@ import nedis.study.jee.entities.Test;
  * Created by Дмитрий on 20.11.2015.
  */
 public interface TestDao extends IEntityDao<Test> {
-    int getCorrectCountAnswer(Test test);
+    Integer getCorrectCountAnswer(Test test);
 }

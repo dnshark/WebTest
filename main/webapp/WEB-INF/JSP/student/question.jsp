@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
-  <form:form method="POST" action="id${question.getId()}" commandName="loginForm" >
+  <form:form method="POST" action="next" commandName="loginForm" >
   <h1>Questions!</h1>
 
   <h2>${question.name}</h2>

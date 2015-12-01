@@ -47,11 +47,12 @@ public class StudentController extends AbstractController {
 	@RequestMapping(value="/question/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,HttpSession session,@PathVariable String testId){
 
-		Question question = studentService.getFirstQuestion(testId);
+		Question question = studentService.getQuestionByNumber(testId,0);
 
 		model.addAttribute("question",question);
 		model.addAttribute("answers", studentService.getAnswers(question));
 		session.setAttribute("CORRECT_ANSWER", 0);
+		session.setAttribute("QUESTION_NUMBER", 0);
 		session.setAttribute("CURRENT_TEST",testId);
 		model.addAttribute("testForm", new TestForm());
 		return "student/question";
@@ -60,13 +61,16 @@ public class StudentController extends AbstractController {
 	@RequestMapping(value="student/result", method=RequestMethod.GET)
 	public String showResults(Model model,HttpSession session){
 		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
-		studentService.listAllResult(account);
+		model.addAttribute("results",studentService.listAllResult(account));
 		return "student/result";
 	}
 
-	@RequestMapping(value="question/id{questionId}", method=RequestMethod.POST)
-	public String GetAnswer(Model model,HttpSession session,@PathVariable String questionId,@ModelAttribute("testForm") TestForm form) {
-		Question question = studentService.getQuestionById(Long.valueOf(questionId));
+	@RequestMapping(value="question/next", method=RequestMethod.POST)
+	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("testForm") TestForm form) {
+		Integer number = (Integer)session.getAttribute("QUESTION_NUMBER");
+		String testId = (String)session.getAttribute("CURRENT_TEST");
+
+		Question question = studentService.getQuestionByNumber(testId, number);
 
 		List<Answer> answers = question.getAnswers();
         Integer correct = (Integer) session.getAttribute("CORRECT_ANSWER");
@@ -74,17 +78,19 @@ public class StudentController extends AbstractController {
 		correct=correct+studentService.CheckCorrectAnswers(answers,form.getAnswer());
 		session.setAttribute("CORRECT_ANSWER",correct);
 
-		question = studentService.getNextQuestion(question);
+		question = studentService.getQuestionByNumber(testId,++number);
 
 		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
 
 		if (question == null) {
+			session.setAttribute("QUESTION_NUMBER", 0);
 			studentService.saveResult(account,
 					(String)session.getAttribute("CURRENT_TEST"),
 					(Integer)session.getAttribute("CORRECT_ANSWER")
 					);
-			return "student/result/id"+String.valueOf(account.getIdAccount());
+			return "redirect:../student/result";
 		} else {
+			session.setAttribute("QUESTION_NUMBER", number);
 			model.addAttribute("question",question);
 			model.addAttribute("answers", studentService.getAnswers(question));
 			return "student/question";
