@@ -58,13 +58,6 @@ public class StudentController extends AbstractController {
 		return "student/question";
 	}
 
-	@RequestMapping(value="student/result", method=RequestMethod.GET)
-	public String showResults(Model model,HttpSession session){
-		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
-		model.addAttribute("results",studentService.listAllResult(account));
-		return "student/result";
-	}
-
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
 	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("testForm") TestForm form) {
 		Integer number = (Integer)session.getAttribute("QUESTION_NUMBER");
@@ -88,7 +81,7 @@ public class StudentController extends AbstractController {
 					(String)session.getAttribute("CURRENT_TEST"),
 					(Integer)session.getAttribute("CORRECT_ANSWER")
 					);
-			return "redirect:../student/result";
+			return "redirect:../allAccess/result";
 		} else {
 			session.setAttribute("QUESTION_NUMBER", number);
 			model.addAttribute("question",question);
@@ -96,5 +89,14 @@ public class StudentController extends AbstractController {
 			return "student/question";
 		}
 	}
+	@RequestMapping(value="/offTests", method=RequestMethod.GET)
+	public String showOffTest(Model model){
+		initTests(model);
+		return "student/offTests";
+	}
 
+	@RequestMapping(value="/offTests/id{testId}", method=RequestMethod.GET)
+	public String showOffTests(Model model,HttpSession session,@PathVariable String testId){
+		return "student/offTests";
+	}
 }

@@ -6,6 +6,7 @@ import nedis.study.jee.entities.*;
  * @author nedis
  * @version 1.0
  */
+//Nedis как быстро перейти с EntityBuilder на Impl
 public interface EntityBuilder {
 
 	Account buildAccount();

@@ -19,5 +19,20 @@
 				<a href="userInfo/new">Add new user</a>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<a href="allAccess/result">View result</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="allAccess/editInfo">Edit Info</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="allAccess/info">Look Info</a>
+			</td>
+		</tr>
 	</table>
 </div>

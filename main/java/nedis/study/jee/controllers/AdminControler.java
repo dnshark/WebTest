@@ -59,11 +59,11 @@ public class AdminControler extends AbstractController {
 		}
 		else if (button.equals("delete")){
 			adminService.deleteUser(Long.valueOf(adminId));
-			return "admin/listUsers";
+			return "redirect:listUsers";
 		} else if (button.equals("add")){
 			Account account = adminService.addUser(form);
 		//	return "redirect:id"+String.valueOf(account.getIdAccount());
-			return "admin/listUsers";
+			return "redirect:listUsers";
 		}
 			 return ""; //to NEDIS (ошибка не определена кнопка)
 	}

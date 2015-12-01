@@ -5,32 +5,41 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-  <h1>Hello student</h1>
-  <table>
+
+  <h1>Result</h1>
+
+  <table align="center" border="2">
     <tr>
       <td>
-       <a href="tests">Testing</a>
+        Test name
       </td>
-    </tr>
-    <tr>
       <td>
-        <a href="offTest">offline Testing</a>
+        User correct answers
       </td>
-    </tr>
-    <tr>
       <td>
-       <a href="allAccess/result">View result</a>
+        All correct answers
       </td>
-    </tr>
-    <tr>
       <td>
-      <a href="allAccess/editInfo">Edit Info</a>
+        Date
       </td>
     </tr>
-    <tr>
-      <td>
-        <a href="allAccess/info">Look Info</a>
-      </td>
-    </tr>
+    <c:forEach var="result" items="${results}">
+      <tr>
+        <td>
+            ${result.testName}
+        </td>
+        <td>
+            ${result.correctAnswer}
+        </td>
+        <td>
+            ${result.allCount}
+        </td>
+        <td>
+            ${result.created}
+        </td>
+      </tr>
+    </c:forEach>
   </table>
+
+
 </div>

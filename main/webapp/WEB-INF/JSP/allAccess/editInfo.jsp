@@ -7,48 +7,30 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form action="/admin/Ok${adminId}" commandName="userForm">
-    <%String mode= (String) request.getAttribute("mode");%>
+  <form:form action="editInfoOk" commandName="userForm">
     <table align="center">
       <tr>
         <td>Email</td>
         <td><form:input path="email" /></td>
-        <td>Confirmed</td>
-        <td><form:checkbox path="confirmed"/> </td>
       </tr>
       <tr>
         <td>Login</td>
         <td><form:input path="login"/> </td>
-        <td>Active</td>
-        <td><form:checkbox path="active"/> </td>
       </tr>
-      <%  if(mode =="new"){%>
       <tr>
         <td>Password</td>
         <td><form:password path="password"/> </td>
       </tr>
-      <%}%>
       <tr>
         <td>Full name</td>
         <td><form:input path="fio"/> </td>
       </tr>
 
-      <%  if(mode =="edit"){%>
       <tr>
         <td colspan="2" style="text-align:center;">
           <input type="submit" name="button" value="save"/>
         </td>
-        <td colspan="2" style="text-align:center;">
-          <input type="submit" name="button" value="delete"/>
-        </td>
       </tr>
-      <%}else if (mode=="new"){ %>
-      <tr>
-      <td colspan="4" style="text-align:center;">
-        <input type="submit" name="button" value="add"/>
-      </td>
-      </tr>
-      <%}%>
     </table>
   </form:form>
 </div>

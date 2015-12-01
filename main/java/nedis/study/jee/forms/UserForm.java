@@ -54,4 +54,8 @@ public class UserForm extends AbstractLoginForm implements IForm {
 		this.fio = fio;
 	}
 
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+
 }

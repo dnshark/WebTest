@@ -4,8 +4,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<jsp:include page="../templates/header.jsp" />
 <div class="container">
-	Hello, tutor!
+	<h1>Hello turtor</h1>
+	<table>
+		<tr>
+			<td>
+				<a href="allAccess/result">View result</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="allAccess/editInfo">Edit Info</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="allAccess/info">Look Info</a>
+			</td>
+		</tr>
+	</table>
 </div>
-<jsp:include page="../templates/footer.jsp" />

@@ -27,4 +27,6 @@ public interface CommonService {
 	List<Role> listAllRoles();
 
 	Account addAccount(UserForm form);
+
+	void updateAccount(Account account);
 }

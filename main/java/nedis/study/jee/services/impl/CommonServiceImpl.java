@@ -2,6 +2,7 @@ package nedis.study.jee.services.impl;
 
 import java.io.FileNotFoundException;
 import java.net.UnknownHostException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -139,6 +140,13 @@ public class CommonServiceImpl implements CommonService {
 		initStudentRole(a);
 
 		return a;
+	}
+
+	@Override
+	@Transactional
+	public void updateAccount(Account account) {
+		account.setUpdated(new Timestamp(System.currentTimeMillis()));
+		accountDao.update(account);
 	}
 
 	private void addHashToAccount(Account a, String hash) {
