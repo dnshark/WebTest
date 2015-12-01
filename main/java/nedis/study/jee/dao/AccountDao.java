@@ -12,5 +12,7 @@ public interface AccountDao extends IEntityDao<Account> {
 
 	List<Account> listAccounts (int offset, int count);
 	
-	Account findByLogin(String email);
+	Account findByLogin(String login);
+
+	Account findByEmail(String email);
 }

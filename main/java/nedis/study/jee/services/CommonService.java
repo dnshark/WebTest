@@ -22,7 +22,7 @@ public interface CommonService {
 
 	Account login (User user) throws InvalidUserInputException, FileNotFoundException, MessagingException, UnknownHostException;
 	
-	Account signUp (UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException;
+	Account signUp (UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException;
 	
 	List<Role> listAllRoles();
 

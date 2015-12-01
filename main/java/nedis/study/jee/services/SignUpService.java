@@ -9,4 +9,6 @@ public interface SignUpService {
     public Account getAccountByHash(String hash);
 
     public void confirmAccount(Account account);
+
+    public Account getAccountByEmail(String email);
 }

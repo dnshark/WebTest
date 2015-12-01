@@ -66,6 +66,8 @@
         <property name="emailReplay" value="${template.email.replay}"/>
         <property name="fromName" value="${template.email.fromname}"/>
         <property name="subject" value="${template.email.subject}"/>
+        <property name="restoreFileName" value="${template.restore.filename}"/>
+        <property name="restoreSubject" value="${template.restore.subject"/>
     </bean>
 	
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

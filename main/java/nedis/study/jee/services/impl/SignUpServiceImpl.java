@@ -34,5 +34,12 @@ public class SignUpServiceImpl implements SignUpService {
         account.setConfirmed(true);
         account.setActive(true);
         accountDao.update(account);
+        AccountRegistration accountRegistration = account.getAccountRegistration();
+        accountRegistrationDao.delete(accountRegistration);
+    }
+
+    @Override
+    public Account getAccountByEmail(String email) {
+        return accountDao.findByEmail(email);
     }
 }

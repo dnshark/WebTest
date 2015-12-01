@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<title>Restore password</title>
+<body>
+<p> Hello ${user} </p>
+<p></p>
+<p> This is your information</p>
+<p></p>
+ <p>Your login / password ${login} / ${password}</p>
+<p></p>
+ </body>
+ </html>

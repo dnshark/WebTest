@@ -56,9 +56,6 @@ public class CommonServiceImpl implements CommonService {
 	
 	@Autowired
 	private EntityBuilder entityBuilder;
-	
-	@Autowired
-	private EmailService emailService;
 
 	@Autowired
 	private TemplateService templateService;
@@ -114,14 +111,13 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})
-	public Account signUp(UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException, UnknownHostException {
+	public Account signUp(UserForm form, boolean sendVerificationEmail) throws InvalidUserInputException, MessagingException, FileNotFoundException {
 
 		Account a = addAccount(form);
-
-		String content = templateService.GetTemplateForEmail(form);
 		if (sendVerificationEmail) {
-			emailService.sendVerificationEmail(form.getEmail(), form.getFio(), content);
+			templateService.sendVerificationEmail(form);
 		}
+
 		return a;
 	}
 

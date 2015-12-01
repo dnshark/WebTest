@@ -46,4 +46,9 @@ public class EmailServiceStub implements EmailService {
 	   }
 	}
 
+	@Override
+	public void sendRestoreEmail(String destinationEmail, String name, String content) throws javax.mail.MessagingException {
+		sendEmail(destinationEmail,name,emailSettings.getEmailReplay(),emailSettings.getFromName(),emailSettings.getRestoreSubject(),content);
+	}
+
 }

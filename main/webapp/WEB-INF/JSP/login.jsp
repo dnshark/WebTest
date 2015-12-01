@@ -11,15 +11,16 @@
 	   <table>
 	    <tr>
 	        <td colspan="2" class="errors"><form:errors path="*"/></td>
-			<td><a href="/signup">New user</a></td>
 	    </tr>
 	    <tr>
 	        <td><form:label path="login">Login</form:label></td>
 	        <td><form:input path="login" /></td>
+			<td><a href="/signup">New user</a></td>
 	    </tr>
 	    <tr>
 	        <td><form:label path="password">Password</form:label></td>
 	        <td><form:password path="password"/> </td>
+			<td><a href="/forget">Forget password</a></td>
 	    </tr>
 	    <tr>
 	        <td><form:label path="idRole">Role</form:label></td>

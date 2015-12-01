@@ -30,4 +30,9 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	public Account findByLogin(final String login) {
 		return (Account) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("login", login)).uniqueResult();
 	}
+
+	@Override
+	public Account findByEmail(String email) {
+		return (Account) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("email", email)).uniqueResult();
+	}
 }

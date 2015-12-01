@@ -16,6 +16,10 @@ public class Settings {
 
     private String subject;
 
+    private String restoreFileName;
+
+    private String restoreSubject;
+
     public String getEmailReplay() {
         return emailReplay;
     }
@@ -24,7 +28,7 @@ public class Settings {
         this.emailReplay = emailReplay;
     }
 
-    public String getEmailFileName() {
+    public String getVerificationEmailFileName() {
         return emailName;
     }
 
@@ -62,5 +66,19 @@ public class Settings {
         this.subject = subject;
     }
 
+    public void setRestoreFileName(String restoreFileName) {
+        this.restoreFileName = restoreFileName;
+    }
 
+    public String getRestoreFileName() {
+        return restoreFileName;
+    }
+
+    public void setRestoreSubject(String restoreSubject) {
+        this.restoreSubject = restoreSubject;
+    }
+
+    public String getRestoreSubject() {
+        return restoreSubject;
+    }
 }

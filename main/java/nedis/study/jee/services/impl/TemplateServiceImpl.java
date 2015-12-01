@@ -1,13 +1,14 @@
 package nedis.study.jee.services.impl;
 
 import nedis.study.jee.forms.UserForm;
+import nedis.study.jee.services.EmailService;
 import nedis.study.jee.services.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -21,9 +22,12 @@ public class TemplateServiceImpl implements TemplateService {
     @Autowired
     private Settings emailSettings;
 
-    private String readTemplate() throws FileNotFoundException {
+    @Autowired
+    private EmailService emailService;
+
+    private String readTemplate(String filename) throws FileNotFoundException {
         String text = "";
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+emailSettings.getEmailFileName());
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+filename);
         Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNextLine())
             text= text.concat(scanner.nextLine());
@@ -31,15 +35,27 @@ public class TemplateServiceImpl implements TemplateService {
         return text;
     }
 
-    public String GetTemplateForEmail(UserForm form) throws FileNotFoundException, UnknownHostException {
-        String text = readTemplate();
+    public String GetTemplateForEmail(UserForm form, String filename) throws FileNotFoundException {
+        String text = readTemplate(filename);
 
         Map<String, Object> map = getMapParams(form);
 
         return resolveVariables(text,map);
     }
 
-    private Map<String, Object> getMapParams(UserForm form) throws UnknownHostException {
+    @Override
+    public void sendVerificationEmail(UserForm form) throws FileNotFoundException, MessagingException {
+        String content = GetTemplateForEmail(form,emailSettings.getVerificationEmailFileName());
+        emailService.sendVerificationEmail(form.getEmail(), form.getFio(), content);
+    }
+
+    @Override
+    public void sendRestoreEmail(UserForm form) throws FileNotFoundException, MessagingException {
+        String content = GetTemplateForEmail(form,emailSettings.getRestoreFileName());
+        emailService.sendRestoreEmail(form.getEmail(), form.getFio(), content);
+    }
+
+    private Map<String, Object> getMapParams(UserForm form) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("user", form.getFio());
         params.put("password", form.getPassword());

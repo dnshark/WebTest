@@ -75,11 +75,8 @@ public class SignUpController extends AbstractController{
             result.addError(new ObjectError("Can't find e-mail template file.", e.getMessage()));
             LOGGER.info("Can't find e-mail template file " + e.getMessage());
             return "/signup";
-        } catch (UnknownHostException e) {
-            result.addError(new ObjectError("Can't find host address", e.getMessage()));
-            LOGGER.info("Can't find host address " + e.getMessage());
-            return "/signup";
         }
+
     }
 
 }

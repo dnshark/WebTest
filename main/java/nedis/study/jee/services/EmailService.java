@@ -10,4 +10,6 @@ public interface EmailService {
 
 	void sendEmail(String destinationEmail,String name,String fromEmail,String fromName,
 							   String subject,String content) throws javax.mail.MessagingException;
+
+	void sendRestoreEmail(String destinationEmail, String name, String content) throws javax.mail.MessagingException ;
 }
