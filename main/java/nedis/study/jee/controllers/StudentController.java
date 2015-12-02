@@ -34,7 +34,7 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String showStudent(Model model){
+	public String showStudent(){
 		return "student/home";
 	}
 

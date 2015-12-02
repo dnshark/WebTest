@@ -5,6 +5,7 @@ import java.util.List;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 
+import nedis.study.jee.entities.Test;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +35,10 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	@Override
 	public Account findByEmail(String email) {
 		return (Account) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("email", email)).uniqueResult();
+	}
+
+	@Override
+	public List<Test> getListTest(Account account) {
+		return (List<Test>) getSession().createCriteria(Test.class).add(Restrictions.eq("account", account)).list();
 	}
 }

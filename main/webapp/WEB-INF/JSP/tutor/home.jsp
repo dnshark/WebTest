@@ -5,21 +5,26 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-	<h1>Hello turtor</h1>
+	<h1>Hello tutor</h1>
 	<table>
 		<tr>
 			<td>
-				<a href="allAccess/result">View result</a>
+				<a href="test">Edit tests</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="allAccess/editInfo">Edit Info</a>
+				<a href="../allAccess/result">View result</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="allAccess/info">Look Info</a>
+				<a href="../allAccess/editInfo">Edit Info</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="../allAccess/info">Look Info</a>
 			</td>
 		</tr>
 	</table>
