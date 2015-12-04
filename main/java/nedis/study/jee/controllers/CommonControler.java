@@ -11,6 +11,8 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
 import nedis.study.jee.forms.LoginForm;
+import nedis.study.jee.security.CurrentAccount;
+import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.CommonService;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -43,48 +45,22 @@ public class CommonControler extends AbstractController implements InitializingB
 		redirects.put(ApplicationConstants.TUTOR_ROLE, "/tutor/home");
 		redirects.put(ApplicationConstants.STUDENT_ROLE, "/home");
 	}
-	
-	@Autowired
-	protected CommonService commonService;
-	
-	@Autowired
-    @Qualifier("loginFormValidator")
-    private Validator validator;
- 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setValidator(validator);
-    }
-    
-    @RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@Validated @ModelAttribute("loginForm") LoginForm loginForm, BindingResult result, 
-						Model model, HttpSession session){
-		try {
-			if(result.hasErrors()) {
-				initRoles(model);
-				return "login";
-			}
-			Account a = commonService.login(loginForm.getLogin(), loginForm.getPassword(), loginForm.getIdRole());
-			session.setAttribute("CURRENT_ACCOUNT", a);
-			return "redirect:"+redirects.get(loginForm.getIdRole());
-		} catch (InvalidUserInputException e) {
-			result.addError(new ObjectError("", e.getMessage()));
-			initRoles(model);
-			return "login";
-		}
-	}
-    
+
     protected void initRoles(Model model){
     	List<Role> roles = commonService.listAllRoles();
 		model.addAttribute("roles", roles);
     }
-	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+
+	@RequestMapping(value={"/login", "/loginFailed"}, method=RequestMethod.GET)
 	public String showLogin(Model model){
-		model.addAttribute("loginForm", new LoginForm());
 		initRoles(model);
 		return "login";
 	}
-	
+
+	@RequestMapping(value={"/myInfo"}, method=RequestMethod.GET)
+	public String myInfo(Model model){
+		CurrentAccount currentAccount = SecurityUtils.getCurrentAccount();
+		return "redirect:"+redirects.get(currentAccount.getRole());
+	}
 	
 }
