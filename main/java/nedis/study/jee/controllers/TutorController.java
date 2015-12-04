@@ -44,8 +44,8 @@ public class TutorController extends AbstractTutorController {
 	}
 
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model,HttpSession session){
-		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+	public String showTutorTests(Model model){
+		Account account = commonService.getLoginAccount();
 		model.addAttribute("tests", tutorService.getTestList(account));
 		return "tutor/test";
 	}

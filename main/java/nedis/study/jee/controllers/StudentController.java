@@ -5,6 +5,8 @@ import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.TestForm;
+import nedis.study.jee.security.CurrentAccount;
+import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +75,7 @@ public class StudentController extends AbstractController {
 
 		question = studentService.getQuestionByNumber(testId,++number);
 
-		Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+		Account account = commonService.getLoginAccount();
 
 		if (question == null) {
 			session.setAttribute("QUESTION_NUMBER", 0);

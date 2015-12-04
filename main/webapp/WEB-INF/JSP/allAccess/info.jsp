@@ -10,7 +10,7 @@
     <table align="center">
       <tr>
         <td>Email</td>
-        <td>${account.email} /></td>
+        <td>${account.email} </td>
       </tr>
       <tr>
         <td>Login</td>

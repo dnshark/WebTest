@@ -29,4 +29,6 @@ public interface CommonService {
 	Account addAccount(UserForm form);
 
 	void updateAccount(Account account);
+
+	Account getLoginAccount();
 }

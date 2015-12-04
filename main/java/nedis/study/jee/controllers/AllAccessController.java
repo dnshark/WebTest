@@ -27,14 +27,14 @@ public class AllAccessController extends AbstractController {
     protected AllAccessService allAccessService;
     @RequestMapping(value="result", method= RequestMethod.GET)
     public String showResults(Model model,HttpSession session){
-        Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+        Account account = commonService.getLoginAccount();
         model.addAttribute("results",studentService.listAllResult(account));
         return "allAccess/result";
     }
 
     @RequestMapping(value="info", method= RequestMethod.GET)
     public String showInfo(Model model,HttpSession session){
-        Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+        Account account = commonService.getLoginAccount();
         model.addAttribute("account",account);
         return "allAccess/info";
     }
@@ -42,15 +42,15 @@ public class AllAccessController extends AbstractController {
     @RequestMapping(value="editInfo", method=RequestMethod.GET)
     public String showEditInfo(Model model,HttpSession session){
         UserForm userForm = new UserForm();
-        Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+        Account account = commonService.getLoginAccount();
         ReflectionUtils.copyByFields(userForm, account);
         model.addAttribute("userForm", userForm);
         return "allAccess/editInfo";
     }
 
     @RequestMapping(value="editInfoOk", method=RequestMethod.POST)
-    public String updateUser(Model model,HttpSession session,@ModelAttribute("userForm") UserForm form){
-        Account account = (Account)session.getAttribute("CURRENT_ACCOUNT");
+    public String updateUser(Model model,@ModelAttribute("userForm") UserForm form){
+        Account account = commonService.getLoginAccount();
         allAccessService.copyFormToUser(form,account);
         commonService.updateAccount(account);
         model.addAttribute("userForm", form);

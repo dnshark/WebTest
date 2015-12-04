@@ -18,6 +18,8 @@ import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
 import nedis.study.jee.forms.UserForm;
+import nedis.study.jee.security.CurrentAccount;
+import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.EmailService;
 import nedis.study.jee.services.TemplateService;
@@ -161,6 +163,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public List<Role> listAllRoles() {
 		return roleDao.findAll();
+	}
+
+	public Account getLoginAccount(){
+		CurrentAccount currentAccount = SecurityUtils.getCurrentAccount();
+		return accountDao.findById(currentAccount.getIdAccount());
 	}
 	/*
 	@Override
