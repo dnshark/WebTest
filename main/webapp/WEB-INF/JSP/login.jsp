@@ -7,42 +7,49 @@
 
 <div class="container">
 	<h2>Please login</h2>
-	<form:form method="POST" action="${context }/login" commandName="loginForm" >
-	   <table>
+	<form method="POST" action="${context }/loginHandler" >
+	   <table style="width:300px;margin:0 auto;">
 	    <tr>
-	        <td colspan="2" class="errors"><form:errors path="*"/></td>
+	        <c:if test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION != null }">
+      		<td colspan="2" class="errors">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message }</td>
+      		</c:if>
 	    </tr>
 	    <tr>
-	        <td><form:label path="login">Login</form:label></td>
-	        <td><form:input path="login" /></td>
-			<td><a href="/signup">New user</a></td>
+	        <td><label for="j_username">Login</label></td>
+	        <td><input type="text"  name="j_username" /> </td>
 	    </tr>
 	    <tr>
-	        <td><form:label path="password">Password</form:label></td>
-	        <td><form:password path="password"/> </td>
-			<td><a href="/forget">Forget password</a></td>
+	        <td><label for="j_password">Password</label></td>
+	        <td><input type="password" name="j_password"/> </td>
 	    </tr>
 	    <tr>
-	        <td><form:label path="idRole">Role</form:label></td>
+	        <td><label for="idRole">Role</label></td>
 	        <td>
-	        	<form:select path="idRole">
-	        		<form:option value="0" label="--- Select ---"/>
-   					<form:options items="${roles}" itemLabel="name" itemValue="idRole" />
-	        	</form:select> 
+	        	<select name="idRole">
+	        		<option value="0">--- Select ---</option>
+	        		<c:forEach var="role" items="${roles }">
+	        			<option value="${role.idRole }">${role.name }</option>
+	        		</c:forEach>
+	        	</select>
 	        </td>
 	    </tr>
 	    <tr>
-	        <td colspan="2" style="text-align:center;">
+	        <td colspan="2" style="text-align:center;padding-top:20px;">
+	            <input type="checkbox" value="true" name="_spring_security_remember_me" >Remember me
+	        </td>
+	    </tr>
+	    <tr>
+	        <td colspan="2" style="text-align:center;padding-top:20px;">
 	            <input type="submit" value="Login"/>
 	        </td>
-	    </tr>
+	    </tr>  
 	    <tr>
-			<td colspan="2" style="text-align:center;padding-top:20px;">
-				<a href="${context }/fbLogin">
-					<img alt="fbLogin" src="${context }/resources/images/login-facebook.png"/>
-				</a>
-			</td>
-		</tr>
+	        <td colspan="2" style="text-align:center;padding-top:20px;">
+	            <a href="${context }/fbLogin">
+	            	<img alt="fbLogin" src="${context }/resources/images/login-facebook.png" />
+	            </a>
+	        </td>
+	    </tr>
 	</table>  
-	</form:form>
+	</form>
 </div>

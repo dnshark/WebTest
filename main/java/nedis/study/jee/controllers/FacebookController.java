@@ -6,6 +6,7 @@ import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.types.User;
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.impl.Settings;
 import org.apache.commons.io.IOUtils;
@@ -58,10 +59,10 @@ public class FacebookController extends AbstractController implements Initializi
     }
 	
 	@RequestMapping(value="/fromfb", method={RequestMethod.GET})
-    public String fromfb(HttpServletRequest request, HttpSession session, @RequestParam("code") String code) throws Exception {
+    public String fromfb(@RequestParam("code") String code) throws Exception {
 		User user = getFacebookUser(code);
 		Account a = commonService.login(user);
-		session.setAttribute("CURRENT_ACCOUNT", a);
+        SecurityUtils.authentificate(a);
 		return "redirect:/home";
 	}
 	

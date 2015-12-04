@@ -13,6 +13,10 @@
 		<param name="BufferSize" value="256"/>
     	<appender-ref ref="CONSOLE"/>    
 	</appender>
+
+	<logger name="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<level value="ERROR" />
+	</logger>
 	
 	<root>
     	<priority value="INFO"/>
