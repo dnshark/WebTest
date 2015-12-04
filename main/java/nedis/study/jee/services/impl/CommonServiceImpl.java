@@ -99,7 +99,7 @@ public class CommonServiceImpl implements CommonService {
 		else{
 			UserForm form = new UserForm ();
 			form.setEmail(user.getEmail());
-			form.setFio(user.getLastName() + " " + user.getFirstName());
+			form.setFio(user.getName());
 			form.setLogin(user.getEmail());
 
 			UUID pwd = UUID.randomUUID();//generate temp password

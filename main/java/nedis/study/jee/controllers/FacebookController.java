@@ -2,6 +2,8 @@ package nedis.study.jee.controllers;
 
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.Version;
 import com.restfb.types.User;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.services.CommonService;
@@ -77,8 +79,8 @@ public class FacebookController extends AbstractController implements Initializi
             String out = scanner.next();
             String[] auth1 = out.split("=");
             String[] auth2 = auth1[1].split("&");
-            FacebookClient facebookClient = new DefaultFacebookClient(auth2[0]);
-            User user = facebookClient.fetchObject("me", User.class);
+            FacebookClient facebookClient = new DefaultFacebookClient(auth2[0], Version.LATEST);
+            User user = facebookClient.fetchObject("me", User.class, Parameter.with("fields", "id,name,email,locale"));
             return user;
         }finally {
         	IOUtils.closeQuietly(in);
