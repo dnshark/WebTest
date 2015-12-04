@@ -1,6 +1,7 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.AdminService;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author nedis
@@ -35,7 +38,7 @@ public class AdminControler extends AbstractController {
 	@RequestMapping(value="/id{userId}", method=RequestMethod.GET)
 	public String showLogin(Model model,@PathVariable String userId){
 		Account user = adminService.getAccount(Long.valueOf(userId));
-		UserForm userForm = new UserForm();
+		UserForm userForm = getUserForm(model);
 		ReflectionUtils.copyByFields(userForm, user);
 		model.addAttribute("userForm", userForm);
 		model.addAttribute("adminId",userId);
@@ -44,11 +47,18 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
-	public String showLogin(Model model){
-		UserForm userForm = new UserForm();
-		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
+	public String showLogin(Model model){//NEDIS спросить как лучше сделать отображение кнопок
+		UserForm userForm = getUserForm(model);
 		model.addAttribute("userForm", userForm);
+		model.addAttribute("mode","new");
 		return "admin/userInfo";
+	}
+
+	private UserForm getUserForm(Model model) {
+		UserForm userForm = new UserForm();
+		List<Role> roles = commonService.listAllRoles();
+		model.addAttribute("roles", roles);
+		return userForm;
 	}
 
 	@RequestMapping(value="/Ok{adminId}", method= RequestMethod.POST)

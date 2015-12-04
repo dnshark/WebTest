@@ -32,6 +32,17 @@
         <td>Full name</td>
         <td><form:input path="fio"/> </td>
       </tr>
+      <tr>
+        <td>Role</td>
+        <td>
+          <select name="idRole">
+            <option value="0">--- Select ---</option>
+            <c:forEach var="role" items="${roles }">
+              <option value="${role.idRole }">${role.name }</option>
+            </c:forEach>
+          </select>
+        </td>
+      </tr>
 
       <%  if(mode =="edit"){%>
       <tr>
