@@ -106,6 +106,7 @@
         <security:intercept-url pattern="/login" 				access="permitAll" />
         <security:intercept-url pattern="/forget" 				access="permitAll" />
         <security:intercept-url pattern="/signup" 				access="permitAll" />
+        <security:intercept-url pattern="/message" 				access="permitAll" />
         <security:intercept-url pattern="/loginFailed" 			access="permitAll" />
         <security:intercept-url pattern="/error" 				access="permitAll" />
         <security:intercept-url pattern="/resources/**"	 		access="permitAll" />

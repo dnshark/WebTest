@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
-import java.net.UnknownHostException;
 
 /**
  * Created by Dmitrij on 25.11.2015.
@@ -53,15 +52,15 @@ public class SignUpController extends AbstractController{
             model.addAttribute("confirmed","Congradulation account confirmed");
         }
 
-        return "confirm";
+        return "message";
     }
 
-    @RequestMapping(value="/signup/ok", method= RequestMethod.POST)
+    @RequestMapping(value="/signup", method= RequestMethod.POST)
     public String DoSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         try {
             commonService.signUp(form,true);
             model.addAttribute("confirmed","Check email to confirm password");
-            return "confirm";
+            return "message";
         } catch (MessagingException e) {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
             LOGGER.info("send e-mail Error " + e.getMessage());

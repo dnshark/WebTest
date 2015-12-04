@@ -3,7 +3,6 @@ package nedis.study.jee.controllers;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.exceptions.InvalidUserInputException;
 import nedis.study.jee.forms.UserForm;
-import nedis.study.jee.services.CommonService;
 import nedis.study.jee.services.SignUpService;
 import nedis.study.jee.services.TemplateService;
 import nedis.study.jee.utils.ReflectionUtils;
@@ -36,7 +35,7 @@ public class ForgetController extends AbstractController{
         return "forget";
     }
 
-    @RequestMapping(value="/forgetOk", method= RequestMethod.POST)
+    @RequestMapping(value="/forget", method= RequestMethod.POST)
     public String DoSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         Account account = signUpService.getAccountByEmail(form.getEmail());
         try{
@@ -46,7 +45,7 @@ public class ForgetController extends AbstractController{
             model.addAttribute("confirmed", "Check email");
         }else
             model.addAttribute("confirmed", "No email found");
-        return "confirm";
+        return "message";
 
     } catch (MessagingException e) {
         result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
