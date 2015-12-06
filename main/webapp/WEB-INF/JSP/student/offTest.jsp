@@ -19,7 +19,5 @@
                 </tr>
             </c:forEach>
         </c:forEach>
-
-        <input type="submit" name="Ok" value="Download"/>
     </table>
 </div>
