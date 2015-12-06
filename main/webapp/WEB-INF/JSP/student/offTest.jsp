@@ -3,26 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Testing</title>
-</head>
+<div class="container">
+    <h1>${test.name}</h1>
+    <table align="center">
+        <c:forEach var="question" items="${test.questions}">
+            <tr>
+                <td>${question.name} </td>
+            </tr>
+            <c:forEach var="answer" items="${question.answers}">
+                <tr>
+                    <td>
+                        <input type="checkbox" name="answer" > ${answer.name}
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:forEach>
 
-   <h1>{$TestName}</h1>
-<table align="center">
-    <c:forEach var="test" items="${tests}">
-        <tr>
-            <td>
-                <a href="/question/id${test.id}">${test.name}</a>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-<body>
-
-</body>
-</html>
+        <input type="submit" name="Ok" value="Download"/>
+    </table>
+</div>
