@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-  <form action="questionNew" method="get">
+  <form method="get">
   <h1>Test list</h1>
   <table align="center">
     <tr>
@@ -19,7 +19,7 @@
     <c:forEach var="test" items="${tests}">
       <tr>
         <td>
-          <a href="/editquestion/id${test.id}">${test.name}</a>
+          <a href="/tutor/editTest/id${test.id}">${test.name}</a>
         </td>
       </tr>
     </c:forEach>

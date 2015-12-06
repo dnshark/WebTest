@@ -1,6 +1,7 @@
 package nedis.study.jee.forms;
 
 import nedis.study.jee.entities.Answer;
+import nedis.study.jee.entities.Test;
 
 import java.util.List;
 
@@ -9,33 +10,13 @@ import java.util.List;
  */
 public class TestForm implements IForm{
 
-    private String name;
+    private Test test;
 
-    private Integer time;
-
-    private List<Answer> answers;
-
-    public List<Answer> getAnswers() {
-        return answers;
+    public Test getTest() {
+        return test;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public void setTime(Integer time) {
-        this.time = time;
+    public void setTest(Test test) {
+        this.test = test;
     }
 }

@@ -11,11 +11,11 @@
     <table align="center">
       <tr>
       <td>Test name</td>
-      <td><form:input path="name"/> </td>
+      <td><form:input path="test.name"/> </td>
       </tr>
       <tr>
           <td>Time per question</td>
-          <td><form:input path="time"/> </td>
+          <td><form:input path="test.timePerQuestion"/> </td>
       </tr>
       <tr>
        <td>

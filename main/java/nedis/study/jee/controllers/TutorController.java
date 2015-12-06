@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,20 +28,13 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/home";
 	}
 
-	@RequestMapping(value="questionNew")
-	public String showQuestion(Model model){
+	@RequestMapping(value="editTest/id{testId}")
+	public String showQuestion(Model model,@PathVariable String testId){
+		Test test = tutorService.getTest(testId);
 		TestForm testForm = new TestForm();
-		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
-		model.addAttribute("questionForm", testForm);
-		return "tutor/editQuestion";
-	}
-
-	@RequestMapping(value="test/new", method=RequestMethod.GET)
-	public String showTest(Model model){
-		TestForm testForm = new TestForm();
-		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
+		testForm.setTest(test);
 		model.addAttribute("testForm", testForm);
-		return "tutor/editQuestion";
+		return "tutor/editTest";
 	}
 
 	@RequestMapping(value="test", method=RequestMethod.GET)
@@ -55,9 +49,9 @@ public class TutorController extends AbstractTutorController {
 		model.addAttribute("testForm", testForm);
 		return "tutor/newTest";
 	}
-	@RequestMapping(value="/addTest")
-	public String addNewTest(Model model,@ModelAttribute("testForm") TestForm testform){
-		tutorService.createTest(testform);
+	@RequestMapping(value="/addTest") //NEDIS  чего-то по ссылке не приходят данные только по кнопке
+	public String addNewTest(@ModelAttribute("testForm") TestForm testform){
+		tutorService.createTest(testform.getTest());
 		return "redirect:/tutor/test";
 	}
 

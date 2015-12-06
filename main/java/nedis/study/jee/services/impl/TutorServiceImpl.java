@@ -32,12 +32,17 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void createTest(TestForm form) {
-       Test test = entityBuilder.buildTest();
-       test.setName(form.getName());
-       test.setTimePerQuestion(form.getTime());
+    public void createTest(Test test) {
+       Test newTest = entityBuilder.buildTest();
+       newTest.setName(test.getName());
+       newTest.setTimePerQuestion(test.getTimePerQuestion());
        Account account =getLoginAccount();
-       test.setAccount(account);
-       testDao.save(test);
+       newTest.setAccount(account);
+       testDao.save(newTest);
+    }
+
+    @Override
+    public Test getTest(String testId) {
+        return testDao.findById(Long.valueOf(testId));
     }
 }
