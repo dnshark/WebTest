@@ -8,6 +8,14 @@
   <form action="questionNew" method="get">
   <h1>Test list</h1>
   <table align="center">
+    <tr>
+      <td>
+        Tutor tests
+      </td>
+      <td>
+        <a href="/tutor/newTest">Add new test</a>
+      </td>
+    </tr>
     <c:forEach var="test" items="${tests}">
       <tr>
         <td>
@@ -15,11 +23,7 @@
         </td>
       </tr>
     </c:forEach>
-    <tr>
-      <td colspan="4" style="text-align:center;">
-        <input type="submit"  name="button" value="add"/>
-      </td>
-    </tr>
+
 
   </table>
     </form>

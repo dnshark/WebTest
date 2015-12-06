@@ -4,9 +4,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
-import nedis.study.jee.forms.TestForm;
-import nedis.study.jee.security.CurrentAccount;
-import nedis.study.jee.security.SecurityUtils;
+import nedis.study.jee.forms.AnswerForm;
 import nedis.study.jee.services.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +55,12 @@ public class StudentController extends AbstractController {
 		session.setAttribute("CORRECT_ANSWER", 0);
 		session.setAttribute("QUESTION_NUMBER", 0);
 		session.setAttribute("CURRENT_TEST",testId);
-		model.addAttribute("testForm", new TestForm());
+		model.addAttribute("testForm", new AnswerForm());
 		return "student/question";
 	}
 
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
-	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("testForm") TestForm form) {
+	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("testForm") AnswerForm form) {
 		Integer number = (Integer)session.getAttribute("QUESTION_NUMBER");
 		String testId = (String)session.getAttribute("CURRENT_TEST");
 

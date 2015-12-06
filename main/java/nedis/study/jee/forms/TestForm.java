@@ -1,22 +1,31 @@
 package nedis.study.jee.forms;
 
-import java.util.ArrayList;
+import nedis.study.jee.entities.Answer;
+
 import java.util.List;
 
 /**
- * Created by Dmitrij on 24.11.2015.
+ * Created by Дмитрий on 02.12.2015.
  */
-public class TestForm implements IForm{
+public class TestForm {
+    private String name;
 
-    private ArrayList<String> answer;
+    private List<Answer> answers;
 
-    public ArrayList<String> getAnswer() {
-
-        return answer;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(ArrayList<String> answer) {
-        this.answer = answer;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

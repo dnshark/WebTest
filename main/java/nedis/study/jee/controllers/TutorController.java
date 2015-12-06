@@ -1,15 +1,13 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.forms.QuestionForm;
+import nedis.study.jee.forms.TestForm;
 import nedis.study.jee.services.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * @author nedis
@@ -29,17 +27,17 @@ public class TutorController extends AbstractTutorController {
 
 	@RequestMapping(value="questionNew")
 	public String showQuestion(Model model){
-		QuestionForm questionForm = new QuestionForm();
+		TestForm testForm = new TestForm();
 		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
-		model.addAttribute("questionForm", questionForm);
+		model.addAttribute("questionForm", testForm);
 		return "tutor/editQuestion";
 	}
 
 	@RequestMapping(value="test/new", method=RequestMethod.GET)
 	public String showTest(Model model){
-		QuestionForm questionForm = new QuestionForm();
+		TestForm testForm = new TestForm();
 		model.addAttribute("mode","new");  //NEDIS спросить как лучше сделать отображение кнопок
-		model.addAttribute("questionForm", questionForm);
+		model.addAttribute("questionForm", testForm);
 		return "tutor/editQuestion";
 	}
 
@@ -48,5 +46,13 @@ public class TutorController extends AbstractTutorController {
 		Account account = commonService.getLoginAccount();
 		model.addAttribute("tests", tutorService.getTestList(account));
 		return "tutor/test";
+	}
+	@RequestMapping(value="/newTest", method=RequestMethod.GET)
+	public String showNewTest(){
+		return "tutor/newTest";
+	}
+	@RequestMapping(value="/addTest", method=RequestMethod.GET)
+	public String addNewTest(){
+		return "redirec:tutor/test";
 	}
 }

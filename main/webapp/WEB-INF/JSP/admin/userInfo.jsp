@@ -45,11 +45,9 @@
 <c:if test="${mode == 'edit'}">
   <tr>
     <td colspan="2" style="text-align:center;">
-     <!-- <button onclick="javascript:window.location.href = '/admin/save${adminId}'" title="save">save</button> -->
       <a href="/admin/save${adminId}">save</a>
     </td>
     <td colspan="2" style="text-align:center;">
-      <!--<button onclick="javascript:window.location.href = '/admin/delete${adminId}'" title="delete">delete</button> -->
       <a href="/admin/delete${adminId}">delete</a>
     </td>
   </tr>
@@ -57,7 +55,6 @@
 <c:if test="${mode == 'new'}">
       <tr>
       <td colspan="4" style="text-align:center;">
-        <!--<button onclick="javascript:window.location.href = '/admin/add${adminId}'" title="add">add</button>-->
         <a href="/admin/add">add</a>
       </td>
       </tr>
