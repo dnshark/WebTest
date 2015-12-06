@@ -7,7 +7,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form action="/admin/Ok${adminId}" commandName="userForm">
+  <form:form commandName="userForm">
     <table align="center">
       <tr>
         <td>Email</td>
@@ -45,17 +45,20 @@
 <c:if test="${mode == 'edit'}">
   <tr>
     <td colspan="2" style="text-align:center;">
-      <input type="submit" name="button" value="save"/>
+     <!-- <button onclick="javascript:window.location.href = '/admin/save${adminId}'" title="save">save</button> -->
+      <a href="/admin/save${adminId}">save</a>
     </td>
     <td colspan="2" style="text-align:center;">
-      <input type="submit" name="button" value="delete"/>
+      <!--<button onclick="javascript:window.location.href = '/admin/delete${adminId}'" title="delete">delete</button> -->
+      <a href="/admin/delete${adminId}">delete</a>
     </td>
   </tr>
 </c:if>
 <c:if test="${mode == 'new'}">
       <tr>
       <td colspan="4" style="text-align:center;">
-        <input type="submit" name="button" value="add"/>
+        <!--<button onclick="javascript:window.location.href = '/admin/add${adminId}'" title="add">add</button>-->
+        <a href="/admin/add">add</a>
       </td>
       </tr>
 </c:if>

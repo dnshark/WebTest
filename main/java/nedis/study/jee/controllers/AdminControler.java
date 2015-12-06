@@ -61,20 +61,22 @@ public class AdminControler extends AbstractController {
 		return userForm;
 	}
 
-	@RequestMapping(value="/Ok{adminId}", method= RequestMethod.POST)
-	public String DoEditInfo(Model model,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("userForm") UserForm form) {
-		if (button.equals("save")) {
+	@RequestMapping(value="/save{adminId}")
+	public String DoSaveInfo(@PathVariable String adminId,@ModelAttribute("userForm") UserForm form) {
 			adminService.updateUser(Long.valueOf(adminId), form);
 			return "redirect:id"+adminId;
-		}
-		else if (button.equals("delete")){
+	}
+
+	@RequestMapping(value="/delete{adminId}")
+	public String DoDeleteInfo(@PathVariable String adminId,@ModelAttribute("userForm") UserForm form) {
 			adminService.deleteUser(Long.valueOf(adminId));
 			return "redirect:listUsers";
-		} else if (button.equals("add")){
-			Account account = adminService.addUser(form);
+	}
+
+	@RequestMapping(value="/add")
+	public String DoAddInfo(@ModelAttribute("userForm") UserForm form) {
+			adminService.addUser(form);
 			return "redirect:listUsers";
-		}
-			 return ""; //to NEDIS (ошибка не определена кнопка)
 	}
 
 }
