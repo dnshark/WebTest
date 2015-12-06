@@ -36,4 +36,12 @@ public class EntityBuilderImpl implements EntityBuilder {
 		testResult.setTestName(test.getName());
 		return testResult;
 	}
+
+	@Override
+	public Test buildTest() {
+		Test test = new Test();
+		test.setCreated(new Timestamp(System.currentTimeMillis()));
+		test.setActive(Boolean.TRUE);
+		return test;
+	}
 }

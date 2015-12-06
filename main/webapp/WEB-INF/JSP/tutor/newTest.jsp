@@ -3,19 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form action="testNew">
+    <form:form action="/tutor/addTest" commandName="testForm">
     <h1>New test</h1>
     <table align="center">
       <tr>
       <td>Test name</td>
-      <td><input type="text"  name="testName" /> </td>
+      <td><form:input path="name"/> </td>
       </tr>
       <tr>
+          <td>Time per question</td>
+          <td><form:input path="time"/> </td>
+      </tr>
+      <tr>
+       <td>
         <a href="/tutor/addTest">Add new test</a>
+           <input type="submit" value="Add new test"/>
+       </td>
       </tr>
     </table>
-  </form>
+    </form:form>
 
 </div>

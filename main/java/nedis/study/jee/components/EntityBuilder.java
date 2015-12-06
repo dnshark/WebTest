@@ -14,4 +14,6 @@ public interface EntityBuilder {
 	AccountRole buildAccountRole(Account account, Role role);
 
 	TestResult buildTestResult(Account account,Test test);
+
+	Test buildTest();
 }

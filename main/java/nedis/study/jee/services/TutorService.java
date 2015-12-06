@@ -2,6 +2,7 @@ package nedis.study.jee.services;
 
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.forms.TestForm;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface TutorService {
 
     List<Test> getTestList(Account account);
 
+    void createTest(TestForm form);
 }

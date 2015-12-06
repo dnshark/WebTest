@@ -57,7 +57,7 @@ public class CommonServiceImpl implements CommonService {
 	private AccountRegistrationDao accountRegistrationDao;
 	
 	@Autowired
-	private EntityBuilder entityBuilder;
+	protected EntityBuilder entityBuilder;
 
 	@Autowired
 	private TemplateService templateService;
