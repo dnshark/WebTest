@@ -43,6 +43,7 @@ public class StudentController extends AbstractController {
 	@RequestMapping(value="/tests", method=RequestMethod.GET)
 	public String showTest(Model model){
 		initTests(model);
+		model.addAttribute("mode","online");
 		return "student/tests";
 	}
 
@@ -91,14 +92,15 @@ public class StudentController extends AbstractController {
 			return "student/question";
 		}
 	}
-	@RequestMapping(value="/offTests", method=RequestMethod.GET)
+	@RequestMapping(value="/offTest", method=RequestMethod.GET)
 	public String showOffTest(Model model){
 		initTests(model);
-		return "student/offTests";
+		model.addAttribute("mode","offline");
+		return "student/tests";
 	}
 
-	@RequestMapping(value="/offTests/id{testId}", method=RequestMethod.GET)
+	@RequestMapping(value="/offTest/id{testId}", method=RequestMethod.GET)
 	public String showOffTests(Model model,HttpSession session,@PathVariable String testId){
-		return "student/offTests";
+		return "student/offTest";
 	}
 }

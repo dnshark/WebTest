@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void updateUser(Long userId, UserForm form) {
         Account account = accountDao.findById(userId);
-        //ReflectionUtils.copyByFields(account, form); NEDIS не получается копировать все поля, так как теряется информация если поле не заполнено в форме
+        ReflectionUtils.copyByFields(account, form); //NEDIS не получается копировать все поля, так как теряется информация если поле не заполнено в форме
         copyFormToUser(form, account);
         accountDao.update(account);
     }

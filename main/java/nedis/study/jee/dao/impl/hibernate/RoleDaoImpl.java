@@ -23,8 +23,5 @@ public class RoleDaoImpl extends AbstractEntityDao<Role> implements RoleDao {
 		 public Role getStudentRole() {
 		return (Role) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("idRole", 4L)).uniqueResult();
 	}
-	@Override
-	public Role getRole(ApplicationConstants.ROLES role) {
-		return (Role) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("idRole", role)).uniqueResult();
-	}
+
 }

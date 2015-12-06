@@ -104,6 +104,7 @@
 
     <security:http use-expressions="true" auto-config="true" >
         <security:intercept-url pattern="/login" 				access="permitAll" />
+        <security:intercept-url pattern="/error" 				access="permitAll" />
         <security:intercept-url pattern="/forget" 				access="permitAll" />
         <security:intercept-url pattern="/signup" 				access="permitAll" />
         <security:intercept-url pattern="/message" 				access="permitAll" />
@@ -119,6 +120,8 @@
         <security:intercept-url pattern="/tutor/**" 			access="hasRole('TUTOR')" />
         <security:intercept-url pattern="/advanced_tutor/**" 	access="hasRole('ADVANCED_TUTOR')" />
         <security:intercept-url pattern="/**" 					access="hasRole('STUDENT')" />
+        <security:intercept-url pattern="/offTest" 				access="hasRole('STUDENT')" />
+        <security:intercept-url pattern="/offTest/*" 			access="hasRole('STUDENT')" />
         <security:form-login
                 login-page="/login"
                 authentication-failure-url="/loginFailed"

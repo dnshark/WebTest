@@ -47,7 +47,7 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
-	public String showLogin(Model model){//NEDIS спросить как лучше сделать отображение кнопок
+	public String showLogin(Model model){
 		UserForm userForm = getUserForm(model);
 		model.addAttribute("userForm", userForm);
 		model.addAttribute("mode","new");
@@ -72,7 +72,6 @@ public class AdminControler extends AbstractController {
 			return "redirect:listUsers";
 		} else if (button.equals("add")){
 			Account account = adminService.addUser(form);
-		//	return "redirect:id"+String.valueOf(account.getIdAccount());
 			return "redirect:listUsers";
 		}
 			 return ""; //to NEDIS (ошибка не определена кнопка)
