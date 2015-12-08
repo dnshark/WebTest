@@ -1,5 +1,7 @@
 package nedis.study.jee.forms;
 
+import nedis.study.jee.entities.Role;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,14 @@ public class AdminForm extends UserForm {
 
     private Boolean active=false;
 
-    private List<CBItem> cbRoles;
+    private List<Role> checkRoles;
 
-    public List<CBItem> getCbRoles() {
-        return cbRoles;
+    public List<Role> getCheckRoles() {
+        return checkRoles;
     }
 
-    public void setCbRoles(List<CBItem> cbRoles) {
-        this.cbRoles = cbRoles;
+    public void setCheckRoles(List<Role> checkRoles) {
+        this.checkRoles = checkRoles;
     }
 
     public Boolean getConfirmed() {

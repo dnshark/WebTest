@@ -1,21 +1,16 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
-import nedis.study.jee.forms.Basic;
-import nedis.study.jee.forms.CBItem;
 import nedis.study.jee.services.AdminService;
 
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,36 +36,17 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/id{userId}", method=RequestMethod.GET)
-	public String showLogin(ModelMap model,@PathVariable String userId){
-		//Account user = adminService.getAccount(Long.valueOf(userId));
-		//AdminForm adminForm = getAdminForm(model);
-		//ReflectionUtils.copyByFields(adminForm, user);
-		/*List<AccountRole> list = user.getAccountRoles();
-		ArrayList<String> roles = new ArrayList<String>();
-		for (AccountRole accountRole : list) {
-			roles.add(String.valueOf(accountRole.getRole().getId()));
-		} */
-		//adminForm.setRole(roles);
-		Basic basic = new Basic();
+	public String showLogin(Model model,@PathVariable String userId){
+		Account user = adminService.getAccount(Long.valueOf(userId));
+		AdminForm adminForm = getAdminForm(model);
+		ReflectionUtils.copyByFields(adminForm, user);
 
-		basic.setName("Basic Data Structure");
+		adminForm.setCheckRoles(adminService.getRoles(user));
 
-		List<CBItem> allItems = new ArrayList<CBItem>();
-		allItems.add(new CBItem("First"));
-		allItems.add(new CBItem("Second"));
-		allItems.add(new CBItem("Third"));
-		allItems.add(new CBItem("Fourth"));
-
-		model.addAttribute("allItems", allItems);
-
-		List<CBItem> cbItems = new ArrayList<CBItem>();
-		cbItems.add(new CBItem("First"));
-		cbItems.add(new CBItem("Third"));
-		basic.setCbItems(cbItems);
-
-		model.addAttribute("basic", basic);
-
-		return "admin/demo";
+		model.addAttribute("allRoles", commonService.listAllRoles());
+		model.addAttribute("adminForm",adminForm);
+		model.addAttribute("mode","edit");
+		return "admin/userInfo";
 	}
 
 	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)

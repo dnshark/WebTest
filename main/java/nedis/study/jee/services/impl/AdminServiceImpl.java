@@ -2,8 +2,9 @@ package nedis.study.jee.services.impl;
 
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.AccountRole;
+import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
-import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import nedis.study.jee.services.AdminService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,5 +66,15 @@ public class AdminServiceImpl implements AdminService {
     public Account addUser(AdminForm form) {
         Account account = commonService.addAccount(form);
         return account;
+    }
+
+    @Override
+    public List<Role> getRoles(Account user) {
+        List<AccountRole> list = user.getAccountRoles();
+        List<Role> roles = new ArrayList<Role>();
+        for (AccountRole accountRole : list) {
+            roles.add(accountRole.getRole());
+        }
+        return roles;
     }
 }

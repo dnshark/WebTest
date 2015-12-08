@@ -35,7 +35,7 @@
       <tr>
         <td>Role</td>
         <td>
-          <form:checkboxes path="cbRoles" items="${allItems}" itemLabel="name" itemValue="name" delimiter="<br/>" />
+          <form:checkboxes path="checkRoles" items="${allRoles}" itemLabel="name" itemValue="name" delimiter="<br/>" />
         </td>
       </tr>
 <c:if test="${mode == 'edit'}">

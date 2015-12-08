@@ -1,6 +1,7 @@
 package nedis.study.jee.services;
 
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface AdminService {
     void deleteUser(Long userId);
 
     Account addUser(AdminForm form);
+
+    List<Role> getRoles(Account user);
 }
