@@ -35,7 +35,7 @@
       <tr>
         <td>Role</td>
         <td>
-          <form:checkboxes path="checkRoles" items="${allRoles}" itemLabel="name" itemValue="name" delimiter="<br/>" />
+          <form:checkboxes path="checkRoles" items="${allRoles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
         </td>
       </tr>
       <c:if test="${mode == 'edit'}">
@@ -51,7 +51,7 @@
       <c:if test="${mode == 'new'}">
         <tr>
           <td colspan="4" style="text-align:center;">
-            <form:button type="submit" name="button" value="add"/>
+            <input type="submit" name="button" value="add"/>
           </td>
         </tr>
       </c:if>

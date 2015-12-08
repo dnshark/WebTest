@@ -22,5 +22,5 @@ public interface AdminService {
 
     Account addUser(AdminForm form);
 
-    List<Role> getRoles(Account user);
+    List<String> getRoles(Account user);
 }

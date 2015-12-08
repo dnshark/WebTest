@@ -25,7 +25,7 @@ public class Role extends AbstractEntity {
 	@SequenceGenerator(name="ROLE_IDROLE_GENERATOR", sequenceName="role_id_role_seq")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ROLE_IDROLE_GENERATOR")
 	@Column(name="id_role", unique=true, nullable=false)
-	private Long idRole;
+	private Integer idRole;
 
 	@Column(nullable=false, length=15)
 	private String name;
@@ -39,7 +39,7 @@ public class Role extends AbstractEntity {
     public Role() {
     }
 
-	public Long getIdRole() {
+	public Integer getIdRole() {
 		return this.idRole;
 	}
 	
@@ -49,7 +49,7 @@ public class Role extends AbstractEntity {
 		return getIdRole();
 	}
 
-	public void setIdRole(Long idRole) {
+	public void setIdRole(Integer idRole) {
 		this.idRole = idRole;
 	}
 
@@ -72,15 +72,11 @@ public class Role extends AbstractEntity {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
+		if (o == null ) return false;
 
-		Role role = (Role) o;
+		if (toString().equals(o.toString())) return true;
 
-		if (idRole != null ? !idRole.equals(role.idRole) : role.idRole != null) return false;
-		if (name != null ? !name.equals(role.name) : role.name != null) return false;
-
-		return true;
+		return false;
 	}
 
 	@Override
@@ -90,4 +86,13 @@ public class Role extends AbstractEntity {
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "Role{" +
+				"idRole=" + idRole +
+				", name='" + name + '\'' +
+				'}';
+	}
+
 }

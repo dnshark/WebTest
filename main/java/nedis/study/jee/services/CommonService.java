@@ -8,6 +8,7 @@ import com.restfb.types.User;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
+import nedis.study.jee.forms.AdminForm;
 import nedis.study.jee.forms.UserForm;
 
 import javax.mail.MessagingException;
@@ -27,6 +28,10 @@ public interface CommonService {
 	List<Role> listAllRoles();
 
 	Account addAccount(UserForm form);
+
+	Account addAccount(AdminForm form);
+
+	void initRoles(List<String> checkRoles, Account a);
 
 	void updateAccount(Account account);
 

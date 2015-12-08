@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  */
 @Repository("hibernateRoleDao")
-public class RoleDaoImpl extends AbstractEntityDao<Role> implements RoleDao {
+public class RoleDaoImpl extends AbstractEntityDao<Role> implements RoleDao,ApplicationConstants {
 
 	@Override
 	protected Class<Role> getEntityClass() {
@@ -21,7 +21,12 @@ public class RoleDaoImpl extends AbstractEntityDao<Role> implements RoleDao {
 
 	@Override
 		 public Role getStudentRole() {
-		return (Role) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("idRole", 4L)).uniqueResult();
+		return getRole(STUDENT_ROLE);
+	}
+
+	@Override
+	public Role getRole(int idRole) {
+		return (Role) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("idRole", idRole)).uniqueResult();
 	}
 
 }

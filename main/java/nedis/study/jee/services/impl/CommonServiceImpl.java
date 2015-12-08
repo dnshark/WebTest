@@ -17,6 +17,7 @@ import nedis.study.jee.entities.AccountRegistration;
 import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.exceptions.InvalidUserInputException;
+import nedis.study.jee.forms.AdminForm;
 import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.security.CurrentAccount;
 import nedis.study.jee.security.SecurityUtils;
@@ -54,13 +55,13 @@ public class CommonServiceImpl implements CommonService {
 
 	@Autowired
 	private AccountRegistrationDao accountRegistrationDao;
-	
+
 	@Autowired
 	protected EntityBuilder entityBuilder;
 
 	@Autowired
 	private TemplateService templateService;
-	
+
 	public CommonServiceImpl() {
 		super();
 	}
@@ -124,19 +125,31 @@ public class CommonServiceImpl implements CommonService {
 
 
 
-	public Account addAccount(UserForm form) {
-		Account a = entityBuilder.buildAccount();
-		ReflectionUtils.copyByFields(a, form);
-		accountDao.save(a);
+	public Account addAccount(AdminForm form) {
+		Account a = addAccount((UserForm) form);
 
-		String hash = UUID.randomUUID().toString();
-		form.setHash(hash);
-
-		addHashToAccount(a, hash);
-
-		initStudentRole(a);
+		initRoles(form.getCheckRoles(),a);
 
 		return a;
+	}
+
+	@Override
+	@Transactional
+	public void initRoles(List<String> checkRoles, Account a) {
+		for (AccountRole ar :a.getAccountRoles()) {
+			String id = String.valueOf(ar.getRole().getId());
+			if (checkRoles.contains(id)){
+				checkRoles.remove(id);
+			}else {
+				accountRoleDao.delete(ar);
+			}
+		}
+
+		for (String str : checkRoles) {
+			Role r = roleDao.getRole(Integer.valueOf(str));
+			AccountRole ar = entityBuilder.buildAccountRole(a, r);
+			accountRoleDao.save(ar);
+		}
 	}
 
 	@Override
@@ -162,6 +175,23 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public List<Role> listAllRoles() {
 		return roleDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Account addAccount(UserForm form) {
+		Account a = entityBuilder.buildAccount();
+		ReflectionUtils.copyByFields(a, form);
+		accountDao.save(a);
+
+		String hash = UUID.randomUUID().toString();
+		form.setHash(hash);
+
+		addHashToAccount(a, hash);
+
+		initStudentRole(a);
+
+		return a;
 	}
 
 	public Account getLoginAccount(){

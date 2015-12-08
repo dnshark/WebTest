@@ -9,6 +9,7 @@ import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,10 +66,9 @@ public class AdminControler extends AbstractController {
 		return adminForm;
 	}
 	@RequestMapping(value="/Ok{adminId}", method = RequestMethod.POST)
-	public String DoEditInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm){
-	//,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm form) {
-	/*	if (button.equals("save")) {
-			adminService.updateUser(Long.valueOf(adminId), form);
+	public String DoEditInfo(Model model,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
+		if (button.equals("save")) {
+			adminService.updateUser(Long.valueOf(adminId), adminForm);
 			return "redirect:id"+adminId;
 		}
 		if (button.equals("delete")) {
@@ -76,9 +76,9 @@ public class AdminControler extends AbstractController {
 			return "redirect:listUsers";
 		}
 		if (button.equals("add")) {
-			adminService.addUser(form);
+			adminService.addUser(adminForm);
 			return "redirect:listUsers";
-		}*/
+		}
 		return "error";
 	}
 /*	@RequestMapping(value="/save{adminId}")

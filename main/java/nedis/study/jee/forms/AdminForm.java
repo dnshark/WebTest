@@ -13,13 +13,13 @@ public class AdminForm extends UserForm {
 
     private Boolean active=false;
 
-    private List<Role> checkRoles;
+    private List<String> checkRoles;
 
-    public List<Role> getCheckRoles() {
+    public List<String> getCheckRoles() {
         return checkRoles;
     }
 
-    public void setCheckRoles(List<Role> checkRoles) {
+    public void setCheckRoles(List<String> checkRoles) {
         this.checkRoles = checkRoles;
     }
 

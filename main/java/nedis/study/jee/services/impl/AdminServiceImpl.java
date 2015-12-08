@@ -43,8 +43,14 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void updateUser(Long userId, AdminForm form) {
         Account account = accountDao.findById(userId);
+        String password = account.getPassword();
         ReflectionUtils.copyByFields(account, form); //NEDIS не получается копировать все поля, так как теряется информация если поле не заполнено в форме
-        copyFormToUser(form, account);
+        if (form.getPassword()=="") {
+            account.setPassword(password);
+        }
+
+        commonService.initRoles(form.getCheckRoles(),account);
+
         accountDao.update(account);
     }
 
@@ -69,11 +75,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Role> getRoles(Account user) {
+    public List<String> getRoles(Account user) {
         List<AccountRole> list = user.getAccountRoles();
-        List<Role> roles = new ArrayList<Role>();
+        List<String> roles = new ArrayList<String>();
         for (AccountRole accountRole : list) {
-            roles.add(accountRole.getRole());
+            roles.add(accountRole.getRole().toString());
         }
         return roles;
     }
