@@ -41,17 +41,17 @@
       <c:if test="${mode == 'edit'}">
         <tr>
           <td colspan="2" style="text-align:center;">
-            <input type="submit" name="button" value="save"/>
+            <input type="submit" value="Save" onclick="form.action='/admin/update${adminId}';">
           </td>
           <td colspan="2" style="text-align:center;">
-            <input type="submit" name="button" value="delete"/>
+            <input type="submit" value="Delete" onclick="form.action='/admin/delete${adminId}';">
           </td>
         </tr>
       </c:if>
       <c:if test="${mode == 'new'}">
         <tr>
           <td colspan="4" style="text-align:center;">
-            <input type="submit" name="button" value="add"/>
+            <input type="submit" value="Add" onclick="form.action='/admin/add${adminId}';">
           </td>
         </tr>
       </c:if>

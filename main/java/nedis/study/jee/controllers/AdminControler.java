@@ -65,38 +65,22 @@ public class AdminControler extends AbstractController {
 		model.addAttribute("roles", list);
 		return adminForm;
 	}
-	@RequestMapping(value="/Ok{adminId}", method = RequestMethod.POST)
-	public String DoEditInfo(Model model,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
-		if (button.equals("save")) {
-			adminService.updateUser(Long.valueOf(adminId), adminForm);
-			return "redirect:id"+adminId;
-		}
-		if (button.equals("delete")) {
-			adminService.deleteUser(Long.valueOf(adminId));
-			return "redirect:listUsers";
-		}
-		if (button.equals("add")) {
-			adminService.addUser(adminForm);
-			return "redirect:listUsers";
-		}
-		return "error";
-	}
-/*	@RequestMapping(value="/save{adminId}")
-	public String DoSaveInfo(@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm form) {
-			adminService.updateUser(Long.valueOf(adminId), form);
-			return "redirect:id"+adminId;
+	@RequestMapping(value="/update{adminId}")
+	public String DoUpdateInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
+		adminService.updateUser(Long.valueOf(adminId), adminForm);
+		return "redirect:id"+adminId;
 	}
 
-	@RequestMapping(value="/delete{adminId}")
-	public String DoDeleteInfo(@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm form) {
+	@RequestMapping(value="/delete{adminId}", method = RequestMethod.POST)
+	public String DoDeleteInfo(Model model,@PathVariable String adminId){
 			adminService.deleteUser(Long.valueOf(adminId));
 			return "redirect:listUsers";
 	}
 
-	@RequestMapping(value="/add")
-	public String DoAddInfo(@ModelAttribute("adminForm") AdminForm form) {
-			adminService.addUser(form);
-			return "redirect:listUsers";
-	}*/
+	@RequestMapping(value="/add{adminId}", method = RequestMethod.POST)
+	public String DoAddInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
+		adminService.addUser(adminForm);
+		return "redirect:listUsers";
+	}
 
 }
