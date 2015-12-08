@@ -4,10 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form commandName="userForm">
+  <form:form action="/admin/save${adminId}" commandName="adminForm">
     <table align="center">
       <tr>
         <td>Email</td>
@@ -34,18 +35,14 @@
       <tr>
         <td>Role</td>
         <td>
-          <select name="idRole">
-            <option value="0">--- Select ---</option>
-            <c:forEach var="role" items="${roles }">
-              <option value="${role.idRole }">${role.name }</option>
-            </c:forEach>
-          </select>
+          <form:checkboxes path="cbRoles" items="${allItems}" itemLabel="name" itemValue="name" delimiter="<br/>" />
         </td>
       </tr>
 <c:if test="${mode == 'edit'}">
   <tr>
     <td colspan="2" style="text-align:center;">
       <a href="/admin/save${adminId}">save</a>
+      <input type="submit" name="button" value="save"/>
     </td>
     <td colspan="2" style="text-align:center;">
       <a href="/admin/delete${adminId}">delete</a>
@@ -62,4 +59,5 @@
 
     </table>
   </form:form>
+
 </div>

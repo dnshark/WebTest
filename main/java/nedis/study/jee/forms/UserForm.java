@@ -15,22 +15,6 @@ public class UserForm extends AbstractLoginForm implements IForm {
 
 	private String hash;
 
-	private Boolean confirmed=false;
-
-	private Boolean active=false;
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public Boolean getConfirmed() {
-		return confirmed;
-	}
-
 	public String getHash() {
 		return hash;
 	}
@@ -52,10 +36,6 @@ public class UserForm extends AbstractLoginForm implements IForm {
 
 	public void setFio(String fio) {
 		this.fio = fio;
-	}
-
-	public void setConfirmed(Boolean confirmed) {
-		this.confirmed = confirmed;
 	}
 
 }

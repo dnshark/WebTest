@@ -1,7 +1,7 @@
 package nedis.study.jee.services;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.forms.UserForm;
+import nedis.study.jee.forms.AdminForm;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ public interface AdminService {
 
     Account getAccount(Long userId);
 
-    void updateUser(Long userId, UserForm form);
+    void updateUser(Long userId, AdminForm form);
 
     void deleteUser(Long userId);
 
-    Account addUser(UserForm form);
+    Account addUser(AdminForm form);
 }

@@ -21,7 +21,6 @@ import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.security.CurrentAccount;
 import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.CommonService;
-import nedis.study.jee.services.EmailService;
 import nedis.study.jee.services.TemplateService;
 import nedis.study.jee.utils.ReflectionUtils;
 

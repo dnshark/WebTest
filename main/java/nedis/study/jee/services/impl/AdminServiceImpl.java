@@ -2,6 +2,7 @@ package nedis.study.jee.services.impl;
 
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.forms.AdminForm;
 import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.CommonService;
 import nedis.study.jee.utils.ReflectionUtils;
@@ -38,14 +39,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void updateUser(Long userId, UserForm form) {
+    public void updateUser(Long userId, AdminForm form) {
         Account account = accountDao.findById(userId);
         ReflectionUtils.copyByFields(account, form); //NEDIS не получается копировать все поля, так как теряется информация если поле не заполнено в форме
         copyFormToUser(form, account);
         accountDao.update(account);
     }
 
-    private void copyFormToUser(UserForm form, Account account) {
+    private void copyFormToUser(AdminForm form, Account account) {
         account.setActive(form.getActive());
         account.setEmail(form.getEmail());
         account.setLogin(form.getLogin());
@@ -60,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Account addUser(UserForm form) {
+    public Account addUser(AdminForm form) {
         Account account = commonService.addAccount(form);
         return account;
     }

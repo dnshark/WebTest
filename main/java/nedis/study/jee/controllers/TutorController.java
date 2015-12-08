@@ -28,14 +28,23 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/home";
 	}
 
-	@RequestMapping(value="editTest/id{testId}")
-	public String showQuestion(Model model,@PathVariable String testId){
+	@RequestMapping(value="editTest/id{testId}", method=RequestMethod.GET)
+	public String showTestForEdit(Model model,@PathVariable String testId){
 		Test test = tutorService.getTest(testId);
-		TestForm testForm = new TestForm();
-		testForm.setTest(test);
-		model.addAttribute("testForm", testForm);
+		model.addAttribute("test", test);
 		return "tutor/editTest";
 	}
+
+	@RequestMapping(value="editTest/test{test}")
+	public String editTest(Model model,@PathVariable Test test
+	){
+
+		TestForm testForm = new TestForm();
+		testForm.setTest(test);
+		//model.addAttribute("test", test);
+		return "tutor/editTest";
+	}
+
 
 	@RequestMapping(value="test", method=RequestMethod.GET)
 	public String showTutorTests(Model model){
