@@ -46,6 +46,7 @@ public class AdminControler extends AbstractController {
 		model.addAttribute("allRoles", commonService.listAllRoles());
 		model.addAttribute("adminForm",adminForm);
 		model.addAttribute("mode","edit");
+		model.addAttribute("adminId",userId);
 		return "admin/userInfo";
 	}
 
@@ -63,8 +64,24 @@ public class AdminControler extends AbstractController {
 		model.addAttribute("roles", list);
 		return adminForm;
 	}
-
-	@RequestMapping(value="/save{adminId}")
+	@RequestMapping(value="/Ok{adminId}", method = RequestMethod.POST)
+	public String DoEditInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm){
+	//,@RequestParam String button,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm form) {
+	/*	if (button.equals("save")) {
+			adminService.updateUser(Long.valueOf(adminId), form);
+			return "redirect:id"+adminId;
+		}
+		if (button.equals("delete")) {
+			adminService.deleteUser(Long.valueOf(adminId));
+			return "redirect:listUsers";
+		}
+		if (button.equals("add")) {
+			adminService.addUser(form);
+			return "redirect:listUsers";
+		}*/
+		return "error";
+	}
+/*	@RequestMapping(value="/save{adminId}")
 	public String DoSaveInfo(@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm form) {
 			adminService.updateUser(Long.valueOf(adminId), form);
 			return "redirect:id"+adminId;
@@ -80,6 +97,6 @@ public class AdminControler extends AbstractController {
 	public String DoAddInfo(@ModelAttribute("adminForm") AdminForm form) {
 			adminService.addUser(form);
 			return "redirect:listUsers";
-	}
+	}*/
 
 }
