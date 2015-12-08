@@ -18,3 +18,9 @@
 	text-align: center;
 	font-weight: bold;
 }
+
+.timeClass {
+	font-family:arial,verdana,helvetica,sans-serif;
+	font-weight:normal;
+	font-size:10pt;
+}

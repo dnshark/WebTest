@@ -6,7 +6,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
+
   <form:form method="POST" action="next" commandName="testForm" >
+  <span id="trv"></span><script>TRT ()</script>
+
+    <table width="100%">
+      <tr><td width="100%" align="center"><span id="theTime" class="timeClass"></span></td></tr>
+    </table>
+
   <h1>Questions!</h1>
 
   <h2>${question.name}</h2>
@@ -19,6 +26,11 @@
         </td>
       </tr>
     </c:forEach>
+    <tr>
+      <td>
+        <input type="checkbox" name="answer" id="-1" value="-1"> Don't know
+      </td>
+    </tr>
   </table>
 
     <input type="submit" name="Ok" value="Ok"/>

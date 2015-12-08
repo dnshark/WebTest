@@ -15,7 +15,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>DEMO 23</title>
+	<title>Web tester</title>
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/normalize.css?v=${CSS_JS_VERSION}" />
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/styles.css?v=${CSS_JS_VERSION}" />
 </head>
@@ -28,9 +28,10 @@
 		<decorator:body />
 	</section>
 	<script src="${context}/resources/js/jquery-1.10.2.js?v=${CSS_JS_VERSION}"></script>
+	<script src="${context}/resources/js/scripts.js"></script>
 	<script>
 		$(document).ready(function(){
-	
+			initTime(${time},0);
 		});
 	</script>
 </body>

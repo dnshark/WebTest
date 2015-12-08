@@ -50,6 +50,7 @@ public class StudentController extends AbstractController {
 
 		Question question = studentService.getQuestionByNumber(testId,0);
 
+		model.addAttribute("time", studentService.GetTestById(Long.valueOf(testId)).getTimePerQuestion());
 		model.addAttribute("question",question);
 		model.addAttribute("answers", studentService.getAnswers(question));
 		session.setAttribute("CORRECT_ANSWER", 0);
@@ -87,6 +88,7 @@ public class StudentController extends AbstractController {
 			session.setAttribute("QUESTION_NUMBER", number);
 			model.addAttribute("question",question);
 			model.addAttribute("answers", studentService.getAnswers(question));
+			model.addAttribute("time", studentService.GetTestById(Long.valueOf(testId)).getTimePerQuestion());
 			return "student/question";
 		}
 	}
