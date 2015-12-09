@@ -24,15 +24,15 @@
       <td><form:input path="questionName" /></td>
       </td>
     </tr>
-    <c:forEach items="${answers}" var="answer">
+    <c:forEach var="answer" items="${answers}">
       <tr>
         <td>
-          <input type="checkbox" name="cbItemList" value="${answer.id}"
-          <c:if test="${answer.checked}"> checked </c:if>
-                  >
+          <input type="checkbox" name="cbItemList" id="${answer.id}" value="${answer.id}"
+          <c:if test="${answer.correct}"> checked </c:if>>
         </td>
         <td>
-          <input type="text"  name="name" value="${answer.name}"/>
+          <input type="text"  name="answerName" value="${answer.name}"/>
+          <input type="hidden"  name="answerId" value="${answer.id}"/>
         </td>
       </tr>
     </c:forEach>

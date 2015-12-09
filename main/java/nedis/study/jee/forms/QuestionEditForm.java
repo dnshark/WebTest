@@ -1,5 +1,6 @@
 package nedis.study.jee.forms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,25 @@ public class QuestionEditForm implements IForm {
 
     private String questionName;
 
-    private List<String> cbItemList;
+    private ArrayList<String> cbItemList;
+    private ArrayList<String> answerName;
+    private ArrayList<String> answerId;
+
+    public ArrayList<String> getAnswerName() {
+        return answerName;
+    }
+
+    public void setAnswerName(ArrayList<String> answerName) {
+        this.answerName = answerName;
+    }
+
+    public ArrayList<String> getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(ArrayList<String> answerId) {
+        this.answerId = answerId;
+    }
 
     public Long getQuestionId() {
         return questionId;
@@ -28,11 +47,11 @@ public class QuestionEditForm implements IForm {
         this.questionName = questionName;
     }
 
-    public List<String> getCbItemList() {
+    public ArrayList<String> getCbItemList() {
         return cbItemList;
     }
 
-    public void setCbItemList(List<String> cbItemList) {
+    public void setCbItemList(ArrayList<String> cbItemList) {
         this.cbItemList = cbItemList;
     }
 }
