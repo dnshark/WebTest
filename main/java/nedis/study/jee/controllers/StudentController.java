@@ -56,12 +56,12 @@ public class StudentController extends AbstractController {
 		session.setAttribute("CORRECT_ANSWER", 0);
 		session.setAttribute("QUESTION_NUMBER", 0);
 		session.setAttribute("CURRENT_TEST",testId);
-		model.addAttribute("testForm", new AnswerForm());
+		model.addAttribute("answerForm", new AnswerForm());
 		return "student/question";
 	}
 
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
-	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("testForm") AnswerForm form) {
+	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form) {
 		Integer number = (Integer)session.getAttribute("QUESTION_NUMBER");
 		String testId = (String)session.getAttribute("CURRENT_TEST");
 

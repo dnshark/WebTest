@@ -1,18 +1,20 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.forms.CBItem;
 import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
 import nedis.study.jee.services.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author nedis
@@ -64,12 +66,22 @@ public class TutorController extends AbstractTutorController {
 		tutorService.createTest(testform.getTest());
 		return "redirect:/tutor/test";
 	}
-	@RequestMapping(value="/editQuestion/id${question.id}", method=RequestMethod.GET)
+	@RequestMapping(value="/editQuestion/id{questionId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,@PathVariable String questionId){
 		QuestionEditForm questionEditForm = new QuestionEditForm();
 		Question question = tutorService.getQuestion(questionId);
-		questionEditForm.setQuestion(question);
+
+		questionEditForm.setQuestionId(question.getIdQuestion());
+		questionEditForm.setQuestionName(question.getName());
+
+		model.addAttribute("answers", question.getAnswers());
 		model.addAttribute("questionEditForm", questionEditForm);
-		return "/editQuestion";
+		return "tutor/editQuestion";
+	}
+
+	@RequestMapping(value="/editQuestion/Ok")
+	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form) {
+		model.addAttribute("question", "1");
+		return "tutor/editQuestion";
 	}
 }

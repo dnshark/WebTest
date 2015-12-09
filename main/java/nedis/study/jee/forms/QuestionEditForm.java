@@ -1,30 +1,38 @@
 package nedis.study.jee.forms;
 
-import nedis.study.jee.entities.Question;
-
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Дмитрий on 09.12.2015.
  */
 public class QuestionEditForm implements IForm {
-    private Question question;
+    private Long questionId;
 
-    private ArrayList<String> correct;
+    private String questionName;
 
-    public Question getQuestion() {
-        return question;
+    private List<String> cbItemList;
+
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 
-    public ArrayList<String> getCorrect() {
-        return correct;
+    public String getQuestionName() {
+        return questionName;
     }
 
-    public void setCorrect(ArrayList<String> correct) {
-        this.correct = correct;
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
+    }
+
+    public List<String> getCbItemList() {
+        return cbItemList;
+    }
+
+    public void setCbItemList(List<String> cbItemList) {
+        this.cbItemList = cbItemList;
     }
 }

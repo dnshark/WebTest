@@ -7,7 +7,7 @@
 
 <div class="container">
 
-  <form:form method="POST" action="next" commandName="testForm" >
+  <form:form method="POST" action="next" commandName="answerForm" >
   <span id="trv"></span><script>TRT ()</script>
 
     <table width="100%">

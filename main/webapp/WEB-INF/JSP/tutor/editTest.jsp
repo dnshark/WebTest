@@ -34,7 +34,7 @@
     </tr>
     <c:forEach var="question" items="${test.questions}">
       <tr>
-        <td> <a href="\editQuestion\id${question.id}"> ${question.name}</a> </td>
+        <td> <a href="/tutor/editQuestion/id${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
     <tr>
@@ -49,5 +49,6 @@
       </td>
     </tr>
   </table>
+  </form>
 
 </div>

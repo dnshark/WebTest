@@ -13,45 +13,37 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-<form:form  commandName="questionEditForm">
+  <form:form method="POST" action="${context }/tutor/editQuestion/Ok" commandName="questionEditForm">
   <table align="center">
     <tr>
       <td>
-        Question name
+        Question:
+        <form:hidden path="questionId" />
       </td>
       <td>
-        <form:input path="question.name" />
+      <td><form:input path="questionName" /></td>
       </td>
     </tr>
-    <c:forEach items="${question.answers}" var="currentAnswer" varStatus="index">
-      <form:form method="post" action = "edit" commandName="answer">
-        <tr>
-          <td><form:checkbox path="correct"/> value="${currentAnswer.correct}"</td>
-          <td><form:input path="name"/> value="${currentAnswer.name}"</td>
-        </tr>
-      </form:form>
-    </c:forEach>
-
-
-    <c:forEach var="answer" items="${question.answers}">
+    <c:forEach items="${answers}" var="answer">
       <tr>
-     <!--   <td>  <input type="checkbox"  name="checks" value="${answer.id}" checked="answer.correct"/> </td>
-        <td>  <input type="text"  name="answer.name" value="${answer.name}"/> </td> -->
-        <td><form:checkbox path="answer.correct"/></td>
-        <td><form:input path="answer.name"/></td>
+        <td>
+          <input type="checkbox" name="cbItemList" value="${answer.id}"
+          <c:if test="${answer.checked}"> checked </c:if>
+                  >
+        </td>
+        <td>
+          <input type="text"  name="name" value="${answer.name}"/>
+        </td>
       </tr>
     </c:forEach>
     <tr>
       <td>
-        <a href="/tutor/editQuestion/new">New question</a>
-      </td>
-      <td>
-        <a href="/tutor/editTest/test${question}">Save test</a>
+        <input type="submit" value="Save test"/>
       </td>
       <td>
         <a href="/tutor/deleteTest${question}">Delete</a>
       </td>
     </tr>
   </table>
-</form:form>
+    </form:form>
 </div>
