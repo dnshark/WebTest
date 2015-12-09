@@ -1,7 +1,9 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
 import nedis.study.jee.services.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,6 @@ public class TutorController extends AbstractTutorController {
 
 		TestForm testForm = new TestForm();
 		testForm.setTest(test);
-		//model.addAttribute("test", test);
 		return "tutor/editTest";
 	}
 
@@ -58,10 +59,17 @@ public class TutorController extends AbstractTutorController {
 		model.addAttribute("testForm", testForm);
 		return "tutor/newTest";
 	}
-	@RequestMapping(value="/addTest") //NEDIS  чего-то по ссылке не приходят данные только по кнопке
+	@RequestMapping(value="/addTest")
 	public String addNewTest(@ModelAttribute("testForm") TestForm testform){
 		tutorService.createTest(testform.getTest());
 		return "redirect:/tutor/test";
 	}
-
+	@RequestMapping(value="/editQuestion/id${question.id}", method=RequestMethod.GET)
+	public String showQuestion(Model model,@PathVariable String questionId){
+		QuestionEditForm questionEditForm = new QuestionEditForm();
+		Question question = tutorService.getQuestion(questionId);
+		questionEditForm.setQuestion(question);
+		model.addAttribute("questionEditForm", questionEditForm);
+		return "/editQuestion";
+	}
 }

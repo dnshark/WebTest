@@ -1,6 +1,7 @@
 package nedis.study.jee.services;
 
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.TestForm;
 
@@ -17,4 +18,6 @@ public interface TutorService {
     void createTest(Test test);
 
     Test getTest(String testId);
+
+    Question getQuestion(String questionId);
 }

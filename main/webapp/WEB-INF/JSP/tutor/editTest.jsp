@@ -34,18 +34,13 @@
     </tr>
     <c:forEach var="question" items="${test.questions}">
       <tr>
-        <td>Question name</td>
-        <td> <input type="text"  name="question.name" value="${question.name}"/> </td>
+        <td> <a href="\editQuestion\id${question.id}"> ${question.name}</a> </td>
       </tr>
-      <c:forEach var="answer" items="${question.answers}">
-        <tr>
-          <td>
-            <input type="checkbox" name="answer" > ${answer.name}
-          </td>
-        </tr>
-      </c:forEach>
     </c:forEach>
     <tr>
+      <td>
+        <a href="/tutor/editQuestion/new">New question</a>
+      </td>
       <td>
         <a href="/tutor/editTest/test${test}">Save test</a>
       </td>

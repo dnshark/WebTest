@@ -1,8 +1,10 @@
 package nedis.study.jee.services.impl;
 
 import nedis.study.jee.dao.AccountDao;
+import nedis.study.jee.dao.QuestionDao;
 import nedis.study.jee.dao.TestDao;
 import nedis.study.jee.entities.Account;
+import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.TestForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Autowired
     private TestDao testDao;
 
+    @Autowired
+    private QuestionDao questionDao;
+
     @Override
     public List<Test> getTestList(Account account) {
         return accountDao.getListTest(account);
@@ -44,5 +49,10 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Override
     public Test getTest(String testId) {
         return testDao.findById(Long.valueOf(testId));
+    }
+
+    @Override
+    public Question getQuestion(String questionId) {
+        return questionDao.findById(Long.valueOf(questionId));
     }
 }
