@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 "> <![endif]-->
@@ -22,7 +23,12 @@
 
 <body class="style1">
 	<header>
-	
+		<http use-expressions="true" > <!--NEDIS не работает -->
+			<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
+				<a href="/logout">logout</a>
+				<p>Logggg</p>
+			</sec:authorize>
+		</http>
 	</header>
 	<section class="main">
 		<decorator:body />
@@ -31,7 +37,7 @@
 	<script src="${context}/resources/js/scripts.js"></script>
 	<script>
 		$(document).ready(function(){
-			initTime(${time},0);
+			initTime(${time},0); <!--NEDIS спросить как определить что надо это делать -->
 		});
 	</script>
 </body>
