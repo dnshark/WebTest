@@ -38,3 +38,11 @@
   </form:form>
 
 </div>
+
+<content tag="customscripts">
+  <script>
+    $(document).ready(function(){
+      initTime(${time},0); <!--NEDIS спросить как определить что надо это делать -->
+    });
+  </script>
+</content>

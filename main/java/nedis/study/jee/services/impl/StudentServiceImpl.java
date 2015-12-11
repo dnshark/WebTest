@@ -105,6 +105,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Integer CheckCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers) {
         Integer correct = 0;
+        if (userAnswers==null) {
+            return correct;
+        }
+
         for (Answer answer : answers) {
             correct = correct +(CheckCorrectAnswer(answer, userAnswers));
         }

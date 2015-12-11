@@ -3,6 +3,8 @@ package nedis.study.jee.controllers;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
+import nedis.study.jee.security.CurrentAccount;
+import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.AdminService;
 
 import nedis.study.jee.utils.ReflectionUtils;
@@ -27,6 +29,7 @@ public class AdminControler extends AbstractController {
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String home(){
+		CurrentAccount currentAccount = SecurityUtils.getCurrentAccount();
 		return "admin/home";
 	}
 

@@ -21,8 +21,9 @@
         <form:hidden path="questionId" />
       </td>
       <td>
-      <td><form:input path="questionName" /></td>
+        <form:input path="questionName" />
       </td>
+
     </tr>
     <c:forEach var="answer" items="${answers}">
       <tr>
@@ -34,14 +35,20 @@
           <input type="text"  name="answerName" value="${answer.name}"/>
           <input type="hidden"  name="answerId" value="${answer.id}"/>
         </td>
+        <td>
+          <a href="/tutor/deleteAnswer${answer.Id}">Delete </a>
+        </td>
       </tr>
     </c:forEach>
     <tr>
       <td>
-        <input type="submit" value="Save test"/>
+        <input type="submit" value="Save question"/>
       </td>
       <td>
-        <a href="/tutor/deleteTest${question}">Delete</a>
+        <a href="/tutor/newAnswer${question.Id}">New answer</a>
+      </td>
+      <td>
+        <a href="/tutor/deleteQuestion${questionId}">Delete question</a>
       </td>
     </tr>
   </table>

@@ -20,7 +20,10 @@ function countDown() {
     if (document.getElementById) { document.getElementById('theTime').innerHTML = time; }
 
     SD=window.setTimeout("countDown();", 1000);
-    if (min == '00' && sec == '00') { sec = "00"; window.clearTimeout(SD); }
+    if (min == '00' && sec == '00') { sec = "00";
+        location.replace("noAnswer");
+        window.clearTimeout(SD);
+    }
 }
 window.onload = countDown;
 

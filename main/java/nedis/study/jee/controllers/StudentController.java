@@ -59,16 +59,24 @@ public class StudentController extends AbstractController {
 		model.addAttribute("answerForm", new AnswerForm());
 		return "student/question";
 	}
-
+	@RequestMapping(value="question/noAnswer")
+	public String DoNoAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form){
+		form.setAnswer(null);
+		return DoAnswer(model, session, form);
+	}
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
 	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form) {
+		return DoAnswer(model, session, form);
+	}
+
+	private String DoAnswer(Model model, HttpSession session, AnswerForm form) {
 		Integer number = (Integer)session.getAttribute("QUESTION_NUMBER");
 		String testId = (String)session.getAttribute("CURRENT_TEST");
 
 		Question question = studentService.getQuestionByNumber(testId, number);
 
 		List<Answer> answers = question.getAnswers();
-        Integer correct = (Integer) session.getAttribute("CORRECT_ANSWER");
+		Integer correct = (Integer) session.getAttribute("CORRECT_ANSWER");
 
 		correct=correct+studentService.CheckCorrectAnswers(answers,form.getAnswer());
 		session.setAttribute("CORRECT_ANSWER",correct);
@@ -92,6 +100,7 @@ public class StudentController extends AbstractController {
 			return "student/question";
 		}
 	}
+
 	@RequestMapping(value="/offTest", method=RequestMethod.GET)
 	public String showOffTest(Model model){
 		initTests(model);

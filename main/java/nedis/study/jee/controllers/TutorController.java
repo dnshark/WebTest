@@ -4,6 +4,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.forms.NewAnswerForm;
 import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
 import nedis.study.jee.services.TutorService;
@@ -65,10 +66,35 @@ public class TutorController extends AbstractTutorController {
 		tutorService.createTest(testform.getTest());
 		return "redirect:/tutor/test";
 	}
+
+	@RequestMapping(value="/newAnswer", method=RequestMethod.GET)
+	public String deleteAnswer(Model model){
+
+		NewAnswerForm newAnswerForm = new NewAnswerForm();
+		model.addAttribute("newAnswerForm",newAnswerForm);
+	  return "/tutor/newAnswer";
+	}
+
+	@RequestMapping(value="/deleteAnswer", method=RequestMethod.POST)
+	public String deleteAnswer(Model model,@RequestParam String questionId,@RequestParam String answerId){
+
+		tutorService.deleteAnswer(Long.valueOf(answerId));
+
+		return "redirect: editQuestion/id"+questionId;
+	}
+
+	@RequestMapping(value="/deleteQuestion", method=RequestMethod.POST)
+	public String deleteQuestion(Model model,@RequestParam String testId,@RequestParam String questionId){
+
+		tutorService.deleteQuestion(Long.valueOf(questionId));
+
+		return "redirect: editTest/id"+testId;
+	}
+
 	@RequestMapping(value="/editQuestion/id{questionId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,@PathVariable String questionId){
 		QuestionEditForm questionEditForm = new QuestionEditForm();
-		Question question = tutorService.getQuestion(questionId);
+		Question question = tutorService.getQuestion(Long.valueOf(questionId));
 
 		questionEditForm.setQuestionId(question.getIdQuestion());
 		questionEditForm.setQuestionName(question.getName());
@@ -78,9 +104,12 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/editQuestion";
 	}
 
-	@RequestMapping(value="/editQuestion/Ok")
+	@RequestMapping(value="/editQuestion/Ok", method = RequestMethod.POST)
 	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form) {
-		model.addAttribute("question", "1");
+
+		tutorService.updateQuestion(form, form.getQuestionId());
+
 		return "tutor/editQuestion";
 	}
+
 }
