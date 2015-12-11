@@ -16,7 +16,7 @@ public interface TutorService {
 
     List<Test> getTestList(Account account);
 
-    void createTest(Test test);
+    void createTest(TestForm test);
 
     Test getTest(String testId);
 

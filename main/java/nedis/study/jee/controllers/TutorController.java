@@ -7,7 +7,9 @@ import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.NewAnswerForm;
 import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
+import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.services.TutorService;
+import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,12 +41,12 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/editTest";
 	}
 
-	@RequestMapping(value="editTest/test{test}")
-	public String editTest(Model model,@PathVariable Test test
-	){
+	@RequestMapping(value="editTest",method = RequestMethod.GET)
+	public String editTest(Model model,@ModelAttribute TestForm form){
 
-		TestForm testForm = new TestForm();
-		testForm.setTest(test);
+		//TestForm testForm = new TestForm();
+		//ReflectionUtils.copyByFields(testForm,test);
+		//testForm.setTest(test);}
 		return "tutor/editTest";
 	}
 
@@ -52,7 +54,15 @@ public class TutorController extends AbstractTutorController {
 	@RequestMapping(value="test", method=RequestMethod.GET)
 	public String showTutorTests(Model model){
 		Account account = commonService.getLoginAccount();
-		model.addAttribute("tests", tutorService.getTestList(account));
+		List<Test> list = tutorService.getTestList(account);
+		List<StringId> tests = new ArrayList<StringId>();
+		for (Test test : list){
+		  tests.add(new StringId(String.valueOf(test.getId()),test.getName()));
+		}
+
+		model.addAttribute("tests",tests);
+
+
 		return "tutor/test";
 	}
 	@RequestMapping(value="/newTest", method=RequestMethod.GET)
@@ -63,7 +73,7 @@ public class TutorController extends AbstractTutorController {
 	}
 	@RequestMapping(value="/addTest")
 	public String addNewTest(@ModelAttribute("testForm") TestForm testform){
-		tutorService.createTest(testform.getTest());
+		tutorService.createTest(testform);
 		return "redirect:/tutor/test";
 	}
 

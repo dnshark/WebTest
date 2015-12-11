@@ -7,23 +7,28 @@
 
 <div class="container">
     <form:form action="/tutor/addTest" commandName="testForm">
-    <h1>New test</h1>
-    <table align="center">
-      <tr>
-      <td>Test name</td>
-      <td><form:input path="test.name"/> </td>
-      </tr>
-      <tr>
-          <td>Time per question</td>
-          <td><form:input path="test.timePerQuestion"/> </td>
-      </tr>
-      <tr>
-       <td>
-        <a href="/tutor/addTest">Add new test</a>
-           <input type="submit" value="Add new test"/>
-       </td>
-      </tr>
-    </table>
+        <h1>New test</h1>
+        <table align="center">
+            <tr>
+                <td>Test name</td>
+                <td><form:input path="name"/> </td>
+            </tr>
+            <tr>
+                <td>Time per question</td>
+                <td><form:input path="timePerQuestion"/> </td>
+            </tr>
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td><form:input path="description"/> </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Add new test"/>
+                </td>
+            </tr>
+        </table>
     </form:form>
 
 </div>

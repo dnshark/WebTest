@@ -9,6 +9,7 @@ import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.QuestionEditForm;
+import nedis.study.jee.forms.TestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +44,11 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void createTest(Test test) {
+    public void createTest(TestForm form) {
        Test newTest = entityBuilder.buildTest();
-       newTest.setName(test.getName());
-       newTest.setTimePerQuestion(test.getTimePerQuestion());
+       newTest.setName(form.getName());
+       newTest.setTimePerQuestion(Integer.valueOf(form.getTimePerQuestion()));
+       newTest.setDescription(form.getDescription());
        Account account =getLoginAccount();
        newTest.setAccount(account);
        testDao.save(newTest);

@@ -7,32 +7,26 @@
 
 <div class="container">
 
-  <table align="center">
-    <tr>
-      <td>
-        Test name
-      </td>
-      <td>
-        <input type="text"  name="test.name" value="${test.name}" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Description
-      </td>
-      <td>
-        <input type="text"  name="test.description" value="${test.description}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Time per question
-      </td>
-      <td>
-        <input type="text"  name="test.timePerQuestion" value="${test.timePerQuestion}"/>
-      </td>
-    </tr>
-    <c:forEach var="question" items="${test.questions}">
+  <form:form action="/tutor/addTest" commandName="testForm">
+    <h1>Edit test</h1>
+    <form:hidden path="id"/>
+    <table align="center">
+      <tr>
+        <td>Test name</td>
+        <td><form:input path="name"/> </td>
+      </tr>
+      <tr>
+        <td>Time per question</td>
+        <td><form:input path="timePerQuestion"/> </td>
+      </tr>
+      <tr>
+        <td>
+          Description
+        </td>
+        <td><form:input path="description"/> </td>
+      </tr>
+
+    <c:forEach var="question" items="${questions}">
       <tr>
         <td> <a href="/tutor/editQuestion/id${question.id}"> ${question.name}</a> </td>
       </tr>
@@ -49,6 +43,6 @@
       </td>
     </tr>
   </table>
-  </form>
+  </form:form>
 
 </div>
