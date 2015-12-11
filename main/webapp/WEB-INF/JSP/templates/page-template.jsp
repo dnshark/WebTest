@@ -26,7 +26,6 @@
 		<!--NEDIS не работает -->
 			<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
 				<a href="/logout">logout</a>
-				<p>Logggg</p>
 			</sec:authorize>
 
 	</header>

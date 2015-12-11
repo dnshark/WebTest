@@ -4,19 +4,19 @@ package nedis.study.jee.forms.util;
  * Created by Дмитрий on 11.12.2015.
  */
 public class StringId {
-    private String id;
+    private Long id;
     private String name;
 
-    public StringId(String id, String name) {
+    public StringId(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

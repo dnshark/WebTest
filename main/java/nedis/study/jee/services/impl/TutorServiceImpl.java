@@ -8,6 +8,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.forms.NewAnswerForm;
 import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,8 +90,20 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
+    @Transactional
     public void deleteAnswer(Long aLong) {
         Answer answer = answerDao.findById(aLong);
         answerDao.delete(answer);
+    }
+
+    @Override
+    @Transactional
+    public void addAnswer(NewAnswerForm newAnswerForm) {
+      Answer answer = entityBuilder.buildAnswer();
+      answer.setName(newAnswerForm.getName());
+      answer.setCorrect(newAnswerForm.getCorrect());
+      Question question = questionDao.findById(newAnswerForm.getQuestionId());
+      answer.setQuestion(question);
+      answerDao.save(answer);
     }
 }

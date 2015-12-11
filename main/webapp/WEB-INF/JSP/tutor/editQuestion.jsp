@@ -36,7 +36,7 @@
           <input type="hidden"  name="answerId" value="${answer.id}"/>
         </td>
         <td>
-          <a href="/tutor/deleteAnswer${answer.id}">Delete </a>
+          <a href="/tutor/deleteAnswer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
         </td>
       </tr>
     </c:forEach>
@@ -45,10 +45,10 @@
         <input type="submit" value="Save question"/>
       </td>
       <td>
-        <a href="/tutor/newAnswer${questionId}">New answer</a>
+        <a href="/tutor/newAnswer/id${questionEditForm.questionId}">New answer</a>
       </td>
       <td>
-        <a href="/tutor/deleteQuestion${questionId}">Delete question</a>
+        <a href="/tutor/deleteQuestion${questionEditForm.questionId}">Delete question</a>
       </td>
     </tr>
   </table>

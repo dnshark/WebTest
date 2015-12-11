@@ -13,7 +13,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form:form method="POST" action="${context }/tutor/newAnswer/Ok" commandName="newAnswerForm">
+  <form:form method="POST" action="${context }/tutor/newAnswer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
     <table align="center">
       <tr>
         <td>
@@ -24,7 +24,7 @@
           <form:input path="name" />
         </td>
         <td>
-          <form:checkbox path="checked" />
+          <form:checkbox path="correct" value="correct"/>
         </td>
       </tr>
 

@@ -7,9 +7,9 @@
 
 <div class="container">
 
-  <form:form action="/tutor/addTest" commandName="testForm">
+  <form:form action="/tutor/editTest/Ok" commandName="testForm">
     <h1>Edit test</h1>
-    <form:hidden path="id"/>
+    <form:hidden path="idTest"/>
     <table align="center">
       <tr>
         <td>Test name</td>
@@ -26,20 +26,21 @@
         <td><form:input path="description"/> </td>
       </tr>
 
-    <c:forEach var="question" items="${questions}">
+    <c:forEach var="question" items="${testForm.testQuestions}">
       <tr>
         <td> <a href="/tutor/editQuestion/id${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
     <tr>
       <td>
-        <a href="/tutor/editQuestion/new">New question</a>
+        <a href="/tutor/editQuestion/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
       </td>
       <td>
         <a href="/tutor/editTest/test${test}">Save test</a>
+        <form:button name="save" value="Save test">Save test</form:button>
       </td>
       <td>
-        <a href="/tutor/deleteTest${test}">Delete</a>
+        <a href="/tutor/deleteTest${testId}">Delete</a>
       </td>
     </tr>
   </table>

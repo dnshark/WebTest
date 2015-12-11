@@ -9,22 +9,25 @@ import java.util.ArrayList;
  */
 public class TestForm implements IForm{
 
-    private Long id;
+    private Long idTest;
 
     private String name;
 
-    private String timePerQuestion;
+    private Integer timePerQuestion;
 
     private String description;
 
-    private ArrayList<StringId> question;
+    private ArrayList<StringId> testQuestions;
 
-    public Long getId() {
-        return id;
+    public TestForm() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdTest() {
+        return idTest;
+    }
+
+    public void setIdTest(Long idTest) {
+        this.idTest = idTest;
     }
 
     public String getName() {
@@ -35,11 +38,11 @@ public class TestForm implements IForm{
         this.name = name;
     }
 
-    public String getTimePerQuestion() {
+    public Integer getTimePerQuestion() {
         return timePerQuestion;
     }
 
-    public void setTimePerQuestion(String timePerQuestion) {
+    public void setTimePerQuestion(Integer timePerQuestion) {
         this.timePerQuestion = timePerQuestion;
     }
 
@@ -51,11 +54,11 @@ public class TestForm implements IForm{
         this.description = description;
     }
 
-    public ArrayList<StringId> getQuestion() {
-        return question;
+    public ArrayList<StringId> getTestQuestions() {
+        return testQuestions;
     }
 
-    public void setQuestion(ArrayList<StringId> question) {
-        this.question = question;
+    public void setTestQuestions(ArrayList<StringId> testQuestions) {
+        this.testQuestions = testQuestions;
     }
 }
