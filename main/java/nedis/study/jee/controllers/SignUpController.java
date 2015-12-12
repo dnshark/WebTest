@@ -61,21 +61,12 @@ public class SignUpController extends AbstractController{
             commonService.signUp(form,true);
             model.addAttribute("confirmed","Check email to confirm password");
             return "message";
-            //NEDIS
-        } catch (MessagingException e) {
+
+        } catch (Exception e) {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
-            LOGGER.info("send e-mail Error " + e.getMessage());
+            LOGGER.info("Error sign up " + e.getMessage());
             return "/signup";
             }
-         catch (InvalidUserInputException e) {
-             result.addError(new ObjectError("Can't create user. Change some information.", e.getMessage()));
-             LOGGER.info("Input form Error " + e.getMessage());
-             return "/signup";
-         } catch (FileNotFoundException e) {
-            result.addError(new ObjectError("Can't find e-mail template file.", e.getMessage()));
-            LOGGER.info("Can't find e-mail template file " + e.getMessage());
-            return "/signup";
-        }
 
     }
 

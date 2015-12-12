@@ -7,4 +7,5 @@ import nedis.study.jee.entities.Test;
  */
 public interface TestDao extends IEntityDao<Test> {
     Integer getCorrectCountAnswer(Test test);
+
 }

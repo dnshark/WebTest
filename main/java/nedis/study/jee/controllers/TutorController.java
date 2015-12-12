@@ -1,7 +1,6 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.NewAnswerForm;
@@ -36,7 +35,7 @@ public class TutorController extends AbstractTutorController {
 
 	//NEDIS
 	@RequestMapping(value="editTest/id{testId}", method=RequestMethod.GET)
-	public String showTestForEdit(Model model,@PathVariable String testId){
+	public String showTestForEdit(Model model,@PathVariable Long testId){
 		Test test = tutorService.getTest(testId);
 		TestForm testForm = new TestForm();
 		ReflectionUtils.copyByNotNullFields(testForm, test);
@@ -66,9 +65,9 @@ public class TutorController extends AbstractTutorController {
 
 	//NEDIS
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model){
+	public String showTutorTests(Model model,@RequestParam int offSet, int count){
 		Account account = commonService.getLoginAccount();
-		List<Test> list = tutorService.getTestList(account);
+		List<Test> list = tutorService.getTestList(account,offSet,count);
 		List<StringId> tests = new ArrayList<StringId>();
 		for (Test test : list){
 		  tests.add(new StringId(test.getIdTest(),test.getName()));
@@ -93,20 +92,17 @@ public class TutorController extends AbstractTutorController {
 	}
 //NEDIS
 	@RequestMapping(value="/deleteQuestion")
-	public String deleteQuestion(Model model,@RequestParam String testId,@RequestParam Long questionId){
+	public String deleteQuestion(Model model,@RequestParam Long questionId){
 
-		tutorService.deleteQuestion(questionId);
+		Test test = tutorService.deleteQuestion(questionId);
 
-		return "redirect:/tutor/editTest/id"+testId;
+		return "redirect:/tutor/editTest/id"+test.getIdTest();
 	}
 
 	@RequestMapping(value="/editQuestion", method=RequestMethod.GET)
 	public String showQuestion(Model model,@RequestParam Long questionId){
-		QuestionEditForm questionEditForm = new QuestionEditForm();
 		Question question = tutorService.getQuestion(questionId);
-		questionEditForm.setQuestionId(question.getIdQuestion());
-		questionEditForm.setQuestionName(question.getName());
-		questionEditForm.setTestId(question.getTest().getIdTest());
+		QuestionEditForm questionEditForm = tutorService.fillQuestionEditForm(question);
 		model.addAttribute("mode", "edit");
 		model.addAttribute("answers", question.getAnswers());
 		model.addAttribute("questionEditForm", questionEditForm);
@@ -129,11 +125,9 @@ public class TutorController extends AbstractTutorController {
 		return "redirect:/tutor/editTest/id"+form.getTestId();
 	}
 
-	//NEDIS
 	@RequestMapping(value="/editQuestion/new", method = RequestMethod.GET)
 	public String addQuestion(Model model,@RequestParam Long testId) {
-		QuestionEditForm questionEditForm = new QuestionEditForm();
-		questionEditForm.setTestId(testId);
+		QuestionEditForm questionEditForm = tutorService.getQuestionEditForm(testId);
 		model.addAttribute("mode","new");
 		model.addAttribute("questionEditForm", questionEditForm);
 

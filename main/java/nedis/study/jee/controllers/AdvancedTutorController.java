@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ public class AdvancedTutorController extends AbstractTutorController {
 	}
 
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model){
-		List<Test> list = advancedTutorService.getAllTests();
+	public String showTutorTests(Model model,@RequestParam int offSet,int count){
+		List<Test> list = advancedTutorService.getAllTests(offSet,count);
 		List<StringId> tests = new ArrayList<StringId>();
 		for (Test test : list){
 			tests.add(new StringId(test.getIdTest(),test.getName()));

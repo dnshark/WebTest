@@ -19,7 +19,7 @@ public class AdvancedTutorServiceImpl implements AdvancedTutorService {
     TestDao testDao;
 
     @Override
-    public List<Test> getAllTests() {
+    public List<Test> getAllTests(int offSet, int count) {
         return testDao.findAll();
     }
 }

@@ -7,28 +7,19 @@ import javax.servlet.http.HttpSession;
  */
 public class TestSessionInfo {
 
-    private HttpSession session;
-
-    public TestSessionInfo(HttpSession session) {
-        this.session = session;
-    }
-
     private Integer correctAnswer;
 
     private Integer questionNumber;
 
     private Long testId;
 
-    public void clear(Long testId){
-        session.setAttribute("CORRECT_ANSWER", 0);
-        session.setAttribute("QUESTION_NUMBER", 0);
-        session.setAttribute("CURRENT_TEST",testId);
-    }
+    private Integer timePerQuestion;
 
-    public void fillInfo() {
-        this.questionNumber = (Integer)session.getAttribute("QUESTION_NUMBER");
-        this.correctAnswer = (Integer) session.getAttribute("CORRECT_ANSWER");
-        this.testId = (Long)session.getAttribute("CURRENT_TEST");
+    public void clear(Long testId){
+        correctAnswer = 0;
+        questionNumber = -1;
+        this.testId = testId;
+        timePerQuestion = 300;
     }
 
     public Integer incQuestNumber(){
@@ -38,11 +29,6 @@ public class TestSessionInfo {
 
     public void incCorrectAnswer(Integer correctAnswer){
         this.correctAnswer +=  correctAnswer;
-    }
-
-    public void saveToSession(){
-        session.setAttribute("CORRECT_ANSWER", correctAnswer);
-        session.setAttribute("QUESTION_NUMBER", questionNumber);
     }
 
     public Integer getCorrectAnswer() {
@@ -55,5 +41,13 @@ public class TestSessionInfo {
 
     public Long getTestId() {
         return testId;
+    }
+
+    public Integer getTimePerQuestion() {
+        return timePerQuestion;
+    }
+
+    public void setTimePerQuestion(Integer timePerQuestion) {
+        this.timePerQuestion = timePerQuestion;
     }
 }

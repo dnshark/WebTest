@@ -20,7 +20,7 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
     }
 
     @Override
-    public List<TestResult> getUserResults(Account account) {
+    public List<TestResult> getUserResults(Account account,int offset, int count) {
         return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
                 .addOrder(Order.desc("created")).list();
     }

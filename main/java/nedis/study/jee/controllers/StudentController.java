@@ -1,19 +1,14 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.AnswerForm;
 import nedis.study.jee.services.StudentService;
 
-import nedis.study.jee.services.impl.utils.TestSessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -28,8 +23,8 @@ public class StudentController extends AbstractController {
 	@Autowired
 	protected StudentService studentService;
 
-	protected void initTests(Model model){
-		List<Test> tests = studentService.listAllTests();
+	protected void initTests(Model model,int offSet,int count){
+		List<Test> tests = studentService.listAllTests(offSet,count);
 		model.addAttribute("tests", tests);
 	}
 
@@ -39,58 +34,56 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/tests", method=RequestMethod.GET)
-	public String showTest(Model model){
-		initTests(model);
+	public String showTest(Model model,@RequestParam int offSet,int count){
+		initTests(model,offSet,count);
 		model.addAttribute("mode","online");
 		return "student/tests";
 	}
-	//NEDIS
-	@RequestMapping(value="/question/id{testId}", method=RequestMethod.GET)
+
+	@RequestMapping(value="/test/start/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,HttpSession session,@PathVariable Long testId){
 
-		TestSessionInfo testSessionInfo= new TestSessionInfo(session);
-
-		testSessionInfo.clear(testId);
+		session.setAttribute("TEST_INFO", studentService.initTestSessionInfo(testId));
 
 		return "redirect:question/next";
 	}
+
 	@RequestMapping(value="question/noAnswer")
 	public String doNoAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form){
 		form.setAnswer(null);
 		return doAnswer(model, session, form);
 	}
+
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
 	public String getAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form) {
 		return doAnswer(model, session, form);
 	}
 
 	private String doAnswer(Model model, HttpSession session, AnswerForm form) {
+		if (form==null) {
+			form = new AnswerForm();
+		}
+
 		Account account = commonService.getLoginAccount();
 
-		Question question = studentService.doNextQuestion(session,form);
+		form = studentService.doAnswer(session, form,account);
 
-		if (question == null) {
-			studentService.saveResult(account,
-					(String)session.getAttribute("CURRENT_TEST"),
-					(Integer)session.getAttribute("CORRECT_ANSWER")
-					);
+		if (form==null) {
 			return "redirect:/allAccess/result";
 		} else {
-			model.addAttribute("question",question);
-			model.addAttribute("answers", studentService.getAnswers(question));
-			model.addAttribute("time", studentService.getTimePerQuestion());
+			model.addAttribute("answerForm", form);
 			return "student/question";
 		}
 	}
 
 	@RequestMapping(value="/offTest", method=RequestMethod.GET)
-	public String showOffTest(Model model){
-		initTests(model);
+	public String showOffTest(Model model,@RequestParam int offSet, int count){
+		initTests(model,offSet,count);
 		model.addAttribute("mode","offline");
 		return "student/tests";
 	}
 
-	@RequestMapping(value="/offTest/id{testId}", method=RequestMethod.GET)
+	@RequestMapping(value="/offTest/test/id{testId}", method=RequestMethod.GET)
 	public String showOffTests(Model model,HttpSession session,@PathVariable Long testId){
 		Test test =studentService.getTestById(testId);
 		model.addAttribute("test",test);

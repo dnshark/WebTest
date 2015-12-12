@@ -4,13 +4,13 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.forms.UserForm;
 import nedis.study.jee.services.AllAccessService;
 import nedis.study.jee.services.StudentService;
-import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,9 +26,9 @@ public class AllAccessController extends AbstractController {
     @Autowired
     protected AllAccessService allAccessService;
     @RequestMapping(value="result", method= RequestMethod.GET)
-    public String showResults(Model model,HttpSession session){
+    public String showResults(Model model,@RequestParam int offSet,int count){
         Account account = commonService.getLoginAccount();
-        model.addAttribute("results",studentService.listAllResult(account));
+        model.addAttribute("results",studentService.listAllResult(account,offSet,count));
         return "allAccess/result";
     }
 
@@ -41,10 +41,10 @@ public class AllAccessController extends AbstractController {
 
     @RequestMapping(value="editInfo", method=RequestMethod.GET)
     public String showEditInfo(Model model,HttpSession session){
-        UserForm userForm = new UserForm();
+
         Account account = commonService.getLoginAccount();
-        ReflectionUtils.copyByFields(userForm, account);
-        //NEDIS
+        UserForm userForm = commonService.getUserForm(account);
+
         model.addAttribute("userForm", userForm);
         return "allAccess/editInfo";
     }
@@ -52,9 +52,8 @@ public class AllAccessController extends AbstractController {
     @RequestMapping(value="editInfoOk", method=RequestMethod.POST)
     public String updateUser(Model model,@ModelAttribute("userForm") UserForm form){
         Account account = commonService.getLoginAccount();
-        allAccessService.copyFormToUser(form,account);
-        commonService.updateAccount(account);
-        //NEDIS
+        allAccessService.fillForm(form, account);
+
         model.addAttribute("userForm", form);
         return "allAccess/editInfo";
     }

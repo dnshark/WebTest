@@ -40,8 +40,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     private AnswerDao answerDao;
 
     @Override
-    public List<Test> getTestList(Account account) {
-        return accountDao.getListTest(account);
+    public List<Test> getTestList(Account account,int offSet,int count) {
+        return accountDao.getListTest(account,offSet,count);
     }
 
     @Override
@@ -98,9 +98,10 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void deleteQuestion(Long aLong) {
+    public Test deleteQuestion(Long aLong) {
         Question question = questionDao.findById(aLong);
         questionDao.delete(question);
+        return null;
     }
 
     @Override
@@ -147,5 +148,21 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
         ReflectionUtils.copyByFields(test,form);
         testDao.update(test);
         return test;
+    }
+
+    @Override
+    public QuestionEditForm getQuestionEditForm(Long testId) {
+        QuestionEditForm questionEditForm = new QuestionEditForm();
+        questionEditForm.setTestId(testId);
+        return questionEditForm;
+    }
+
+    @Override
+    public QuestionEditForm fillQuestionEditForm(Question question) {
+        QuestionEditForm questionEditForm = new QuestionEditForm();
+        questionEditForm.setQuestionId(question.getIdQuestion());
+        questionEditForm.setQuestionName(question.getName());
+        questionEditForm.setTestId(question.getTest().getIdTest());
+        return questionEditForm;
     }
 }

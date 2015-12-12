@@ -1,5 +1,6 @@
 package nedis.study.jee.services.impl;
 
+import nedis.study.jee.controllers.AdminControler;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.AccountRole;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import nedis.study.jee.services.AdminService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
     private CommonService commonService;
 
     @Override
-    public List<Account> loadAllUser() {
+    public List<Account> loadAllUser(int offSet,int count) {
         return accountDao.findAll();
     }
 
@@ -82,5 +84,15 @@ public class AdminServiceImpl implements AdminService {
             roles.add(accountRole.getRole().toString());
         }
         return roles;
+    }
+
+    @Override
+    public AdminForm getAdminForm(Model model, Account user) {
+        AdminForm adminForm = new AdminForm();
+        List<Role> list = commonService.listAllRoles();
+        model.addAttribute("roles", list);
+        ReflectionUtils.copyByFields(adminForm, user);
+        adminForm.setCheckRoles(getRoles(user));
+        return adminForm;
     }
 }

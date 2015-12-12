@@ -198,6 +198,12 @@ public class CommonServiceImpl implements CommonService {
 		CurrentAccount currentAccount = SecurityUtils.getCurrentAccount();
 		return accountDao.findById(currentAccount.getIdAccount());
 	}
+
+	public UserForm getUserForm(Account account) {
+		UserForm userForm = new UserForm();
+		ReflectionUtils.copyByFields(userForm, account);
+		return userForm;
+	}
 	/*
 	@Override
 	@Transactional(readOnly=false, rollbackFor={InvalidUserInputException.class, RuntimeException.class})

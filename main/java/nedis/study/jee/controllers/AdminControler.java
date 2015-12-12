@@ -1,20 +1,14 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
-import nedis.study.jee.security.CurrentAccount;
-import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.AdminService;
 
-import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author nedis
@@ -33,18 +27,15 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/listUsers", method=RequestMethod.GET)
-	public String showTest(Model model){
-		model.addAttribute("users", adminService.loadAllUser());
+	public String showTest(Model model,@RequestParam int offSet, int count){
+		model.addAttribute("users", adminService.loadAllUser(offSet,count));
 		return "admin/listUsers";
 	}
 
-	@RequestMapping(value="/id{userId}", method=RequestMethod.GET)
+	@RequestMapping(value="user/id{userId}", method=RequestMethod.GET)
 	public String showLogin(Model model,@PathVariable Long userId){
 		Account user = adminService.getAccount(userId);
-		AdminForm adminForm = getAdminForm(model);
-
-
-		adminForm.setCheckRoles(adminService.getRoles(user));
+		AdminForm adminForm = adminService.getAdminForm(model, user);
 
 		model.addAttribute("allRoles", commonService.listAllRoles());
 		model.addAttribute("adminForm",adminForm);
@@ -55,26 +46,20 @@ public class AdminControler extends AbstractController {
 
 	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
 	public String showLogin(Model model){
-		AdminForm adminForm = getAdminForm(model);
+		Account user = commonService.getLoginAccount();
+		AdminForm adminForm = adminService.getAdminForm(model, user);
 		model.addAttribute("adminForm", adminForm);
 		model.addAttribute("mode","new");
 		return "admin/userInfo";
 	}
 
-	private AdminForm getAdminForm(Model model) {
-		AdminForm adminForm = new AdminForm();
-		List<Role> list = commonService.listAllRoles();
-		model.addAttribute("roles", list);
-		ReflectionUtils.copyByFields(adminForm, user);
-		return adminForm;
-	}
-	@RequestMapping(value="/update{adminId}")
+	@RequestMapping(value="/update/id{adminId}")
 	public String doUpdateInfo(Model model,@PathVariable Long adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
 		adminService.updateUser(adminId, adminForm);
 		return "redirect:id"+adminId;
 	}
 
-	@RequestMapping(value="/delete{adminId}", method = RequestMethod.POST)
+	@RequestMapping(value="/delete/id{adminId}", method = RequestMethod.POST)
 	public String doDeleteInfo(Model model,@PathVariable Long adminId){
 			adminService.deleteUser(adminId);
 			return "redirect:listUsers";

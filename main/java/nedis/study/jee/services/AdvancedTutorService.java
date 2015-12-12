@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface AdvancedTutorService {
 
-    List<Test> getAllTests();
+    List<Test> getAllTests(int offSet,int count);
 }

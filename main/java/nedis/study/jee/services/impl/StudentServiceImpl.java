@@ -51,32 +51,17 @@ public class StudentServiceImpl implements StudentService {
     private EntityBuilder entityBuilder;
 
     @Override
-    public List<Test> listAllTests() {
+    public List<Test> listAllTests(int offSet,int count) {
         return testDao.findAll();
     }
 
     @Override
-    public List<TestResult> listAllResult(Account account) {
-        return testResultDao.getUserResults(account);
+    public List<TestResult> listAllResult(Account account,int offSet,int count) {
+        return testResultDao.getUserResults(account,offSet,count);
     }
 
     public Test getTestById(long testId) {
         return testDao.findById(testId);
-    }
-
-    @Override
-    public List<Answer> getAnswers(Question question) {
-        List<Answer> answers = question.getAnswers();
-
-        if (answers.isEmpty()) {
-            throw new EmptyResultDataAccessException(1);
-        }
-        return answers;
-    }
-
-    @Override
-    public Question getQuestionById(long questionId) {
-        return questionDao.findById(questionId);
     }
 
     @Override
@@ -124,39 +109,62 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public TestResult saveResult(Account current_account, Long current_test, int correct_answer) {
-        Test test = testDao.findById(current_test);
+    public TestResult saveResult(Account current_account, TestSessionInfo testSessionInfo) {
+        Test test = testDao.findById(testSessionInfo.getTestId());
         TestResult testResult = entityBuilder.buildTestResult(current_account,test);
-        testResult.setCorrectAnswer(correct_answer);
+        testResult.setCorrectAnswer(testSessionInfo.getCorrectAnswer());
         testResult.setAllCount(testDao.getCorrectCountAnswer(test));
         testResultDao.save(testResult);
         return testResult;
     }
 
     @Override
-    public Question doNextQuestion(HttpSession session, AnswerForm form) {
-        TestSessionInfo testSessionInfo = new TestSessionInfo(session);
+    public AnswerForm doAnswer(HttpSession session, AnswerForm form, Account account) {
 
-        testSessionInfo.fillInfo();
+        TestSessionInfo testSessionInfo = (TestSessionInfo) session.getAttribute("TEST_INFO");
 
+        testSessionInfo.incCorrectAnswer(checkCorrectAnswers(form, testSessionInfo));
+
+        Question question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.incQuestNumber());
+
+        session.setAttribute("TEST_INFO",testSessionInfo);
+
+        if (question == null) {
+            saveResult(account,testSessionInfo);
+            return null;
+        }
+
+        AnswerForm answerForm = buildAnswerForm(testSessionInfo, question);
+        return answerForm;
+    }
+
+    public Integer checkCorrectAnswers(AnswerForm form, TestSessionInfo testSessionInfo) {
         Question question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.getQuestionNumber());
 
         List<Answer> answers = question.getAnswers();
 
-        testSessionInfo.incCorrectAnswer(checkCorrectAnswers(answers, form.getAnswer()));
+        return checkCorrectAnswers(answers, form.getAnswer());
+    }
 
-        question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.incQuestNumber());
-
-        testSessionInfo.saveToSession();
-        return question;
+    public AnswerForm buildAnswerForm(TestSessionInfo testSessionInfo, Question question) {
+        AnswerForm answerForm = new AnswerForm();
+        answerForm.setQuestion(question);
+        answerForm.setAnswers(question.getAnswers());
+        answerForm.setTimePerQuestion(testSessionInfo.getTimePerQuestion());
+        return answerForm;
     }
 
     @Override
-    public Object getTimePerQuestion(HttpSession session) {
+    public TestSessionInfo initTestSessionInfo(Long testId) {
 
-        Long testId = (Long)session.getAttribute("CURRENT_TEST");
-        testDao.findById();
+        TestSessionInfo testSessionInfo= new TestSessionInfo();
 
-        return null;
+        testSessionInfo.clear(testId);
+
+        Test test = testDao.findById(testId);
+
+        testSessionInfo.setTimePerQuestion(test.getTimePerQuestion());
+
+        return testSessionInfo;
     }
 }

@@ -38,7 +38,7 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	}
 
 	@Override
-	public List<Test> getListTest(Account account) {
+	public List<Test> getListTest(Account account,int offset, int count) {
 		return (List<Test>) getSession().createCriteria(Test.class).add(Restrictions.eq("account", account)).list();
 	}
 }

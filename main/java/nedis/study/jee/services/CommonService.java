@@ -36,4 +36,6 @@ public interface CommonService {
 	void updateAccount(Account account);
 
 	Account getLoginAccount();
+
+	public UserForm getUserForm(Account account);
 }

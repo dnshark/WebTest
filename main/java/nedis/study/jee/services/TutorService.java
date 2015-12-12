@@ -16,17 +16,17 @@ import java.util.List;
  */
 public interface TutorService {
 
-    List<Test> getTestList(Account account);
+    List<Test> getTestList(Account account,int offSet,int count);
 
     Test createTest(TestForm test);
 
-    Test getTest(String testId);
+    Test getTest(Long testId);
 
     Question getQuestion(Long questionId);
 
     Question updateQuestion(QuestionEditForm form, Long questionId);
 
-    void deleteQuestion(Long aLong);
+    Test deleteQuestion(Long aLong);
 
     void deleteAnswer(Long aLong);
 
@@ -37,4 +37,8 @@ public interface TutorService {
     Question addQuestion(QuestionEditForm form);
 
     Test updateTest(TestForm form);
+
+    QuestionEditForm getQuestionEditForm(Long testId);
+
+    QuestionEditForm fillQuestionEditForm(Question question);
 }

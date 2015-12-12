@@ -1,8 +1,10 @@
 package nedis.study.jee.services;
 
+import nedis.study.jee.controllers.AdminControler;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.AdminForm;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  */
 public interface AdminService {
 
-    List<Account> loadAllUser();
+    List<Account> loadAllUser(int offSet,int count);
 
     Account getAccount(Long userId);
 
@@ -23,4 +25,6 @@ public interface AdminService {
     Account addUser(AdminForm form);
 
     List<String> getRoles(Account user);
+
+    AdminForm getAdminForm(Model model, Account user);
 }
