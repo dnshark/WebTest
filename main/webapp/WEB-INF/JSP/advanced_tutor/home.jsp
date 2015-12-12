@@ -9,6 +9,11 @@
 	<table>
 		<tr>
 			<td>
+				<a href="test">Edit tests</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<a href="../allAccess/result">View result</a>
 			</td>
 		</tr>

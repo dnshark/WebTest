@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Add new test"/>
+                    <input type="submit" value="Add new test" />
                 </td>
             </tr>
         </table>

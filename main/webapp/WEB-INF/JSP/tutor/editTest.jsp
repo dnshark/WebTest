@@ -31,17 +31,28 @@
         <td> <a href="/tutor/editQuestion?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
-    <tr>
-      <td>
-        <a href="/tutor/editQuestion/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
-      </td>
-      <td>
-        <form:button name="save" value="Save test">Save test</form:button>
-      </td>
-      <td>
-        <a href="/tutor/deleteTest${testId}">Delete</a>
-      </td>
-    </tr>
+
+      <c:if test="${mode == 'edit'}">
+        <tr>
+          <td>
+            <a href="/tutor/editQuestion/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
+          </td>
+          <td>
+            <input type="submit" value="Save test" onclick="form.action='/tutor/editTest/Ok';">
+          </td>
+          <td>
+            <a href="/tutor/deleteTest/id${testId}">Delete</a>
+          </td>
+        </tr>
+      </c:if>
+
+      <c:if test="${mode == 'new'}">
+        <tr>
+        <td>
+          <input type="submit" value="Add" onclick="form.action='/tutor/addTest';">
+        </td>
+        </tr>
+      </c:if>
   </table>
   </form:form>
 

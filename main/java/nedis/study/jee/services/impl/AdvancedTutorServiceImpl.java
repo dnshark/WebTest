@@ -1,8 +1,13 @@
 package nedis.study.jee.services.impl;
 
+import nedis.study.jee.dao.TestDao;
+import nedis.study.jee.entities.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nedis.study.jee.services.AdvancedTutorService;
+
+import java.util.List;
 
 /**
  * @author nedis
@@ -10,5 +15,11 @@ import nedis.study.jee.services.AdvancedTutorService;
  */
 @Service
 public class AdvancedTutorServiceImpl implements AdvancedTutorService {
+    @Autowired
+    TestDao testDao;
 
+    @Override
+    public List<Test> getAllTests() {
+        return testDao.findAll();
+    }
 }

@@ -75,7 +75,9 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
         ArrayList<String> answersId = form.getAnswerId();
 
-        for (int i = 0; i < answersId.size(); i++) {
+        int leng = getLength(answersId);
+
+        for (int i = 0; i < leng; i++) {
            Answer answer = answerDao.findById(Long.valueOf(answersId.get(i)));
 
            answer.setName(form.getAnswerName().get(i));
@@ -85,6 +87,13 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
            answerDao.update(answer);
         }
         return question;
+    }
+
+    public int getLength(ArrayList<String> answersId) {
+        int leng;
+        if (answersId==null) {leng=0;}
+        else
+        {leng=answersId.size();} return leng;
     }
 
     @Override

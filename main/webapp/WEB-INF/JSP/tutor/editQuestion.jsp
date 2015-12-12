@@ -55,7 +55,7 @@
         <input type="submit" value="Save question">
       </td>
       <td>
-        <a href="/tutor/deleteQuestion${questionEditForm.questionId}">Delete question</a>
+        <a href="/tutor/deleteQuestion?questionId=${questionEditForm.questionId}&testId=${questionEditForm.testId}">Delete question</a>
       </td>
     </c:if>
     </tr>

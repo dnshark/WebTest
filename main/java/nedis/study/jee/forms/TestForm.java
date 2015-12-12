@@ -19,9 +19,6 @@ public class TestForm implements IForm{
 
     private ArrayList<StringId> testQuestions;
 
-    public TestForm() {
-    }
-
     public Long getIdTest() {
         return idTest;
     }
