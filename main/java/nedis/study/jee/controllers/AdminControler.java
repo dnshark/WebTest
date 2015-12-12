@@ -29,7 +29,6 @@ public class AdminControler extends AbstractController {
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String home(){
-		CurrentAccount currentAccount = SecurityUtils.getCurrentAccount();
 		return "admin/home";
 	}
 
@@ -40,10 +39,10 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/id{userId}", method=RequestMethod.GET)
-	public String showLogin(Model model,@PathVariable String userId){
-		Account user = adminService.getAccount(Long.valueOf(userId));
+	public String showLogin(Model model,@PathVariable Long userId){
+		Account user = adminService.getAccount(userId);
 		AdminForm adminForm = getAdminForm(model);
-		ReflectionUtils.copyByFields(adminForm, user);
+
 
 		adminForm.setCheckRoles(adminService.getRoles(user));
 
@@ -66,6 +65,7 @@ public class AdminControler extends AbstractController {
 		AdminForm adminForm = new AdminForm();
 		List<Role> list = commonService.listAllRoles();
 		model.addAttribute("roles", list);
+		ReflectionUtils.copyByFields(adminForm, user);
 		return adminForm;
 	}
 	@RequestMapping(value="/update{adminId}")

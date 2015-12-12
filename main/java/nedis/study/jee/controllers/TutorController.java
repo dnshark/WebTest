@@ -34,6 +34,7 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/home";
 	}
 
+	//NEDIS
 	@RequestMapping(value="editTest/id{testId}", method=RequestMethod.GET)
 	public String showTestForEdit(Model model,@PathVariable String testId){
 		Test test = tutorService.getTest(testId);
@@ -63,7 +64,7 @@ public class TutorController extends AbstractTutorController {
 		return "redirect:/tutor/test";
 	}
 
-
+	//NEDIS
 	@RequestMapping(value="test", method=RequestMethod.GET)
 	public String showTutorTests(Model model){
 		Account account = commonService.getLoginAccount();
@@ -90,7 +91,7 @@ public class TutorController extends AbstractTutorController {
 		tutorService.createTest(testform);
 		return "redirect:/tutor/test";
 	}
-
+//NEDIS
 	@RequestMapping(value="/deleteQuestion")
 	public String deleteQuestion(Model model,@RequestParam String testId,@RequestParam String questionId){
 
@@ -114,10 +115,10 @@ public class TutorController extends AbstractTutorController {
 
 	@RequestMapping(value="/editQuestion/Ok", method = RequestMethod.POST)
 	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form) {
-
+		//NEDIS
 		tutorService.updateQuestion(form, form.getQuestionId());
 
-		return "redirect:/tutor/editTest/id"+String.valueOf(form.getTestId());
+		return "redirect:/tutor/editTest/id"+form.getTestId();
 	}
 
 	@RequestMapping(value="/editQuestion/add", method = RequestMethod.POST)
@@ -125,9 +126,10 @@ public class TutorController extends AbstractTutorController {
 
 		tutorService.addQuestion(form);
 
-		return "redirect:/tutor/editTest/id"+String.valueOf(form.getTestId());
+		return "redirect:/tutor/editTest/id"+form.getTestId();
 	}
 
+	//NEDIS
 	@RequestMapping(value="/editQuestion/new", method = RequestMethod.GET)
 	public String addQuestion(Model model,@RequestParam String testId) {
 		QuestionEditForm questionEditForm = new QuestionEditForm();
@@ -142,7 +144,7 @@ public class TutorController extends AbstractTutorController {
 	public String addAnswer(Model model,@ModelAttribute("newAnswerForm") NewAnswerForm newAnswerForm){
 		tutorService.addAnswer(newAnswerForm);
 
-		return "redirect:/tutor/editQuestion?questionId="+String.valueOf(newAnswerForm.getQuestionId());
+		return "redirect:/tutor/editQuestion?questionId="+newAnswerForm.getQuestionId();
 	}
 
 	@RequestMapping(value="/deleteAnswer")

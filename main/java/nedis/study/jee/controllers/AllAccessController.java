@@ -44,6 +44,7 @@ public class AllAccessController extends AbstractController {
         UserForm userForm = new UserForm();
         Account account = commonService.getLoginAccount();
         ReflectionUtils.copyByFields(userForm, account);
+        //NEDIS
         model.addAttribute("userForm", userForm);
         return "allAccess/editInfo";
     }
@@ -53,6 +54,7 @@ public class AllAccessController extends AbstractController {
         Account account = commonService.getLoginAccount();
         allAccessService.copyFormToUser(form,account);
         commonService.updateAccount(account);
+        //NEDIS
         model.addAttribute("userForm", form);
         return "allAccess/editInfo";
     }

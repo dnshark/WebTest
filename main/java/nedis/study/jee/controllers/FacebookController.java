@@ -40,7 +40,7 @@ public class FacebookController extends AbstractController implements Initializi
     private String facebookSecretKey;
 
     @Autowired
-    Settings emailSettings;
+    private Settings emailSettings;
     
     @Autowired
     private CommonService commonService;

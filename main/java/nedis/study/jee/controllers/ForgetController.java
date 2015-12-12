@@ -36,7 +36,7 @@ public class ForgetController extends AbstractController{
     }
 
     @RequestMapping(value="/forget", method= RequestMethod.POST)
-    public String DoSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
+    public String doSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         Account account = signUpService.getAccountByEmail(form.getEmail());
         try{
         if (account!=null) {

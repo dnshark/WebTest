@@ -41,7 +41,7 @@ public class SignUpController extends AbstractController{
     }
 
     @RequestMapping(value="/hash{hashText}", method=RequestMethod.GET)
-    public String DoConfirmRegister(Model model,@PathVariable String hashText){
+    public String doConfirmRegister(Model model,@PathVariable String hashText){
         Account account =  signUpService.getAccountByHash(hashText);
         if (account==null) {
             model.addAttribute("confirmed","Incorrect link");
@@ -61,6 +61,7 @@ public class SignUpController extends AbstractController{
             commonService.signUp(form,true);
             model.addAttribute("confirmed","Check email to confirm password");
             return "message";
+            //NEDIS
         } catch (MessagingException e) {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
             LOGGER.info("send e-mail Error " + e.getMessage());

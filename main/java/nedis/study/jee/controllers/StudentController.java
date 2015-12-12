@@ -45,7 +45,7 @@ public class StudentController extends AbstractController {
 		model.addAttribute("mode","online");
 		return "student/tests";
 	}
-
+	//NEDIS
 	@RequestMapping(value="/question/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,HttpSession session,@PathVariable String testId){
 
@@ -65,7 +65,7 @@ public class StudentController extends AbstractController {
 		return DoAnswer(model, session, form);
 	}
 
-	private String DoAnswer(Model model, HttpSession session, AnswerForm form) {
+	private String doAnswer(Model model, HttpSession session, AnswerForm form) {
 		Account account = commonService.getLoginAccount();
 
 		Question question = studentService.doNextQuestion(session,form);
@@ -75,7 +75,7 @@ public class StudentController extends AbstractController {
 					(String)session.getAttribute("CURRENT_TEST"),
 					(Integer)session.getAttribute("CORRECT_ANSWER")
 					);
-			return "redirect:../allAccess/result";
+			return "redirect:/allAccess/result";
 		} else {
 			model.addAttribute("question",question);
 			model.addAttribute("answers", studentService.getAnswers(question));
