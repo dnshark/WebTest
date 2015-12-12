@@ -6,6 +6,8 @@ import nedis.study.jee.dao.QuestionDao;
 import nedis.study.jee.dao.TestDao;
 import nedis.study.jee.dao.TestResultDao;
 import nedis.study.jee.entities.*;
+import nedis.study.jee.forms.AnswerForm;
+import nedis.study.jee.services.impl.utils.TestSessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import nedis.study.jee.services.StudentService;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +80,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Question getQuestionByNumber(String testId, Integer number) {
+    public Question getQuestionByNumber(Long testId, Integer number) {
         Test test = testDao.findById(Long.valueOf(testId));
         return questionDao.getQuestionByNumber(number, test);
     }
@@ -128,5 +131,32 @@ public class StudentServiceImpl implements StudentService {
         testResult.setAllCount(testDao.getCorrectCountAnswer(test));
         testResultDao.save(testResult);
         return testResult;
+    }
+
+    @Override
+    public Question doNextQuestion(HttpSession session, AnswerForm form) {
+        TestSessionInfo testSessionInfo = new TestSessionInfo(session);
+
+        testSessionInfo.fillInfo();
+
+        Question question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.getQuestionNumber());
+
+        List<Answer> answers = question.getAnswers();
+
+        testSessionInfo.incCorrectAnswer(CheckCorrectAnswers(answers,form.getAnswer()));
+
+        question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.incQuestNumber());
+
+        testSessionInfo.saveToSession();
+        return question;
+    }
+
+    @Override
+    public Object getTimePerQuestion(HttpSession session) {
+
+        Long testId = (Long)session.getAttribute("CURRENT_TEST");
+        testDao.findById();
+
+        return null;
     }
 }

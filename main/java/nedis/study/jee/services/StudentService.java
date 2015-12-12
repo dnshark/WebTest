@@ -1,7 +1,9 @@
 package nedis.study.jee.services;
 
 import nedis.study.jee.entities.*;
+import nedis.study.jee.forms.AnswerForm;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +23,15 @@ public interface StudentService {
 
     Question getQuestionById(long questionId);
 
-    Question getQuestionByNumber(String testId, Integer number);
+    Question getQuestionByNumber(Long testId, Integer number);
 
     Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers);
 
     Integer CheckCorrectAnswers(List<Answer> answers,ArrayList<String> userAnswers);
 
     TestResult saveResult(Account current_account, String current_test, int correct_answer);
+
+    Question doNextQuestion(HttpSession session, AnswerForm form);
+
+    Object getTimePerQuestion(HttpSession session);
 }
