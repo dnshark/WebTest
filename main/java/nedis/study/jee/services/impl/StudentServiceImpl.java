@@ -60,7 +60,7 @@ public class StudentServiceImpl implements StudentService {
         return testResultDao.getUserResults(account);
     }
 
-    public Test GetTestById(long testId) {
+    public Test getTestById(long testId) {
         return testDao.findById(testId);
     }
 
@@ -81,12 +81,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Question getQuestionByNumber(Long testId, Integer number) {
-        Test test = testDao.findById(Long.valueOf(testId));
+        Test test = testDao.findById(testId);
         return questionDao.getQuestionByNumber(number, test);
     }
 
     @Override
-    public Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers) {
+    public Integer checkCorrectAnswer(Answer answer, ArrayList<String> userAnswers) {
         String id = String.valueOf(answer.getIdAnswer());
 
         Boolean exists = userAnswers.contains(id);
@@ -106,14 +106,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Integer CheckCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers) {
+    public Integer checkCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers) {
         Integer correct = 0;
         if (userAnswers==null) {
             return correct;
         }
 
         for (Answer answer : answers) {
-            correct = correct +(CheckCorrectAnswer(answer, userAnswers));
+            correct = correct +(checkCorrectAnswer(answer, userAnswers));
         }
 
         if (correct<0) {
@@ -124,8 +124,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public TestResult saveResult(Account current_account, String current_test, int correct_answer) {
-        Test test = testDao.findById(Long.valueOf(current_test));
+    public TestResult saveResult(Account current_account, Long current_test, int correct_answer) {
+        Test test = testDao.findById(current_test);
         TestResult testResult = entityBuilder.buildTestResult(current_account,test);
         testResult.setCorrectAnswer(correct_answer);
         testResult.setAllCount(testDao.getCorrectCountAnswer(test));
@@ -143,7 +143,7 @@ public class StudentServiceImpl implements StudentService {
 
         List<Answer> answers = question.getAnswers();
 
-        testSessionInfo.incCorrectAnswer(CheckCorrectAnswers(answers,form.getAnswer()));
+        testSessionInfo.incCorrectAnswer(checkCorrectAnswers(answers, form.getAnswer()));
 
         question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.incQuestNumber());
 

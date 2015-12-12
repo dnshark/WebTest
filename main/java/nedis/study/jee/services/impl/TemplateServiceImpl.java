@@ -35,7 +35,7 @@ public class TemplateServiceImpl implements TemplateService {
         return text;
     }
 
-    public String GetTemplateForEmail(UserForm form, String filename) throws FileNotFoundException {
+    public String getTemplateForEmail(UserForm form, String filename) throws FileNotFoundException {
         String text = readTemplate(filename);
 
         Map<String, Object> map = getMapParams(form);
@@ -45,13 +45,13 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public void sendVerificationEmail(UserForm form) throws FileNotFoundException, MessagingException {
-        String content = GetTemplateForEmail(form,emailSettings.getVerificationEmailFileName());
+        String content = getTemplateForEmail(form, emailSettings.getVerificationEmailFileName());
         emailService.sendVerificationEmail(form.getEmail(), form.getFio(), content);
     }
 
     @Override
     public void sendRestoreEmail(UserForm form) throws FileNotFoundException, MessagingException {
-        String content = GetTemplateForEmail(form,emailSettings.getRestoreFileName());
+        String content = getTemplateForEmail(form, emailSettings.getRestoreFileName());
         emailService.sendRestoreEmail(form.getEmail(), form.getFio(), content);
     }
 

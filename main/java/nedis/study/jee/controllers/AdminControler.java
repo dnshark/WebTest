@@ -69,19 +69,19 @@ public class AdminControler extends AbstractController {
 		return adminForm;
 	}
 	@RequestMapping(value="/update{adminId}")
-	public String DoUpdateInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
-		adminService.updateUser(Long.valueOf(adminId), adminForm);
+	public String doUpdateInfo(Model model,@PathVariable Long adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
+		adminService.updateUser(adminId, adminForm);
 		return "redirect:id"+adminId;
 	}
 
 	@RequestMapping(value="/delete{adminId}", method = RequestMethod.POST)
-	public String DoDeleteInfo(Model model,@PathVariable String adminId){
-			adminService.deleteUser(Long.valueOf(adminId));
+	public String doDeleteInfo(Model model,@PathVariable Long adminId){
+			adminService.deleteUser(adminId);
 			return "redirect:listUsers";
 	}
 
-	@RequestMapping(value="/add{adminId}", method = RequestMethod.POST)
-	public String DoAddInfo(Model model,@PathVariable String adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
+	@RequestMapping(value="/add", method = RequestMethod.POST)
+	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
 		adminService.addUser(adminForm);
 		return "redirect:listUsers";
 	}

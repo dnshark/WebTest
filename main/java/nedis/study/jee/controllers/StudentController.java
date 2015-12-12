@@ -1,7 +1,6 @@
 package nedis.study.jee.controllers;
 
 import nedis.study.jee.entities.Account;
-import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.AnswerForm;
@@ -47,22 +46,22 @@ public class StudentController extends AbstractController {
 	}
 	//NEDIS
 	@RequestMapping(value="/question/id{testId}", method=RequestMethod.GET)
-	public String showQuestion(Model model,HttpSession session,@PathVariable String testId){
+	public String showQuestion(Model model,HttpSession session,@PathVariable Long testId){
 
 		TestSessionInfo testSessionInfo= new TestSessionInfo(session);
 
-		testSessionInfo.clear(Long.valueOf(testId));
+		testSessionInfo.clear(testId);
 
 		return "redirect:question/next";
 	}
 	@RequestMapping(value="question/noAnswer")
-	public String DoNoAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form){
+	public String doNoAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form){
 		form.setAnswer(null);
-		return DoAnswer(model, session, form);
+		return doAnswer(model, session, form);
 	}
 	@RequestMapping(value="question/next", method=RequestMethod.POST)
-	public String GetAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form) {
-		return DoAnswer(model, session, form);
+	public String getAnswer(Model model,HttpSession session,@ModelAttribute("answerForm") AnswerForm form) {
+		return doAnswer(model, session, form);
 	}
 
 	private String doAnswer(Model model, HttpSession session, AnswerForm form) {
@@ -92,8 +91,8 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/offTest/id{testId}", method=RequestMethod.GET)
-	public String showOffTests(Model model,HttpSession session,@PathVariable String testId){
-		Test test =studentService.GetTestById(Long.valueOf(testId));
+	public String showOffTests(Model model,HttpSession session,@PathVariable Long testId){
+		Test test =studentService.getTestById(testId);
 		model.addAttribute("test",test);
 		return "student/offTest";
 	}

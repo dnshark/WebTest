@@ -1,4 +1,4 @@
-package nedis.study.jee.controllers;
+package nedis.study.jee.controllers.example;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -49,7 +49,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     public Test createTest(TestForm form) {
        Test newTest = entityBuilder.buildTest();
        newTest.setName(form.getName());
-       newTest.setTimePerQuestion(Integer.valueOf(form.getTimePerQuestion()));
+       newTest.setTimePerQuestion(form.getTimePerQuestion());
        newTest.setDescription(form.getDescription());
        Account account =getLoginAccount();
        newTest.setAccount(account);
@@ -58,8 +58,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
-    public Test getTest(String testId) {
-        return testDao.findById(Long.valueOf(testId));
+    public Test getTest(Long testId) {
+        return testDao.findById(testId);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
  * Created by Dmitrij on 26.11.2015.
  */
 public interface TemplateService {
-    String GetTemplateForEmail(UserForm form, String filename) throws FileNotFoundException, UnknownHostException;
+    String getTemplateForEmail(UserForm form, String filename) throws FileNotFoundException, UnknownHostException;
 
     void sendVerificationEmail(UserForm form) throws FileNotFoundException, MessagingException;
 

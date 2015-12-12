@@ -56,7 +56,7 @@ public class SignUpController extends AbstractController{
     }
 
     @RequestMapping(value="/signup", method= RequestMethod.POST)
-    public String DoSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
+    public String doSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         try {
             commonService.signUp(form,true);
             model.addAttribute("confirmed","Check email to confirm password");

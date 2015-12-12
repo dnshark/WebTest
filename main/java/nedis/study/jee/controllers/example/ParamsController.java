@@ -1,4 +1,4 @@
-package nedis.study.jee.controllers;
+package nedis.study.jee.controllers.example;
 
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.forms.LoginForm;

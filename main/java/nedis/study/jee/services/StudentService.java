@@ -17,7 +17,7 @@ public interface StudentService {
 
     List<TestResult> listAllResult(Account account);
 
-    Test GetTestById(long testId);
+    Test getTestById(long testId);
 
     List<Answer> getAnswers(Question question);
 
@@ -25,9 +25,9 @@ public interface StudentService {
 
     Question getQuestionByNumber(Long testId, Integer number);
 
-    Integer CheckCorrectAnswer(Answer answer, ArrayList<String> userAnswers);
+    Integer checkCorrectAnswer(Answer answer, ArrayList<String> userAnswers);
 
-    Integer CheckCorrectAnswers(List<Answer> answers,ArrayList<String> userAnswers);
+    Integer checkCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers);
 
     TestResult saveResult(Account current_account, String current_test, int correct_answer);
 
