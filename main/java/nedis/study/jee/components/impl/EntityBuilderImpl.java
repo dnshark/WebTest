@@ -52,4 +52,12 @@ public class EntityBuilderImpl implements EntityBuilder {
 		answer.setActive(Boolean.TRUE);
 		return answer;
 	}
+
+	@Override
+	public Question buildQuestion() {
+		Question question = new Question();
+		question.setCreated(new Timestamp(System.currentTimeMillis()));
+		question.setActive(Boolean.TRUE);
+		return question;
+	}
 }

@@ -7,6 +7,8 @@ import java.util.List;
  * Created by Дмитрий on 09.12.2015.
  */
 public class QuestionEditForm implements IForm {
+    private Long testId;
+
     private Long questionId;
 
     private String questionName;
@@ -53,5 +55,13 @@ public class QuestionEditForm implements IForm {
 
     public void setCbItemList(ArrayList<String> cbItemList) {
         this.cbItemList = cbItemList;
+    }
+
+    public Long getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Long testId) {
+        this.testId = testId;
     }
 }

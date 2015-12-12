@@ -18,4 +18,6 @@ public interface EntityBuilder {
 	Test buildTest();
 
 	Answer buildAnswer();
+
+	Question buildQuestion();
 }

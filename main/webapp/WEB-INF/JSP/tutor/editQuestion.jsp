@@ -15,10 +15,11 @@
 <div class="container">
   <form:form method="POST" action="${context }/tutor/editQuestion/Ok" commandName="questionEditForm">
   <table align="center">
+    <form:hidden path="testId" />
+    <form:hidden path="questionId" />
     <tr>
       <td>
         Question:
-        <form:hidden path="questionId" />
       </td>
       <td>
         <form:input path="questionName" />
@@ -41,15 +42,22 @@
       </tr>
     </c:forEach>
     <tr>
+    <c:if test="${mode == 'new'}">
       <td>
-        <input type="submit" value="Save question"/>
+        <input type="submit" value="Add" onclick="form.action='/tutor/editQuestion/add';">
       </td>
+    </c:if>
+    <c:if test="${mode == 'edit'}">
       <td>
         <a href="/tutor/newAnswer/id${questionEditForm.questionId}">New answer</a>
       </td>
       <td>
+        <input type="submit" value="Save question">
+      </td>
+      <td>
         <a href="/tutor/deleteQuestion${questionEditForm.questionId}">Delete question</a>
       </td>
+    </c:if>
     </tr>
   </table>
     </form:form>

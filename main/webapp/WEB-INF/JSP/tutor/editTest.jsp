@@ -28,7 +28,7 @@
 
     <c:forEach var="question" items="${testForm.testQuestions}">
       <tr>
-        <td> <a href="/tutor/editQuestion/id${question.id}"> ${question.name}</a> </td>
+        <td> <a href="/tutor/editQuestion?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
     <tr>
@@ -36,7 +36,6 @@
         <a href="/tutor/editQuestion/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
       </td>
       <td>
-        <a href="/tutor/editTest/test${test}">Save test</a>
         <form:button name="save" value="Save test">Save test</form:button>
       </td>
       <td>

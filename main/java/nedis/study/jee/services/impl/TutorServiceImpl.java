@@ -11,6 +11,7 @@ import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.NewAnswerForm;
 import nedis.study.jee.forms.QuestionEditForm;
 import nedis.study.jee.forms.TestForm;
+import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void createTest(TestForm form) {
+    public Test createTest(TestForm form) {
        Test newTest = entityBuilder.buildTest();
        newTest.setName(form.getName());
        newTest.setTimePerQuestion(Integer.valueOf(form.getTimePerQuestion()));
@@ -53,6 +54,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
        Account account =getLoginAccount();
        newTest.setAccount(account);
        testDao.save(newTest);
+        return newTest;
     }
 
     @Override
@@ -66,7 +68,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
-    public void updateQuestion(QuestionEditForm form, Long questionId) {
+    @Transactional
+    public Question updateQuestion(QuestionEditForm form, Long questionId) {
         Question question = getQuestion(questionId);
         question.setName(form.getQuestionName());
 
@@ -81,9 +84,11 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
            answerDao.update(answer);
         }
+        return question;
     }
 
     @Override
+    @Transactional
     public void deleteQuestion(Long aLong) {
         Question question = questionDao.findById(aLong);
         questionDao.delete(question);
@@ -98,12 +103,40 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void addAnswer(NewAnswerForm newAnswerForm) {
+    public void deleteTest(Long testId) {
+        Test test =testDao.findById(testId);
+        testDao.delete(test);
+    }
+
+    @Override
+    @Transactional
+    public Answer addAnswer(NewAnswerForm newAnswerForm) {
       Answer answer = entityBuilder.buildAnswer();
       answer.setName(newAnswerForm.getName());
       answer.setCorrect(newAnswerForm.getCorrect());
       Question question = questionDao.findById(newAnswerForm.getQuestionId());
       answer.setQuestion(question);
       answerDao.save(answer);
+      return answer;
+    }
+
+    @Override
+    @Transactional
+    public Question addQuestion(QuestionEditForm form) {
+        Question question = entityBuilder.buildQuestion();
+        Test test = testDao.findById(form.getTestId());
+        question.setName(form.getQuestionName());
+        question.setTest(test);
+        questionDao.save(question);
+        return question;
+    }
+
+    @Override
+    @Transactional
+    public Test updateTest(TestForm form) {
+        Test test = testDao.findById(form.getIdTest());
+        ReflectionUtils.copyByFields(test,form);
+        testDao.update(test);
+        return test;
     }
 }

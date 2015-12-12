@@ -21,10 +21,10 @@
           <form:hidden path="questionId" />
         </td>
         <td>
-          <form:input path="name" />
+          <form:checkbox path="correct" value="correct"/>
         </td>
         <td>
-          <form:checkbox path="correct" value="correct"/>
+          <form:input path="name" />
         </td>
       </tr>
 
