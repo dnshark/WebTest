@@ -7,19 +7,19 @@
 
 <div class="container">
 
-  <form:form method="POST" action="next" commandName="answerForm" >
-  <span id="trv"></span><script>TRT ()</script>
+  <form:form method="POST" action="next" commandName="testPassForm" >
+    <!--<span id="trv"></span><script>TRT ()</script>
 
     <table width="100%">
       <tr><td width="100%" align="center"><span id="theTime" class="timeClass"></span></td></tr>
-    </table>
+    </table>-->
 
   <h1>Questions!</h1>
 
-  <h2>${question.name}</h2>
+  <h2>${testPassForm.question.name}</h2>
 
   <table align="center">
-    <c:forEach var="answer" items="${answers}">
+    <c:forEach var="answer" items="${testPassForm.answers}">
       <tr>
         <td>
           <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"> ${answer.name}
@@ -42,7 +42,7 @@
 <content tag="customscripts">
   <script>
     $(document).ready(function(){
-      initTime(${time},0); <!--NEDIS спросить как определить что надо это делать -->
+      initTime(${testPassForm.timePerQuestion},0); <!--NEDIS спросить как определить что надо это делать -->
     });
   </script>
 </content>

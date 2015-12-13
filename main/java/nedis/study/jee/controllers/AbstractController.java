@@ -3,7 +3,7 @@ package nedis.study.jee.controllers;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import nedis.study.jee.services.CommonService;
+import nedis.study.jee.services.allAccess.CommonService;
 
 /**
  * @author nedis

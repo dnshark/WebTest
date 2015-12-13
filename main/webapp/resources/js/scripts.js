@@ -3,7 +3,7 @@
  */
 
 var sec = 00;   // set the seconds
-var min = 01;   // set the minutes
+var min = 10;   // set the minutes
 
 function countDown() {
     sec--;

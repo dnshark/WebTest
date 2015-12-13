@@ -32,8 +32,8 @@
     <context:component-scan base-package="nedis.study.jee.components.impl"/>
     <context:component-scan base-package="nedis.study.jee.dao.impl.hibernate"/>
     <!--context:component-scan base-package="nedis.study.jee.dao.impl.jpa"/-->
-    <context:component-scan base-package="nedis.study.jee.services.impl"/>
-    <context:component-scan base-package="nedis.study.jee.controllers"/>
+    <context:component-scan base-package="nedis.study.jee.services.**"/>
+    <context:component-scan base-package="nedis.study.jee.controllers.**"/>
     
     <mvc:resources mapping="/resources/**" location="/resources/**" />
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
@@ -60,7 +60,7 @@
         <property name="maxConnections" value="200" />
     </bean>
 
-    <bean name="emailSettings" class="nedis.study.jee.services.impl.Settings">
+    <bean name="emailSettings" class="nedis.study.jee.services.allAccess.Settings">
     <property name="port" value="${host.port}" />
     <property name="emailFileName" value="${template.email.filename}"/>
     <property name="emailReplay" value="${template.email.replay}"/>
