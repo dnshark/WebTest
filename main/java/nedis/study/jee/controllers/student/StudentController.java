@@ -77,7 +77,7 @@ public class StudentController extends AbstractController {
 		form = studentService.doAnswer(session, form,account);
 
 		if (form==null) {
-			return "redirect:/allAccess/result";
+			return "redirect:/allAccess/result?offSet=0&count=50";
 		} else {
 			model.addAttribute("testPassForm", form);
 			return "student/question";

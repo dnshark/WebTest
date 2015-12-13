@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td>
-				<a href="../allAccess/result">View result</a>
+				<a href="../allAccess/result?offSet=0&count=50">View result</a>
 			</td>
 		</tr>
 		<tr>
