@@ -4,7 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import nedis.study.jee.services.ConfigApplicationService;
+import nedis.study.jee.services.allAccess.ConfigApplicationService;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;

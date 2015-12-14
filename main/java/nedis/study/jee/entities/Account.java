@@ -61,7 +61,7 @@ public class Account extends AbstractEntity {
 
 	//bi-directional one-to-one association to AccountRegistration
 	@OneToOne(mappedBy="account", fetch=FetchType.LAZY)
-	//FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
+	//NEDIS FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
 	private AccountRegistration accountRegistration;
 
 	/*

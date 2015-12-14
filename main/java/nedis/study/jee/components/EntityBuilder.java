@@ -16,4 +16,8 @@ public interface EntityBuilder {
 	TestResult buildTestResult(Account account,Test test);
 
 	Test buildTest();
+
+	Answer buildAnswer();
+
+	Question buildQuestion();
 }

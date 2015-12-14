@@ -44,4 +44,20 @@ public class EntityBuilderImpl implements EntityBuilder {
 		test.setActive(Boolean.TRUE);
 		return test;
 	}
+
+	@Override
+	public Answer buildAnswer() {
+		Answer answer = new Answer();
+		answer.setCreated(new Timestamp(System.currentTimeMillis()));
+		answer.setActive(Boolean.TRUE);
+		return answer;
+	}
+
+	@Override
+	public Question buildQuestion() {
+		Question question = new Question();
+		question.setCreated(new Timestamp(System.currentTimeMillis()));
+		question.setActive(Boolean.TRUE);
+		return question;
+	}
 }

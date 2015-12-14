@@ -7,48 +7,53 @@
 
 <div class="container">
 
-  <table align="center">
-    <tr>
-      <td>
-        Test name
-      </td>
-      <td>
-        <input type="text"  name="test.name" value="${test.name}" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Description
-      </td>
-      <td>
-        <input type="text"  name="test.description" value="${test.description}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Time per question
-      </td>
-      <td>
-        <input type="text"  name="test.timePerQuestion" value="${test.timePerQuestion}"/>
-      </td>
-    </tr>
-    <c:forEach var="question" items="${test.questions}">
+  <form:form action="/tutor/edit/test/ok" commandName="testForm">
+    <h1>Edit test</h1>
+    <form:hidden path="idTest"/>
+    <table align="center">
       <tr>
-        <td> <a href="/tutor/editQuestion/id${question.id}"> ${question.name}</a> </td>
+        <td>Test name</td>
+        <td><form:input path="name"/> </td>
+      </tr>
+      <tr>
+        <td>Time per question</td>
+        <td><form:input path="timePerQuestion"/> </td>
+      </tr>
+      <tr>
+        <td>
+          Description
+        </td>
+        <td><form:input path="description"/> </td>
+      </tr>
+
+    <c:forEach var="question" items="${testForm.testQuestions}">
+      <tr>
+        <td> <a href="/tutor/edit/question?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
-    <tr>
-      <td>
-        <a href="/tutor/editQuestion/new">New question</a>
-      </td>
-      <td>
-        <a href="/tutor/editTest/test${test}">Save test</a>
-      </td>
-      <td>
-        <a href="/tutor/deleteTest${test}">Delete</a>
-      </td>
-    </tr>
+
+      <c:if test="${mode == 'edit'}">
+        <tr>
+          <td>
+            <a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
+          </td>
+          <td>
+            <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
+          </td>
+          <td>
+            <a href="/tutor/delete/test/id${testId}">Delete</a>
+          </td>
+        </tr>
+      </c:if>
+
+      <c:if test="${mode == 'new'}">
+        <tr>
+        <td>
+          <input type="submit" value="Add" onclick="form.action='/tutor/add/test';">
+        </td>
+        </tr>
+      </c:if>
   </table>
-  </form>
+  </form:form>
 
 </div>

@@ -9,17 +9,7 @@
 	<table>
 		<tr>
 			<td>
-				<a href="../allAccess/result">View result</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="../allAccess/editInfo">Edit Info</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="../allAccess/info">Look Info</a>
+				<a href="test?offSet=0&count=50">Edit tests</a>
 			</td>
 		</tr>
 	</table>

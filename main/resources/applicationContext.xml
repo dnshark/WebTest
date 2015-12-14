@@ -31,9 +31,8 @@
 
     <context:component-scan base-package="nedis.study.jee.components.impl"/>
     <context:component-scan base-package="nedis.study.jee.dao.impl.hibernate"/>
-    <!--context:component-scan base-package="nedis.study.jee.dao.impl.jpa"/-->
-    <context:component-scan base-package="nedis.study.jee.services.impl"/>
-    <context:component-scan base-package="nedis.study.jee.controllers"/>
+    <context:component-scan base-package="nedis.study.jee.services.**"/>
+    <context:component-scan base-package="nedis.study.jee.controllers.**"/>
     
     <mvc:resources mapping="/resources/**" location="/resources/**" />
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
@@ -60,7 +59,7 @@
         <property name="maxConnections" value="200" />
     </bean>
 
-    <bean name="emailSettings" class="nedis.study.jee.services.impl.Settings">
+    <bean name="emailSettings" class="nedis.study.jee.services.allAccess.Settings">
     <property name="port" value="${host.port}" />
     <property name="emailFileName" value="${template.email.filename}"/>
     <property name="emailReplay" value="${template.email.replay}"/>
@@ -116,6 +115,9 @@
         <security:intercept-url pattern="/fromfb" 		     	access="permitAll" />
         <security:intercept-url pattern="/allAccess" 			access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
         <security:intercept-url pattern="/myInfo" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
+        <security:intercept-url pattern="/info" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
+        <security:intercept-url pattern="/edit/info" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
+        <security:intercept-url pattern="/result" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
         <security:intercept-url pattern="/admin/**" 			access="hasRole('ADMIN')" />
         <security:intercept-url pattern="/tutor/**" 			access="hasRole('TUTOR')" />
         <security:intercept-url pattern="/advanced_tutor/**" 	access="hasRole('ADVANCED_TUTOR')" />
@@ -133,13 +135,6 @@
                 delete-cookies="JSESSIONID"
                 logout-url="/logout" />
         <security:remember-me key="testOnlineKey" token-repository-ref="tokenRepository" />
-
-        <security:session-management session-fixation-protection="migrateSession"
-                                     invalid-session-url="/invalidSession">
-            <security:concurrency-control
-                    max-sessions="1"
-                    expired-url="/sessionExpired" />
-        </security:session-management>
 
     </security:http>
 

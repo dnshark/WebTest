@@ -8,7 +8,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form action="/admin/Ok${adminId}" method="post" commandName="adminForm">
+  <form:form method="post" commandName="adminForm">
     <table align="center">
       <tr>
         <td>Email</td>
@@ -35,23 +35,23 @@
       <tr>
         <td>Role</td>
         <td>
-          <form:checkboxes path="checkRoles" items="${allRoles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
+          <form:checkboxes path="checkRoles" items="${adminForm.allRoles}" itemLabel="name" itemValue="id" delimiter="<br/>" />
         </td>
       </tr>
       <c:if test="${mode == 'edit'}">
         <tr>
           <td colspan="2" style="text-align:center;">
-            <input type="submit" value="Save" onclick="form.action='/admin/update${adminId}';">
+            <input type="submit" value="Save" onclick="form.action='/admin/update/user/id${adminId}';">
           </td>
           <td colspan="2" style="text-align:center;">
-            <input type="submit" value="Delete" onclick="form.action='/admin/delete${adminId}';">
+            <input type="submit" value="Delete" onclick="form.action='/admin/delete/user/id${adminId}';">
           </td>
         </tr>
       </c:if>
       <c:if test="${mode == 'new'}">
         <tr>
           <td colspan="4" style="text-align:center;">
-            <input type="submit" value="Add" onclick="form.action='/admin/add${adminId}';">
+            <input type="submit" value="Add" onclick="form.action='/admin/add/user';">
           </td>
         </tr>
       </c:if>

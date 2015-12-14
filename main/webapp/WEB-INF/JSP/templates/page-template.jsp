@@ -23,22 +23,42 @@
 
 <body class="style1">
 	<header>
-		<http use-expressions="true" > <!--NEDIS не работает -->
+		<table>
 			<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
-				<a href="/logout">logout</a>
-				<p>Logggg</p>
+				<tr>
+					<td>
+				       <a href="/logout">logout</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/myInfo">home</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/result?offSet=0&count=50">View result</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/edit/info">Edit Info</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/info">Look Info</a>
+					</td>
+				</tr>
 			</sec:authorize>
-		</http>
+		</table>
 	</header>
 	<section class="main">
 		<decorator:body />
 	</section>
 	<script src="${context}/resources/js/jquery-1.10.2.js?v=${CSS_JS_VERSION}"></script>
 	<script src="${context}/resources/js/scripts.js"></script>
-	<script>
-		$(document).ready(function(){
-			initTime(${time},0); <!--NEDIS спросить как определить что надо это делать -->
-		});
-	</script>
+
+	<decorator:getProperty property="page.customscripts" />
 </body>
 </html>

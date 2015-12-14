@@ -12,7 +12,7 @@
 			<tr>
 				<td>
 					<c:if test="${mode == 'online'}">
-					<a href="/question/id${test.id}">${test.name}</a>
+					<a href="/test/start/id${test.id}">${test.name}</a>
 					</c:if>
 					<c:if test="${mode == 'offline'}">
 					<a href="/offTest/id${test.id}" download="${test.name}.html">${test.name}</a>
