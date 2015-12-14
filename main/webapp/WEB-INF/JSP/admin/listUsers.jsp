@@ -12,7 +12,7 @@
     <c:forEach var="user" items="${users}">
       <tr>
         <td>
-          <a href="/admin/id${user.id}">${user.fio}</a>
+          <a href="/admin/user/id${user.id}">${user.fio}</a>
         </td>
       </tr>
     </c:forEach>

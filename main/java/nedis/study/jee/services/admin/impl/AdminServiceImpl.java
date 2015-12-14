@@ -1,5 +1,6 @@
 package nedis.study.jee.services.admin.impl;
 
+import nedis.study.jee.components.EntityBuilder;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.AccountRole;
@@ -23,6 +24,8 @@ import java.util.List;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
+    @Autowired
+    private EntityBuilder entityBuilder;
 
     @Autowired
     private AccountDao accountDao;
@@ -89,9 +92,17 @@ public class AdminServiceImpl implements AdminService {
     public AdminForm getAdminForm(Model model, Account user) {
         AdminForm adminForm = new AdminForm();
         List<Role> list = commonService.listAllRoles();
-        model.addAttribute("roles", list);
+        adminForm.setAllRoles(list);
         ReflectionUtils.copyByFields(adminForm, user);
         adminForm.setCheckRoles(getRoles(user));
         return adminForm;
+    }
+
+    @Override
+    public Account buildAccount() {
+        Account account = entityBuilder.buildAccount();
+        List list = new ArrayList<Role>();
+        account.setAccountRoles(list);
+        return account;
     }
 }

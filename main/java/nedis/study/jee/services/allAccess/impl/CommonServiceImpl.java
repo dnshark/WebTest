@@ -123,10 +123,10 @@ public class CommonServiceImpl implements CommonService {
 		return a;
 	}
 
-
-
+    @Override
+    @Transactional
 	public Account addAccount(AdminForm form) {
-		Account a = addAccount((UserForm) form);
+		Account a = createUser(form);
 
 		initRoles(form.getCheckRoles(),a);
 
@@ -136,12 +136,14 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	@Transactional
 	public void initRoles(List<String> checkRoles, Account a) {
-		for (AccountRole ar :a.getAccountRoles()) {
-			String id = String.valueOf(ar.getRole().getId());
-			if (checkRoles.contains(id)){
-				checkRoles.remove(id);
-			}else {
-				accountRoleDao.delete(ar);
+		if (a.getAccountRoles()!= null) {
+			for (AccountRole ar : a.getAccountRoles()) {
+				String id = String.valueOf(ar.getRole().getId());
+				if (checkRoles.contains(id)) {
+					checkRoles.remove(id);
+				} else {
+					accountRoleDao.delete(ar);
+				}
 			}
 		}
 
@@ -180,6 +182,14 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	@Transactional
 	public Account addAccount(UserForm form) {
+		Account a = createUser(form);
+
+		initStudentRole(a);
+
+		return a;
+	}
+
+	private Account createUser(UserForm form) {
 		Account a = entityBuilder.buildAccount();
 		ReflectionUtils.copyByFields(a, form);
 		accountDao.save(a);
@@ -188,9 +198,6 @@ public class CommonServiceImpl implements CommonService {
 		form.setHash(hash);
 
 		addHashToAccount(a, hash);
-
-		initStudentRole(a);
-
 		return a;
 	}
 

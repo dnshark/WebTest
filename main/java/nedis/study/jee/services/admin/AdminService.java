@@ -25,4 +25,6 @@ public interface AdminService {
     List<String> getRoles(Account user);
 
     AdminForm getAdminForm(Model model, Account user);
+
+    Account buildAccount();
 }

@@ -37,8 +37,6 @@ public class AdminControler extends AbstractController {
 	public String showLogin(Model model,@PathVariable Long userId){
 		Account user = adminService.getAccount(userId);
 		AdminForm adminForm = adminService.getAdminForm(model, user);
-
-		model.addAttribute("allRoles", commonService.listAllRoles());
 		model.addAttribute("adminForm",adminForm);
 		model.addAttribute("mode","edit");
 		model.addAttribute("adminId",userId);
@@ -47,7 +45,7 @@ public class AdminControler extends AbstractController {
 
 	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
 	public String showLogin(Model model){
-		Account user = commonService.getLoginAccount();
+		Account user = adminService.buildAccount();
 		AdminForm adminForm = adminService.getAdminForm(model, user);
 		model.addAttribute("adminForm", adminForm);
 		model.addAttribute("mode","new");
@@ -57,19 +55,19 @@ public class AdminControler extends AbstractController {
 	@RequestMapping(value="/update/id{adminId}")
 	public String doUpdateInfo(Model model,@PathVariable Long adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
 		adminService.updateUser(adminId, adminForm);
-		return "redirect:/admin/update/id"+adminId;
+		return "redirect:/admin/listUsers?offSet=0&count=50";
 	}
 
 	@RequestMapping(value="/delete/id{adminId}", method = RequestMethod.POST)
 	public String doDeleteInfo(Model model,@PathVariable Long adminId){
 			adminService.deleteUser(adminId);
-			return "redirect:/admin/listUsers";
+			return "redirect:/admin/listUsers?offSet=0&count=50";
 	}
 
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
 		adminService.addUser(adminForm);
-		return "redirect:/admin/listUsers";
+		return "redirect:/admin/listUsers?offSet=0&count=50";
 	}
 
 }

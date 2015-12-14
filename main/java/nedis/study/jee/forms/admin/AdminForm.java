@@ -16,6 +16,8 @@ public class AdminForm extends UserForm {
 
     private List<String> checkRoles;
 
+    private List<Role> allRoles;
+
     public List<String> getCheckRoles() {
         return checkRoles;
     }
@@ -38,5 +40,13 @@ public class AdminForm extends UserForm {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public List<Role> getAllRoles() {
+        return allRoles;
+    }
+
+    public void setAllRoles(List<Role> allRoles) {
+        this.allRoles = allRoles;
     }
 }
