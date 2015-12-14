@@ -31,7 +31,6 @@
 
     <context:component-scan base-package="nedis.study.jee.components.impl"/>
     <context:component-scan base-package="nedis.study.jee.dao.impl.hibernate"/>
-    <!--context:component-scan base-package="nedis.study.jee.dao.impl.jpa"/-->
     <context:component-scan base-package="nedis.study.jee.services.**"/>
     <context:component-scan base-package="nedis.study.jee.controllers.**"/>
     

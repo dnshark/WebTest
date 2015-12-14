@@ -23,11 +23,18 @@
 
 <body class="style1">
 	<header>
-		<!--NEDIS не работает -->
+		<table>
 			<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
-				<a href="/logout">logout</a>
+				<tr>
+					<td>
+				       <a href="/logout">logout</a>
+					</td>
+					<td>
+						<a href="/home">home</a>
+					</td>
+				</tr>
 			</sec:authorize>
-
+		</table>
 	</header>
 	<section class="main">
 		<decorator:body />

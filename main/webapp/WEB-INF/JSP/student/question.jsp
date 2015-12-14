@@ -8,11 +8,11 @@
 <div class="container">
 
   <form:form method="POST" action="next" commandName="testPassForm" >
-    <!--<span id="trv"></span><script>TRT ()</script>
+    <span id="trv"></span><script>TRT ()</script>
 
     <table width="100%">
       <tr><td width="100%" align="center"><span id="theTime" class="timeClass"></span></td></tr>
-    </table>-->
+    </table>
 
   <h1>Questions!</h1>
 
