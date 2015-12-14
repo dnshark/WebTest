@@ -13,7 +13,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form:form method="POST" action="${context }/tutor/edit/question/Ok" commandName="questionEditForm">
+  <form:form method="POST" action="${context }/tutor/edit/question/ok" commandName="questionEditForm">
   <table align="center">
     <form:hidden path="testId" />
     <form:hidden path="questionId" />
@@ -55,7 +55,7 @@
         <input type="submit" value="Save question">
       </td>
       <td>
-        <a href="/tutor/delete/question?questionId=${questionEditForm.questionId}&testId=${questionEditForm.testId}">Delete question</a>
+        <a href="/tutor/delete/question?questionId=${questionEditForm.questionId}">Delete question</a>
       </td>
     </c:if>
     </tr>

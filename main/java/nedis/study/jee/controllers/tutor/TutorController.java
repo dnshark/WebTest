@@ -53,10 +53,10 @@ public class TutorController extends AbstractTutorController {
 	@RequestMapping(value="delete/test/id{testId}", method=RequestMethod.GET)
 	public String deleteTest(Model model,@PathVariable Long testId) {
 		tutorService.deleteTest(testId);
-	 return "redirect:/tutor/test";
+	 return "redirect:/tutor/test?offSet=0&count=50";
 	}
 
-	@RequestMapping(value="edit/test/Ok")
+	@RequestMapping(value="edit/test/ok")
 	public String editTest(@ModelAttribute TestForm form){
 		tutorService.updateTest(form);
 
@@ -94,9 +94,11 @@ public class TutorController extends AbstractTutorController {
 	@RequestMapping(value="/delete/question")
 	public String deleteQuestion(Model model,@RequestParam Long questionId){
 
-		Test test = tutorService.deleteQuestion(questionId);
+		Account account = commonService.getLoginAccount();
 
-		return "redirect:/tutor/editTest/id"+test.getIdTest();
+		Test test = tutorService.deleteQuestion(questionId/*,account*/);
+
+		return "redirect:/tutor/edit/test/id"+test.getIdTest();
 	}
 
 	@RequestMapping(value="/edit/question", method=RequestMethod.GET)
@@ -109,12 +111,12 @@ public class TutorController extends AbstractTutorController {
 		return "tutor/editQuestion";
 	}
 
-	@RequestMapping(value="/edit/question/Ok", method = RequestMethod.POST)
+	@RequestMapping(value="/edit/question/ok", method = RequestMethod.POST)
 	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form) {
 		//NEDIS
 		tutorService.updateQuestion(form, form.getQuestionId());
 
-		return "redirect:/tutor/editTest/id"+form.getTestId();
+		return "redirect:/tutor/edit/test/id"+form.getTestId();
 	}
 
 	@RequestMapping(value="/edit/question/add", method = RequestMethod.POST)
@@ -122,7 +124,7 @@ public class TutorController extends AbstractTutorController {
 
 		tutorService.addQuestion(form);
 
-		return "redirect:/tutor/editTest/id"+form.getTestId();
+		return "redirect:/tutor/edit/test/id"+form.getTestId();
 	}
 
 	@RequestMapping(value="/edit/question/new", method = RequestMethod.GET)
@@ -138,7 +140,7 @@ public class TutorController extends AbstractTutorController {
 	public String addAnswer(Model model,@ModelAttribute("newAnswerForm") NewAnswerForm newAnswerForm){
 		tutorService.addAnswer(newAnswerForm);
 
-		return "redirect:/tutor/editQuestion?questionId="+newAnswerForm.getQuestionId();
+		return "redirect:/tutor/edit/question?questionId="+newAnswerForm.getQuestionId();
 	}
 
 	@RequestMapping(value="/delete/answer")
@@ -146,7 +148,7 @@ public class TutorController extends AbstractTutorController {
 
 		tutorService.deleteAnswer(answerId);
 
-		return "redirect:/tutor/editQuestion?questionId="+questionId;
+		return "redirect:/tutor/edit/question?questionId="+questionId;
 	}
 
 	@RequestMapping(value="/new/answer/id{questionId}", method=RequestMethod.GET)
