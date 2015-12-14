@@ -14,22 +14,7 @@
     </tr>
     <tr>
       <td>
-        <a href="offTest">offline Testing</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       <a href="allAccess/result?offSet=0&count=50">View result</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      <a href="allAccess/editInfo">Edit Info</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="allAccess/info">Look Info</a>
+        <a href="offTest?offSet=0&count=50">offline Testing</a>
       </td>
     </tr>
   </table>

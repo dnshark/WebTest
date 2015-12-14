@@ -27,7 +27,7 @@ public class AdminControler extends AbstractController {
 		return "admin/home";
 	}
 
-	@RequestMapping(value="/listUsers", method=RequestMethod.GET)
+	@RequestMapping(value="/list/users", method=RequestMethod.GET)
 	public String showTest(Model model,@RequestParam int offSet, int count){
 		model.addAttribute("users", adminService.loadAllUser(offSet,count));
 		return "admin/listUsers";
@@ -43,7 +43,7 @@ public class AdminControler extends AbstractController {
 		return "admin/userInfo";
 	}
 
-	@RequestMapping(value="userInfo/new", method=RequestMethod.GET)
+	@RequestMapping(value="user/info/new", method=RequestMethod.GET)
 	public String showLogin(Model model){
 		Account user = adminService.buildAccount();
 		AdminForm adminForm = adminService.getAdminForm(model, user);
@@ -52,22 +52,22 @@ public class AdminControler extends AbstractController {
 		return "admin/userInfo";
 	}
 
-	@RequestMapping(value="/update/id{adminId}")
-	public String doUpdateInfo(Model model,@PathVariable Long adminId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
-		adminService.updateUser(adminId, adminForm);
-		return "redirect:/admin/listUsers?offSet=0&count=50";
+	@RequestMapping(value="/update/user/id{userId}")
+	public String doUpdateInfo(Model model,@PathVariable Long userId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
+		adminService.updateUser(userId, adminForm);
+		return "redirect:/admin/list/users?offSet=0&count=50";
 	}
 
-	@RequestMapping(value="/delete/id{adminId}", method = RequestMethod.POST)
-	public String doDeleteInfo(Model model,@PathVariable Long adminId){
-			adminService.deleteUser(adminId);
-			return "redirect:/admin/listUsers?offSet=0&count=50";
+	@RequestMapping(value="/delete/user/id{userId}", method = RequestMethod.POST)
+	public String doDeleteInfo(Model model,@PathVariable Long userId){
+			adminService.deleteUser(userId);
+			return "redirect:/admin/list/users?offSet=0&count=50";
 	}
 
-	@RequestMapping(value="/add", method = RequestMethod.POST)
+	@RequestMapping(value="/add/user", method = RequestMethod.POST)
 	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
 		adminService.addUser(adminForm);
-		return "redirect:/admin/listUsers?offSet=0&count=50";
+		return "redirect:/admin/list/users?offSet=0&count=50";
 	}
 
 }

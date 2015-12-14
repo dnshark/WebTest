@@ -6,7 +6,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-    <form:form action="/tutor/addTest" commandName="testForm">
+    <form:form action="/tutor/add/test" commandName="testForm">
         <h1>New test</h1>
         <table align="center">
             <tr>

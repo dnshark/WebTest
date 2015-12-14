@@ -7,7 +7,7 @@
 
 <div class="container">
 
-  <form:form action="/tutor/editTest/Ok" commandName="testForm">
+  <form:form action="/tutor/edit/test/ok" commandName="testForm">
     <h1>Edit test</h1>
     <form:hidden path="idTest"/>
     <table align="center">
@@ -28,20 +28,20 @@
 
     <c:forEach var="question" items="${testForm.testQuestions}">
       <tr>
-        <td> <a href="/tutor/editQuestion?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a> </td>
+        <td> <a href="/tutor/edit/question?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a> </td>
       </tr>
     </c:forEach>
 
       <c:if test="${mode == 'edit'}">
         <tr>
           <td>
-            <a href="/tutor/editQuestion/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
+            <a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a>  <!--NEDIS как передать id -->
           </td>
           <td>
-            <input type="submit" value="Save test" onclick="form.action='/tutor/editTest/Ok';">
+            <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
           </td>
           <td>
-            <a href="/tutor/deleteTest/id${testId}">Delete</a>
+            <a href="/tutor/delete/test/id${testId}">Delete</a>
           </td>
         </tr>
       </c:if>
@@ -49,7 +49,7 @@
       <c:if test="${mode == 'new'}">
         <tr>
         <td>
-          <input type="submit" value="Add" onclick="form.action='/tutor/addTest';">
+          <input type="submit" value="Add" onclick="form.action='/tutor/add/test';">
         </td>
         </tr>
       </c:if>

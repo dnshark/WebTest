@@ -13,7 +13,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form:form method="POST" action="${context }/tutor/newAnswer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
+  <form:form method="POST" action="${context }/tutor/new/answer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
     <table align="center">
       <tr>
         <td>

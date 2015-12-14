@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  * Created by Дмитрий on 01.12.2015.
  */
 @Controller
-@RequestMapping(value="/allAccess")
 public class AllAccessController extends AbstractController {
     @Autowired
     protected StudentService studentService;
@@ -30,33 +29,33 @@ public class AllAccessController extends AbstractController {
     public String showResults(Model model,@RequestParam int offSet,int count){
         Account account = commonService.getLoginAccount();
         model.addAttribute("results",studentService.listAllResult(account,offSet,count));
-        return "allAccess/result";
+        return "/allAccess/result";
     }
 
     @RequestMapping(value="info", method= RequestMethod.GET)
     public String showInfo(Model model,HttpSession session){
         Account account = commonService.getLoginAccount();
         model.addAttribute("account",account);
-        return "allAccess/info";
+        return "/allAccess/info";
     }
 
-    @RequestMapping(value="editInfo", method=RequestMethod.GET)
+    @RequestMapping(value="edit/info", method=RequestMethod.GET)
     public String showEditInfo(Model model,HttpSession session){
 
         Account account = commonService.getLoginAccount();
         UserForm userForm = commonService.getUserForm(account);
 
         model.addAttribute("userForm", userForm);
-        return "allAccess/editInfo";
+        return "/allAccess/editInfo";
     }
 
-    @RequestMapping(value="editInfoOk", method=RequestMethod.POST)
+    @RequestMapping(value="edit/info/ok", method=RequestMethod.POST)
     public String updateUser(Model model,@ModelAttribute("userForm") UserForm form){
         Account account = commonService.getLoginAccount();
         allAccessService.fillForm(form, account);
 
         model.addAttribute("userForm", form);
-        return "allAccess/editInfo";
+        return "/allAccess/info";
     }
 
 

@@ -11,27 +11,12 @@
 	<table align="center">
 		<tr>
 			<td>
-				<a href="listUsers?offSet=0&count=50">Users list</a>
+				<a href="list/users?offSet=0&count=50">Users list</a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="userInfo/new">Add new user</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="../allAccess/result?offSet=0&count=50">View result</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="../allAccess/editInfo">Edit Info</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="../allAccess/info">Look Info</a>
+				<a href="user/info/new">Add new user</a>
 			</td>
 		</tr>
 	</table>

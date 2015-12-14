@@ -29,8 +29,25 @@
 					<td>
 				       <a href="/logout">logout</a>
 					</td>
+				</tr>
+				<tr>
 					<td>
-						<a href="/home">home</a>
+						<a href="/myInfo">home</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/result?offSet=0&count=50">View result</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/edit/info">Edit Info</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/info">Look Info</a>
 					</td>
 				</tr>
 			</sec:authorize>

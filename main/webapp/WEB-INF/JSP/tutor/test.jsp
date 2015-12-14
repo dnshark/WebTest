@@ -13,13 +13,13 @@
         Tutor tests
       </td>
       <td>
-        <a href="/tutor/newTest">Add new test</a>
+        <a href="/tutor/new/test">Add new test</a>
       </td>
     </tr>
     <c:forEach var="test" items="${tests}">
       <tr>
         <td>
-          <a href="/tutor/editTest/id${test.id}">${test.name}</a>
+          <a href="/tutor/edit/test/id${test.id}?offSet=0&count=50">${test.name}</a>
         </td>
       </tr>
     </c:forEach>

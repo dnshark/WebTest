@@ -77,7 +77,7 @@ public class StudentController extends AbstractController {
 		form = studentService.doAnswer(session, form,account);
 
 		if (form==null) {
-			return "redirect:/allAccess/result?offSet=0&count=50";
+			return "redirect:/result?offSet=0&count=50";
 		} else {
 			model.addAttribute("testPassForm", form);
 			return "student/question";
@@ -91,7 +91,7 @@ public class StudentController extends AbstractController {
 		return "student/tests";
 	}
 
-	@RequestMapping(value="/offTest/test/id{testId}", method=RequestMethod.GET)
+	@RequestMapping(value="/offTest/id{testId}", method=RequestMethod.GET)
 	public String showOffTests(Model model,HttpSession session,@PathVariable Long testId){
 		Test test =studentService.getTestById(testId);
 		model.addAttribute("test",test);

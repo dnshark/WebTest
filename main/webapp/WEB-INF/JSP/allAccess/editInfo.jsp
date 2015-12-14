@@ -7,7 +7,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-  <form:form action="editInfoOk" commandName="userForm">
+  <form:form action="/edit/info/ok" commandName="userForm">
     <table align="center">
       <tr>
         <td>Email</td>

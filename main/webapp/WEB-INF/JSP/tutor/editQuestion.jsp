@@ -13,7 +13,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form:form method="POST" action="${context }/tutor/editQuestion/Ok" commandName="questionEditForm">
+  <form:form method="POST" action="${context }/tutor/edit/question/Ok" commandName="questionEditForm">
   <table align="center">
     <form:hidden path="testId" />
     <form:hidden path="questionId" />
@@ -37,25 +37,25 @@
           <input type="hidden"  name="answerId" value="${answer.id}"/>
         </td>
         <td>
-          <a href="/tutor/deleteAnswer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
+          <a href="/tutor/delete/answer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
         </td>
       </tr>
     </c:forEach>
     <tr>
     <c:if test="${mode == 'new'}">
       <td>
-        <input type="submit" value="Add" onclick="form.action='/tutor/editQuestion/add';">
+        <input type="submit" value="Add" onclick="form.action='/tutor/edit/question/add';">
       </td>
     </c:if>
     <c:if test="${mode == 'edit'}">
       <td>
-        <a href="/tutor/newAnswer/id${questionEditForm.questionId}">New answer</a>
+        <a href="/tutor/new/answer/id${questionEditForm.questionId}">New answer</a>
       </td>
       <td>
         <input type="submit" value="Save question">
       </td>
       <td>
-        <a href="/tutor/deleteQuestion?questionId=${questionEditForm.questionId}&testId=${questionEditForm.testId}">Delete question</a>
+        <a href="/tutor/delete/question?questionId=${questionEditForm.questionId}&testId=${questionEditForm.testId}">Delete question</a>
       </td>
     </c:if>
     </tr>
