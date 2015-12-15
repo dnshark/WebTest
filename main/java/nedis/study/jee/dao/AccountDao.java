@@ -11,11 +11,13 @@ import nedis.study.jee.entities.Test;
  */
 public interface AccountDao extends IEntityDao<Account> {
 
-	List<Account> listAccounts (int page, int count);
+	List<Account> listAccounts (int offset, int count);
 	
 	Account findByLogin(String login);
 
 	Account findByEmail(String email);
 
-	List<Test> getListTest(Account account, int page, int count);
+	List<Test> getListTest(Account account, int offset, int count);
+
+	Long getListCount();
 }

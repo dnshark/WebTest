@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="/result?page=0&count=50">View result</a>
+						<a href="/result">View result</a>
 					</td>
 				</tr>
 				<tr>

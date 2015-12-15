@@ -1,5 +1,6 @@
 package nedis.study.jee.controllers.admin;
 
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.controllers.AbstractController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.forms.admin.AdminForm;
@@ -28,8 +29,15 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/list/users", method=RequestMethod.GET)
-	public String showTest(Model model,@RequestParam int page, int count){
+	public String showTest(@RequestParam(value = "page", required = false) Integer page,
+						   @RequestParam(value = "count", required = false) Integer count,
+						   Model model){
+
+		if (page == null) {page= 0;}
+		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		model.addAttribute("users", adminService.loadAllUser(page,count));
+		model.addAttribute("maxPages",adminService.getUsersMaxPageList(count));
+		model.addAttribute("page", page);
 		return "admin/listUsers";
 	}
 
@@ -55,19 +63,19 @@ public class AdminControler extends AbstractController {
 	@RequestMapping(value="/update/user/id{userId}")
 	public String doUpdateInfo(Model model,@PathVariable Long userId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
 		adminService.updateUser(userId, adminForm);
-		return "redirect:/admin/list/users?page=0&count=50";
+		return "redirect:/admin/list/users";
 	}
 
 	@RequestMapping(value="/delete/user/id{userId}", method = RequestMethod.POST)
 	public String doDeleteInfo(Model model,@PathVariable Long userId){
 			adminService.deleteUser(userId);
-			return "redirect:/admin/list/users?page=0&count=50";
+			return "redirect:/admin/list/users";
 	}
 
 	@RequestMapping(value="/add/user", method = RequestMethod.POST)
 	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
 		adminService.addUser(adminForm);
-		return "redirect:/admin/list/users?page=0&count=50";
+		return "redirect:/admin/list/users";
 	}
 
 }

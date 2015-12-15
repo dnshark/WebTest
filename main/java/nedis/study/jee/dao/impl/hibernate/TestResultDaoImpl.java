@@ -26,7 +26,8 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
         return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
                 .setFirstResult(page)
                 .setMaxResults(count)
-                .addOrder(Order.desc("created")).list();
+                .addOrder(Order.desc("created"))
+                .list();
     }
 
     @Override

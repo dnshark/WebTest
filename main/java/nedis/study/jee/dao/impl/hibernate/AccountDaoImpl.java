@@ -6,6 +6,7 @@ import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 
 import nedis.study.jee.entities.Test;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +19,9 @@ import org.springframework.stereotype.Repository;
 public class AccountDaoImpl extends AbstractEntityDao<Account> implements AccountDao {
 
 	@Override
-	public List<Account> listAccounts(final int page, final int count) {
-		return getSession().createCriteria(getEntityClass()).setFirstResult(page).setMaxResults(count)
-				.setFirstResult(page)
+	public List<Account> listAccounts(final int offset, final int count) {
+		return getSession().createCriteria(getEntityClass()).setFirstResult(offset).setMaxResults(count)
+				.setFirstResult(offset)
 				.setMaxResults(count)
 				.list();
 	}
@@ -41,10 +42,16 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	}
 
 	@Override
-	public List<Test> getListTest(Account account,int page, int count) {
+	public List<Test> getListTest(Account account,int offset, int count) {
 		return (List<Test>) getSession().createCriteria(Test.class).add(Restrictions.eq("account", account))
-				.setFirstResult(page)
+				.setFirstResult(offset)
 				.setMaxResults(count)
 				.list();
+	}
+
+	@Override
+	public Long getListCount() {
+		return (Long)getSession().createCriteria(getEntityClass())
+				.setProjection(Projections.rowCount()).uniqueResult();
 	}
 }

@@ -15,7 +15,7 @@ public class QuestionEditForm implements IForm {
 
     private String questionName;
 
-    private ArrayList<String> cbItemList;   //NEDIS спросить как тут заполнять эти пропуски.
+    private ArrayList<String> cbItemList;
     private ArrayList<String> answerName;
     private ArrayList<String> answerId;
 

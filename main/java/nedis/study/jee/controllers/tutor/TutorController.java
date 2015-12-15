@@ -11,8 +11,6 @@ import nedis.study.jee.forms.tutor.TestForm;
 import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.security.SecurityUtils;
 import nedis.study.jee.services.tutor.TutorService;
-import nedis.study.jee.services.tutor.impl.AdvancedTutorServiceImpl;
-import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,20 +49,21 @@ public class TutorController extends AbstractController {
 		return tutorService;
 	}
 
-	//NEDIS
 	@RequestMapping(value="edit/test/id{testId}", method=RequestMethod.GET)
-	public String showTestForEdit(Model model,@PathVariable Long testId){
-		Test test = getService().getTest(testId);
-		TestForm testForm = new TestForm();
-		ReflectionUtils.copyByNotNullFields(testForm, test);
-		List<Question> list = test.getQuestions();
-		ArrayList<StringId> testQuestions = new ArrayList<StringId>();
-		for (Question question : list){
-			testQuestions.add(new StringId(question.getIdQuestion(), question.getName()));
-		}
-		testForm.setTestQuestions(testQuestions);
+	public String showTestForEdit(Model model,@PathVariable Long testId,
+								  @RequestParam(value = "page", required = false) Integer page,
+								  @RequestParam(value = "count", required = false) Integer count
+	){
+
+		if (page == null) {page= 0;}
+		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
+
+
+		TestForm testForm = getService().getTestForm(testId, page, count);
 		model.addAttribute("mode","edit");
 		model.addAttribute("testForm", testForm);
+		model.addAttribute("maxPages",getService().getQuestionMaxPageCount(testId, count));
+		model.addAttribute("page", page);
 		return "tutor/editTest";
 	}
 
@@ -78,7 +76,7 @@ public class TutorController extends AbstractController {
 			LOGGER.error(e);
 			return "redirect:/error?url="+request.getRequestURI();
 		}
-		return "redirect:/tutor/test?page=0&count=50";
+		return "redirect:/tutor/test";
 	}
 
 	@RequestMapping(value="edit/test/ok")
@@ -91,24 +89,27 @@ public class TutorController extends AbstractController {
 			return "redirect:/error?url="+request.getRequestURI();
 		}
 
-		return "redirect:/tutor/test?page=0&count=50";
+		return "redirect:/tutor/test";
 	}
 
-	//NEDIS
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model,@RequestParam int page, int count){
+	public String showTutorTests(Model model, @RequestParam(value = "page", required = false) Integer page,
+								 @RequestParam(value = "count", required = false) Integer count
+	){
+
+		if (page == null) {page= 0;}
+		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
+
 		Account account = commonService.getLoginAccount();
-		List<Test> list = getService().getTestList(account, page, count);
-		List<StringId> tests = new ArrayList<StringId>();
-		for (Test test : list){
-		  tests.add(new StringId(test.getIdTest(),test.getName()));
-		}
+
+		List<StringId> tests = tutorService.getTests(page, count, account);
 
 		model.addAttribute("tests",tests);
-
-
+		model.addAttribute("maxPages",getService().getTestMaxPageCount(account,count));
+		model.addAttribute("page", page);
 		return "tutor/test";
 	}
+
 	@RequestMapping(value="/new/test", method=RequestMethod.GET)
 	public String showNewTest(Model model){
 		TestForm testForm = new TestForm();
@@ -119,9 +120,9 @@ public class TutorController extends AbstractController {
 	@RequestMapping(value="/add/test")
 	public String addNewTest(@ModelAttribute("testForm") TestForm testform){
 		getService().createTest(testform);
-		return "redirect:/tutor/test?page=0&count=50";
+		return "redirect:/tutor/test";
 	}
-//NEDIS
+
 	@RequestMapping(value="/delete/question")
 	public String deleteQuestion(Model model,@RequestParam Long questionId,HttpServletRequest request){
 

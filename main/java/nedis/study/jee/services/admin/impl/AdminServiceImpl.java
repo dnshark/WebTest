@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Account> loadAllUser(int page,int count) {
-        return accountDao.findAll();
+        return accountDao.listAccounts((page - 1) * count, count);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
     public void updateUser(Long userId, AdminForm form) {
         Account account = accountDao.findById(userId);
         String password = account.getPassword();
-        ReflectionUtils.copyByFields(account, form); //NEDIS не получается копировать все поля, так как теряется информация если поле не заполнено в форме
+        ReflectionUtils.copyByFields(account, form);
         if (form.getPassword()=="") {
             account.setPassword(password);
         }
@@ -104,5 +104,11 @@ public class AdminServiceImpl implements AdminService {
         List list = new ArrayList<Role>();
         account.setAccountRoles(list);
         return account;
+    }
+
+    @Override
+    public int getUsersMaxPageList(Integer count) {
+        double d = (double)accountDao.getListCount();
+        return  (int)Math.ceil(d / count);
     }
 }

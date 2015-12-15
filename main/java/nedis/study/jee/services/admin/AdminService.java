@@ -27,4 +27,6 @@ public interface AdminService {
     AdminForm getAdminForm(Model model, Account user);
 
     Account buildAccount();
+
+    int getUsersMaxPageList(Integer count);
 }

@@ -42,7 +42,7 @@
 <content tag="customscripts">
   <script>
     $(document).ready(function(){
-      initTime(${testPassForm.timePerQuestion},0); <!--NEDIS спросить как определить что надо это делать -->
+      initTime(${testPassForm.timePerQuestion},0);
     });
   </script>
 </content>

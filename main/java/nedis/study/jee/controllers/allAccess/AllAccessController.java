@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+import static nedis.study.jee.utils.HibernateDebugUtils.turnOnShowSQL;
+
 /**
  * Created by Дмитрий on 01.12.2015.
  */
@@ -31,11 +33,13 @@ public class AllAccessController extends AbstractController {
     public String showResults(@RequestParam(value = "page", required = false) Integer page,
                               @RequestParam(value = "count", required = false) Integer count,
                               Model model){
+
         Account account = commonService.getLoginAccount();
 
+       if (page == null) {page= 0;}
        if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
-        model.addAttribute("results",studentService.listAllResult(account,page*count,count));
+        model.addAttribute("results",studentService.listAllResult(account,(page-1)*count,count));
         model.addAttribute("maxPages",studentService.getMaxPageResult(account,count));
         model.addAttribute("page", page);
         return "/allAccess/result";

@@ -1,5 +1,6 @@
 package nedis.study.jee.services.tutor.impl;
 
+import nedis.study.jee.controllers.tutor.TutorController;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.AnswerDao;
 import nedis.study.jee.dao.QuestionDao;
@@ -11,6 +12,7 @@ import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.tutor.NewAnswerForm;
 import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
+import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.services.allAccess.impl.CommonServiceImpl;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     public List<Test> getTestList(Account account,int page,int count) {
-        return accountDao.getListTest(account,page,count);
+        return accountDao.getListTest(account,(page-1)*count,count);
     }
 
     @Override
@@ -161,7 +163,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     public Test updateTest(TestForm form, Account account) throws Exception {
         Test test = testDao.findById(form.getIdTest());
         checkPermission(test, account);
-        ReflectionUtils.copyByFields(test,form);
+        ReflectionUtils.copyByFields(test, form);
         testDao.update(test);
         return test;
     }
@@ -192,5 +194,41 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Override
     public String getHelo() {
         return "Helo tutor";
+    }
+
+    @Override
+    public TestForm getTestForm(Long testId,Integer page,Integer count) {
+        Test test = getTest(testId);
+        TestForm testForm = new TestForm();
+        ReflectionUtils.copyByNotNullFields(testForm, test);
+        List<Question> list = testDao.getListQuestion(test, (page-1)*count, count);
+        ArrayList<StringId> testQuestions = new ArrayList<StringId>();
+        for (Question question : list){
+            testQuestions.add(new StringId(question.getIdQuestion(), question.getName()));
+        }
+        testForm.setTestQuestions(testQuestions);
+        return testForm;
+    }
+
+    @Override
+    public int getQuestionMaxPageCount(Long testId, Integer count) {
+        double d = (double)testDao.getQuestionCount(testId);
+        return  (int)Math.ceil(d / count);
+    }
+
+    @Override
+    public int getTestMaxPageCount(Account account, Integer count) {
+        double d = (double)testDao.getAccountCountTests(account);
+        return  (int)Math.ceil(d / count);
+    }
+
+    @Override
+    public List<StringId> getTests(Integer page, Integer count, Account account) {
+        List<Test> list = getTestList(account, page, count);
+        List<StringId> tests = new ArrayList<StringId>();
+        for (Test test : list){
+          tests.add(new StringId(test.getIdTest(),test.getName()));
+        }
+        return tests;
     }
 }
