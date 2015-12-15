@@ -19,7 +19,10 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 
 	@Override
 	public List<Account> listAccounts(final int offset, final int count) {
-		return getSession().createCriteria(getEntityClass()).setFirstResult(offset).setMaxResults(count).list();
+		return getSession().createCriteria(getEntityClass()).setFirstResult(offset).setMaxResults(count)
+				.setFirstResult(offset)
+				.setMaxResults(count)
+				.list();
 	}
 
 	@Override
@@ -38,7 +41,10 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	}
 
 	@Override
-	public List<Test> getListTest(Account account,int offset, int count) {
-		return (List<Test>) getSession().createCriteria(Test.class).add(Restrictions.eq("account", account)).list();
+	public List<Test> getListTest(Account account,int offSet, int count) {
+		return (List<Test>) getSession().createCriteria(Test.class).add(Restrictions.eq("account", account))
+				.setFirstResult(offSet)
+				.setMaxResults(count)
+				.list();
 	}
 }

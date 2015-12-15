@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Test> listAllTests(int offSet,int count) {
-        return testDao.findAll();
+        return testDao.getTestList(offSet,count);
     }
 
     @Override
