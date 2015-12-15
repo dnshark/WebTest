@@ -23,6 +23,7 @@
         </td>
       </tr>
     </c:forEach>
+  </table>
 
     <div id="pagination"> <!--NEDIS как вынести в отдельный метод -->
       <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
@@ -46,7 +47,6 @@
       </c:if>
     </div>
 
-  </table>
     </form>
 
 </div>
