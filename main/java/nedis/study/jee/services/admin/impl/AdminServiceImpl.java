@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
     private CommonService commonService;
 
     @Override
-    public List<Account> loadAllUser(int offSet,int count) {
+    public List<Account> loadAllUser(int page,int count) {
         return accountDao.findAll();
     }
 

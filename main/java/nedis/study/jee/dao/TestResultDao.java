@@ -9,5 +9,7 @@ import java.util.List;
  * Created by Дмитрий on 29.11.2015.
  */
 public interface TestResultDao extends IEntityDao<TestResult> {
-    List<TestResult> getUserResults(Account account,int offset, int count);
+    List<TestResult> getUserResults(Account account,int page, int count);
+
+    Long getMaxPageResult(Account account);
 }

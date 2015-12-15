@@ -50,13 +50,13 @@ public class StudentServiceImpl implements StudentService {
     private EntityBuilder entityBuilder;
 
     @Override
-    public List<Test> listAllTests(int offSet,int count) {
-        return testDao.getTestList(offSet,count);
+    public List<Test> listAllTests(int page,int count) {
+        return testDao.getTestList(page,count);
     }
 
     @Override
-    public List<TestResult> listAllResult(Account account,int offSet,int count) {
-        return testResultDao.getUserResults(account, offSet, count);
+    public List<TestResult> listAllResult(Account account,int page,int count) {
+        return testResultDao.getUserResults(account, page, count);
     }
 
     public Test getTestById(long testId) {
@@ -175,5 +175,11 @@ public class StudentServiceImpl implements StudentService {
         testSessionInfo.setTimePerQuestion(test.getTimePerQuestion());
 
         return testSessionInfo;
+    }
+
+    @Override
+    public Integer getMaxPageResult(Account account, Integer count) {
+        double d = (double)testResultDao.getMaxPageResult(account);
+        return  (int)Math.ceil(d / count);
     }
 }

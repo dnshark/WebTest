@@ -25,8 +25,8 @@ public class StudentController extends AbstractController {
 	@Autowired
 	protected StudentService studentService;
 
-	protected void initTests(Model model,int offSet,int count){
-		List<Test> tests = studentService.listAllTests(offSet,count);
+	protected void initTests(Model model,int page,int count){
+		List<Test> tests = studentService.listAllTests(page,count);
 		model.addAttribute("tests", tests);
 	}
 
@@ -36,8 +36,8 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/tests", method=RequestMethod.GET)
-	public String showTest(Model model,@RequestParam int offSet,int count){
-		initTests(model,offSet,count);
+	public String showTest(Model model,@RequestParam int page,int count){
+		initTests(model, page,count);
 		model.addAttribute("mode","online");
 		return "student/tests";
 	}
@@ -77,7 +77,7 @@ public class StudentController extends AbstractController {
 		form = studentService.doAnswer(session, form,account);
 
 		if (form==null) {
-			return "redirect:/result?offSet=0&count=50";
+			return "redirect:/result?page=0&count=50";
 		} else {
 			model.addAttribute("testPassForm", form);
 			return "student/question";
@@ -85,8 +85,8 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/offTest", method=RequestMethod.GET)
-	public String showOffTest(Model model,@RequestParam int offSet, int count){
-		initTests(model,offSet,count);
+	public String showOffTest(Model model,@RequestParam int page, int count){
+		initTests(model, page,count);
 		model.addAttribute("mode","offline");
 		return "student/tests";
 	}

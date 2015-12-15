@@ -9,7 +9,7 @@
 	<table>
 		<tr>
 			<td>
-				<a href="test?offSet=0&count=50">Edit tests</a>
+				<a href="test?page=0&count=50">Edit tests</a>
 			</td>
 		</tr>
 	</table>

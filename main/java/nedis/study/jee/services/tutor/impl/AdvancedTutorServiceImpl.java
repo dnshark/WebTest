@@ -19,7 +19,7 @@ public class AdvancedTutorServiceImpl extends TutorServiceImpl implements TutorS
     TestDao testDao;
 
     @Override
-    public List<Test> getTestList(Account account,int offSet,int count) {
+    public List<Test> getTestList(Account account,int page,int count) {
         return testDao.findAll();
     }
 

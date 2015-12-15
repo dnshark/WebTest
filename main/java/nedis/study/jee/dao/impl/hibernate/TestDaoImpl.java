@@ -31,17 +31,17 @@ public class TestDaoImpl extends AbstractEntityDao<Test> implements TestDao {
     }
 
     @Override
-    public List<Question> getListQuestion(Test test, Integer offSet, Integer count) {
+    public List<Question> getListQuestion(Test test, Integer page, Integer count) {
         return (List<Question>) getSession().createCriteria(Question.class).add(Restrictions.eq("test", test))
-                .setFirstResult(offSet)
+                .setFirstResult(page)
                 .setMaxResults(count)
                 .list();
     }
 
     @Override
-    public List<Test> getTestList(Integer offSet, Integer count) {
+    public List<Test> getTestList(Integer page, Integer count) {
         return (List<Test>) getSession().createCriteria(Test.class)
-                .setFirstResult(offSet)
+                .setFirstResult(page)
                 .setMaxResults(count)
                 .list();
     }

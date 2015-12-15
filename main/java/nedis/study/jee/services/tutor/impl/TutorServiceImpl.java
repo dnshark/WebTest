@@ -41,8 +41,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     private AnswerDao answerDao;
 
     @Override
-    public List<Test> getTestList(Account account,int offSet,int count) {
-        return accountDao.getListTest(account,offSet,count);
+    public List<Test> getTestList(Account account,int page,int count) {
+        return accountDao.getListTest(account,page,count);
     }
 
     @Override

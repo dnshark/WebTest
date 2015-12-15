@@ -9,12 +9,12 @@
   <table>
     <tr>
       <td>
-       <a href="tests?offSet=0&count=50">Testing</a>
+       <a href="tests?page=0&count=50">Testing</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="offTest?offSet=0&count=50">offline Testing</a>
+        <a href="offTest?page=0&count=50">offline Testing</a>
       </td>
     </tr>
   </table>

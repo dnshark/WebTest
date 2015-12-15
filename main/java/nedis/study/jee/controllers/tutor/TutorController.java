@@ -78,7 +78,7 @@ public class TutorController extends AbstractController {
 			LOGGER.error(e);
 			return "redirect:/error?url="+request.getRequestURI();
 		}
-		return "redirect:/tutor/test?offSet=0&count=50";
+		return "redirect:/tutor/test?page=0&count=50";
 	}
 
 	@RequestMapping(value="edit/test/ok")
@@ -91,14 +91,14 @@ public class TutorController extends AbstractController {
 			return "redirect:/error?url="+request.getRequestURI();
 		}
 
-		return "redirect:/tutor/test?offSet=0&count=50";
+		return "redirect:/tutor/test?page=0&count=50";
 	}
 
 	//NEDIS
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model,@RequestParam int offSet, int count){
+	public String showTutorTests(Model model,@RequestParam int page, int count){
 		Account account = commonService.getLoginAccount();
-		List<Test> list = getService().getTestList(account, offSet, count);
+		List<Test> list = getService().getTestList(account, page, count);
 		List<StringId> tests = new ArrayList<StringId>();
 		for (Test test : list){
 		  tests.add(new StringId(test.getIdTest(),test.getName()));
@@ -119,7 +119,7 @@ public class TutorController extends AbstractController {
 	@RequestMapping(value="/add/test")
 	public String addNewTest(@ModelAttribute("testForm") TestForm testform){
 		getService().createTest(testform);
-		return "redirect:/tutor/test?offSet=0&count=50";
+		return "redirect:/tutor/test?page=0&count=50";
 	}
 //NEDIS
 	@RequestMapping(value="/delete/question")

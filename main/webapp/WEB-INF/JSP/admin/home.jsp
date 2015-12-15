@@ -11,7 +11,7 @@
 	<table align="center">
 		<tr>
 			<td>
-				<a href="list/users?offSet=0&count=50">Users list</a>
+				<a href="list/users?page=0&count=50">Users list</a>
 			</td>
 		</tr>
 		<tr>

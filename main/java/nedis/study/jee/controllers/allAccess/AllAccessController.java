@@ -1,5 +1,6 @@
 package nedis.study.jee.controllers.allAccess;
 
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.controllers.AbstractController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.forms.UserForm;
@@ -25,12 +26,21 @@ public class AllAccessController extends AbstractController {
 
     @Autowired
     protected AllAccessService allAccessService;
+
     @RequestMapping(value="result", method= RequestMethod.GET)
-    public String showResults(Model model,@RequestParam int offSet,int count){
+    public String showResults(@RequestParam(value = "page", required = false) Integer page,
+                              @RequestParam(value = "count", required = false) Integer count,
+                              Model model){
         Account account = commonService.getLoginAccount();
-        model.addAttribute("results",studentService.listAllResult(account,offSet,count));
+
+       if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
+
+        model.addAttribute("results",studentService.listAllResult(account,page*count,count));
+        model.addAttribute("maxPages",studentService.getMaxPageResult(account,count));
+        model.addAttribute("page", page);
         return "/allAccess/result";
     }
+
 
     @RequestMapping(value="info", method= RequestMethod.GET)
     public String showInfo(Model model,HttpSession session){

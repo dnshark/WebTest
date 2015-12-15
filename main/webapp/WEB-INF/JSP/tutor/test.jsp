@@ -19,7 +19,7 @@
     <c:forEach var="test" items="${tests}">
       <tr>
         <td>
-          <a href="/tutor/edit/test/id${test.id}?offSet=0&count=50">${test.name}</a>
+          <a href="/tutor/edit/test/id${test.id}?page=0&count=50">${test.name}</a>
         </td>
       </tr>
     </c:forEach>

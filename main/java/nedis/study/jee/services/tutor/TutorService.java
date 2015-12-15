@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface TutorService {
 
-    List<Test> getTestList(Account account,int offSet,int count);
+    List<Test> getTestList(Account account,int page,int count);
 
     Test createTest(TestForm test);
 
