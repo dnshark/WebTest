@@ -6,10 +6,10 @@
 
 <div class="container">
 	<h1>${helo}</h1>
-	<table>
+	<table align="center">
 		<tr>
 			<td>
-				<a href="test?page=0&count=50">Edit tests</a>
+				<a href="test">Edit tests</a>
 			</td>
 		</tr>
 	</table>

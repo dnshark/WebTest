@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Test> listAllTests(int page,int count) {
-        return testDao.getTestList(page,count);
+        return testDao.getTestList((page-1)*count,count);
     }
 
     @Override
@@ -178,8 +178,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Integer getMaxPageResult(Account account, Integer count) {
+    public int getMaxPageResult(Account account, Integer count) {
         double d = (double)testResultDao.getMaxPageResult(account);
+        return  (int)Math.ceil(d / count);
+    }
+
+    @Override
+    public int getMaxPageTests(Integer count) {
+        double d = (double)testDao.getAllTestsCount();
         return  (int)Math.ceil(d / count);
     }
 }

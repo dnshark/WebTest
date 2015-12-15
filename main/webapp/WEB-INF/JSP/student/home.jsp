@@ -6,15 +6,15 @@
 
 <div class="container">
   <h1>Hello student</h1>
-  <table>
+  <table align="center">
     <tr>
       <td>
-       <a href="tests?page=0&count=50">Testing</a>
+       <a href="tests">Testing</a>
       </td>
     </tr>
     <tr>
       <td>
-        <a href="offTest?page=0&count=50">offline Testing</a>
+        <a href="offTest">offline Testing</a>
       </td>
     </tr>
   </table>

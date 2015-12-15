@@ -33,5 +33,7 @@ public interface StudentService {
 
     TestSessionInfo initTestSessionInfo(Long testId);
 
-    Integer getMaxPageResult(Account account, Integer count);
+    int getMaxPageResult(Account account, Integer count);
+
+    int getMaxPageTests(Integer count);
 }

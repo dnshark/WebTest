@@ -1,5 +1,6 @@
 package nedis.study.jee.controllers.student;
 
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.controllers.AbstractController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Test;
@@ -36,9 +37,18 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/tests", method=RequestMethod.GET)
-	public String showTest(Model model,@RequestParam int page,int count){
+	public String showTest(@RequestParam(value = "page", required = false) Integer page,
+						   @RequestParam(value = "count", required = false) Integer count,
+						   Model model){
+
+		Account account = commonService.getLoginAccount();
+
+		if (page == null) {page= 0;}
+		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		initTests(model, page,count);
 		model.addAttribute("mode","online");
+		model.addAttribute("maxPages",studentService.getMaxPageTests(count));
+		model.addAttribute("page", page);
 		return "student/tests";
 	}
 
@@ -77,7 +87,7 @@ public class StudentController extends AbstractController {
 		form = studentService.doAnswer(session, form,account);
 
 		if (form==null) {
-			return "redirect:/result?page=0&count=50";
+			return "redirect:/result";
 		} else {
 			model.addAttribute("testPassForm", form);
 			return "student/question";
