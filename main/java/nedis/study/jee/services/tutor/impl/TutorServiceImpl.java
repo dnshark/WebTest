@@ -26,7 +26,7 @@ import java.util.List;
  * @author nedis
  * @version 1.0
  */
-@Service
+@Service("tutorService")
 public class TutorServiceImpl extends CommonServiceImpl implements TutorService {
     @Autowired
     private AccountDao accountDao;
@@ -70,8 +70,11 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Question updateQuestion(QuestionEditForm form, Long questionId) {
-        Question question = getQuestion(questionId);
+    public Question updateQuestion(QuestionEditForm form, Account account) throws Exception {
+        Question question = getQuestion(form.getQuestionId());
+
+        checkPermission(question.getTest(), account);
+
         question.setName(form.getQuestionName());
 
         ArrayList<String> answersId = form.getAnswerId();
@@ -99,44 +102,55 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Test deleteQuestion(Long aLong) {
-        Question question = questionDao.findById(aLong);
+    public Test deleteQuestion(Long questionId, Account account) throws Exception {
+        Question question = questionDao.findById(questionId);
+        Test test = question.getTest();
+        checkPermission(test, account);
+
         questionDao.delete(question);
-        return null;
+        return test;
     }
 
     @Override
     @Transactional
-    public void deleteAnswer(Long aLong) {
-        Answer answer = answerDao.findById(aLong);
+    public void deleteAnswer(Long answerId, Account account) throws Exception {
+        Answer answer = answerDao.findById(answerId);
+        checkPermission(answer.getQuestion().getTest(),account);
         answerDao.delete(answer);
     }
 
     @Override
     @Transactional
-    public void deleteTest(Long testId) {
+    public void deleteTest(Long testId, Account account) throws Exception {
         Test test =testDao.findById(testId);
+
+        checkPermission(test, account);
+
         testDao.delete(test);
     }
 
     @Override
     @Transactional
-    public Answer addAnswer(NewAnswerForm newAnswerForm) {
+    public Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws Exception {
       Answer answer = entityBuilder.buildAnswer();
       answer.setName(newAnswerForm.getName());
       answer.setCorrect(newAnswerForm.getCorrect());
       Question question = questionDao.findById(newAnswerForm.getQuestionId());
       answer.setQuestion(question);
+
+      checkPermission(question.getTest(), account);
+
       answerDao.save(answer);
       return answer;
     }
 
     @Override
     @Transactional
-    public Question addQuestion(QuestionEditForm form) {
+    public Question addQuestion(QuestionEditForm form, Account account) throws Exception {
         Question question = entityBuilder.buildQuestion();
         Test test = testDao.findById(form.getTestId());
         question.setName(form.getQuestionName());
+        checkPermission(test, account);
         question.setTest(test);
         questionDao.save(question);
         return question;
@@ -144,8 +158,9 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Test updateTest(TestForm form) {
+    public Test updateTest(TestForm form, Account account) throws Exception {
         Test test = testDao.findById(form.getIdTest());
+        checkPermission(test, account);
         ReflectionUtils.copyByFields(test,form);
         testDao.update(test);
         return test;
@@ -165,5 +180,17 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
         questionEditForm.setQuestionName(question.getName());
         questionEditForm.setTestId(question.getTest().getIdTest());
         return questionEditForm;
+    }
+
+    @Override
+    public Boolean checkPermission(Test test, Account account) throws Exception {
+        if (test.getAccount().getIdAccount().equals(account.getIdAccount()))
+           return true;
+        throw new Exception("No access");
+    }
+
+    @Override
+    public String getHelo() {
+        return "Helo tutor";
     }
 }

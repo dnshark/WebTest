@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-	<h1>Hello tutor</h1>
+	<h1>${helo}</h1>
 	<table>
 		<tr>
 			<td>

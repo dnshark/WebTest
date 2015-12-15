@@ -38,7 +38,8 @@ public class DefaultExceptionResolver extends AbstractHandlerExceptionResolver {
 	}
 	@Override
 	protected void logException(Exception ex, HttpServletRequest request) {
-		//do nothing
+		LOGGER.trace(ex.getStackTrace());
+		LOGGER.error("Log exception", ex);
 	}
 	@Override
 	protected boolean shouldApplyTo(HttpServletRequest request, Object handler) {

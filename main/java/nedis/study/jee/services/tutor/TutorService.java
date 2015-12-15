@@ -24,21 +24,25 @@ public interface TutorService {
 
     Question getQuestion(Long questionId);
 
-    Question updateQuestion(QuestionEditForm form, Long questionId);
+    Question updateQuestion(QuestionEditForm form, Account account) throws Exception;
 
-    Test deleteQuestion(Long aLong);
+    Test deleteQuestion(Long aLong,Account account) throws Exception;
 
-    void deleteAnswer(Long aLong);
+    void deleteAnswer(Long aLong, Account account) throws Exception;
 
-    void deleteTest(Long testId);
+    void deleteTest(Long testId, Account account) throws Exception;
 
-    Answer addAnswer(NewAnswerForm newAnswerForm);
+    Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws Exception;
 
-    Question addQuestion(QuestionEditForm form);
+    Question addQuestion(QuestionEditForm form, Account account) throws Exception;
 
-    Test updateTest(TestForm form);
+    Test updateTest(TestForm form, Account account) throws Exception;
 
     QuestionEditForm getQuestionEditForm(Long testId);
 
     QuestionEditForm fillQuestionEditForm(Question question);
+
+    Boolean checkPermission(Test test, Account account) throws Exception;
+
+    String getHelo();
 }
