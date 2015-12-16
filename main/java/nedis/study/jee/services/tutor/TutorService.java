@@ -5,6 +5,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.exceptions.InvalidUserAccessException;
 import nedis.study.jee.forms.tutor.NewAnswerForm;
 import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
@@ -26,25 +27,25 @@ public interface TutorService {
 
     Question getQuestion(Long questionId);
 
-    Question updateQuestion(QuestionEditForm form, Account account) throws Exception;
+    Question updateQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException;
 
-    Test deleteQuestion(Long aLong,Account account) throws Exception;
+    Test deleteQuestion(Long aLong,Account account) throws InvalidUserAccessException;
 
-    void deleteAnswer(Long aLong, Account account) throws Exception;
+    void deleteAnswer(Long aLong, Account account) throws InvalidUserAccessException;
 
-    void deleteTest(Long testId, Account account) throws Exception;
+    void deleteTest(Long testId, Account account) throws InvalidUserAccessException;
 
-    Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws Exception;
+    Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws InvalidUserAccessException;
 
-    Question addQuestion(QuestionEditForm form, Account account) throws Exception;
+    Question addQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException;
 
-    Test updateTest(TestForm form, Account account) throws Exception;
+    Test updateTest(TestForm form, Account account) throws InvalidUserAccessException;
 
     QuestionEditForm getQuestionEditForm(Long testId);
 
     QuestionEditForm fillQuestionEditForm(Question question);
 
-    Boolean checkPermission(Test test, Account account) throws Exception;
+    Boolean checkPermission(Test test, Account account) throws InvalidUserAccessException;
 
     String getHelo();
 

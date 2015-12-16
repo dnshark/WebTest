@@ -5,6 +5,7 @@ import nedis.study.jee.controllers.AbstractController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.exceptions.InvalidUserAccessException;
 import nedis.study.jee.forms.tutor.NewAnswerForm;
 import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
@@ -68,26 +69,19 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="delete/test/id{testId}", method=RequestMethod.GET)
-	public String deleteTest(Model model,@PathVariable Long testId,HttpServletRequest request) {
+	public String deleteTest(Model model,@PathVariable Long testId,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().deleteTest(testId, account);
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url="+request.getRequestURI();
-		}
+
+		getService().deleteTest(testId, account);
+
 		return "redirect:/tutor/test";
 	}
 
 	@RequestMapping(value="edit/test/ok")
-	public String editTest(@ModelAttribute TestForm form,HttpServletRequest request){
+	public String editTest(@ModelAttribute TestForm form,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().updateTest(form, account);
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url="+request.getRequestURI();
-		}
+
+		getService().updateTest(form, account);
 
 		return "redirect:/tutor/test";
 	}
@@ -101,7 +95,6 @@ public class TutorController extends AbstractController {
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
 		Account account = commonService.getLoginAccount();
-
 		List<StringId> tests = tutorService.getTests(page, count, account);
 
 		model.addAttribute("tests",tests);
@@ -124,17 +117,12 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="/delete/question")
-	public String deleteQuestion(Model model,@RequestParam Long questionId,HttpServletRequest request){
+	public String deleteQuestion(Model model,@RequestParam Long questionId,HttpServletRequest request) throws InvalidUserAccessException {
 
 		Account account = commonService.getLoginAccount();
 
-		try {
-			Test test = getService().deleteQuestion(questionId, account);
-			return "redirect:/tutor/edit/test/id"+test.getIdTest();
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url="+request.getRequestURI();
-		}
+		Test test = getService().deleteQuestion(questionId, account);
+		return "redirect:/tutor/edit/test/id"+test.getIdTest();
 
 	}
 
@@ -149,27 +137,19 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="/edit/question/ok", method = RequestMethod.POST)
-	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form,HttpServletRequest request) {
+	public String editQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().updateQuestion(form, account);
-			return "redirect:/tutor/edit/test/id"+form.getTestId();
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url="+request.getRequestURI();
-		}
+
+		getService().updateQuestion(form, account);
+		return "redirect:/tutor/edit/test/id"+form.getTestId();
 	}
 
 	@RequestMapping(value="/edit/question/add", method = RequestMethod.POST)
-	public String addQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form,HttpServletRequest request) {
+	public String addQuestion(Model model,@ModelAttribute("questionEditForm") QuestionEditForm form,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().addQuestion(form, account);
-			return "redirect:/tutor/edit/test/id"+form.getTestId();
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url=" + request.getRequestURI();
-		}
+
+		getService().addQuestion(form, account);
+		return "redirect:/tutor/edit/test/id"+form.getTestId();
 	}
 
 	@RequestMapping(value="/edit/question/new", method = RequestMethod.GET)
@@ -182,28 +162,20 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="/new/answer/id{questionId}", method=RequestMethod.POST)
-	public String addAnswer(Model model,@ModelAttribute("newAnswerForm") NewAnswerForm newAnswerForm,HttpServletRequest request){
+	public String addAnswer(Model model,@ModelAttribute("newAnswerForm") NewAnswerForm newAnswerForm,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().addAnswer(newAnswerForm, account);
-			return "redirect:/tutor/edit/question?questionId="+newAnswerForm.getQuestionId();
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url=" + request.getRequestURI();
-		}
+
+		getService().addAnswer(newAnswerForm, account);
+		return "redirect:/tutor/edit/question?questionId="+newAnswerForm.getQuestionId();
 
 	}
 
 	@RequestMapping(value="/delete/answer")
-	public String deleteAnswer(Model model,@RequestParam Long answerId,@RequestParam String questionId,HttpServletRequest request){
+	public String deleteAnswer(Model model,@RequestParam Long answerId,@RequestParam String questionId,HttpServletRequest request) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
-		try {
-			getService().deleteAnswer(answerId, account);
-			return "redirect:/tutor/edit/question?questionId="+questionId;
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return "redirect:/error?url=" + request.getRequestURI();
-		}
+
+		getService().deleteAnswer(answerId, account);
+		return "redirect:/tutor/edit/question?questionId="+questionId;
 	}
 
 	@RequestMapping(value="/new/answer/id{questionId}", method=RequestMethod.GET)

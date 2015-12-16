@@ -9,6 +9,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
+import nedis.study.jee.exceptions.InvalidUserAccessException;
 import nedis.study.jee.forms.tutor.NewAnswerForm;
 import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
@@ -72,7 +73,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Question updateQuestion(QuestionEditForm form, Account account) throws Exception {
+    public Question updateQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException {
         Question question = getQuestion(form.getQuestionId());
 
         checkPermission(question.getTest(), account);
@@ -104,7 +105,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Test deleteQuestion(Long questionId, Account account) throws Exception {
+    public Test deleteQuestion(Long questionId, Account account) throws InvalidUserAccessException {
         Question question = questionDao.findById(questionId);
         Test test = question.getTest();
         checkPermission(test, account);
@@ -115,7 +116,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void deleteAnswer(Long answerId, Account account) throws Exception {
+    public void deleteAnswer(Long answerId, Account account) throws InvalidUserAccessException {
         Answer answer = answerDao.findById(answerId);
         checkPermission(answer.getQuestion().getTest(),account);
         answerDao.delete(answer);
@@ -123,7 +124,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public void deleteTest(Long testId, Account account) throws Exception {
+    public void deleteTest(Long testId, Account account) throws InvalidUserAccessException {
         Test test =testDao.findById(testId);
 
         checkPermission(test, account);
@@ -133,7 +134,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws Exception {
+    public Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws InvalidUserAccessException {
       Answer answer = entityBuilder.buildAnswer();
       answer.setName(newAnswerForm.getName());
       answer.setCorrect(newAnswerForm.getCorrect());
@@ -148,7 +149,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Question addQuestion(QuestionEditForm form, Account account) throws Exception {
+    public Question addQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException {
         Question question = entityBuilder.buildQuestion();
         Test test = testDao.findById(form.getTestId());
         question.setName(form.getQuestionName());
@@ -160,7 +161,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Test updateTest(TestForm form, Account account) throws Exception {
+    public Test updateTest(TestForm form, Account account) throws InvalidUserAccessException {
         Test test = testDao.findById(form.getIdTest());
         checkPermission(test, account);
         ReflectionUtils.copyByFields(test, form);
@@ -185,10 +186,10 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
-    public Boolean checkPermission(Test test, Account account) throws Exception {
+    public Boolean checkPermission(Test test, Account account) throws InvalidUserAccessException {
         if (test.getAccount().getIdAccount().equals(account.getIdAccount()))
            return true;
-        throw new Exception("No access");
+        throw new InvalidUserAccessException("No access");
     }
 
     @Override
