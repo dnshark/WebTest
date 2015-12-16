@@ -66,7 +66,7 @@
     <property name="fromName" value="${template.email.fromname}"/>
     <property name="subject" value="${template.email.subject}"/>
     <property name="restoreFileName" value="${template.restore.filename}"/>
-    <property name="restoreSubject" value="${template.restore.subject"/>
+    <property name="restoreSubject" value="${template.email.subject}"/>
 </bean>
 	
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -113,6 +113,9 @@
         <security:intercept-url pattern="/favicon.ico" 			access="permitAll" />
         <security:intercept-url pattern="/index.jsp" 			access="permitAll" />
         <security:intercept-url pattern="/fromfb" 		     	access="permitAll" />
+        <security:intercept-url pattern="/fbLogin" 		     	access="permitAll" />
+        <security:intercept-url pattern="/fbSignup" 	    	access="permitAll" />
+        <security:intercept-url pattern="/hash/**" 		     	access="permitAll" />
         <security:intercept-url pattern="/allAccess" 			access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
         <security:intercept-url pattern="/myInfo" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />
         <security:intercept-url pattern="/info" 				access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')" />

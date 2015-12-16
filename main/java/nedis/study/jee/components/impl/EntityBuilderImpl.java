@@ -19,6 +19,7 @@ public class EntityBuilderImpl implements EntityBuilder {
 		Account a = new Account();
 		a.setCreated(new Timestamp(System.currentTimeMillis()));
 		a.setActive(Boolean.FALSE);
+		a.setConfirmed(Boolean.FALSE);
 		return a;
 	}
 

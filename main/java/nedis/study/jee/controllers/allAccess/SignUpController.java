@@ -38,7 +38,7 @@ public class SignUpController extends AbstractController {
         return "signup";
     }
 
-    @RequestMapping(value="/hash{hashText}", method=RequestMethod.GET)
+    @RequestMapping(value="/hash/{hashText}", method=RequestMethod.GET)
     public String doConfirmRegister(Model model,@PathVariable String hashText){
         Account account =  signUpService.getAccountByHash(hashText);
         if (account==null) {

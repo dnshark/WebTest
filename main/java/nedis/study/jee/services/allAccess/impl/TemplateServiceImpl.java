@@ -62,7 +62,7 @@ public class TemplateServiceImpl implements TemplateService {
         params.put("password", form.getPassword());
         params.put("login", form.getLogin());
         String host = emailSettings.getHost();
-        params.put("host_context", host+"/hash"+form.getHash());
+        params.put("host_context", host+"/hash/"+form.getHash());
         return params;
     }
 

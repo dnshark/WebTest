@@ -41,7 +41,7 @@ public class ForgetController extends AbstractController {
         Account account = signUpService.getAccountByEmail(form.getEmail());
         try{
         if (account!=null) {
-            ReflectionUtils.copyByFields(account, form);
+            ReflectionUtils.copyByFields(form,account);
             templateService.sendRestoreEmail(form);
             model.addAttribute("confirmed", "Check email");
         }else

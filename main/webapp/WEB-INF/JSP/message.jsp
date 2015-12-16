@@ -7,6 +7,6 @@
 
 <div class="container">
   <h1> <c:out value="${confirmed}" /></h1>
-  <p><a href="login">Go to start page</a></p>
+  <p><a href="/login">Go to start page</a></p>
 </div>
 
