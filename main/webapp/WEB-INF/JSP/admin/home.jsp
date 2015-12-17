@@ -8,7 +8,7 @@
 
 <div class="container">
 	<h1>Hello admin</h1>
-	<table align="center">
+	<table>
 		<tr>
 			<td>
 				<a href="list/users">Users list</a>

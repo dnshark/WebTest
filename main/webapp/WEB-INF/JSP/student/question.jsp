@@ -18,7 +18,7 @@
 
   <h2>${testPassForm.question.name}</h2>
 
-  <table align="center">
+  <table>
     <c:forEach var="answer" items="${testPassForm.answers}">
       <tr>
         <td>

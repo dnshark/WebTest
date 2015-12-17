@@ -31,21 +31,24 @@
 				</div>
 				<div id="header_menu">
 					<ul>
-						<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
+						<sec:authorize access="isAuthenticated()">
 						<li><a href="/myInfo"><span>Home</span></a></li>
 						<li><a href="/edit/info"><span>Edit Info</span></a></li>
 						<li><a href="/result"><span>View results</span></a></li>
 						<li><a href="/info"><span>Look Info</span></a></li>
 						<li><a href="/logout"><span>Logout</span></a></li>
 						</sec:authorize>
+						<sec:authorize access="!isAuthenticated()">
+							<li><a href="/signup"><span>Sign up</span></a></li>
+							<li><a href="/forget"><span>Forgot Password</span></a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<div id="header_welcome">
 					<h3>Welcome</h3>
 					<div id="welcome_text">
-						<p>Don't forgot to check free website templates every day, because we add at least one free website template daily.</p>
-						<p>This is a template designed by free website templates for you for free you can replace all the text by your own
-							text. This is just a place holder so you can see how the site would look like.</p>
+						<p>Site for testing</p>
+						<p>This is a site designed by Krupa Dmitrij.</p>
 					</div>
 				</div>
 			</div>
@@ -54,6 +57,12 @@
 	<section class="main">
 		<decorator:body />
 	</section>
+	<!-- Start of Page Footer -->
+	<div id="page_footer"> <p>All questions you can send to e-mail: dnshark@mail.ru</p>
+	</div>
+	<!-- End of Page Footer -->
+
+
 	<script src="${context}/resources/js/jquery-1.10.2.js?v=${CSS_JS_VERSION}"></script>
 	<script src="${context}/resources/js/scripts.js"></script>
 
