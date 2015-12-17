@@ -17,42 +17,40 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Web tester</title>
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/normalize.css?v=${CSS_JS_VERSION}" />
-	<link rel="stylesheet" type="text/css" href="${context}/resources/css/styles.css?v=${CSS_JS_VERSION}" />
-</head>
+	<!--<link rel="stylesheet" type="text/css" href="${context}/resources/css/normalize.css?v=${CSS_JS_VERSION}" /> -->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/style.css?v=${CSS_JS_VERSION}"  media="screen"/>
+	</head>
 
-<body class="style1">
-	<header>
-		<table>
-			<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
-				<tr>
-					<td>
-				       <a href="/logout">logout</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/myInfo">home</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/result">View result</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/edit/info">Edit Info</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="/info">Look Info</a>
-					</td>
-				</tr>
-			</sec:authorize>
-		</table>
-	</header>
+<body>
+<div id="container">
+		<!-- Start of Page Header -->
+		<div id="header_container">
+			<div id="page_header">
+				<div id="header_company">
+					<h1><span>Fibreglass Company</span></h1>
+				</div>
+				<div id="header_menu">
+					<ul>
+						<sec:authorize access="hasAnyRole('ADMIN','TUTOR','ADVANCED_TUTOR','STUDENT')">
+						<li><a href="/myInfo"><span>Home</span></a></li>
+						<li><a href="/edit/info"><span>Edit Info</span></a></li>
+						<li><a href="/result"><span>View results</span></a></li>
+						<li><a href="/info"><span>Look Info</span></a></li>
+						<li><a href="/logout"><span>Logout</span></a></li>
+						</sec:authorize>
+					</ul>
+				</div>
+				<div id="header_welcome">
+					<h3>Welcome</h3>
+					<div id="welcome_text">
+						<p>Don't forgot to check free website templates every day, because we add at least one free website template daily.</p>
+						<p>This is a template designed by free website templates for you for free you can replace all the text by your own
+							text. This is just a place holder so you can see how the site would look like.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Page Header -->
 	<section class="main">
 		<decorator:body />
 	</section>
@@ -60,5 +58,6 @@
 	<script src="${context}/resources/js/scripts.js"></script>
 
 	<decorator:getProperty property="page.customscripts" />
+  </div>
 </body>
 </html>
