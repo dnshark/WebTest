@@ -1,5 +1,6 @@
 package nedis.study.jee.dao.impl.hibernate;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -59,11 +60,18 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 
 	@Override
 	public void clearNotConfirmedUsers() {
-		Calendar c=Calendar.getInstance();
-		c.add(Calendar.DATE,-1);
+		Timestamp timestamp = getYesterday();
+
 		List<Account> list=(List<Account>) getSession().createCriteria(getEntityClass())
-				.add(Restrictions.and(Restrictions.lt("created", c.getTimeInMillis()), Restrictions.eq("confirmed", false)))
+				.add(Restrictions.and(Restrictions.lt("created", timestamp), Restrictions.eq("confirmed", false)))
 				.list();
 		getSession().delete(list);
+	}
+
+	private Timestamp getYesterday() {
+		Calendar c=Calendar.getInstance();
+		c.add(Calendar.DATE,-1);
+		Long l = c.getTimeInMillis();
+		return new Timestamp(l);
 	}
 }

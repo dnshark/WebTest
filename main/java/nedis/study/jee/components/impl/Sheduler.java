@@ -13,7 +13,7 @@ public class Sheduler {
 
     @Autowired
     Cleaner cleaner;
-    	 @Scheduled(cron = "0/10 * * * * *")
+    	 @Scheduled(cron = "0 0 0/12 * * *")
     	 public void pollDatabase() {
              cleaner.clearNotConfirmedUsers();
          }
