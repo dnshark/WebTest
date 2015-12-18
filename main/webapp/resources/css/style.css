@@ -220,6 +220,12 @@ input {
 #userlogin form input {
 	width: 93px;
 	float: right;
+#userlogin textarea:focus,input:focus {
+	color: #000000;
+}
+
+#userlogin input, select, textarea{
+	color: #000000;
 }
 
 #userlogin form input.button {
