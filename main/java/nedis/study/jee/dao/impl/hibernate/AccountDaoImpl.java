@@ -1,5 +1,7 @@
 package nedis.study.jee.dao.impl.hibernate;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import nedis.study.jee.dao.AccountDao;
@@ -53,5 +55,15 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	public Long getListCount() {
 		return (Long)getSession().createCriteria(getEntityClass())
 				.setProjection(Projections.rowCount()).uniqueResult();
+	}
+
+	@Override
+	public void clearNotConfirmedUsers() {
+		Calendar c=Calendar.getInstance();
+		c.add(Calendar.DATE,-1);
+		List<Account> list=(List<Account>) getSession().createCriteria(getEntityClass())
+				.add(Restrictions.and(Restrictions.lt("created", c.getTimeInMillis()), Restrictions.eq("confirmed", false)))
+				.list();
+		getSession().delete(list);
 	}
 }

@@ -20,4 +20,6 @@ public interface AccountDao extends IEntityDao<Account> {
 	List<Test> getListTest(Account account, int offset, int count);
 
 	Long getListCount();
+
+	void clearNotConfirmedUsers();
 }

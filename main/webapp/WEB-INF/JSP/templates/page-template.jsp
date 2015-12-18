@@ -40,7 +40,6 @@
 						</sec:authorize>
 						<sec:authorize access="!isAuthenticated()">
 							<li><a href="/signup"><span>Sign up</span></a></li>
-							<li><a href="/forget"><span>Forgot Password</span></a></li>
 						</sec:authorize>
 					</ul>
 				</div>
