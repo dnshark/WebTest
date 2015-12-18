@@ -7,7 +7,7 @@
 
 <div class="container">
   <h2>User Info</h2>
-    <table>
+    <table align="center">
       <tr>
         <td>Email</td>
         <td>${account.email} </td>

@@ -6,6 +6,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h2>Error</h2>
+  <h1>Error</h1>
 
 </div>

@@ -8,7 +8,7 @@
 <div class="container">
   <h2>Please SignUp</h2>
   <form:form action="/forget" commandName="signUpForm">
-    <table>
+    <table align="center">
       <tr>
         <td><form:label path="email">email</form:label></td>
         <td><form:input path="email" /></td>

@@ -7,7 +7,7 @@
 <div class="container">
 	<h1>${helo}</h1>
 	<div id="maincontent">
-	<table>
+	<table align="center">
 		<tr>
 			<td>
 				<a href="test">Edit tests</a>

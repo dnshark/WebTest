@@ -14,7 +14,7 @@
 
 <div class="container">
   <form:form method="POST" action="${context }/tutor/edit/question/ok" commandName="questionEditForm">
-  <table>
+  <table align="center">
     <form:hidden path="testId" />
     <form:hidden path="questionId" />
     <tr>

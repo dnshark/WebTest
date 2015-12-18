@@ -8,7 +8,7 @@
 
   <h1>Result</h1>
 
-  <table border="2">
+  <table border="2" align="center">
     <tr>
       <td>
         Test name

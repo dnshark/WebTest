@@ -6,7 +6,7 @@
 
 <div class="container">
     <h1>${test.name}</h1>
-    <table>
+    <table align="center">
         <c:forEach var="question" items="${test.questions}">
             <tr>
                 <td>${question.name} </td>

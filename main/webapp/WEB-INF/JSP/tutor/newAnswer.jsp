@@ -14,7 +14,7 @@
 
 <div class="container">
   <form:form method="POST" action="${context }/tutor/new/answer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
-    <table>
+    <table  align="center">
       <tr>
         <td>
           Question:

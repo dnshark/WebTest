@@ -9,7 +9,7 @@
 <div class="container">
   <h2>User Info</h2>
   <form:form method="post" commandName="adminForm">
-    <table>
+    <table align="center">
       <tr>
         <td>Email</td>
         <td><form:input path="email" /></td>
