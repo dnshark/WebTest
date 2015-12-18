@@ -7,14 +7,17 @@
 
 <div class="container">
   <form:form action="/forget" commandName="signUpForm">
-  <div id="maincontent">
+  <div id="maincontent_container">
+    <div id="maincontent">
     <h2>Please SignUp</h2>
     <div class="form_field">
       <strong>Email</strong>
       <form:input path="email" />
     </div>
+     <div class="clearthis"></div>
     <div class="form_field">
       <input type="submit" value="Send"/>
+    </div>
     </div>
   </form:form>
 </div>

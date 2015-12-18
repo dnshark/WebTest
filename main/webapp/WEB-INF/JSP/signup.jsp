@@ -6,30 +6,32 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h2>Please SignUp</h2>
   <form:form action="/signup" commandName="signUpForm">
-    <table align="center">
-      <tr>
-        <td><form:label path="email">email</form:label></td>
-        <td><form:input path="email" /></td>
-      </tr>
-      <tr>
-        <td><form:label path="password">password</form:label></td>
-        <td><form:password path="password"/> </td>
-      </tr>
-      <tr>
-        <td><form:label path="login">Login</form:label></td>
-        <td><form:input path="login"/> </td>
-      </tr>
-      <tr>
-        <td><form:label path="fio">Full name</form:label></td>
-        <td><form:input path="fio"/> </td>
-      </tr>
-      <tr>
-        <td colspan="2" style="text-align:center;">
+  <div id="maincontent_container">
+    <div id="maincontent">
+  <h2>Please SignUp</h2>
+      <div class="form_field">
+        <strong>Email</strong>
+        <form:input path="email" />
+        </div>
+        <div class="form_field">
+        <strong>Password</strong>
+        <form:password path="password"/>
+        </div>
+      <div class="form_field">
+        <strong>Login</strong>
+        <form:input path="login"/>
+    </div>
+
+      <div class="form_field">
+        <strong>Full name</strong>
+        <form:input path="fio"/>
+  </div>
+
+     <div id="submit_button">
           <input type="submit" value="Ok"/>
-        </td>
-      </tr>
-    </table>
+     </div>
+  </div>
+
   </form:form>
 </div>

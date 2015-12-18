@@ -7,10 +7,6 @@
 
 
 <div class="container">
-	<div id="left_sidebar">
-
-	</div>
-	<div id="maincontent">
 		<form method="POST" action="${context }/loginHandler" >
 			<div id="userlogin">
 				<h2>Please login</h2>
@@ -60,7 +56,6 @@
 						<td colspan="2" class="errors">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message }</td>
 					</c:if>
 				</div>
-			</div>
 		</form>
 	</div>
 </div>

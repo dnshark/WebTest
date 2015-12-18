@@ -173,11 +173,13 @@ input {
 	float: left;
 }
 
-#box_container {
+.box_container {
 	margin-bottom: 11px;
 	border: 1px solid #fff;
 	background-color: #537caf;
 }
+
+
 
 
 /* Left Sidebar : User Login */
@@ -211,7 +213,7 @@ h2 {
 	padding-top: 5px;
 }
 
-#userlogin .form_field {
+.form_field {
 	padding-left: 1px;
 	padding-top: 7px;
 	width: 250px;
@@ -312,8 +314,40 @@ h2 {
 }
 
 #maincontent {
-	margin: 7px 0px 0px 206px;
+	margin: 14px 0px 0px 206px;
 	width: 561px;
+	height: 300px;
+}
+
+#maincontent h2 {
+	width: 300px;
+	height: 28px;
+}
+
+#maincontent strong{
+	padding-top: 1px;
+	display: block;
+	width: 80px;
+	height: 13px;
+	float: left;
+	text-align: left;
+}
+
+#maincontent form input {
+	float: right;
+	padding: 0px;
+	width: 100px;
+	height: 16px;
+}
+
+#submit_button input {
+	margin-top: 15px;
+	width: 100px;
+	height: auto;
+	font-size: 13px;
+	margin-left: 60px;
+	border: none;
+	float: none;
 }
 
 #maincontent_top {
