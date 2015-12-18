@@ -27,7 +27,7 @@
 		<div id="header_container">
 			<div id="page_header">
 				<div id="header_company">
-					<h1><span>Fibreglass Company</span></h1>
+					<h1><span>Webt tester</span></h1>
 				</div>
 				<div id="header_menu">
 					<ul>

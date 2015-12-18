@@ -6,18 +6,15 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h2>Please SignUp</h2>
   <form:form action="/forget" commandName="signUpForm">
-    <table align="center">
-      <tr>
-        <td><form:label path="email">email</form:label></td>
-        <td><form:input path="email" /></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="text-align:center;">
-          <input type="submit" value="Send"/>
-        </td>
-      </tr>
-    </table>
+  <div id="maincontent">
+    <h2>Please SignUp</h2>
+    <div class="form_field">
+      <strong>Email</strong>
+      <form:input path="email" />
+    </div>
+    <div class="form_field">
+      <input type="submit" value="Send"/>
+    </div>
   </form:form>
 </div>
