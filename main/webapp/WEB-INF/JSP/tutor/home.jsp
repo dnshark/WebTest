@@ -6,11 +6,13 @@
 
 <div class="container">
 	<h1>${helo}</h1>
-	<table align="center">
+	<div id="maincontent">
+	<table>
 		<tr>
 			<td>
 				<a href="test">Edit tests</a>
 			</td>
 		</tr>
 	</table>
+	</div>
 </div>

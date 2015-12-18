@@ -17,12 +17,10 @@
 	    <tr>
 	        <td><label for="j_username">Login</label></td>
 	        <td><input type="text"  name="j_username" /> </td>
-			<td><a href="/signup">Sign up</a></td>
 	    </tr>
 	    <tr>
 	        <td><label for="j_password">Password</label></td>
 	        <td><input type="password" name="j_password"/> </td>
-			<td><a href="/forget">Forget password</a></td>
 	    </tr>
 	    <tr>
 	        <td><label for="idRole">Role</label></td>
@@ -52,6 +50,10 @@
 	            </a>
 	        </td>
 	    </tr>
+		   <tr>
+			   <td><a href="/signup">Sign up</a></td>
+			   <td><a href="/forget">Forget password</a></td>
+		   </tr>
 	</table>  
 	</form>
 </div>

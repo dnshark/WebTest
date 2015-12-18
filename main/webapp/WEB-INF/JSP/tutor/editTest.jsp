@@ -10,7 +10,7 @@
   <form:form action="/tutor/edit/test/ok" commandName="testForm">
     <h1>Edit test</h1>
     <form:hidden path="idTest"/>
-    <table align="center">
+    <table>
       <tr>
         <td>Test name</td>
         <td><form:input path="name"/> </td>

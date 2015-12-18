@@ -7,7 +7,7 @@
 <div class="container">
   <form method="get">
   <h1>Test list</h1>
-  <table align="center">
+  <table>
     <tr>
       <td>
         Tutor tests

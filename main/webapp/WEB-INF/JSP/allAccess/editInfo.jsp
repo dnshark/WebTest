@@ -8,7 +8,7 @@
 <div class="container">
   <h2>User Info</h2>
   <form:form action="/edit/info/ok" commandName="userForm">
-    <table align="center">
+    <table>
       <tr>
         <td>Email</td>
         <td><form:input path="email" /></td>
