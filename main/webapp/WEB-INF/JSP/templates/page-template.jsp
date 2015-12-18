@@ -47,7 +47,6 @@
 					<h3>Welcome</h3>
 					<div id="welcome_text">
 						<p>Site for testing</p>
-						<p>This is a site designed by Krupa Dmitrij.</p>
 					</div>
 				</div>
 			</div>

@@ -184,7 +184,7 @@ input {
 
 #userlogin {
 	border: 1px solid #fff;
-	margin-left: 202px;
+	margin-left: 12px;
 	margin-top: 7px;
 	width:300px;
 	height:240px;
@@ -193,11 +193,18 @@ input {
 	text-align: left;
 }
 
-#userlogin h2 {
+h2 {
 	width: 200px;
 	height: 15px;
 	margin-left:80px;
-	background: url('/resources/images/userlogin_title.gif') no-repeat -2px 0px;
+}
+
+#userlogin .form_remember_me{
+	margin-left:110px;
+}
+
+#userlogin .form_facebook{
+	margin-left:80px;
 }
 
 #userlogin form {
@@ -236,7 +243,7 @@ input {
 
 #userlogin form input.button {
 	padding: 0px;
-	width: 55px;
+	width: 80px;
 	height: 15px;
 	border: none;
 	float: none;
@@ -254,6 +261,13 @@ input {
 
 #userlogin #link-password a:hover {
 	color: #bfd8f6;
+}
+
+.form_exception {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	color: red;
+	margin-left: 110px;
 }
 
 
@@ -298,7 +312,7 @@ input {
 }
 
 #maincontent {
-	margin: 7px 0px 0px 16px;
+	margin: 7px 0px 0px 206px;
 	width: 561px;
 }
 
