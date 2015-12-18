@@ -43,7 +43,7 @@ public class StudentController extends AbstractController {
 
 		Account account = commonService.getLoginAccount();
 
-		if (page == null) {page= 0;}
+		if (page == null) {page= 1;}
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		initTests(model, page,count);
 		model.addAttribute("mode","online");

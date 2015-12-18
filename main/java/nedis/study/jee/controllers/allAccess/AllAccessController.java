@@ -36,7 +36,7 @@ public class AllAccessController extends AbstractController {
 
         Account account = commonService.getLoginAccount();
 
-       if (page == null) {page= 0;}
+       if (page == null) {page= 1;}
        if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
         model.addAttribute("results",studentService.listAllResult(account,(page-1)*count,count));

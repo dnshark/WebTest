@@ -33,7 +33,7 @@ public class AdminControler extends AbstractController {
 						   @RequestParam(value = "count", required = false) Integer count,
 						   Model model){
 
-		if (page == null) {page= 0;}
+		if (page == null) {page= 1;}
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		model.addAttribute("users", adminService.loadAllUser(page,count));
 		model.addAttribute("maxPages",adminService.getUsersMaxPageList(count));

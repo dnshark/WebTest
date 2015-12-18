@@ -56,7 +56,7 @@ public class TutorController extends AbstractController {
 								  @RequestParam(value = "count", required = false) Integer count
 	){
 
-		if (page == null) {page= 0;}
+		if (page == null) {page= 1;}
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
 
@@ -91,7 +91,7 @@ public class TutorController extends AbstractController {
 								 @RequestParam(value = "count", required = false) Integer count
 	){
 
-		if (page == null) {page= 0;}
+		if (page == null) {page= 1;}
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
 		Account account = commonService.getLoginAccount();
