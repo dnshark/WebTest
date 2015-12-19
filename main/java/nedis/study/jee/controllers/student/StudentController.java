@@ -54,7 +54,7 @@ public class StudentController extends AbstractController {
 
 	@RequestMapping(value="/test/start/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,HttpSession session,@PathVariable Long testId){
-
+//NEDIS
 		session.setAttribute("TEST_INFO", studentService.initTestSessionInfo(testId));
 
 		return "redirect:/question/next";

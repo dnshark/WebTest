@@ -20,7 +20,7 @@ public class RoleDaoImpl extends AbstractEntityDao<Role> implements RoleDao,Appl
 	}
 
 	@Override
-		 public Role getStudentRole() {
+	public Role getStudentRole() {
 		return getRole(STUDENT_ROLE);
 	}
 

@@ -25,7 +25,7 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	public List<Account> listAccounts(final int offset, final int count) {
 		return getSession().createCriteria(getEntityClass()).setFirstResult(offset).setMaxResults(count)
 				.setFirstResult(offset)
-				.setMaxResults(count)
+				.setMaxResults(count)//NEDIS
 				.list();
 	}
 
@@ -66,6 +66,8 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 				.add(Restrictions.and(Restrictions.lt("created", timestamp), Restrictions.eq("confirmed", false)))
 				.list();
 		getSession().delete(list);
+
+		//NEDIS Query q=getSession.createQuery("delete from Account where")
 	}
 
 	private Timestamp getYesterday() {

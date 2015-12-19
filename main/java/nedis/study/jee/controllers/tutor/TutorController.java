@@ -42,7 +42,7 @@ public class TutorController extends AbstractController {
 		model.addAttribute("helo",getService().getHelo());
 		return "tutor/home";
 	}
-
+//NEDIS
 	private TutorService getService(){
 		if (SecurityUtils.getCurrentAccount().getRole() == ApplicationConstants.ADVANCED_TUTOR_ROLE)
 		return advancedTutorService;

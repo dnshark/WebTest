@@ -64,7 +64,7 @@ public class SignUpController extends AbstractController {
             result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
             LOGGER.info("Error sign up " + e.getMessage());
             return "/signup";
-            }
+        }
 
     }
 

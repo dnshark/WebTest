@@ -29,11 +29,10 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/list/users", method=RequestMethod.GET)
-	public String showTest(@RequestParam(value = "page", required = false) Integer page,
+	public String showTest(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 						   @RequestParam(value = "count", required = false) Integer count,
 						   Model model){
-
-		if (page == null) {page= 1;}
+		//NEDIS
 		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		model.addAttribute("users", adminService.loadAllUser(page,count));
 		model.addAttribute("maxPages",adminService.getUsersMaxPageList(count));

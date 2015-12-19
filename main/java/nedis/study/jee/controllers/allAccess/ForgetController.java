@@ -47,7 +47,7 @@ public class ForgetController extends AbstractController {
         }else
             model.addAttribute("confirmed", "No email found");
         return "message";
-
+//NEDIS
     } catch (MessagingException e) {
         result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
         LOGGER.info("send e-mail Error " + e.getMessage());
