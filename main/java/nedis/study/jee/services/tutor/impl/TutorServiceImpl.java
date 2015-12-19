@@ -15,6 +15,7 @@ import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
 import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.services.allAccess.impl.CommonServiceImpl;
+import nedis.study.jee.utils.Calculation;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -213,14 +214,12 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     public int getQuestionMaxPageCount(Long testId, Integer count) {
-        double d = (double)testDao.getQuestionCount(testId);
-        return  (int)Math.ceil(d / count);
+        return Calculation.getMaxPage(testDao.getQuestionCount(testId),count);
     }
 
     @Override
     public int getTestMaxPageCount(Account account, Integer count) {
-        double d = (double)testDao.getAccountCountTests(account);
-        return  (int)Math.ceil(d / count);
+        return  Calculation.getMaxPage(testDao.getAccountCountTests(account),count);
     }
 
     @Override

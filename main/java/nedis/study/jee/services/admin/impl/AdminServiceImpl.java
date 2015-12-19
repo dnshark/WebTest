@@ -7,6 +7,7 @@ import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.admin.AdminForm;
 import nedis.study.jee.services.allAccess.CommonService;
+import nedis.study.jee.utils.Calculation;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,7 +109,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int getUsersMaxPageList(Integer count) {
-        double d = (double)accountDao.getListCount();
-        return  (int)Math.ceil(d / count);
+        return  Calculation.getMaxPage(accountDao.getListCount(),count);
     }
 }

@@ -8,6 +8,7 @@ import nedis.study.jee.dao.TestResultDao;
 import nedis.study.jee.entities.*;
 import nedis.study.jee.forms.student.TestPassForm;
 import nedis.study.jee.services.student.TestSessionInfo;
+import nedis.study.jee.utils.Calculation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -179,13 +180,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int getMaxPageResult(Account account, Integer count) {
-        double d = (double)testResultDao.getMaxPageResult(account);
-        return  (int)Math.ceil(d / count);
+        return  Calculation.getMaxPage(testResultDao.getMaxPageResult(account),count);
     }
 
     @Override
     public int getMaxPageTests(Integer count) {
-        double d = (double)testDao.getAllTestsCount();
-        return  (int)Math.ceil(d / count);
+        return   Calculation.getMaxPage(testDao.getAllTestsCount(),count);
     }
 }

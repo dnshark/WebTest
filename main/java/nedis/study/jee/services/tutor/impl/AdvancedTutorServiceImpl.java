@@ -6,6 +6,7 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.services.tutor.TutorService;
+import nedis.study.jee.utils.Calculation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +34,7 @@ public class AdvancedTutorServiceImpl extends TutorServiceImpl implements TutorS
 
     @Override
     public int getTestMaxPageCount(Account account, Integer count) {
-        double d = (double)testDao.getAllTestsCount();
-        return  (int)Math.ceil(d / count);
+        return Calculation.getMaxPage(testDao.getAllTestsCount(),count);
     }
 
     @Override
