@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
  */
 @Component("loginFormValidator")
 public class LoginFormValidator implements Validator {
-//NEDIS как оно работает
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return LoginForm.class.equals(clazz);

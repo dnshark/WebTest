@@ -326,8 +326,9 @@ h2 {
 
 #maincontent strong{
 	padding-top: 1px;
+	margin-left: 20px;
 	display: block;
-	width: 80px;
+	width: 100px;
 	height: 13px;
 	float: left;
 	text-align: left;

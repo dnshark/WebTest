@@ -9,6 +9,7 @@ import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.entities.Account;
 
 import nedis.study.jee.entities.Test;
+import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -62,12 +63,11 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 	public void clearNotConfirmedUsers() {
 		Timestamp timestamp = getYesterday();
 
-		List<Account> list=(List<Account>) getSession().createCriteria(getEntityClass())
-				.add(Restrictions.and(Restrictions.lt("created", timestamp), Restrictions.eq("confirmed", false)))
-				.list();
-		getSession().delete(list);
-
-		//NEDIS Query q=getSession.createQuery("delete from Account where")
+		String hql = "delete from Account where created< :yesterday AND confirmed= :flag";
+		Query query = getSession().createQuery(hql);
+		query.setTimestamp("yesterday",timestamp);
+		query.setBoolean("flag",false);
+		query.executeUpdate();
 	}
 
 	private Timestamp getYesterday() {

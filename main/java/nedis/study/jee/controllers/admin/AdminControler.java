@@ -30,10 +30,8 @@ public class AdminControler extends AbstractController {
 
 	@RequestMapping(value="/list/users", method=RequestMethod.GET)
 	public String showTest(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-						   @RequestParam(value = "count", required = false) Integer count,
+						   @RequestParam(value = "count", required = false,defaultValue= ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count,
 						   Model model){
-		//NEDIS
-		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		model.addAttribute("users", adminService.loadAllUser(page,count));
 		model.addAttribute("maxPages",adminService.getUsersMaxPageList(count));
 		model.addAttribute("page", page);
@@ -60,7 +58,7 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/update/user/id{userId}")
-	public String doUpdateInfo(Model model,@PathVariable Long userId,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result){
+	public String doUpdateInfo(Model model,@PathVariable Long userId,@ModelAttribute("adminForm") AdminForm adminForm){
 		adminService.updateUser(userId, adminForm);
 		return "redirect:/admin/list/users";
 	}
@@ -72,7 +70,7 @@ public class AdminControler extends AbstractController {
 	}
 
 	@RequestMapping(value="/add/user", method = RequestMethod.POST)
-	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm, BindingResult result) {
+	public String doAddInfo(Model model,@ModelAttribute("adminForm") AdminForm adminForm) {
 		adminService.addUser(adminForm);
 		return "redirect:/admin/list/users";
 	}

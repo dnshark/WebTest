@@ -15,7 +15,7 @@
       <form:input path="email" />
     </div>
      <div class="clearthis"></div>
-    <div class="form_field">
+    <div id="submit_button">
       <input type="submit" value="Send"/>
     </div>
     </div>

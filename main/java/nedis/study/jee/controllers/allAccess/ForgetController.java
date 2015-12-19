@@ -40,22 +40,17 @@ public class ForgetController extends AbstractController {
     public String doSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         Account account = signUpService.getAccountByEmail(form.getEmail());
         try{
-        if (account!=null) {
-            ReflectionUtils.copyByFields(form,account);
-            templateService.sendRestoreEmail(form);
-            model.addAttribute("confirmed", "Check email");
-        }else
-            model.addAttribute("confirmed", "No email found");
-        return "message";
-//NEDIS
-    } catch (MessagingException e) {
-        result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
-        LOGGER.info("send e-mail Error " + e.getMessage());
-        return "redirect:forget";
-    } catch (FileNotFoundException e) {
-        result.addError(new ObjectError("Can't find e-mail template file.", e.getMessage()));
-        LOGGER.info("Can't find e-mail template file " + e.getMessage());
-        return "redirect:forget";
-    }
+            if (account!=null) {
+                ReflectionUtils.copyByFields(form,account);
+                templateService.sendRestoreEmail(form);
+                model.addAttribute("confirmed", "Check email");
+            }else
+                model.addAttribute("confirmed", "No email found");
+            return "message";
+        } catch (Exception e) {
+            result.addError(new ObjectError("Can't send e-mail", e.getMessage()));
+            LOGGER.info("send e-mail Error " + e.getMessage());
+            return "redirect:forget";
+        }
     }
 }

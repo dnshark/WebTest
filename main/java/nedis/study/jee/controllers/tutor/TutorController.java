@@ -42,24 +42,19 @@ public class TutorController extends AbstractController {
 		model.addAttribute("helo",getService().getHelo());
 		return "tutor/home";
 	}
-//NEDIS
-	private TutorService getService(){
-		if (SecurityUtils.getCurrentAccount().getRole() == ApplicationConstants.ADVANCED_TUTOR_ROLE)
-		return advancedTutorService;
 
-		return tutorService;
+	private TutorService getService(){
+		if (SecurityUtils.getCurrentAccount().getRole() == ApplicationConstants.ADVANCED_TUTOR_ROLE){
+			return advancedTutorService;}
+		else
+			return tutorService;
 	}
 
 	@RequestMapping(value="edit/test/id{testId}", method=RequestMethod.GET)
 	public String showTestForEdit(Model model,@PathVariable Long testId,
-								  @RequestParam(value = "page", required = false) Integer page,
-								  @RequestParam(value = "count", required = false) Integer count
+								  @RequestParam(value = "page", required = false,defaultValue = "1") Integer page,
+								  @RequestParam(value = "count", required = false,defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count
 	){
-
-		if (page == null) {page= 1;}
-		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
-
-
 		TestForm testForm = getService().getTestForm(testId, page, count);
 		model.addAttribute("mode","edit");
 		model.addAttribute("testForm", testForm);
@@ -69,7 +64,7 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="delete/test/id{testId}", method=RequestMethod.GET)
-	public String deleteTest(Model model,@PathVariable Long testId,HttpServletRequest request) throws InvalidUserAccessException {
+	public String deleteTest(Model model,@PathVariable Long testId) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
 
 		getService().deleteTest(testId, account);
@@ -78,7 +73,7 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="edit/test/ok")
-	public String editTest(@ModelAttribute TestForm form,HttpServletRequest request) throws InvalidUserAccessException {
+	public String editTest(@ModelAttribute TestForm form) throws InvalidUserAccessException {
 		Account account = commonService.getLoginAccount();
 
 		getService().updateTest(form, account);
@@ -87,12 +82,9 @@ public class TutorController extends AbstractController {
 	}
 
 	@RequestMapping(value="test", method=RequestMethod.GET)
-	public String showTutorTests(Model model, @RequestParam(value = "page", required = false) Integer page,
-								 @RequestParam(value = "count", required = false) Integer count
+	public String showTutorTests(Model model, @RequestParam(value = "page", required = false,defaultValue = "1") Integer page,
+								 @RequestParam(value = "count", required = false,defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count
 	){
-
-		if (page == null) {page= 1;}
-		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
 		Account account = commonService.getLoginAccount();
 		List<StringId> tests = tutorService.getTests(page, count, account);

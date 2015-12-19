@@ -21,7 +21,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
-public class StudentController extends AbstractController {
+public class StudentController extends AbstractController implements ApplicationConstants{
 
 	@Autowired
 	protected StudentService studentService;
@@ -37,14 +37,10 @@ public class StudentController extends AbstractController {
 	}
 
 	@RequestMapping(value="/tests", method=RequestMethod.GET)
-	public String showTest(@RequestParam(value = "page", required = false) Integer page,
-						   @RequestParam(value = "count", required = false) Integer count,
+	public String showTest(@RequestParam(value = "page", required = false,defaultValue = "1") Integer page,
+						   @RequestParam(value = "count", required = false,defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count,
 						   Model model){
 
-		Account account = commonService.getLoginAccount();
-
-		if (page == null) {page= 1;}
-		if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 		initTests(model, page,count);
 		model.addAttribute("mode","online");
 		model.addAttribute("maxPages",studentService.getMaxPageTests(count));
@@ -54,8 +50,7 @@ public class StudentController extends AbstractController {
 
 	@RequestMapping(value="/test/start/id{testId}", method=RequestMethod.GET)
 	public String showQuestion(Model model,HttpSession session,@PathVariable Long testId){
-//NEDIS
-		session.setAttribute("TEST_INFO", studentService.initTestSessionInfo(testId));
+		session.setAttribute(SESSION_TEST_INFO, studentService.initTestSessionInfo(testId));
 
 		return "redirect:/question/next";
 	}
@@ -68,7 +63,7 @@ public class StudentController extends AbstractController {
 
 	@RequestMapping(value="/question/next", method=RequestMethod.GET)
 	public String getAnswer(Model model,HttpSession session) {
-		TestSessionInfo testSessionInfo = (TestSessionInfo)session.getAttribute("TEST_INFO");
+		TestSessionInfo testSessionInfo = (TestSessionInfo)session.getAttribute(SESSION_TEST_INFO);
 		Account account = commonService.getLoginAccount();
 		TestPassForm form = studentService.getTestPassForm(account,testSessionInfo);
 		model.addAttribute("testPassForm",form);

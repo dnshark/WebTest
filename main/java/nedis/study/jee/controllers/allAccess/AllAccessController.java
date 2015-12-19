@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-
-import static nedis.study.jee.utils.HibernateDebugUtils.turnOnShowSQL;
-
 /**
  * Created by Дмитрий on 01.12.2015.
  */
@@ -30,14 +26,11 @@ public class AllAccessController extends AbstractController {
     protected AllAccessService allAccessService;
 
     @RequestMapping(value="result", method= RequestMethod.GET)
-    public String showResults(@RequestParam(value = "page", required = false) Integer page,
-                              @RequestParam(value = "count", required = false) Integer count,
+    public String showResults(@RequestParam(value = "page", required = false,defaultValue = "1") Integer page,
+                              @RequestParam(value = "count", required = false,defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count,
                               Model model){
 
         Account account = commonService.getLoginAccount();
-
-       if (page == null) {page= 1;}
-       if (count == null) {count= ApplicationConstants.DEFAULT_PAGE_COUNT;}
 
         model.addAttribute("results",studentService.listAllResult(account,(page-1)*count,count));
         model.addAttribute("maxPages",studentService.getMaxPageResult(account,count));
@@ -47,14 +40,14 @@ public class AllAccessController extends AbstractController {
 
 
     @RequestMapping(value="info", method= RequestMethod.GET)
-    public String showInfo(Model model,HttpSession session){
+    public String showInfo(Model model){
         Account account = commonService.getLoginAccount();
         model.addAttribute("account",account);
         return "/allAccess/info";
     }
 
     @RequestMapping(value="edit/info", method=RequestMethod.GET)
-    public String showEditInfo(Model model,HttpSession session){
+    public String showEditInfo(Model model){
 
         Account account = commonService.getLoginAccount();
         UserForm userForm = commonService.getUserForm(account);

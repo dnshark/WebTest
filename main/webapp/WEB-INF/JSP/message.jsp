@@ -6,7 +6,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h1> <c:out value="${confirmed}" /></h1>
-  <p><a href="/login">Go to start page</a></p>
+  <div id="maincontent_container">
+    <div id="maincontent">
+      <h2> <c:out value="${confirmed}" /></h2>
+      <p><a href="/login">Go to start page</a></p>
+    </div>
+  </div>
 </div>
 

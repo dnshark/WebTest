@@ -1,5 +1,6 @@
 package nedis.study.jee.services.student.impl;
 
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.components.EntityBuilder;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.QuestionDao;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Service
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService,ApplicationConstants {
 
     @Autowired
     @Qualifier("hibernateTestDao")
@@ -121,13 +122,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public TestPassForm doAnswer(HttpSession session, TestPassForm form, Account account) {
 
-        TestSessionInfo testSessionInfo = (TestSessionInfo) session.getAttribute("TEST_INFO");
+        TestSessionInfo testSessionInfo = (TestSessionInfo) session.getAttribute(SESSION_TEST_INFO);
 
         testSessionInfo.incCorrectAnswer(checkCorrectAnswers(form, testSessionInfo));
 
         testSessionInfo.incQuestNumber();
 
-        session.setAttribute("TEST_INFO",testSessionInfo);
+        session.setAttribute(SESSION_TEST_INFO,testSessionInfo);
 
         return getTestPassForm(account, testSessionInfo);
     }
