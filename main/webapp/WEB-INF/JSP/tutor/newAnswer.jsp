@@ -13,27 +13,31 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <form:form method="POST" action="${context }/tutor/new/answer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
-    <table  align="center">
-      <tr>
-        <td>
-          Question:
-          <form:hidden path="questionId" />
-        </td>
-        <td>
-          <form:checkbox path="correct" value="correct"/>
-        </td>
-        <td>
-          <form:input path="name" />
-        </td>
-      </tr>
+  <div id="maincontent_container">
+    <div id="maincontent">
+      <form:form method="POST" action="${context }/tutor/new/answer/id{newAnswerForm.questionId}" commandName="newAnswerForm">
+        <table  align="center">
+          <tr>
+            <td>
+              Question:
+              <form:hidden path="questionId" />
+            </td>
+            <td>
+              <form:checkbox path="correct" value="correct"/>
+            </td>
+            <td>
+              <form:input path="name" />
+            </td>
+          </tr>
 
-      <tr>
-        <td>
-          <input type="submit" value="Save answer"/>
-        </td>
-      </tr>
-    </table>
-  </form:form>
+          <tr>
+            <td>
+              <input type="submit" value="Save answer"/>
+            </td>
+          </tr>
+        </table>
+      </form:form>
+    </div>
+  </div>
 </div>
 

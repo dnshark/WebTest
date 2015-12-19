@@ -6,37 +6,46 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
+  <div id="maincontent_container">
+    <div id="maincontent">
 
-  <form:form method="POST" action="next" commandName="testPassForm" >
-    <span id="trv"></span><script>TRT ()</script>
+      <form:form method="POST" action="next" commandName="testPassForm" >
+        <span id="trv"></span><script>TRT ()</script>
 
-    <table width="100%">
-      <tr><td width="100%" align="center"><span id="theTime" class="timeClass"></span></td></tr>
-    </table>
+        <table width="100%">
+          <tr><td width="100%" align="center"><span id="theTime" class="timeClass"></span></td></tr>
+        </table>
 
-  <h1>Questions!</h1>
+        <h1>${testPassForm.question.name}</h1>
 
-  <h2>${testPassForm.question.name}</h2>
+        <table align="center">
+          <c:forEach var="answer" items="${testPassForm.answers}">
+            <tr>
+              <td>
+                <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"><strong> ${answer.name}</strong>
+              </td>
+            </tr>
+          </c:forEach>
+          <tr>
+            <td>
+              <input type="checkbox" name="answer" id="-1" value="-1"> <strong>Don't know</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="submit_button">
+              <input type="submit" name="Ok" value="Ok"/>
+              </div>
+            </td>
+          </tr>
+        </table>
 
-  <table align="center">
-    <c:forEach var="answer" items="${testPassForm.answers}">
-      <tr>
-        <td>
-          <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"> ${answer.name}
-        </td>
-      </tr>
-    </c:forEach>
-    <tr>
-      <td>
-        <input type="checkbox" name="answer" id="-1" value="-1"> Don't know
-      </td>
-    </tr>
-  </table>
 
-    <input type="submit" name="Ok" value="Ok"/>
 
-  </form:form>
+      </form:form>
 
+    </div>
+  </div>
 </div>
 
 <content tag="customscripts">
