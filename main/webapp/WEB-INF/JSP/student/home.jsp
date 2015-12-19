@@ -5,17 +5,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="container">
-  <h1>Hello student</h1>
-  <table align="center">
-    <tr>
-      <td>
-       <a href="tests">Testing</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <a href="offTest">offline Testing</a>
-      </td>
-    </tr>
-  </table>
+    <div id="maincontent_container">
+        <div id="maincontent">
+            <h1>Hello student</h1>
+            <div class="main_box">
+                <li><sp><a href="tests">Testing</a></sp></li>
+
+                <li><sp><a href="offTest">Offline Testing</a></sp></li>
+            </div>
+        </div>
+    </div>
 </div>

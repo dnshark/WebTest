@@ -7,10 +7,11 @@
 
 
 <div class="container">
+	<div id="login_container">
 		<form method="POST" action="${context }/loginHandler" >
 			<div id="userlogin">
 				<h2>Please login</h2>
-
+				<div class="form_field"></div>
 				<div class="clearthis"></div>
 				<div class="form_field">
 					<strong> Login</strong>
@@ -41,8 +42,14 @@
 				<div class="clearthis"></div>
 
 				<div class="clearthis"></div>
-				<div class="form_field">
+				<div class="form_button">
 					<input type="submit" value="Login"/>
+				</div>
+				<div class="clearthis"></div>
+				<div class="form_exception">
+					<c:if test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION != null }">
+						<td colspan="2" class="errors">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message }</td>
+					</c:if>
 				</div>
 				<div class="clearthis"></div>
 				<div class="form_facebook">
@@ -51,11 +58,8 @@
 					</a>
 				</div>
 				<div class="clearthis"></div>
-				<div class="form_exception">
-					<c:if test="${sessionScope.SPRING_SECURITY_LAST_EXCEPTION != null }">
-						<td colspan="2" class="errors">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message }</td>
-					</c:if>
-				</div>
+			</div>
 		</form>
+
 	</div>
 </div>

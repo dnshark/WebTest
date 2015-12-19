@@ -7,17 +7,14 @@
 
 
 <div class="container">
-	<h1>Hello admin</h1>
-	<table align="center">
-		<tr>
-			<td>
-				<a href="list/users">Users list</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="user/info/new">Add new user</a>
-			</td>
-		</tr>
-	</table>
+	<div id="maincontent_container">
+		<div id="maincontent">
+			<h1>Hello admin</h1>
+			<div class="main_box">
+				<li><sp><a href="list/users">Users list</a></sp></li>
+
+				<li><sp><a href="user/info/new">Add new user</a></sp></li>
+			</div>
+		</div>
+	</div>
 </div>

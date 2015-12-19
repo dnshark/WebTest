@@ -6,31 +6,32 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h2>User Info</h2>
   <form:form action="/edit/info/ok" commandName="userForm">
-    <table align="center">
-      <tr>
-        <td>Email</td>
-        <td><form:input path="email" /></td>
-      </tr>
-      <tr>
-        <td>Login</td>
-        <td><form:input path="login"/> </td>
-      </tr>
-      <tr>
-        <td>Password</td>
-        <td><form:password path="password"/> </td>
-      </tr>
-      <tr>
-        <td>Full name</td>
-        <td><form:input path="fio"/> </td>
-      </tr>
+  <div id="maincontent_container">
+    <div id="maincontent">
+      <h2>User Info</h2>
+      <div class="form_field">
+        <strong>Email</strong>
+        <form:input path="email" />
+      </div>
+      <div class="form_field">
+        <strong>Password</strong>
+        <form:password path="password"/>
+      </div>
+      <div class="form_field">
+        <strong>Login</strong>
+        <form:input path="login"/>
+      </div>
 
-      <tr>
-        <td colspan="2" style="text-align:center;">
-          <input type="submit" name="button" value="save"/>
-        </td>
-      </tr>
-    </table>
-  </form:form>
+      <div class="form_field">
+        <strong>Full name</strong>
+        <form:input path="fio"/>
+      </div>
+
+      <div id="submit_button">
+        <input type="submit" value="Ok"/>
+      </div>
+    </div>
+
+    </form:form>
 </div>

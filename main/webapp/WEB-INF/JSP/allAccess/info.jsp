@@ -6,24 +6,29 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
-  <h2>User Info</h2>
-    <table align="center">
-      <tr>
-        <td>Email</td>
-        <td>${account.email} </td>
-      </tr>
-      <tr>
-        <td>Login</td>
-        <td>${account.login} </td>
-      </tr>
-      <tr>
-        <td>Full name</td>
-        <td>${account.fio} </td>
-      </tr>
-      <tr>
-        <td>Created</td>
-        <td>${account.created} </td>
-      </tr>
+  <div id="maincontent_container">
+    <div id="maincontent">
+      <h2>User Info</h2>
+      <div class="form_field">
+        <strong>Email</strong>
+        <strong>${account.email}</strong>
+      </div>
+      <div class="form_field">
+        <strong>Login</strong>
+        <strong>${account.login}</strong>
+      </div>
 
-    </table>
+      <div class="form_field">
+        <strong>Full name</strong>
+        <strong>${account.fio}</strong>
+      </div>
+
+      <div class="form_field">
+        <strong>Created</strong>
+        <strong>${account.created}</strong>
+      </div>
+    </div>
+  </div>
 </div>
+
+
