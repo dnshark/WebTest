@@ -46,26 +46,17 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    //NEDIS
     public void updateUser(Long userId, AdminForm form) {
         Account account = accountDao.findById(userId);
         String password = account.getPassword();
         ReflectionUtils.copyByFields(account, form);
-        if (form.getPassword()=="") {//NEDIS
+        if (form.getPassword().equals("")) {
             account.setPassword(password);
         }
 
         commonService.initRoles(form.getCheckRoles(),account);
 
         accountDao.update(account);
-    }
-
-    private void copyFormToUser(AdminForm form, Account account) {
-        account.setActive(form.getActive());
-        account.setEmail(form.getEmail());
-        account.setLogin(form.getLogin());
-        account.setFio(form.getFio());
-        account.setConfirmed(form.getConfirmed());
     }
 
     @Override

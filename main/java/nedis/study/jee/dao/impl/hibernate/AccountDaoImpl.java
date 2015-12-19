@@ -24,9 +24,9 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
 
 	@Override
 	public List<Account> listAccounts(final int offset, final int count) {
-		return getSession().createCriteria(getEntityClass()).setFirstResult(offset).setMaxResults(count)
+		return getSession().createCriteria(getEntityClass())
 				.setFirstResult(offset)
-				.setMaxResults(count)//NEDIS
+				.setMaxResults(count)
 				.list();
 	}
 
