@@ -25,7 +25,7 @@
             <td>
               Description
             </td>
-            <td><form:input path="description"/> </td>
+            <td><form:textarea path="description"/> </td>
           </tr>
 
           <c:forEach var="question" items="${testForm.testQuestions}">
@@ -59,13 +59,13 @@
           <c:if test="${mode == 'edit'}">
             <tr>
               <td>
-                <a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a>
+                <li><sp><a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a></sp></li>
               </td>
               <td>
-                <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
+                <li><sp><input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';"></sp></li>
               </td>
               <td>
-                <a href="/tutor/delete/test/id${testForm.idTest}">Delete</a>
+                <li><sp><a href="/tutor/delete/test/id${testForm.idTest}">Delete</a></sp></li>
               </td>
             </tr>
           </c:if>

@@ -17,29 +17,29 @@
         </table>
 
         <h1>${testPassForm.question.name}</h1>
-
-        <table align="center">
-          <c:forEach var="answer" items="${testPassForm.answers}">
+        <div class="main_box">
+          <table align="center">
+            <c:forEach var="answer" items="${testPassForm.answers}">
+              <tr>
+                <td>
+                  <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"><strong> ${answer.name}</strong>
+                </td>
+              </tr>
+            </c:forEach>
             <tr>
               <td>
-                <input type="checkbox" name="answer" id="${answer.id}" value="${answer.id}"><strong> ${answer.name}</strong>
+                <input type="checkbox" name="answer" id="-1" value="-1"> <strong>Don't know</strong>
               </td>
             </tr>
-          </c:forEach>
-          <tr>
-            <td>
-              <input type="checkbox" name="answer" id="-1" value="-1"> <strong>Don't know</strong>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div id="submit_button">
-              <input type="submit" name="Ok" value="Ok"/>
-              </div>
-            </td>
-          </tr>
-        </table>
-
+            <tr>
+              <td>
+                <div id="submit_button">
+                  <input type="submit" name="Ok" value="Ok"/>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
 
 
       </form:form>

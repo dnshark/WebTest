@@ -16,52 +16,54 @@
   <div id="maincontent_container">
     <div id="maincontent">
       <form:form method="POST" action="${context }/tutor/edit/question/ok" commandName="questionEditForm">
-        <table align="center">
-          <form:hidden path="testId" />
-          <form:hidden path="questionId" />
-          <tr>
-            <td>
-              Question:
-            </td>
-            <td>
-              <form:input path="questionName" />
-            </td>
-
-          </tr>
-          <c:forEach var="answer" items="${answers}">
+        <h1>Edit question</h1>
+        <div class="main_box">
+          <table align="center">
+            <form:hidden path="testId" />
+            <form:hidden path="questionId" />
             <tr>
               <td>
-                <input type="checkbox" name="cbItemList" id="${answer.id}" value="${answer.id}"
-                <c:if test="${answer.correct}"> checked </c:if>>
+                <b>Question:</b>
               </td>
-              <td>
-                <input type="text"  name="answerName" value="${answer.name}"/>
-                <input type="hidden"  name="answerId" value="${answer.id}"/>
+               <area> <form:textarea path="questionName" />
               </td>
-              <td>
-                <a href="/tutor/delete/answer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
-              </td>
+
             </tr>
-          </c:forEach>
-          <tr>
-            <c:if test="${mode == 'new'}">
-              <td>
-                <input type="submit" value="Add" onclick="form.action='/tutor/edit/question/add';">
-              </td>
-            </c:if>
-            <c:if test="${mode == 'edit'}">
-              <td>
-                <a href="/tutor/new/answer/id${questionEditForm.questionId}">New answer</a>
-              </td>
-              <td>
-                <input type="submit" value="Save question">
-              </td>
-              <td>
-                <a href="/tutor/delete/question?questionId=${questionEditForm.questionId}">Delete question</a>
-              </td>
-            </c:if>
-          </tr>
-        </table>
+            <c:forEach var="answer" items="${answers}">
+              <tr>
+                <td>
+                  <input type="checkbox" name="cbItemList" id="${answer.id}" value="${answer.id}"
+                  <c:if test="${answer.correct}"> checked </c:if>>
+                </td>
+                <td>
+                  <input type="text"  name="answerName" value="${answer.name}"/>
+                  <input type="hidden"  name="answerId" value="${answer.id}"/>
+                </td>
+                <td>
+                  <li><sp><a href="/tutor/delete/answer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a></sp></li>
+                </td>
+              </tr>
+            </c:forEach>
+            <tr>
+              <c:if test="${mode == 'new'}">
+                <td>
+                  <li><sp><input type="submit" value="Add" onclick="form.action='/tutor/edit/question/add';"></sp></li>
+                </td>
+              </c:if>
+              <c:if test="${mode == 'edit'}">
+                <td>
+                  <li><sp><a href="/tutor/new/answer/id${questionEditForm.questionId}">New answer</a></sp></li>
+                </td>
+                <td>
+                  <li><sp><input type="submit" value="Save question"></sp></li>
+                </td>
+                <td>
+                  <li><sp><a href="/tutor/delete/question?questionId=${questionEditForm.questionId}">Delete question</a</sp></li>
+                </td>
+              </c:if>
+            </tr>
+          </table>
+        </div>
       </form:form>
     </div>
   </div>

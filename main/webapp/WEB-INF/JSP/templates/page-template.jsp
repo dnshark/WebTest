@@ -17,7 +17,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Web tester</title>
-	<!--<link rel="stylesheet" type="text/css" href="${context}/resources/css/normalize.css?v=${CSS_JS_VERSION}" /> -->
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/default.css?v=${CSS_JS_VERSION}"  media="screen"/>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/head.css?v=${CSS_JS_VERSION}"  media="screen"/>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/login.css?v=${CSS_JS_VERSION}"  media="screen"/>
+	<link rel="stylesheet" type="text/css" href="${context}/resources/css/main.css?v=${CSS_JS_VERSION}"  media="screen"/>
 	<link rel="stylesheet" type="text/css" href="${context}/resources/css/style.css?v=${CSS_JS_VERSION}"  media="screen"/>
 	</head>
 
@@ -57,7 +60,7 @@
 		<decorator:body />
 	</section>
 	<!-- Start of Page Footer -->
-	<div id="page_footer"> <p>All questions you can send to e-mail: dnshark@mail.ru</p>
+	<div id="page_footer"><p> All questions you can send to e-mail: dnshark@mail.ru</p>
 	</div>
 	<!-- End of Page Footer -->
 
