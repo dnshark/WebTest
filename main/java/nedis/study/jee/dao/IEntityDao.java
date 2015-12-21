@@ -9,17 +9,17 @@ import java.util.List;
  */
 public interface IEntityDao<T> {
 
-	void save(T e);
-	
-	void update(T e);
-	
-	void delete(T e);
-	
-	void remove(T e);
+    void save(T e);
 
-	T findById(Serializable id);
-	
-	List<T> findAll();
-	
-	void close();
+    void update(T e);
+
+    void delete(T e);
+
+    void remove(T e);
+
+    T findById(Serializable id);
+
+    List<T> findAll();
+
+    void close();
 }

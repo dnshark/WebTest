@@ -1,6 +1,5 @@
 package nedis.study.jee.services.tutor.impl;
 
-import nedis.study.jee.controllers.tutor.TutorController;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.AnswerDao;
 import nedis.study.jee.dao.QuestionDao;
@@ -15,12 +14,11 @@ import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
 import nedis.study.jee.forms.util.StringId;
 import nedis.study.jee.services.allAccess.impl.CommonServiceImpl;
+import nedis.study.jee.services.tutor.TutorService;
 import nedis.study.jee.utils.Calculation;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import nedis.study.jee.services.tutor.TutorService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -45,20 +43,20 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     private AnswerDao answerDao;
 
     @Override
-    public List<Test> getTestList(Account account,int page,int count) {
-        return accountDao.getListTest(account,(page-1)*count,count);
+    public List<Test> getTestList(Account account, int page, int count) {
+        return accountDao.getListTest(account, (page - 1) * count, count);
     }
 
     @Override
     @Transactional
     public Test createTest(TestForm form) {
-       Test newTest = entityBuilder.buildTest();
-       newTest.setName(form.getName());
-       newTest.setTimePerQuestion(form.getTimePerQuestion());
-       newTest.setDescription(form.getDescription());
-       Account account =getLoginAccount();
-       newTest.setAccount(account);
-       testDao.save(newTest);
+        Test newTest = entityBuilder.buildTest();
+        newTest.setName(form.getName());
+        newTest.setTimePerQuestion(form.getTimePerQuestion());
+        newTest.setDescription(form.getDescription());
+        Account account = getLoginAccount();
+        newTest.setAccount(account);
+        testDao.save(newTest);
         return newTest;
     }
 
@@ -86,22 +84,25 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
         int leng = getLength(answersId);
 
         for (int i = 0; i < leng; i++) {
-           Answer answer = answerDao.findById(Long.valueOf(answersId.get(i)));
+            Answer answer = answerDao.findById(Long.valueOf(answersId.get(i)));
 
-           answer.setName(form.getAnswerName().get(i));
+            answer.setName(form.getAnswerName().get(i));
 
-           answer.setCorrect(form.getCbItemList().contains(answersId.get(i)));
+            answer.setCorrect(form.getCbItemList().contains(answersId.get(i)));
 
-           answerDao.update(answer);
+            answerDao.update(answer);
         }
         return question;
     }
 
     public int getLength(ArrayList<String> answersId) {
         int leng;
-        if (answersId==null) {leng=0;}
-        else
-        {leng=answersId.size();} return leng;
+        if (answersId == null) {
+            leng = 0;
+        } else {
+            leng = answersId.size();
+        }
+        return leng;
     }
 
     @Override
@@ -119,14 +120,14 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Transactional
     public void deleteAnswer(Long answerId, Account account) throws InvalidUserAccessException {
         Answer answer = answerDao.findById(answerId);
-        checkPermission(answer.getQuestion().getTest(),account);
+        checkPermission(answer.getQuestion().getTest(), account);
         answerDao.delete(answer);
     }
 
     @Override
     @Transactional
     public void deleteTest(Long testId, Account account) throws InvalidUserAccessException {
-        Test test =testDao.findById(testId);
+        Test test = testDao.findById(testId);
 
         checkPermission(test, account);
 
@@ -136,16 +137,16 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Override
     @Transactional
     public Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws InvalidUserAccessException {
-      Answer answer = entityBuilder.buildAnswer();
-      answer.setName(newAnswerForm.getName());
-      answer.setCorrect(newAnswerForm.getCorrect());
-      Question question = questionDao.findById(newAnswerForm.getQuestionId());
-      answer.setQuestion(question);
+        Answer answer = entityBuilder.buildAnswer();
+        answer.setName(newAnswerForm.getName());
+        answer.setCorrect(newAnswerForm.getCorrect());
+        Question question = questionDao.findById(newAnswerForm.getQuestionId());
+        answer.setQuestion(question);
 
-      checkPermission(question.getTest(), account);
+        checkPermission(question.getTest(), account);
 
-      answerDao.save(answer);
-      return answer;
+        answerDao.save(answer);
+        return answer;
     }
 
     @Override
@@ -189,7 +190,7 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     @Override
     public Boolean checkPermission(Test test, Account account) throws InvalidUserAccessException {
         if (test.getAccount().getIdAccount().equals(account.getIdAccount()))
-           return true;
+            return true;
         throw new InvalidUserAccessException("No access");
     }
 
@@ -199,13 +200,13 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
-    public TestForm getTestForm(Long testId,Integer page,Integer count) {
+    public TestForm getTestForm(Long testId, Integer page, Integer count) {
         Test test = getTest(testId);
         TestForm testForm = new TestForm();
         ReflectionUtils.copyByNotNullFields(testForm, test);
-        List<Question> list = testDao.getListQuestion(test, (page-1)*count, count);
+        List<Question> list = testDao.getListQuestion(test, (page - 1) * count, count);
         ArrayList<StringId> testQuestions = new ArrayList<StringId>();
-        for (Question question : list){
+        for (Question question : list) {
             testQuestions.add(new StringId(question.getIdQuestion(), question.getName()));
         }
         testForm.setTestQuestions(testQuestions);
@@ -214,20 +215,20 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     public int getQuestionMaxPageCount(Long testId, Integer count) {
-        return Calculation.getMaxPage(testDao.getQuestionCount(testId),count);
+        return Calculation.getMaxPage(testDao.getQuestionCount(testId), count);
     }
 
     @Override
     public int getTestMaxPageCount(Account account, Integer count) {
-        return  Calculation.getMaxPage(testDao.getAccountCountTests(account),count);
+        return Calculation.getMaxPage(testDao.getAccountCountTests(account), count);
     }
 
     @Override
     public List<StringId> getTests(Integer page, Integer count, Account account) {
         List<Test> list = getTestList(account, page, count);
         List<StringId> tests = new ArrayList<StringId>();
-        for (Test test : list){
-          tests.add(new StringId(test.getIdTest(),test.getName()));
+        for (Test test : list) {
+            tests.add(new StringId(test.getIdTest(), test.getName()));
         }
         return tests;
     }

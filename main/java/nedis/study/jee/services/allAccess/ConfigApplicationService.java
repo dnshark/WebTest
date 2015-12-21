@@ -5,8 +5,8 @@ package nedis.study.jee.services.allAccess;
  * @version 1.0
  */
 public interface ConfigApplicationService {
-	
-	String getSupportEmailAddress();
-	
-	String getCssJsVersion();
+
+    String getSupportEmailAddress();
+
+    String getCssJsVersion();
 }

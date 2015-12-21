@@ -9,15 +9,15 @@ import nedis.study.jee.entities.*;
 //Nedis как быстро перейти с EntityBuilder на Impl
 public interface EntityBuilder {
 
-	Account buildAccount();
-	
-	AccountRole buildAccountRole(Account account, Role role);
+    Account buildAccount();
 
-	TestResult buildTestResult(Account account,Test test);
+    AccountRole buildAccountRole(Account account, Role role);
 
-	Test buildTest();
+    TestResult buildTestResult(Account account, Test test);
 
-	Answer buildAnswer();
+    Test buildTest();
 
-	Question buildQuestion();
+    Answer buildAnswer();
+
+    Question buildQuestion();
 }

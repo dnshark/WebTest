@@ -7,5 +7,5 @@ import java.io.Serializable;
  * @version 1.0
  */
 public interface IForm extends Serializable {
-	
+
 }

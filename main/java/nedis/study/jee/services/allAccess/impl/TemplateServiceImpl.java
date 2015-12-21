@@ -28,10 +28,10 @@ public class TemplateServiceImpl implements TemplateService {
 
     private String readTemplate(String filename) throws FileNotFoundException {
         String text = "";
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/"+filename);
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("/" + filename);
         Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNextLine())
-            text= text.concat(scanner.nextLine());
+            text = text.concat(scanner.nextLine());
         scanner.close();
         return text;
     }
@@ -41,7 +41,7 @@ public class TemplateServiceImpl implements TemplateService {
 
         Map<String, Object> map = getMapParams(form);
 
-        return resolveVariables(text,map);
+        return resolveVariables(text, map);
     }
 
     @Override
@@ -62,11 +62,11 @@ public class TemplateServiceImpl implements TemplateService {
         params.put("password", form.getPassword());
         params.put("login", form.getLogin());
         String host = emailSettings.getHost();
-        params.put("host_context", host+"/hash/"+form.getHash());
+        params.put("host_context", host + "/hash/" + form.getHash());
         return params;
     }
 
-    public static String resolveVariables(String text,Map<String,Object> params) {
+    public static String resolveVariables(String text, Map<String, Object> params) {
         String result = text;
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             String var = "${" + entry.getKey() + "}";

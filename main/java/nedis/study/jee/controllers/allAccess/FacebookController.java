@@ -30,9 +30,9 @@ import java.util.Scanner;
  * @version 1.0
  */
 @Controller
-public class FacebookController extends AbstractController implements InitializingBean{
+public class FacebookController extends AbstractController implements InitializingBean {
 
-	@Value("${facebook.clientId}")
+    @Value("${facebook.clientId}")
     private String facebookClientId;
 
     @Value("${facebook.secretKey}")
@@ -40,41 +40,41 @@ public class FacebookController extends AbstractController implements Initializi
 
     @Autowired
     private Settings emailSettings;
-    
+
     @Autowired
     private CommonService commonService;
-    
+
     private String fbReferrer;
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		fbReferrer = "https://graph.facebook.com/oauth/authorize?client_id=" + facebookClientId + 
-				"&redirect_uri=http://" + emailSettings.getHost() + "/fromfb" + "&scope=email,user_location,user_birthday";
-	}
-    
-	@RequestMapping(value={"/fbLogin", "/fbSignup"}, method={RequestMethod.GET})
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        fbReferrer = "https://graph.facebook.com/oauth/authorize?client_id=" + facebookClientId +
+                "&redirect_uri=http://" + emailSettings.getHost() + "/fromfb" + "&scope=email,user_location,user_birthday";
+    }
+
+    @RequestMapping(value = {"/fbLogin", "/fbSignup"}, method = {RequestMethod.GET})
     public String fbLogin() throws Exception {
         return "redirect:" + fbReferrer;
     }
-	
-	@RequestMapping(value="/fromfb", method={RequestMethod.GET})
+
+    @RequestMapping(value = "/fromfb", method = {RequestMethod.GET})
     public String fromfb(@RequestParam("code") String code) throws Exception {
-		User user = getFacebookUser(code);
-		Account a = commonService.login(user);
+        User user = getFacebookUser(code);
+        Account a = commonService.login(user);
         SecurityUtils.authentificate(a);
-		return "redirect:/home";
-	}
-	
-	
-	protected User getFacebookUser (String code) throws IOException{
-    	String url = "https://graph.facebook.com/oauth/access_token?client_id="
+        return "redirect:/home";
+    }
+
+
+    protected User getFacebookUser(String code) throws IOException {
+        String url = "https://graph.facebook.com/oauth/access_token?client_id="
                 + facebookClientId + "&redirect_uri=http://" + emailSettings.getHost() + "/fromfb?referrer="
                 + fbReferrer + "&client_secret=" + facebookSecretKey + "&code=" + code;
         URLConnection connection = new URL(url).openConnection();
         InputStream in = null;
         try {
-        	in = connection.getInputStream();
-        	Scanner scanner = new Scanner(in);
+            in = connection.getInputStream();
+            Scanner scanner = new Scanner(in);
             scanner.useDelimiter("\\Z");
             String out = scanner.next();
             String[] auth1 = out.split("=");
@@ -82,8 +82,8 @@ public class FacebookController extends AbstractController implements Initializi
             FacebookClient facebookClient = new DefaultFacebookClient(auth2[0], Version.LATEST);
             User user = facebookClient.fetchObject("me", User.class, Parameter.with("fields", "id,name,email,locale"));
             return user;
-        }finally {
-        	IOUtils.closeQuietly(in);
+        } finally {
+            IOUtils.closeQuietly(in);
         }
     }
 }

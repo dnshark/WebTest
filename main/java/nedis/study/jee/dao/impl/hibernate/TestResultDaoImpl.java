@@ -4,7 +4,6 @@ import nedis.study.jee.dao.TestResultDao;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.TestResult;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -22,7 +21,7 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
     }
 
     @Override
-    public List<TestResult> getUserResults(Account account,int page, int count) {
+    public List<TestResult> getUserResults(Account account, int page, int count) {
         return (List<TestResult>) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
                 .setFirstResult(page)
                 .setMaxResults(count)
@@ -32,7 +31,7 @@ public class TestResultDaoImpl extends AbstractEntityDao<TestResult> implements 
 
     @Override
     public Long getMaxPageResult(Account account) {
-        return (Long)getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
+        return (Long) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
                 .setProjection(Projections.rowCount()).uniqueResult();
     }
 }

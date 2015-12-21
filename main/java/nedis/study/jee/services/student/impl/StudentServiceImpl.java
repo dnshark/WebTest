@@ -8,6 +8,7 @@ import nedis.study.jee.dao.TestDao;
 import nedis.study.jee.dao.TestResultDao;
 import nedis.study.jee.entities.*;
 import nedis.study.jee.forms.student.TestPassForm;
+import nedis.study.jee.services.student.StudentService;
 import nedis.study.jee.services.student.TestSessionInfo;
 import nedis.study.jee.utils.Calculation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
-import nedis.study.jee.services.student.StudentService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +28,7 @@ import java.util.List;
  */
 @Service
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class StudentServiceImpl implements StudentService,ApplicationConstants {
+public class StudentServiceImpl implements StudentService, ApplicationConstants {
 
     @Autowired
     @Qualifier("hibernateTestDao")
@@ -52,12 +51,12 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
     private EntityBuilder entityBuilder;
 
     @Override
-    public List<Test> listAllTests(int page,int count) {
-        return testDao.getTestList((page-1)*count,count);
+    public List<Test> listAllTests(int page, int count) {
+        return testDao.getTestList((page - 1) * count, count);
     }
 
     @Override
-    public List<TestResult> listAllResult(Account account,int page,int count) {
+    public List<TestResult> listAllResult(Account account, int page, int count) {
         return testResultDao.getUserResults(account, page, count);
     }
 
@@ -83,8 +82,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
             result = 1;
         }
 
-        if (exists && !answer.getCorrect())
-        {
+        if (exists && !answer.getCorrect()) {
             result = -1;
         }
 
@@ -94,16 +92,16 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
     @Override
     public Integer checkCorrectAnswers(List<Answer> answers, ArrayList<String> userAnswers) {
         Integer correct = 0;
-        if (userAnswers==null) {
+        if (userAnswers == null) {
             return correct;
         }
 
         for (Answer answer : answers) {
-            correct = correct +(checkCorrectAnswer(answer, userAnswers));
+            correct = correct + (checkCorrectAnswer(answer, userAnswers));
         }
 
-        if (correct<0) {
-            correct=0;
+        if (correct < 0) {
+            correct = 0;
         }
         return correct;
     }
@@ -112,7 +110,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
     @Transactional
     public TestResult saveResult(Account current_account, TestSessionInfo testSessionInfo) {
         Test test = testDao.findById(testSessionInfo.getTestId());
-        TestResult testResult = entityBuilder.buildTestResult(current_account,test);
+        TestResult testResult = entityBuilder.buildTestResult(current_account, test);
         testResult.setCorrectAnswer(testSessionInfo.getCorrectAnswer());
         testResult.setAllCount(testDao.getCorrectCountAnswer(test));
         testResultDao.save(testResult);
@@ -128,7 +126,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
 
         testSessionInfo.incQuestNumber();
 
-        session.setAttribute(SESSION_TEST_INFO,testSessionInfo);
+        session.setAttribute(SESSION_TEST_INFO, testSessionInfo);
 
         return getTestPassForm(account, testSessionInfo);
     }
@@ -137,7 +135,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
         Question question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.getQuestionNumber());
 
         if (question == null) {
-            saveResult(account,testSessionInfo);
+            saveResult(account, testSessionInfo);
             return null;
         }
 
@@ -148,7 +146,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
     public Integer checkCorrectAnswers(TestPassForm form, TestSessionInfo testSessionInfo) {
         Question question = getQuestionByNumber(testSessionInfo.getTestId(), testSessionInfo.getQuestionNumber());
 
-        if (question==null){
+        if (question == null) {
             return 0;
         }
 
@@ -168,7 +166,7 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
     @Override
     public TestSessionInfo initTestSessionInfo(Long testId) {
 
-        TestSessionInfo testSessionInfo= new TestSessionInfo();
+        TestSessionInfo testSessionInfo = new TestSessionInfo();
 
         testSessionInfo.clear(testId);
 
@@ -181,11 +179,11 @@ public class StudentServiceImpl implements StudentService,ApplicationConstants {
 
     @Override
     public int getMaxPageResult(Account account, Integer count) {
-        return  Calculation.getMaxPage(testResultDao.getMaxPageResult(account),count);
+        return Calculation.getMaxPage(testResultDao.getMaxPageResult(account), count);
     }
 
     @Override
     public int getMaxPageTests(Integer count) {
-        return   Calculation.getMaxPage(testDao.getAllTestsCount(),count);
+        return Calculation.getMaxPage(testDao.getAllTestsCount(), count);
     }
 }

@@ -1,6 +1,5 @@
 package nedis.study.jee.services.tutor;
 
-import nedis.study.jee.controllers.tutor.TutorController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public interface TutorService {
 
-    List<Test> getTestList(Account account,int page,int count);
+    List<Test> getTestList(Account account, int page, int count);
 
     Test createTest(TestForm test);
 
@@ -29,7 +28,7 @@ public interface TutorService {
 
     Question updateQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException;
 
-    Test deleteQuestion(Long aLong,Account account) throws InvalidUserAccessException;
+    Test deleteQuestion(Long aLong, Account account) throws InvalidUserAccessException;
 
     void deleteAnswer(Long aLong, Account account) throws InvalidUserAccessException;
 
@@ -49,7 +48,7 @@ public interface TutorService {
 
     String getHelo();
 
-    TestForm getTestForm(Long testId,Integer page,Integer count);
+    TestForm getTestForm(Long testId, Integer page, Integer count);
 
     int getQuestionMaxPageCount(Long testId, Integer count);
 

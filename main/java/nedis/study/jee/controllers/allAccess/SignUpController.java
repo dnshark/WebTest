@@ -32,32 +32,32 @@ public class SignUpController extends AbstractController {
     @Autowired
     protected TemplateService templateService;
 
-    @RequestMapping(value="/signup", method=RequestMethod.GET)
-    public String showLogin(Model model){
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String showLogin(Model model) {
         model.addAttribute("signUpForm", new UserForm());
         return "signup";
     }
 
-    @RequestMapping(value="/hash/{hashText}", method=RequestMethod.GET)
-    public String doConfirmRegister(Model model,@PathVariable String hashText){
-        Account account =  signUpService.getAccountByHash(hashText);
-        if (account==null) {
-            model.addAttribute("confirmed","Incorrect link");
-        }else if (account.getConfirmed()){
-            model.addAttribute("confirmed","Account already confirmed");
-        }else {
+    @RequestMapping(value = "/hash/{hashText}", method = RequestMethod.GET)
+    public String doConfirmRegister(Model model, @PathVariable String hashText) {
+        Account account = signUpService.getAccountByHash(hashText);
+        if (account == null) {
+            model.addAttribute("confirmed", "Incorrect link");
+        } else if (account.getConfirmed()) {
+            model.addAttribute("confirmed", "Account already confirmed");
+        } else {
             signUpService.confirmAccount(account);
-            model.addAttribute("confirmed","Congradulation account confirmed");
+            model.addAttribute("confirmed", "Congradulation account confirmed");
         }
 
         return "message";
     }
 
-    @RequestMapping(value="/signup", method= RequestMethod.POST)
-    public String doSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String doSignUp(Model model, @ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         try {
-            commonService.signUp(form,true);
-            model.addAttribute("confirmed","Check email to confirm password");
+            commonService.signUp(form, true);
+            model.addAttribute("confirmed", "Check email to confirm password");
             return "message";
 
         } catch (Exception e) {

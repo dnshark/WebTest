@@ -22,9 +22,9 @@ public class SignUpServiceImpl implements SignUpService {
 
     public Account getAccountByHash(String hash) {
         AccountRegistration accountRegistration = accountRegistrationDao.findByHash(hash);
-        if (accountRegistration==null){
+        if (accountRegistration == null) {
             return null;
-        }else
+        } else
             return accountRegistration.getAccount();
     }
 

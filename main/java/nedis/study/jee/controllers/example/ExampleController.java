@@ -10,28 +10,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version 1.0
  */
 @Controller
-@RequestMapping(value="/example")
+@RequestMapping(value = "/example")
 public class ExampleController {
 
-	@RequestMapping(value="/login1")
-	public void function1(){}
-	
-	@RequestMapping(value="/login2", method={RequestMethod.POST})
-	public void function2(){}
-	
-	@RequestMapping(value="/login3", method={RequestMethod.POST, RequestMethod.PUT})
-	public void function3(){}
-	
-	@RequestMapping(value="/pets/{petId}")
-	public void function4(@PathVariable String petId){}
-	
-	@RequestMapping(value="/pets/{petId}", headers="Content-Type=application/json")
-	public void function5(@PathVariable String petId){}
-	
-	@RequestMapping(value="/test", headers="nedis=test1")
-	public void function6(){}
-	
-	@RequestMapping(value="/test", params="myParam=myValue")
-	//test?myParam=myValue
-	public void function7(){}
+    @RequestMapping(value = "/login1")
+    public void function1() {
+    }
+
+    @RequestMapping(value = "/login2", method = {RequestMethod.POST})
+    public void function2() {
+    }
+
+    @RequestMapping(value = "/login3", method = {RequestMethod.POST, RequestMethod.PUT})
+    public void function3() {
+    }
+
+    @RequestMapping(value = "/pets/{petId}")
+    public void function4(@PathVariable String petId) {
+    }
+
+    @RequestMapping(value = "/pets/{petId}", headers = "Content-Type=application/json")
+    public void function5(@PathVariable String petId) {
+    }
+
+    @RequestMapping(value = "/test", headers = "nedis=test1")
+    public void function6() {
+    }
+
+    @RequestMapping(value = "/test", params = "myParam=myValue")
+    //test?myParam=myValue
+    public void function7() {
+    }
 }
