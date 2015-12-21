@@ -19,6 +19,7 @@ import nedis.study.jee.services.allAccess.CommonService;
 import nedis.study.jee.services.allAccess.TemplateService;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -40,6 +41,8 @@ import java.util.UUID;
 @Service("commonService")
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class CommonServiceImpl implements CommonService {
+
+    protected final Logger LOGGER = Logger.getLogger(getClass());
 
     @Autowired
     private AccountDao accountDao;
@@ -68,12 +71,15 @@ public class CommonServiceImpl implements CommonService {
     public Account login(String login, String password, int role) throws InvalidUserInputException {
         Account a = accountDao.findByLogin(login);
         if (a == null) {
+            LOGGER.info("Can't find login :"+ login);
             throw new InvalidUserInputException("Bad credentials");
         }
         if (!StringUtils.equals(password, a.getPassword())) {
+            LOGGER.info("Incorrect password by user:"+ login);
             throw new InvalidUserInputException("Bad credentials");
         }
         if (!a.getActive()) {
+            LOGGER.info("try login inactive account:"+ login);
             throw new InvalidUserInputException("Account is not active");
         }
         boolean found = false;

@@ -68,6 +68,11 @@ public class AccountDaoImpl extends AbstractEntityDao<Account> implements Accoun
         query.executeUpdate();
     }
 
+    @Override
+    public void delete(Long userId) {
+        getSession().createQuery("delete from Account where id=:id").setParameter("id", userId).executeUpdate();
+    }
+
     private Timestamp getYesterday() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, -1);

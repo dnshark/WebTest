@@ -78,7 +78,11 @@ public class StudentController extends AbstractController implements Application
 
         Account account = commonService.getLoginAccount();
 
-        form = studentService.doAnswer(session, form, account);
+        TestSessionInfo testSessionInfo = (TestSessionInfo) session.getAttribute(SESSION_TEST_INFO);
+
+        form = studentService.doAnswer(testSessionInfo, form, account);
+
+        session.setAttribute(SESSION_TEST_INFO, testSessionInfo);
 
         if (form == null) {
             return "redirect:/result";

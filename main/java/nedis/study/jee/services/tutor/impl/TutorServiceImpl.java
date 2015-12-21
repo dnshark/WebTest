@@ -96,13 +96,12 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     public int getLength(ArrayList<String> answersId) {
-        int leng;
+
         if (answersId == null) {
-            leng = 0;
+            return  0;
         } else {
-            leng = answersId.size();
+            return answersId.size();
         }
-        return leng;
     }
 
     @Override

@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void deleteUser(Long userId) {
-        accountDao.delete(accountDao.findById(userId));
+        accountDao.delete(userId);
     }
 
     @Override

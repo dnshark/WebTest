@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,15 +117,11 @@ public class StudentServiceImpl implements StudentService, ApplicationConstants 
     }
 
     @Override
-    public TestPassForm doAnswer(HttpSession session, TestPassForm form, Account account) {
-
-        TestSessionInfo testSessionInfo = (TestSessionInfo) session.getAttribute(SESSION_TEST_INFO);
+    public TestPassForm doAnswer(TestSessionInfo testSessionInfo, TestPassForm form, Account account) {
 
         testSessionInfo.incCorrectAnswer(checkCorrectAnswers(form, testSessionInfo));
 
         testSessionInfo.incQuestNumber();
-
-        session.setAttribute(SESSION_TEST_INFO, testSessionInfo);
 
         return getTestPassForm(account, testSessionInfo);
     }

@@ -22,4 +22,6 @@ public interface AccountDao extends IEntityDao<Account> {
     Long getListCount();
 
     void clearNotConfirmedUsers();
+
+    void delete(Long userId);
 }

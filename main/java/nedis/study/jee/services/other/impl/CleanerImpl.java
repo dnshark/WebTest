@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("CleanerService")
 public class CleanerImpl implements Cleaner {
     @Autowired
-    AccountDao accountDao;
+    private AccountDao accountDao;
 
     @Override
     @Transactional
