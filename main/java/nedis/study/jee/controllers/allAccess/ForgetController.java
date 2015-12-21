@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.mail.MessagingException;
-import java.io.FileNotFoundException;
-
 /**
  * Created by Дмитрий on 01.12.2015.
  */
@@ -30,21 +27,21 @@ public class ForgetController extends AbstractController {
     @Autowired
     private TemplateService templateService;
 
-    @RequestMapping(value="/forget", method= RequestMethod.GET)
-    public String showForget(Model model){
+    @RequestMapping(value = "/forget", method = RequestMethod.GET)
+    public String showForget(Model model) {
         model.addAttribute("signUpForm", new UserForm());
         return "forget";
     }
 
-    @RequestMapping(value="/forget", method= RequestMethod.POST)
-    public String doSignUp(Model model,@ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
+    @RequestMapping(value = "/forget", method = RequestMethod.POST)
+    public String doSignUp(Model model, @ModelAttribute("signUpForm") UserForm form, BindingResult result) throws InvalidUserInputException {
         Account account = signUpService.getAccountByEmail(form.getEmail());
-        try{
-            if (account!=null) {
-                ReflectionUtils.copyByFields(form,account);
+        try {
+            if (account != null) {
+                ReflectionUtils.copyByFields(form, account);
                 templateService.sendRestoreEmail(form);
                 model.addAttribute("confirmed", "Check email");
-            }else
+            } else
                 model.addAttribute("confirmed", "No email found");
             return "message";
         } catch (Exception e) {

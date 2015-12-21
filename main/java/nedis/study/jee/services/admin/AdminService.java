@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface AdminService {
 
-    List<Account> loadAllUser(int page,int count);
+    List<Account> loadAllUser(int page, int count);
 
     Account getAccount(Long userId);
 

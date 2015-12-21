@@ -1,9 +1,9 @@
 package nedis.study.jee.dao;
 
-import java.util.List;
-
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.Test;
+
+import java.util.List;
 
 /**
  * @author nedis
@@ -11,15 +11,17 @@ import nedis.study.jee.entities.Test;
  */
 public interface AccountDao extends IEntityDao<Account> {
 
-	List<Account> listAccounts (int offset, int count);
-	
-	Account findByLogin(String login);
+    List<Account> listAccounts(int offset, int count);
 
-	Account findByEmail(String email);
+    Account findByLogin(String login);
 
-	List<Test> getListTest(Account account, int offset, int count);
+    Account findByEmail(String email);
 
-	Long getListCount();
+    List<Test> getListTest(Account account, int offset, int count);
 
-	void clearNotConfirmedUsers();
+    Long getListCount();
+
+    void clearNotConfirmedUsers();
+
+    void delete(Long userId);
 }

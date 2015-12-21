@@ -6,13 +6,12 @@ import nedis.study.jee.entities.Account;
 import nedis.study.jee.entities.AccountRole;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.admin.AdminForm;
+import nedis.study.jee.services.admin.AdminService;
 import nedis.study.jee.services.allAccess.CommonService;
 import nedis.study.jee.utils.Calculation;
 import nedis.study.jee.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import nedis.study.jee.services.admin.AdminService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
@@ -35,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
     private CommonService commonService;
 
     @Override
-    public List<Account> loadAllUser(int page,int count) {
+    public List<Account> loadAllUser(int page, int count) {
         return accountDao.listAccounts((page - 1) * count, count);
     }
 
@@ -54,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
             account.setPassword(password);
         }
 
-        commonService.initRoles(form.getCheckRoles(),account);
+        commonService.initRoles(form.getCheckRoles(), account);
 
         accountDao.update(account);
     }
@@ -62,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void deleteUser(Long userId) {
-        accountDao.delete(accountDao.findById(userId));
+        accountDao.delete(userId);
     }
 
     @Override
@@ -101,6 +100,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int getUsersMaxPageList(Integer count) {
-        return  Calculation.getMaxPage(accountDao.getListCount(),count);
+        return Calculation.getMaxPage(accountDao.getListCount(), count);
     }
 }

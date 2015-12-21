@@ -25,29 +25,29 @@ public class AllAccessController extends AbstractController {
     @Autowired
     protected AllAccessService allAccessService;
 
-    @RequestMapping(value="result", method= RequestMethod.GET)
-    public String showResults(@RequestParam(value = "page", required = false,defaultValue = "1") Integer page,
-                              @RequestParam(value = "count", required = false,defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count,
-                              Model model){
+    @RequestMapping(value = "result", method = RequestMethod.GET)
+    public String showResults(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                              @RequestParam(value = "count", required = false, defaultValue = ApplicationConstants.DEFAULT_PAGE_COUNT) Integer count,
+                              Model model) {
 
         Account account = commonService.getLoginAccount();
 
-        model.addAttribute("results",studentService.listAllResult(account,(page-1)*count,count));
-        model.addAttribute("maxPages",studentService.getMaxPageResult(account,count));
+        model.addAttribute("results", studentService.listAllResult(account, (page - 1) * count, count));
+        model.addAttribute("maxPages", studentService.getMaxPageResult(account, count));
         model.addAttribute("page", page);
         return "/allAccess/result";
     }
 
 
-    @RequestMapping(value="info", method= RequestMethod.GET)
-    public String showInfo(Model model){
+    @RequestMapping(value = "info", method = RequestMethod.GET)
+    public String showInfo(Model model) {
         Account account = commonService.getLoginAccount();
-        model.addAttribute("account",account);
+        model.addAttribute("account", account);
         return "/allAccess/info";
     }
 
-    @RequestMapping(value="edit/info", method=RequestMethod.GET)
-    public String showEditInfo(Model model){
+    @RequestMapping(value = "edit/info", method = RequestMethod.GET)
+    public String showEditInfo(Model model) {
 
         Account account = commonService.getLoginAccount();
         UserForm userForm = commonService.getUserForm(account);
@@ -56,8 +56,8 @@ public class AllAccessController extends AbstractController {
         return "/allAccess/editInfo";
     }
 
-    @RequestMapping(value="edit/info/ok", method=RequestMethod.POST)
-    public String updateUser(Model model,@ModelAttribute("userForm") UserForm form){
+    @RequestMapping(value = "edit/info/ok", method = RequestMethod.POST)
+    public String updateUser(Model model, @ModelAttribute("userForm") UserForm form) {
         Account account = commonService.getLoginAccount();
         allAccessService.fillForm(form, account);
 

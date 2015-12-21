@@ -23,11 +23,11 @@ public class TestDaoImpl extends AbstractEntityDao<Test> implements TestDao {
 
     @Override
     public int getCorrectCountAnswer(Test test) {
-        String hql = "SELECT COUNT(Answer.correct) FROM Test T"+
-                " join T.questions Question"+
-                " join Question.answers Answer"+
+        String hql = "SELECT COUNT(Answer.correct) FROM Test T" +
+                " join T.questions Question" +
+                " join Question.answers Answer" +
                 " where Answer.correct=true and T.idTest=:test_id";
-        Query query = getSession().createQuery(hql).setParameter("test_id",test.getIdTest());
+        Query query = getSession().createQuery(hql).setParameter("test_id", test.getIdTest());
         Long result = (Long) query.uniqueResult();
         return result.intValue();
     }
@@ -50,19 +50,19 @@ public class TestDaoImpl extends AbstractEntityDao<Test> implements TestDao {
 
     @Override
     public Long getQuestionCount(Long testId) {
-        return (Long)getSession().createCriteria(Question.class).add(Restrictions.eq("test.idTest", testId))
+        return (Long) getSession().createCriteria(Question.class).add(Restrictions.eq("test.idTest", testId))
                 .setProjection(Projections.rowCount()).uniqueResult();
     }
 
     @Override
     public Long getAccountCountTests(Account account) {
-        return (Long)getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
+        return (Long) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("account", account))
                 .setProjection(Projections.rowCount()).uniqueResult();
     }
 
     @Override
     public Long getAllTestsCount() {
-        return (Long)getSession().createCriteria(getEntityClass())
+        return (Long) getSession().createCriteria(getEntityClass())
                 .setProjection(Projections.rowCount()).uniqueResult();
     }
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created by Дмитрий on 24.11.2015.
  */
 @Repository("hibernateQuestionDao")
-public class QuestionDaoImpl extends AbstractEntityDao<Question> implements QuestionDao{
+public class QuestionDaoImpl extends AbstractEntityDao<Question> implements QuestionDao {
     @Override
     protected Class<Question> getEntityClass() {
         return Question.class;
@@ -19,7 +19,7 @@ public class QuestionDaoImpl extends AbstractEntityDao<Question> implements Ques
 
     @Override
     public Question getQuestionByNumber(int number, Test test) {
-        return (Question) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("test",test)).setFirstResult(number)
+        return (Question) getSession().createCriteria(getEntityClass()).add(Restrictions.eq("test", test)).setFirstResult(number)
                 .setMaxResults(1)
                 .addOrder(Order.asc("idQuestion")).uniqueResult();
     }

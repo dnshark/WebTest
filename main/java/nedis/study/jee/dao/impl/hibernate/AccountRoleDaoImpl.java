@@ -1,9 +1,8 @@
 package nedis.study.jee.dao.impl.hibernate;
 
-import org.springframework.stereotype.Repository;
-
 import nedis.study.jee.dao.AccountRoleDao;
 import nedis.study.jee.entities.AccountRole;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author nedis
@@ -12,9 +11,9 @@ import nedis.study.jee.entities.AccountRole;
 @Repository("hiberanteAccountRoleDao")
 public class AccountRoleDaoImpl extends AbstractEntityDao<AccountRole> implements AccountRoleDao {
 
-	@Override
-	protected Class<AccountRole> getEntityClass() {
-		return AccountRole.class;
-	}
+    @Override
+    protected Class<AccountRole> getEntityClass() {
+        return AccountRole.class;
+    }
 
 }

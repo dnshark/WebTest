@@ -1,187 +1,175 @@
 package nedis.study.jee.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 
 /**
  * The persistent class for the account database table.
- * 
  */
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class Account extends AbstractEntity {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="ACCOUNT_IDACCOUNT_GENERATOR", sequenceName="account_id_account_seq")
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="ACCOUNT_IDACCOUNT_GENERATOR")
-	@Column(name="id_account", unique=true, nullable=false)
-	private Long idAccount;
+    @Id
+    @SequenceGenerator(name = "ACCOUNT_IDACCOUNT_GENERATOR", sequenceName = "account_id_account_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "ACCOUNT_IDACCOUNT_GENERATOR")
+    @Column(name = "id_account", unique = true, nullable = false)
+    private Long idAccount;
 
-	@Column(nullable=false)
-	private Boolean active;
+    @Column(nullable = false)
+    private Boolean active;
 
-	@Column(nullable=false)
-	private Boolean confirmed;
+    @Column(nullable = false)
+    private Boolean confirmed;
 
-	@Column(nullable=false)
-	private Timestamp created;
+    @Column(nullable = false)
+    private Timestamp created;
 
-	@Column(nullable=false, length=100)
-	private String email;
+    @Column(nullable = false, length = 100)
+    private String email;
 
-	@Column(nullable=false, length=60)
-	private String login;
+    @Column(nullable = false, length = 60)
+    private String login;
 
-	@Column(length=80)
-	private String fio;
+    @Column(length = 80)
+    private String fio;
 
-	@Column(nullable=false, length=255)
-	private String password;
+    @Column(nullable = false, length = 255)
+    private String password;
 
-	private Timestamp updated;
+    private Timestamp updated;
 
-	//bi-directional many-to-one association to AccountRole
-	@OneToMany(mappedBy="account")
-	private List<AccountRole> accountRoles;
+    //bi-directional many-to-one association to AccountRole
+    @OneToMany(mappedBy = "account")
+    private List<AccountRole> accountRoles;
 
-	//bi-directional one-to-one association to AccountRegistration
-	@OneToOne(mappedBy="account", fetch=FetchType.LAZY)
-	//NEDIS FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
-	private AccountRegistration accountRegistration;
+    //bi-directional one-to-one association to AccountRegistration
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    //NEDIS FIXME!!!!!!!!! Hibernate does not support OneToOne lazy mode
+    private AccountRegistration accountRegistration;
 
-	/*
-	//bi-directional many-to-one association to TestResult
-	@OneToMany(mappedBy="account")
-	private List<TestResult> passedTests;
+    /*
+    //bi-directional many-to-one association to TestResult
+    @OneToMany(mappedBy="account")
+    private List<TestResult> passedTests;
 
-	//bi-directional many-to-one association to Test
-	@OneToMany(mappedBy="account")
-	private List<Test> tests;
-	 */
+    //bi-directional many-to-one association to Test
+    @OneToMany(mappedBy="account")
+    private List<Test> tests;
+     */
     public Account() {
     }
 
-	public Long getIdAccount() {
-		return this.idAccount;
-	}
-	
-	@Override
-	@Transient
-	public Serializable getId() {
-		return getIdAccount();
-	}
+    public Long getIdAccount() {
+        return this.idAccount;
+    }
 
-	public void setIdAccount(Long idAccount) {
-		this.idAccount = idAccount;
-	}
+    @Override
+    @Transient
+    public Serializable getId() {
+        return getIdAccount();
+    }
 
-	public Boolean getActive() {
-		return this.active;
-	}
+    public void setIdAccount(Long idAccount) {
+        this.idAccount = idAccount;
+    }
 
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+    public Boolean getActive() {
+        return this.active;
+    }
 
-	public Timestamp getCreated() {
-		return this.created;
-	}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
-	public void setCreated(Timestamp created) {
-		this.created = created;
-	}
+    public Timestamp getCreated() {
+        return this.created;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public String getLogin() {
-		return this.login;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public String getLogin() {
+        return this.login;
+    }
 
-	public String getFio() {
-		return this.fio;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	public void setFio(String name) {
-		this.fio = name;
-	}
+    public String getFio() {
+        return this.fio;
+    }
 
-	public String getPassword() {
-		return this.password;
-	}
+    public void setFio(String name) {
+        this.fio = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	public Timestamp getUpdated() {
-		return this.updated;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUpdated(Timestamp updated) {
-		this.updated = updated;
-	}
+    public Timestamp getUpdated() {
+        return this.updated;
+    }
 
-	public List<AccountRole> getAccountRoles() {
-		return this.accountRoles;
-	}
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
+    }
 
-	public void setAccountRoles(List<AccountRole> accountRoles) {
-		this.accountRoles = accountRoles;
-	}
-	
-	public AccountRegistration getAccountRegistration() {
-		return this.accountRegistration;
-	}
+    public List<AccountRole> getAccountRoles() {
+        return this.accountRoles;
+    }
 
-	public void setAccountRegistration(AccountRegistration accountRegistration) {
-		this.accountRegistration = accountRegistration;
-	}
-	
-	/*public List<TestResult> getPassedTests() {
-		return this.passedTests;
-	}
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 
-	public void setPassedTests(List<TestResult> passedTests) {
-		this.passedTests = passedTests;
-	}
-	
-	public List<Test> getTests() {
-		return this.tests;
-	}
+    public AccountRegistration getAccountRegistration() {
+        return this.accountRegistration;
+    }
 
-	public void setTests(List<Test> tests) {
-		this.tests = tests;
-	}*/
-	public Boolean getConfirmed() {
-		return confirmed;
-	}
+    public void setAccountRegistration(AccountRegistration accountRegistration) {
+        this.accountRegistration = accountRegistration;
+    }
 
-	public void setConfirmed(Boolean confirmed) {
-		this.confirmed = confirmed;
-	}
+    /*public List<TestResult> getPassedTests() {
+        return this.passedTests;
+    }
+
+    public void setPassedTests(List<TestResult> passedTests) {
+        this.passedTests = passedTests;
+    }
+
+    public List<Test> getTests() {
+        return this.tests;
+    }
+
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
+    }*/
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
 }

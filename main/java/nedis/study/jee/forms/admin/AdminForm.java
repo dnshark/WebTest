@@ -3,16 +3,15 @@ package nedis.study.jee.forms.admin;
 import nedis.study.jee.entities.Role;
 import nedis.study.jee.forms.UserForm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Дмитрий on 08.12.2015.
  */
 public class AdminForm extends UserForm {
-    private Boolean confirmed=false;
+    private Boolean confirmed = false;
 
-    private Boolean active=false;
+    private Boolean active = false;
 
     private List<String> checkRoles;
 

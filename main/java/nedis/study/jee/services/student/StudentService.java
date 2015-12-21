@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface StudentService {
 
-    List<Test> listAllTests(int page,int count);
+    List<Test> listAllTests(int page, int count);
 
-    List<TestResult> listAllResult(Account account,int page,int count);
+    List<TestResult> listAllResult(Account account, int page, int count);
 
     Test getTestById(long testId);
 
@@ -27,7 +27,7 @@ public interface StudentService {
 
     TestResult saveResult(Account current_account, TestSessionInfo testSessionInfo);
 
-    TestPassForm doAnswer(HttpSession session, TestPassForm form, Account account);
+    TestPassForm doAnswer(TestSessionInfo session, TestPassForm form, Account account);
 
     TestPassForm getTestPassForm(Account account, TestSessionInfo testSessionInfo);
 

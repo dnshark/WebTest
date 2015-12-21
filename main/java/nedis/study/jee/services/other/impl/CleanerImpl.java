@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Дмитрий on 18.12.2015.
  */
 @Service("CleanerService")
-public class CleanerImpl implements Cleaner{
+public class CleanerImpl implements Cleaner {
     @Autowired
-    AccountDao accountDao;
+    private AccountDao accountDao;
 
     @Override
     @Transactional
-    public void clearNotConfirmedUsers(){
+    public void clearNotConfirmedUsers() {
         accountDao.clearNotConfirmedUsers();
     }
 }

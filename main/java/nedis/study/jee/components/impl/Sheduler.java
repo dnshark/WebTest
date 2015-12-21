@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 public class Sheduler {
 
     @Autowired
-    private  Cleaner cleaner;
-    	 @Scheduled(cron = "0 0 0/12 * * *")
-    	 public void clearNotConfirmedUsers() {
-             cleaner.clearNotConfirmedUsers();
-         }
+    private Cleaner cleaner;
+
+    @Scheduled(cron = "0 0 0/12 * * *")
+    public void clearNotConfirmedUsers() {
+        cleaner.clearNotConfirmedUsers();
+    }
 }

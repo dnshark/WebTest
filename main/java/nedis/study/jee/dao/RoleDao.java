@@ -7,8 +7,8 @@ import nedis.study.jee.entities.Role;
  * @version 1.0
  */
 public interface RoleDao extends IEntityDao<Role> {
-	
-	Role getStudentRole();
 
-	Role getRole(int idRole);
+    Role getStudentRole();
+
+    Role getRole(int idRole);
 }

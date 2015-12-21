@@ -42,7 +42,6 @@ public class Settings {
     }
 
 
-
     public void setPort(String port) {
         this.port = port;
     }

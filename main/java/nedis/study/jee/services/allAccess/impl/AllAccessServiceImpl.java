@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class AllAccessServiceImpl implements AllAccessService {
 
     @Autowired
-    CommonService commonService;
+    private CommonService commonService;
 
     public void copyFormToUser(UserForm form, Account account) {
         account.setEmail(form.getEmail());
