@@ -15,12 +15,12 @@
                     <div class="main_box">
                         <div id="testInfo">
                             <div class="form_field">
-                                <strong>Test name<strong>
-                                        <form:input path="name"/>
+                                <strong>Test name</strong>
+                                <form:input path="name"/>
                             </div>
                             <div class="form_field">
-                                <strong>Time per question<strong>
-                                        <form:input path="timePerQuestion"/>
+                                <strong>Time per question</strong>
+                                <form:input path="timePerQuestion"/>
                             </div>
 
                             <div class="form_field">
@@ -31,9 +31,9 @@
 
                         <div class="linkList">
                             <c:forEach var="question" items="${testForm.testQuestions}">
-                                <link>
-                                <a href="/tutor/edit/question?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a>
-                                </link>
+                                <li>
+                                    <a href="/tutor/edit/question?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a>
+                                </li>
                             </c:forEach>
                         </div>
                         <div id="pagination">
@@ -57,26 +57,25 @@
                                 <a href='<c:out value="${next}" />' class="pn next">Next</a>
                             </c:if>
                         </div>
+                        <div class="field_buttons">
+                            <c:if test="${mode == 'edit'}">
+                                <div class="left_button">
+                                    <input type="button" value="New question" onclick="location.href='/tutor/edit/question/new?testId=${testForm.idTest}'">
+                                </div>
+                                <div class="center_button">
+                                    <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
+                                </div>
+                                <div class="right_button">
+                                    <input type="button" value="Delete" onclick="location.href='/tutor/delete/test/id${testForm.idTest}'">
+                                </div>
+                            </c:if>
 
-                        <c:if test="${mode == 'edit'}">
-                            <li><sp>
-                                <a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a>
-                            </sp></li>
-                            <div id="submit_button">
-                                <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
-                            </div>
-                            <li><sp>
-                                <a href="/tutor/delete/test/id${testForm.idTest}">Delete</a>
-                            </sp></li>
-
-                        </c:if>
-
-                        <c:if test="${mode == 'new'}">
-                            <div id="submit_button">
-                                <input type="submit" value="Add" onclick="form.action='/tutor/add/test';">
-                            </div>
-                        </c:if>
-
+                            <c:if test="${mode == 'new'}">
+                                <div class="submit_button">
+                                    <input type="submit" value="Add" onclick="form.action='/tutor/add/test';">
+                                </div>
+                            </c:if>
+                        </div>
                     </div>
                 </form:form>
             </div>

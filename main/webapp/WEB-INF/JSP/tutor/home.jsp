@@ -7,12 +7,14 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
+            <div class="home">
             <h1>${helo}</h1>
 
             <div class="main_box">
                 <li>
                     <sp><a href="test">Edit tests</a></sp>
                 </li>
+            </div>
             </div>
         </div>
     </div>

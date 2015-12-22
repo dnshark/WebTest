@@ -7,6 +7,7 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
+            <div class="home">
             <h1>Hello student</h1>
 
             <div class="main_box">
@@ -18,6 +19,7 @@
                     <sp><a href="offTest">Offline Testing</a></sp>
                 </li>
             </div>
+                </div>
         </div>
     </div>
 </div>

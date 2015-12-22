@@ -8,6 +8,7 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
+            <div class="home">
             <h1>Hello admin</h1>
 
             <div class="main_box">
@@ -19,6 +20,7 @@
                     <sp><a href="user/info/new">Add new user</a></sp>
                 </li>
             </div>
+                </div>
         </div>
     </div>
 </div>

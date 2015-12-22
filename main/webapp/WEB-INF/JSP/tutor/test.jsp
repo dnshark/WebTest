@@ -7,7 +7,7 @@
 <div class="container">
   <div id="maincontent_container">
     <div id="maincontent">
-      <div id="tutorTest">
+      <div id="studentTest">
         <form method="get">
           <h1>Test list</h1>
           <div class="main_box">
@@ -17,7 +17,7 @@
             </li>
             <div class="linkList">
               <c:forEach var="test" items="${tests}">
-                <a href="/tutor/edit/test/id${test.id}">${test.name}</a>
+               <li> <a href="/tutor/edit/test/id${test.id}">${test.name}</a> </li>
               </c:forEach>
             </div>
 
