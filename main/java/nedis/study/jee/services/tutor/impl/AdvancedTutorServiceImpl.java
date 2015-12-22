@@ -35,8 +35,8 @@ public class AdvancedTutorServiceImpl extends TutorServiceImpl implements TutorS
     }
 
     @Override
-    public String getHelo() {
-        return "Helo advanced tutor";
+    public String getHello() {
+        return "Hello advanced tutor";
     }
 
 }

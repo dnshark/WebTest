@@ -60,17 +60,7 @@
         <decorator:body/>
     </section>
     <!-- Start of Page Footer -->
-    <div id="page_footer"><p>All
-    questions
-    you
-    can
-    send
-    to
-    e - mail
-    :
-    dnshark
-    @
-    mail.ru</p>
+    <div id="page_footer"><p>All questions you can send to e-mail: dnshark@mail.ru</p>
     </div>
     <!-- End of Page Footer -->
 

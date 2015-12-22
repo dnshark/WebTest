@@ -39,7 +39,7 @@ public class TutorController extends AbstractController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
-        model.addAttribute("helo", getService().getHelo());
+        model.addAttribute("helo", getService().getHello());
         return "tutor/home";
     }
 

@@ -46,7 +46,7 @@ public interface TutorService {
 
     Boolean checkPermission(Test test, Account account) throws InvalidUserAccessException;
 
-    String getHelo();
+    String getHello();
 
     TestForm getTestForm(Long testId, Integer page, Integer count);
 

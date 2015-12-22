@@ -194,8 +194,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     }
 
     @Override
-    public String getHelo() {
-        return "Helo tutor";
+    public String getHello() {
+        return "Hello tutor";
     }
 
     @Override
