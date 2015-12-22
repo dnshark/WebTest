@@ -15,29 +15,24 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
+            <div id="newAnswer">
             <form:form method="POST" action="${context }/tutor/new/answer/id{newAnswerForm.questionId}"
                        commandName="newAnswerForm">
-                <table align="center">
-                    <tr>
-                        <td>
-                            Question:
-                            <form:hidden path="questionId"/>
-                        </td>
-                        <td>
-                            <form:checkbox path="correct" value="correct"/>
-                        </td>
-                        <td>
-                            <form:input path="name"/>
-                        </td>
-                    </tr>
+                <form:hidden path="questionId"/>
+                <div class="main_box">
+                    <div class="form_field">
+                    <strong>Answer:</strong>
 
-                    <tr>
-                        <td>
+                    <form:input path="name"/>
+                    <form:checkbox path="correct" value="correct"/>
+                    </div>
+
+                    <div id="submit_button">
                             <input type="submit" value="Save answer"/>
-                        </td>
-                    </tr>
-                </table>
+                    </div>
+                   </div>
             </form:form>
+                </div>
         </div>
     </div>
 </div>

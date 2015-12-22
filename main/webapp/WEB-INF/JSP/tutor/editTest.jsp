@@ -8,79 +8,78 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
+            <div id="editTest">
+                <form:form action="/tutor/edit/test/ok" commandName="testForm">
+                    <h1>Edit test</h1>
+                    <form:hidden path="idTest"/>
+                    <div class="main_box">
+                        <div id="testInfo">
+                            <div class="form_field">
+                                <strong>Test name<strong>
+                                        <form:input path="name"/>
+                            </div>
+                            <div class="form_field">
+                                <strong>Time per question<strong>
+                                        <form:input path="timePerQuestion"/>
+                            </div>
 
-            <form:form action="/tutor/edit/test/ok" commandName="testForm">
-                <h1>Edit test</h1>
-                <form:hidden path="idTest"/>
-                <table align="center">
-                    <tr>
-                        <td>Test name</td>
-                        <td><form:input path="name"/></td>
-                    </tr>
-                    <tr>
-                        <td>Time per question</td>
-                        <td><form:input path="timePerQuestion"/></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Description
-                        </td>
-                        <td><form:input path="description"/></td>
-                    </tr>
+                            <div class="form_field">
+                                <strong>   Description</strong>
+                                <form:input path="description"/>
+                            </div>
+                        </div>
 
-                    <c:forEach var="question" items="${testForm.testQuestions}">
-                        <tr>
-                            <td>
+                        <div class="linkList">
+                            <c:forEach var="question" items="${testForm.testQuestions}">
+                                <link>
                                 <a href="/tutor/edit/question?testId=${testForm.idTest}&questionId=${question.id}"> ${question.name}</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                                </link>
+                            </c:forEach>
+                        </div>
+                        <div id="pagination">
+                            <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
+                                <c:choose>
+                                    <c:when test="${page == i.index}">
+                                        <span>${i.index}</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url value="/tutor/edit/test/id${testForm.idTest}" var="url">
+                                            <c:param name="page" value="${i.index}"/>
+                                        </c:url>
+                                        <a href='<c:out value="${url}" />'>${i.index}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <c:url value="/tutor/edit/test/id${testForm.idTest}" var="next">
+                                <c:param name="page" value="${page + 1}"/>
+                            </c:url>
+                            <c:if test="${page + 1 < maxPages}">
+                                <a href='<c:out value="${next}" />' class="pn next">Next</a>
+                            </c:if>
+                        </div>
 
-                    <div id="pagination">
-                        <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
-                            <c:choose>
-                                <c:when test="${page == i.index}">
-                                    <span>${i.index}</span>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:url value="/tutor/edit/test/id${testForm.idTest}" var="url">
-                                        <c:param name="page" value="${i.index}"/>
-                                    </c:url>
-                                    <a href='<c:out value="${url}" />'>${i.index}</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                        <c:url value="/tutor/edit/test/id${testForm.idTest}" var="next">
-                            <c:param name="page" value="${page + 1}"/>
-                        </c:url>
-                        <c:if test="${page + 1 < maxPages}">
-                            <a href='<c:out value="${next}" />' class="pn next">Next</a>
-                        </c:if>
-                    </div>
-
-                    <c:if test="${mode == 'edit'}">
-                        <tr>
-                            <td>
+                        <c:if test="${mode == 'edit'}">
+                            <li><sp>
                                 <a href="/tutor/edit/question/new?testId=${testForm.idTest}">New question</a>
-                            </td>
-                            <td>
+                            </sp></li>
+                            <div id="submit_button">
                                 <input type="submit" value="Save test" onclick="form.action='/tutor/edit/test/ok';">
-                            </td>
-                            <td>
+                            </div>
+                            <li><sp>
                                 <a href="/tutor/delete/test/id${testForm.idTest}">Delete</a>
-                            </td>
-                        </tr>
-                    </c:if>
+                            </sp></li>
 
-                    <c:if test="${mode == 'new'}">
-                        <tr>
-                            <td>
+                        </c:if>
+
+                        <c:if test="${mode == 'new'}">
+                            <div id="submit_button">
                                 <input type="submit" value="Add" onclick="form.action='/tutor/add/test';">
-                            </td>
-                        </tr>
-                    </c:if>
-                </table>
-            </form:form>
+                            </div>
+                        </c:if>
+
+                    </div>
+                </form:form>
+            </div>
         </div>
     </div>
 </div>

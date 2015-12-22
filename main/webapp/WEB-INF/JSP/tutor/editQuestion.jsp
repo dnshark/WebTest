@@ -15,55 +15,54 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
-            <form:form method="POST" action="${context }/tutor/edit/question/ok" commandName="questionEditForm">
-                <table align="center">
-                    <form:hidden path="testId"/>
-                    <form:hidden path="questionId"/>
-                    <tr>
-                        <td>
-                            Question:
-                        </td>
-                        <td>
-                            <form:input path="questionName"/>
-                        </td>
+            <div id="editQuestion">
+                <form:form method="POST" action="${context }/tutor/edit/question/ok" commandName="questionEditForm">
+                    <div class="main_box">
+                        <form:hidden path="testId"/>
+                        <form:hidden path="questionId"/>
+                        <div class="form_field">
+                            <strong>Question:</strong>
 
-                    </tr>
-                    <c:forEach var="answer" items="${answers}">
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="cbItemList" id="${answer.id}" value="${answer.id}"
-                                <c:if test="${answer.correct}"> checked </c:if>>
-                            </td>
-                            <td>
-                                <input type="text" name="answerName" value="${answer.name}"/>
+
+                            <form:input path="questionName"/>
+                        </div>
+
+                        <c:forEach var="answer" items="${answers}">
+                            <div class="answer_field">
+                                <div class="check-box">
+                                    <input type="checkbox" name="cbItemList" id="${answer.id}" value="${answer.id}"
+
+                                    <c:if test="${answer.correct}"> checked </c:if>>
+                                </div>
+                                <div class="answerText">
+                                    <input type="text" name="answerName" value="${answer.name}"/>
+                                </div>
                                 <input type="hidden" name="answerId" value="${answer.id}"/>
-                            </td>
-                            <td>
-                                <a href="/tutor/delete/answer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    <tr>
+                                <div class="delLink">
+                                    <a href="/tutor/delete/answer?questionId=${questionEditForm.questionId}&answerId=${answer.id}">Delete </a>
+                                </div>
+                            </div>
+                        </c:forEach>
+
                         <c:if test="${mode == 'new'}">
-                            <td>
+                            <div id="submit_button">
                                 <input type="submit" value="Add" onclick="form.action='/tutor/edit/question/add';">
-                            </td>
+                            </div>
                         </c:if>
                         <c:if test="${mode == 'edit'}">
-                            <td>
-                                <a href="/tutor/new/answer/id${questionEditForm.questionId}">New answer</a>
-                            </td>
-                            <td>
+                            <li><sp><a href="/tutor/new/answer/id${questionEditForm.questionId}">New answer</a></sp></li>
+
+                            <div id="submit_button">
                                 <input type="submit" value="Save question">
-                            </td>
-                            <td>
+                            </div>
+                            <li><sp>
                                 <a href="/tutor/delete/question?questionId=${questionEditForm.questionId}">Delete
-                                    question</a>
-                            </td>
+                                    question</a></sp></li>
+
                         </c:if>
-                    </tr>
-                </table>
-            </form:form>
+                    </div>
+                </form:form>
+            </div>
         </div>
     </div>
 </div>
