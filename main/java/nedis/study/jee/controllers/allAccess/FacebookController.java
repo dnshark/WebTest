@@ -5,6 +5,7 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.Version;
 import com.restfb.types.User;
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.controllers.AbstractController;
 import nedis.study.jee.entities.Account;
 import nedis.study.jee.security.SecurityUtils;
@@ -61,7 +62,7 @@ public class FacebookController extends AbstractController implements Initializi
     public String fromfb(@RequestParam("code") String code) throws Exception {
         User user = getFacebookUser(code);
         Account a = commonService.login(user);
-        SecurityUtils.authentificate(a);
+        SecurityUtils.authentificate(a, ApplicationConstants.STUDENT_ROLE);
         return "redirect:/home";
     }
 

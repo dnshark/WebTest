@@ -20,11 +20,13 @@ public class AllAccessServiceImpl implements AllAccessService {
         account.setEmail(form.getEmail());
         account.setLogin(form.getLogin());
         account.setFio(form.getFio());
-        account.setPassword(form.getPassword());
+        if (!form.getPassword().equals("")) {
+            account.setPassword(form.getPassword());
+        }
     }
 
     @Override
-    public void fillForm(UserForm form, Account account) {
+    public void updateAccountByForm(UserForm form, Account account) {
         copyFormToUser(form, account);
         commonService.updateAccount(account);
     }

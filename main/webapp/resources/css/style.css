@@ -544,3 +544,18 @@ h2 {
 .home .main_box li {
     margin-bottom: 20px;
 }
+
+#listUsers li {
+    width: 155px;
+}
+
+#listUsers {
+    padding-left: 10%;
+}
+
+#listUsers li a{
+    width: 140px;
+    height: auto;
+    min-height: 15px;
+    padding-bottom: 2px;
+}

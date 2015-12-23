@@ -9,5 +9,5 @@ import nedis.study.jee.forms.UserForm;
 public interface AllAccessService {
     public void copyFormToUser(UserForm form, Account account);
 
-    void fillForm(UserForm form, Account account);
+    void updateAccountByForm(UserForm form, Account account);
 }

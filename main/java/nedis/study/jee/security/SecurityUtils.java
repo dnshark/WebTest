@@ -27,9 +27,11 @@ public class SecurityUtils {
         return null;
     }
 
-    public static void authentificate(Account account) {
+    public static void authentificate(Account account, int role) {
+        CurrentAccount currentAccount = new CurrentAccount(account);
+        currentAccount.setRole(role);
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-                new CurrentAccount(account),
+                currentAccount,
                 account.getPassword(),
                 AuthentificationService.convert(account.getAccountRoles()));
         SecurityContextHolder.getContext().setAuthentication(authentication);

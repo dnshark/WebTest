@@ -100,7 +100,7 @@ public class StudentController extends AbstractController implements Application
     }
 
     @RequestMapping(value = "/offTest/id{testId}", method = RequestMethod.GET)
-    public String showOffTests(Model model, HttpSession session, @PathVariable Long testId) {
+    public String showOffTests(Model model, @PathVariable Long testId) {
         Test test = studentService.getTestById(testId);
         model.addAttribute("test", test);
         return "student/offTest";

@@ -8,35 +8,38 @@
 <div class="container">
     <div id="maincontent_container">
         <div id="maincontent">
-            <h2> Users list</h2>
+            <div id="listUsers">
+                <h1> Users list</h1>
 
+                <div class="main_box">
+                    <div class="linkList">
+                        <c:forEach var="user" items="${users}">
+                                <li>  <a href="/admin/user/id${user.id}">${user.fio}</a> </li>
+                        </c:forEach>
+                    </div>
 
-            <c:forEach var="user" items="${users}">
-                <div class="form_field">
-                    <strong> <a href="/admin/user/id${user.id}">${user.fio}</a> </strong>
+                    <div id="pagination">
+                        <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
+                            <c:choose>
+                                <c:when test="${page == i.index}">
+                                    <span>${i.index}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url value="/admin/list/users" var="url">
+                                        <c:param name="page" value="${i.index}"/>
+                                    </c:url>
+                                    <a href='<c:out value="${url}" />'>${i.index}</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                        <c:url value="/admin/list/users" var="next">
+                            <c:param name="page" value="${page + 1}"/>
+                        </c:url>
+                        <c:if test="${page + 1 < maxPages}">
+                            <a href='<c:out value="${next}" />' class="pn next">Next</a>
+                        </c:if>
+                    </div>
                 </div>
-            </c:forEach>
-
-            <div id="pagination">
-                <c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
-                    <c:choose>
-                        <c:when test="${page == i.index}">
-                            <span>${i.index}</span>
-                        </c:when>
-                        <c:otherwise>
-                            <c:url value="/admin/list/users" var="url">
-                                <c:param name="page" value="${i.index}"/>
-                            </c:url>
-                            <a href='<c:out value="${url}" />'>${i.index}</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                <c:url value="/admin/list/users" var="next">
-                    <c:param name="page" value="${page + 1}"/>
-                </c:url>
-                <c:if test="${page + 1 < maxPages}">
-                    <a href='<c:out value="${next}" />' class="pn next">Next</a>
-                </c:if>
             </div>
         </div>
     </div>

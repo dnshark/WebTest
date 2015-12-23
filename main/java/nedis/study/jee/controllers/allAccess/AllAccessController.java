@@ -59,9 +59,9 @@ public class AllAccessController extends AbstractController {
     @RequestMapping(value = "edit/info/ok", method = RequestMethod.POST)
     public String updateUser(Model model, @ModelAttribute("userForm") UserForm form) {
         Account account = commonService.getLoginAccount();
-        allAccessService.fillForm(form, account);
+        allAccessService.updateAccountByForm(form, account);
 
-        model.addAttribute("userForm", form);
+        model.addAttribute("account", account);
         return "/allAccess/info";
     }
 
