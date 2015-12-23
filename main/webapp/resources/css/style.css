@@ -49,13 +49,17 @@ p {
     overflow: hidden;
 }
 
-input {
+input,option,select {
     padding-left: 2px;
     background-color: #eff3f7;
     border: 2px solid #eff3f7;
     color: #537caf;
     font-family: tahoma, arial, sans-serif;
     font-size: 12px;
+}
+
+select {
+    border: 2px solid #007CF8;
 }
 
 #container {
