@@ -9,7 +9,6 @@ import nedis.study.jee.entities.Answer;
 import nedis.study.jee.entities.Question;
 import nedis.study.jee.entities.Test;
 import nedis.study.jee.exceptions.InvalidUserAccessException;
-import nedis.study.jee.forms.tutor.NewAnswerForm;
 import nedis.study.jee.forms.tutor.QuestionEditForm;
 import nedis.study.jee.forms.tutor.TestForm;
 import nedis.study.jee.forms.util.StringId;
@@ -81,18 +80,30 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
         ArrayList<String> answersId = form.getAnswerId();
 
-        int leng = getLength(answersId);
+        int length = getLength(answersId);
 
-        for (int i = 0; i < leng; i++) {
+        for (int i = 0; i < length; i++) {
+
+
             Answer answer = answerDao.findById(Long.valueOf(answersId.get(i)));
 
             answer.setName(form.getAnswerName().get(i));
 
-            answer.setCorrect(form.getCbItemList().contains(answersId.get(i)));
+            Boolean correct = checkCorrect(form.getCbItemList(), answersId.get(i));
+
+            answer.setCorrect(correct);
 
             answerDao.update(answer);
         }
         return question;
+    }
+
+    private Boolean checkCorrect(ArrayList<String> cbItemsList, String id) {
+        if (cbItemsList==null) {
+            return false;
+        }
+        else
+            return cbItemsList.contains(id);
     }
 
     public int getLength(ArrayList<String> answersId) {
@@ -135,11 +146,9 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
 
     @Override
     @Transactional
-    public Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws InvalidUserAccessException {
+    public Answer addAnswer(Long questuionId, Account account) throws InvalidUserAccessException {
         Answer answer = entityBuilder.buildAnswer();
-        answer.setName(newAnswerForm.getName());
-        answer.setCorrect(newAnswerForm.getCorrect());
-        Question question = questionDao.findById(newAnswerForm.getQuestionId());
+        Question question = questionDao.findById(questuionId);
         answer.setQuestion(question);
 
         checkPermission(question.getTest(), account);

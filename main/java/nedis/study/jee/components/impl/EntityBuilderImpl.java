@@ -50,6 +50,8 @@ public class EntityBuilderImpl implements EntityBuilder {
         Answer answer = new Answer();
         answer.setCreated(new Timestamp(System.currentTimeMillis()));
         answer.setActive(Boolean.TRUE);
+        answer.setName("");
+        answer.setCorrect(false);
         return answer;
     }
 

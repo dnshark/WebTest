@@ -34,7 +34,7 @@ public interface TutorService {
 
     void deleteTest(Long testId, Account account) throws InvalidUserAccessException;
 
-    Answer addAnswer(NewAnswerForm newAnswerForm, Account account) throws InvalidUserAccessException;
+    Answer addAnswer(Long newAnswerForm, Account account) throws InvalidUserAccessException;
 
     Question addQuestion(QuestionEditForm form, Account account) throws InvalidUserAccessException;
 

@@ -154,15 +154,6 @@ public class TutorController extends AbstractController {
         return "tutor/editQuestion";
     }
 
-    @RequestMapping(value = "/new/answer/id{questionId}", method = RequestMethod.POST)
-    public String addAnswer(Model model, @ModelAttribute("newAnswerForm") NewAnswerForm newAnswerForm, HttpServletRequest request) throws InvalidUserAccessException {
-        Account account = commonService.getLoginAccount();
-
-        getService().addAnswer(newAnswerForm, account);
-        return "redirect:/tutor/edit/question?questionId=" + newAnswerForm.getQuestionId();
-
-    }
-
     @RequestMapping(value = "/delete/answer")
     public String deleteAnswer(Model model, @RequestParam Long answerId, @RequestParam String questionId, HttpServletRequest request) throws InvalidUserAccessException {
         Account account = commonService.getLoginAccount();
@@ -172,12 +163,12 @@ public class TutorController extends AbstractController {
     }
 
     @RequestMapping(value = "/new/answer/id{questionId}", method = RequestMethod.GET)
-    public String newAnswer(Model model, @PathVariable Long questionId) {
+    public String newAnswer(Model model, @PathVariable Long questionId) throws InvalidUserAccessException {
+        Account account = commonService.getLoginAccount();
 
-        NewAnswerForm newAnswerForm = new NewAnswerForm();
-        newAnswerForm.setQuestionId(questionId);
-        model.addAttribute("newAnswerForm", newAnswerForm);
-        return "/tutor/newAnswer";
+        getService().addAnswer(questionId, account);
+
+        return "redirect:/tutor/edit/question?questionId=" + questionId;
     }
 
 }
