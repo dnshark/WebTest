@@ -50,10 +50,10 @@
     </div>
 </div>
 
-<!--<content tag="customscripts">
+<content tag="customscripts">
 <script>
 $(document).ready(function(){
 initTime(${testPassForm.timePerQuestion},0);
 });
 </script>
-</content> -->
+</content>
