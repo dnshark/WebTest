@@ -18,10 +18,6 @@
                                 <strong>Test name</strong>
                                 <form:input path="name"/>
                             </div>
-                            <div class="form_field">
-                                <strong>Time per question</strong>
-                                <form:input path="timePerQuestion"/>
-                            </div>
 
                             <div class="form_field">
                                 <strong>   Description</strong>

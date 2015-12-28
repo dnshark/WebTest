@@ -29,9 +29,6 @@ public class Test extends AbstractEntity {
     @Column(length = 2147483647)
     private String description;
 
-    @Column(name = "time_per_question", nullable = false)
-    private Integer timePerQuestion;
-
     @Column(nullable = false, length = 100)
     private String name;
 
@@ -91,14 +88,6 @@ public class Test extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getTimePerQuestion() {
-        return this.timePerQuestion;
-    }
-
-    public void setTimePerQuestion(Integer periodPerQuestion) {
-        this.timePerQuestion = periodPerQuestion;
     }
 
     public String getName() {

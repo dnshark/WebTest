@@ -29,6 +29,12 @@ public class Question extends AbstractEntity {
     @Column(nullable = false, length = 2147483647)
     private String name;
 
+    @Column(nullable = false, columnDefinition = "int default 30")
+    private Integer time;
+
+    @Column(nullable = false, columnDefinition = "int default 1")
+    private Integer weight;
+
     private Timestamp updated;
 
     //bi-directional many-to-one association to Answer
@@ -106,4 +112,19 @@ public class Question extends AbstractEntity {
         this.test = test;
     }
 
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 }

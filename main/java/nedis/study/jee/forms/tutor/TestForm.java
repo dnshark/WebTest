@@ -14,8 +14,6 @@ public class TestForm implements IForm {
 
     private String name;
 
-    private Integer timePerQuestion;
-
     private String description;
 
     private ArrayList<StringId> testQuestions;
@@ -34,14 +32,6 @@ public class TestForm implements IForm {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getTimePerQuestion() {
-        return timePerQuestion;
-    }
-
-    public void setTimePerQuestion(Integer timePerQuestion) {
-        this.timePerQuestion = timePerQuestion;
     }
 
     public String getDescription() {

@@ -134,7 +134,7 @@ public class StudentServiceImpl implements StudentService, ApplicationConstants 
             return null;
         }
 
-        TestPassForm testPassForm = buildAnswerForm(testSessionInfo, question);
+        TestPassForm testPassForm = buildAnswerForm(question);
         return testPassForm;
     }
 
@@ -150,11 +150,11 @@ public class StudentServiceImpl implements StudentService, ApplicationConstants 
         return checkCorrectAnswers(answers, form.getAnswer());
     }
 
-    public TestPassForm buildAnswerForm(TestSessionInfo testSessionInfo, Question question) {
+    public TestPassForm buildAnswerForm(Question question) {
         TestPassForm testPassForm = new TestPassForm();
         testPassForm.setQuestion(question);
         testPassForm.setAnswers(question.getAnswers());
-        testPassForm.setTimePerQuestion(testSessionInfo.getTimePerQuestion());
+        testPassForm.setTimePerQuestion(question.getTime());
         return testPassForm;
     }
 
@@ -164,10 +164,6 @@ public class StudentServiceImpl implements StudentService, ApplicationConstants 
         TestSessionInfo testSessionInfo = new TestSessionInfo();
 
         testSessionInfo.clear(testId);
-
-        Test test = testDao.findById(testId);
-
-        testSessionInfo.setTimePerQuestion(test.getTimePerQuestion());
 
         return testSessionInfo;
     }
