@@ -1,5 +1,6 @@
 package nedis.study.jee.services.tutor.impl;
 
+import nedis.study.jee.ApplicationConstants;
 import nedis.study.jee.dao.AccountDao;
 import nedis.study.jee.dao.AnswerDao;
 import nedis.study.jee.dao.QuestionDao;
@@ -51,7 +52,6 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     public Test createTest(TestForm form) {
         Test newTest = entityBuilder.buildTest();
         newTest.setName(form.getName());
-        newTest.setTimePerQuestion(form.getTimePerQuestion());
         newTest.setDescription(form.getDescription());
         Account account = getLoginAccount();
         newTest.setAccount(account);
@@ -77,6 +77,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
         checkPermission(question.getTest(), account);
 
         question.setName(form.getQuestionName());
+        question.setTime(form.getTime());
+        question.setWeight(form.getWeight());
 
         ArrayList<String> answersId = form.getAnswerId();
 
@@ -183,6 +185,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
     public QuestionEditForm getQuestionEditForm(Long testId) {
         QuestionEditForm questionEditForm = new QuestionEditForm();
         questionEditForm.setTestId(testId);
+        questionEditForm.setWeight(ApplicationConstants.DEFAULT_WEIGHT);
+        questionEditForm.setTime(ApplicationConstants.DEFAULT_TIME);
         return questionEditForm;
     }
 
@@ -192,6 +196,8 @@ public class TutorServiceImpl extends CommonServiceImpl implements TutorService 
         questionEditForm.setQuestionId(question.getIdQuestion());
         questionEditForm.setQuestionName(question.getName());
         questionEditForm.setTestId(question.getTest().getIdTest());
+        questionEditForm.setTime(question.getTime());
+        questionEditForm.setWeight(question.getWeight());
         return questionEditForm;
     }
 

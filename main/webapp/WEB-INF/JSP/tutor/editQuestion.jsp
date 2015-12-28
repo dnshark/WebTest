@@ -22,9 +22,15 @@
                         <form:hidden path="questionId"/>
                         <div class="question_field">
                             <strong>Question:</strong>
-
-
                             <form:input path="questionName"/>
+                        </div>
+                        <div class="question_small_field">
+                            <strong>Time Question:</strong>
+                            <form:input path="time"/>
+                        </div>
+                        <div class="question_small_field">
+                            <strong>Question weight:</strong>
+                            <form:input path="weight"/>
                         </div>
                         <div class="answer_fields">
                             <c:forEach var="answer" items="${answers}">

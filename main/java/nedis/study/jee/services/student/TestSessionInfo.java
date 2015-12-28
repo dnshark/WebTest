@@ -11,13 +11,10 @@ public class TestSessionInfo {
 
     private Long testId;
 
-    private Integer timePerQuestion;
-
     public void clear(Long testId) {
         correctAnswer = 0;
         questionNumber = 0;
         this.testId = testId;
-        timePerQuestion = 300;
     }
 
     public Integer incQuestNumber() {
@@ -39,13 +36,5 @@ public class TestSessionInfo {
 
     public Long getTestId() {
         return testId;
-    }
-
-    public Integer getTimePerQuestion() {
-        return timePerQuestion;
-    }
-
-    public void setTimePerQuestion(Integer timePerQuestion) {
-        this.timePerQuestion = timePerQuestion;
     }
 }

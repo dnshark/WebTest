@@ -17,4 +17,6 @@ public interface ApplicationConstants {
 
     String DEFAULT_PAGE_COUNT = "10";
     String SESSION_TEST_INFO = "TEST_INFO";
+    Integer DEFAULT_TIME = 30;
+    Integer DEFAULT_WEIGHT = 1;
 }

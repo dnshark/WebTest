@@ -14,6 +14,10 @@ public class QuestionEditForm implements IForm {
 
     private String questionName;
 
+    private Integer time;
+
+    private Integer weight;
+
     private ArrayList<String> cbItemList;
     private ArrayList<String> answerName;
     private ArrayList<String> answerId;
@@ -64,5 +68,21 @@ public class QuestionEditForm implements IForm {
 
     public void setTestId(Long testId) {
         this.testId = testId;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }
