@@ -7,6 +7,6 @@ import java.io.Serializable;
  * @version 1.0
  */
 public interface IEntity extends Serializable {
-	
-	Serializable getId();
+
+    Serializable getId();
 }

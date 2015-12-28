@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<title>Confirm registration</title>
+<body>
+<p> Hello ${user} </p>
+<p></p>
+<p> Congradulation You create new Account.</p>
+<p></p>
+ <p>Your login / password ${login} / ${password}</p>
+<p></p>
+ <p><a href="http://${host_context}">please click link to confirm passord</a></p>
+ </body>
+ </html>
